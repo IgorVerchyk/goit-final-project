@@ -8,8 +8,12 @@
 @value textMain: rgba(24, 28, 39, 1);
 @value textShaded:rgba(24, 28, 39, 0.6); */
 
+$formBackground: #fafafa;
+$appBackground: #f1f2f7;
+$modalBackground: rgba(24, 28, 39, 0.25);
 $height_header: 50px;
 $white: #fff;
-$text-color: #181c27;
+$text-color: rgb(23, 27, 38);
 $primary-color: #ff6b08;
 $error-color: #ff2c0c;
+$textShaded: rgba(24, 28, 39, 0.6);
