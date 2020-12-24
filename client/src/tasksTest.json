@@ -1,0 +1,31 @@
+{
+  "id": "1234567",
+  "taskName": "bestTask",
+  "descr": "Test task",
+  "colaborators": [
+    "evolution@killus.all",
+    "redeyes@wantsle.ep",
+    "gypifish@revenge.org",
+    "nisepupilon@cow.net"
+  ],
+  "sprints": [
+    {
+      "id": "a1234567",
+      "description": "bla bla",
+      "startDate": "2020, 12, 10",
+      "finDate": "2020, 12, 12"
+    },
+    {
+      "id": "b234567",
+      "description": "bla bla",
+      "startDate": "2020, 12, 10",
+      "finDate": "2020, 12, 12"
+    },
+    {
+      "id": "c1234567",
+      "description": "bla bla",
+      "startDate": "2020, 12, 10",
+      "finDate": "2020, 12, 12"
+    }
+  ]
+}
