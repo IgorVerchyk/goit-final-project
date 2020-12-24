@@ -16,5 +16,7 @@
 
 7. По всім питанням пишіть в Slack або в дірект. Нема хороших чи поганих питаннь, є задані і незадані.
 
+8. Посилання на доки react-calendar [https://github.com/wojtekmaj/react-calendar/blob/master/README.md](https://github.com/wojtekmaj/react-calendar/blob/master/README.md).
+
 
 
