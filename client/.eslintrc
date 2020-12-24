@@ -1,11 +1,7 @@
 {
   "extends": ["react-app", "prettier"],
   "rules": {
-    "jsx-quotes": [1, "prefer-double"],
-    "css.lint.validProperties": ["composes"],
-    "css.lint.unknownAtRules": "ignore",
-    "scss.lint.validProperties": ["composes"],
-    "scss.lint.unknownAtRules": "ignore"
+    "jsx-quotes": [1, "prefer-double"]
   },
   "plugins": ["prettier"]
 }

@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-export default [
+const routes = [
   {
     path: '/',
     label: 'Home',
@@ -9,4 +9,22 @@ export default [
     private: true,
     restricted: false,
   },
+  {
+    path: '/login',
+    label: 'Home',
+    exact: true,
+    component: lazy(() => import('./views/LoginView')),
+    private: false,
+    restricted: false,
+  },
+  {
+    path: '/register',
+    label: 'Home',
+    exact: true,
+    component: lazy(() => import('./views/RegisterView')),
+    private: false,
+    restricted: false,
+  },
 ];
+
+export default routes;
