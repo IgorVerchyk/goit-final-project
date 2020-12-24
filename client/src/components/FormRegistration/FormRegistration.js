@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { authOperations } from '../../redux/auth';
 
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
 import FormLabel from '../FormLabel/FormLabel';
@@ -11,20 +14,32 @@ export default function FormRegistration() {
   const [password, setPassword] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
 
+  const dispatch = useDispatch();
+  const onRegister = useCallback(
+    dataUser => dispatch(authOperations.register(dataUser)),
+    [dispatch],
+  );
+
   // для теста стилей на ошибку ---start
   const errorEmail = false;
   const errorPassword = false;
   // --end
 
+  const hendleSubmit = e => {
+    e.preventDefault();
+
+    onRegister({ email, password });
+  };
+
   return (
-    <form className={s.formAuth}>
+    <form className={s.formAuth} onSubmit={hendleSubmit}>
       <h2 className={s.titleForm}>Реєстрація</h2>
       <FormLabel
         stateValue={email}
         title={'E-mail'}
         type={'email'}
         name={'email'}
-        // text={"Невірний E-mail"}
+        text={''}
         handleChange={setEmail}
         timeError={errorEmail}
       />

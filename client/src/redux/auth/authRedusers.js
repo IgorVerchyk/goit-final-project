@@ -5,10 +5,8 @@ import { authActions } from './';
 const currentUser = createReducer(
   {},
   {
-    [authActions.submitAuthFormSuccess]: (state, { payload }) => {
-      console.log('payload', payload);
-      return payload;
-    },
+    [authActions.submitAuthFormSuccess]: (state, { payload }) => payload,
+    [authActions.loginSuccess]: (state, { payload }) => payload,
   },
 );
 

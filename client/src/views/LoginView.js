@@ -4,7 +4,6 @@ import AuthenticationsBlock from '../components/AuthenticationsBlock/Authenticat
 import FormLogin from '../components/FormLogin/FormLogin';
 
 export default function LoginView() {
-  console.log('login');
   return (
     <AuthenticationsBlock>
       <FormLogin />
