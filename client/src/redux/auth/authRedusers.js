@@ -5,7 +5,7 @@ import { authActions } from './';
 const currentUser = createReducer(
   {},
   {
-    [authActions.submitAuthFormSuccess]: (state, { payload }) => payload,
+    [authActions.registerSuccess]: (state, { payload }) => payload,
     [authActions.loginSuccess]: (state, { payload }) => payload,
   },
 );
