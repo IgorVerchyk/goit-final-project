@@ -1,0 +1,74 @@
+@import "../../helpers/scss/mixin.scss";
+@import "../../helpers/scss/vars.module.scss";
+
+.formAuth {
+  position: relative;
+  padding: 47px 20px 30px;
+  height: calc(100vh - #{$height_header});
+  background-color: $white;
+  border-radius: 5px;
+  box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
+  color: rgba($text-color, 0.4);
+  z-index: 10;
+  overflow: hidden;
+
+  @include tablets {
+    width: 570px;
+    height: auto;
+    padding: 65px 70px 60px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 69px;
+      left: -235px;
+      width: 332px;
+      height: 565px;
+      display: block;
+      background: url("../../assets//images/circle-2.svg") no-repeat;
+      background-position: 0 0;
+    }
+  }
+}
+
+.titleForm {
+  margin-bottom: 30px;
+  font-size: 26px;
+  font-weight: 400;
+  text-align: center;
+  color: $text-color;
+
+  @include tablets {
+    font-size: 36px;
+    font-weight: 500;
+  }
+}
+
+.primaryBtn {
+  padding: 11px 44px;
+  background-color: $primary-color;
+  color: $white;
+  border: none;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: padding 0.25s linear, transform 0.1s linear;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    padding: 11px 66px;
+  }
+
+  &:active {
+    transform: translate(2px, 2px);
+  }
+}
+
+.btnSubmit {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  min-width: 154px;
+  max-width: 200px;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import authSelectors from '../redux/auth/authSelectors';
+// import { authSelectors } from '../redux/auth/';
 import Header from './Header/Header';
 
 const AppLayout = ({ errorMessage, children }) => {
@@ -8,13 +8,13 @@ const AppLayout = ({ errorMessage, children }) => {
     <div>
       <Header />
       {children}
-      {errorMessage && alert(`Woops, something go wrong... ${errorMessage}`)}
+      {/* {errorMessage && alert(`Woops, something go wrong... ${errorMessage}`)} */}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  errorMessage: authSelectors.getCurrentError(state),
+  // errorMessage: authSelectors.getCurrentError(state),
 });
 
 export default connect(mapStateToProps)(AppLayout);
