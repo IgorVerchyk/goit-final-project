@@ -9,6 +9,9 @@ import { store, persistor } from './redux/store';
 
 import 'modern-normalize/modern-normalize.css';
 
+import './main.scss';
+
+
 console.log(store.getState());
 
 ReactDOM.render(
