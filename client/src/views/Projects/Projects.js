@@ -1,5 +1,5 @@
 import React from 'react';
-import AddNewBtn from '../../components/AddNew/AddNewBtn.js';
+import ButtonAddNew from '../../components/ButtonAddNew/ButtonAddNew.js';
 import SingleProjectCard from '../../components/SingleProjectСard/SingleProjectCard.js';
 import styles from './Projects.module.scss';
 
@@ -29,7 +29,7 @@ export default function Projects() {
 
         <div className={styles.addNewWrapper}>
           <span className={styles.addNewText}>Створити проект</span>
-          <AddNewBtn className={styles.addProject} />
+          <ButtonAddNew />
         </div>
       </section>
       {/* {loading && <Loader />} */}
