@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './Tasks.module.scss';
+import s from './Projects.module.scss';
 
 import ButtonAddNew from '../ButtonAddNew/ButtonAddNew.js';
 import SingleProjectCard from '../SingleProjectСard/SingleProjectCard.js';
@@ -10,15 +10,15 @@ import SingleProjectCard from '../SingleProjectСard/SingleProjectCard.js';
 //   return color;
 // }
 
-const TasksListItems = ({ tasks }) =>
-  console.log('TasksList re-render') || (
+const ProjectsListItems = ({ projects }) =>
+  console.log('ProjectsList re-render') || (
     <section className={s.projects}>
       .<h2 className={s.title}>Проекти</h2>
       <ul className={s.list}>
-        {tasks.map(({ id, taskName, descr, color }) => (
+        {projects.map(({ id, projectName, descr, color }) => (
           <SingleProjectCard
             key={id}
-            taskName={taskName}
+            projectName={projectName}
             descr={descr}
             color={color}
           ></SingleProjectCard>
@@ -31,4 +31,4 @@ const TasksListItems = ({ tasks }) =>
     </section>
   );
 
-export default TasksListItems;
+export default ProjectsListItems;

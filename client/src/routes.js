@@ -34,10 +34,10 @@ const routes = [
   //   restricted: false,
   // },
   {
-    path: '/tasks',
-    label: 'Tasks',
+    path: '/projects',
+    label: 'Projects',
     exact: true,
-    component: lazy(() => import('./views/TasksView')),
+    component: lazy(() => import('./views/ProjectsView')),
     private: false,
     restricted: false,
   },
