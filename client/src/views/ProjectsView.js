@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import ProjectsEditor from '../components/Projects/ProjectsEditor';
+// import ProjectsEditor from '../components/Projects/ProjectsEditor';
 import ProjectsList from '../components/Projects/ProjectsList';
 import projectsOperations from '../redux/projects/projectsOperations';
 
@@ -13,7 +13,7 @@ class Projects extends Component {
   render() {
     return (
       <>
-        <ProjectsEditor />
+        {/* <ProjectsEditor /> */}
         <ProjectsList />
       </>
     );

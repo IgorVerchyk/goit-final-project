@@ -8,6 +8,6 @@ export const fetchProjectsSuccess = createAction(
 );
 export const fetchProjectsError = createAction('projects/fetchProjectsError');
 
-export const addProjectRequest = createAction('projects/addProjectRequest');
-export const addProjectSuccess = createAction('projects/addProjectSuccess');
-export const addProjectError = createAction('projects/addProjectError');
+// export const addProjectRequest = createAction('projects/addProjectRequest');
+// export const addProjectSuccess = createAction('projects/addProjectSuccess');
+// export const addProjectError = createAction('projects/addProjectError');
