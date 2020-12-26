@@ -2,11 +2,11 @@ import React from 'react';
 
 import styles from './SingleProjectCard.module.scss';
 
-export default function SingleProjectCard({ id, color }) {
+export default function SingleProjectCard({ id, color, taskName, descr }) {
   return (
     <li className={styles.el} style={{ backgroundColor: color }}>
-      <h2 className={styles.title}>Project name</h2>
-      <p className={styles.text}>lorem</p>
+      <h2 className={styles.title}>{taskName}</h2>
+      <p className={styles.text}>{descr}</p>
       <div className={styles.trash}>
         <svg
           width="30"

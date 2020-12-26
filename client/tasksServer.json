@@ -1,31 +1,260 @@
 {
-  "id": "1234567",
-  "taskName": "bestTask",
-  "descr": "Test task",
-  "colaborators": [
-    "evolution@killus.all",
-    "redeyes@wantsle.ep",
-    "gypifish@revenge.org",
-    "nisepupilon@cow.net"
-  ],
-  "sprints": [
+  "tasks": [
     {
-      "id": "a1234567",
-      "description": "bla bla",
-      "startDate": "2020, 12, 10",
-      "finDate": "2020, 12, 12"
+      "id": "1234567",
+      "taskName": "bestTask",
+      "descr": "Test task",
+      "color": "#ff0000",
+      "colaborators": [
+        "evolution@killus.all",
+        "redeyes@wantsle.ep",
+        "gypifish@revenge.org",
+        "nisepupilon@cow.net"
+      ],
+      "sprints": [
+        {
+          "id": "a1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "b234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "c1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        }
+      ]
     },
     {
-      "id": "b234567",
-      "description": "bla bla",
-      "startDate": "2020, 12, 10",
-      "finDate": "2020, 12, 12"
+      "id": "12345672",
+      "taskName": "bestTask2",
+      "descr": "Test task2",
+      "color": "#ffcc00",
+      "colaborators": [
+        "evolution@killus.all",
+        "redeyes@wantsle.ep",
+        "gypifish@revenge.org",
+        "nisepupilon@cow.net"
+      ],
+      "sprints": [
+        {
+          "id": "a1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "b234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "c1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        }
+      ]
     },
     {
-      "id": "c1234567",
-      "description": "bla bla",
-      "startDate": "2020, 12, 10",
-      "finDate": "2020, 12, 12"
+      "id": "12345673",
+      "taskName": "bestTask3",
+      "descr": "Test task3",
+      "color": "#009900",
+      "colaborators": [
+        "evolution@killus.all",
+        "redeyes@wantsle.ep",
+        "gypifish@revenge.org",
+        "nisepupilon@cow.net"
+      ],
+      "sprints": [
+        {
+          "id": "a1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "b234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "c1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        }
+      ]
+    },
+    {
+      "id": "12345674",
+      "taskName": "bestTask4",
+      "descr": "Test task4",
+      "color": "#009999",
+      "colaborators": [
+        "evolution@killus.all",
+        "redeyes@wantsle.ep",
+        "gypifish@revenge.org",
+        "nisepupilon@cow.net"
+      ],
+      "sprints": [
+        {
+          "id": "a1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "b234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "c1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        }
+      ]
+    },
+    {
+      "id": "12345675",
+      "taskName": "bestTask5",
+      "descr": "Test task5",
+      "color": "#00f00f",
+      "colaborators": [
+        "evolution@killus.all",
+        "redeyes@wantsle.ep",
+        "gypifish@revenge.org",
+        "nisepupilon@cow.net"
+      ],
+      "sprints": [
+        {
+          "id": "a1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "b234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "c1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        }
+      ]
+    },
+    {
+      "id": "12345676",
+      "taskName": "bestTask6",
+      "descr": "Test task6",
+      "color": "#ff00ff",
+      "colaborators": [
+        "evolution@killus.all",
+        "redeyes@wantsle.ep",
+        "gypifish@revenge.org",
+        "nisepupilon@cow.net"
+      ],
+      "sprints": [
+        {
+          "id": "a1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "b234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "c1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        }
+      ]
+    },
+    {
+      "id": "12345677",
+      "taskName": "bestTask7",
+      "descr": "Test task7",
+      "color": "#330066",
+      "colaborators": [
+        "evolution@killus.all",
+        "redeyes@wantsle.ep",
+        "gypifish@revenge.org",
+        "nisepupilon@cow.net"
+      ],
+      "sprints": [
+        {
+          "id": "a1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "b234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "c1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        }
+      ]
+    },
+    {
+      "id": "123456741",
+      "taskName": "bestTask--",
+      "descr": "Test task--",
+      "color": "#009999",
+      "colaborators": [
+        "evolution@killus.all",
+        "redeyes@wantsle.ep",
+        "gypifish@revenge.org",
+        "nisepupilon@cow.net"
+      ],
+      "sprints": [
+        {
+          "id": "a1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "b234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        },
+        {
+          "id": "c1234567",
+          "description": "bla bla",
+          "startDate": "2020, 12, 10",
+          "finDate": "2020, 12, 12"
+        }
+      ]
     }
   ]
 }
