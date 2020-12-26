@@ -1,0 +1,45 @@
+@import '../../helpers/scss/vars.module.scss';
+
+.header {
+  // position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+  background-color: $appBackground;
+  z-index: 11;
+  width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .svg {
+    width: 100px;
+    height: 30px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    height: 80px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .svg {
+    width: 140px;
+    height: 42px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    padding-right: 55px;
+    padding-left: 55px;
+  }
+}

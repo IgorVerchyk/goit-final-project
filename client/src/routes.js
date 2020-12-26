@@ -25,6 +25,14 @@ const routes = [
     private: false,
     restricted: false,
   },
+  {
+    path: '/projects',
+    label: 'Home',
+    exact: true,
+    component: lazy(() => import('./views/Projects/Projects.js')),
+    private: false,
+    restricted: false,
+  },
 ];
 
 export default routes;
