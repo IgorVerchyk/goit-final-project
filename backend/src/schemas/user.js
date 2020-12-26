@@ -44,6 +44,10 @@ const userSchema = new Schema(
       required: [true, "Verify token is required"],
     },
     tasks: [taskSchema],
+    admin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { versionKey: false, timestamps: true }
 );
