@@ -1,9 +1,11 @@
 import React from 'react';
-
+import { useSelector } from 'react-redux';
 import styles from './Header.module.scss';
 import UserMenu from '../UserMenu/UserMenu';
 
 export default function Header() {
+  const isAuth = useSelector(state => state.auth.currentUser.email); //временный вариант
+  // let isAuth = useSelector(state => state.auth.token);
   return (
     <header className={styles.header}>
       <a href="/" className={styles.link}>
@@ -44,7 +46,7 @@ export default function Header() {
           />
         </svg>
       </a>
-      <UserMenu />
+      {isAuth && <UserMenu />}
     </header>
   );
 }
