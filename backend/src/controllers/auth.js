@@ -2,12 +2,13 @@ const AuthService = require("../services/auth");
 const UsersService = require("../services/user");
 const { HttpCode } = require("../helpers/constants");
 
-const serviceUser = new UsersService();
-const serviceAuth = new AuthService();
+const userServise = new UsersService();
+const authService = new AuthService();
 
 const reg = async (req, res, next) => {
-  const { username, email, password } = req.body;
-  const user = await serviceUser.findByEmail(email);
+  const { email, password } = req.body;
+  console.log(email, password);
+  const user = await userServise.findByEmail(email);
   if (user) {
     return next({
       status: HttpCode.CONFLICT,
@@ -16,8 +17,7 @@ const reg = async (req, res, next) => {
     });
   }
   try {
-    const newUser = await serviceUser.create({
-      username,
+    const newUser = await userServise.create({
       email,
       password,
     });
@@ -38,7 +38,7 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const token = await serviceAuth.login({ email, password });
+    const token = await authService.login({ email, password });
     if (token) {
       return res.status(HttpCode.OK).json({
         status: "success",
@@ -59,7 +59,7 @@ const login = async (req, res, next) => {
 
 const logout = async (req, res, next) => {
   const id = req.user.id;
-  await serviceAuth.logout(id);
+  await userServise.logout(id);
   return res.status(HttpCode.NO_CONTENT).json({
     status: "success",
     code: HttpCode.NO_CONTENT,
@@ -69,7 +69,7 @@ const logout = async (req, res, next) => {
 const current = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const user = await serviceUser.getCurrentUser(userId);
+    const user = await userServise.getCurrentUser(userId);
     if (user) {
       return res.status(HttpCode.OK).json({
         status: "success",

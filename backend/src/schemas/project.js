@@ -13,7 +13,7 @@ const sprintSchema = new Schema({
   title: { type: String, required: [true, "sprint title is required"] },
   startDate: { type: Number, required: true },
   endDate: { type: Number, required: true },
-  tasks: [taskShema],
+  tasks: [taskSchema],
 });
 
 const projectSchema = new Schema({
@@ -25,7 +25,7 @@ const projectSchema = new Schema({
   sprints: { sprintSchema },
 });
 
-progectSchema.plugin(mongoosePaginate);
+projectSchema.plugin(mongoosePaginate);
 const Project = mongoose.model("Task", projectSchema);
 
 module.exports = Project;
