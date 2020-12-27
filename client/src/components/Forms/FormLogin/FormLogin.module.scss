@@ -1,5 +1,5 @@
-@import "../../helpers/scss/mixin.scss";
-@import "../../helpers/scss/vars.module.scss";
+@import '../../../helpers/scss/mixin.scss';
+@import '../../../helpers/scss/vars.module.scss';
 
 .formAuth {
   position: relative;
@@ -18,14 +18,14 @@
     padding: 65px 70px 60px;
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 69px;
       left: -235px;
       width: 332px;
       height: 565px;
       display: block;
-      background: url("../../assets//images/circle-2.svg") no-repeat;
+      background: url('../../../assets/images/circle-2.svg') no-repeat;
       background-position: 0 0;
     }
   }
