@@ -45,9 +45,24 @@ const login = dataUser => async dispatch => {
   }
 };
 
+const logout = () => async dispatch => {
+  dispatch(authActions.logoutRequest());
+  try {
+    await axios.post(`${baseURL}/users/logout`);
+    console.log('logout +');
+    // token.unset();
+    dispatch(authActions.logoutSucces());
+  } catch (error) {
+    console.log('logout -');
+
+    dispatch(authActions.logoutError(error.message));
+  }
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   register,
   login,
   // token,
+  logout,
 };

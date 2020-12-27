@@ -11,6 +11,10 @@ const loginError = createAction('AUTH/loginError');
 const isLogin = createAction('AUTH/isLogin');
 const isRegister = createAction('AUTH/isRegister');
 
+const logoutRequest = createAction('auth/logoutRequest');
+const logoutSuccess = createAction('auth/logoutSuccess');
+const logoutError = createAction('auth/logoutError');
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   registerRequest,
@@ -21,6 +25,11 @@ export default {
   loginSuccess,
   loginError,
 
+
   isLogin,
   isRegister,
+
+  logoutRequest,
+  logoutSuccess,
+  logoutError,
 };
