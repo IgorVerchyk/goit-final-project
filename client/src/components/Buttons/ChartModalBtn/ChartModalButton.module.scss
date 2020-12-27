@@ -1,0 +1,20 @@
+@import '../../../helpers/scss/vars.module.scss';
+
+.chartModalBtn {
+  position: fixed;
+  height: 44px;
+  width: 44px;
+  bottom: 2%;
+  right: 2%;
+  border-radius: 50px;
+  background: url('../../../assets/images/analytics.svg') no-repeat center;
+  background-size: 22px 22px;
+  background-color: $primary-color;
+  z-index: 999;
+  border: 0;
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}

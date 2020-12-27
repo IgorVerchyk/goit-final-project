@@ -3,24 +3,15 @@ import Modal from 'react-modal';
 
 import SprintChart from './SprintChart';
 
-const modalStyles = {
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-  },
-  content: {
-    maxWidth: '950px',
-    height: '495px',
-    top: '50%',
-    left: ' 50%',
-    transform: `translate(-50%, -50%)`,
-    padding: '24px',
-  },
-};
+import ChartModalBtn from '../Buttons/ChartModalBtn';
+import CloseModalBtn from '../Buttons/CloseModalBtn';
+
+import s from './ChartModal.module.scss';
 
 Modal.setAppElement('body');
 
 const ChartModal = () => {
-  const [modalIsOpen, setIsOpen] = useState(true);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -31,17 +22,21 @@ const ChartModal = () => {
   }
 
   return (
-    <div>
+    <>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={modalStyles}
         shouldCloseOnOverlayClick={true}
+        // style={modalStyles}
+        className={s.content}
+        overlayClassName={s.overlay}
       >
-        <h1>Burndown Chart(Calendar Team)</h1>
+        <CloseModalBtn onButtonClick={closeModal} />
+        <h1 className={s.chartHeader}>Burndown Chart(Calendar Team)</h1>
         <SprintChart />
       </Modal>
-    </div>
+      <ChartModalBtn onButtonClick={openModal} />
+    </>
   );
 };
 
