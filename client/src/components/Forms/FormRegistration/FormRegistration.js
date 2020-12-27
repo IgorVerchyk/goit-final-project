@@ -9,13 +9,13 @@ import FormTextAndLink from '../FormTextAndLink/FormTextAndLink';
 import s from './FormRegistration.module.scss';
 
 export default function FormRegistration({ submitForm }) {
-  const { handleChange, handleSubmit, values, errors } = useForm(
+  const { handleBlur, handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate,
   );
 
   return (
-    <form className={s.formAuth} onSubmit={handleSubmit}>
+    <form className={s.formAuth} onSubmit={handleSubmit} noValidate>
       <h2 className={s.titleForm}>Реєстрація</h2>
       <FormLabel
         value={values.email}
@@ -23,6 +23,7 @@ export default function FormRegistration({ submitForm }) {
         type={'email'}
         name={'email'}
         handleChange={handleChange}
+        handleBlur={handleBlur}
         errors={errors}
       />
 
@@ -32,6 +33,7 @@ export default function FormRegistration({ submitForm }) {
         type={'password'}
         name={'password'}
         handleChange={handleChange}
+        handleBlur={handleBlur}
         errors={errors}
       />
 
@@ -41,6 +43,7 @@ export default function FormRegistration({ submitForm }) {
         type={'password'}
         name={'password2'}
         handleChange={handleChange}
+        handleBlur={handleBlur}
         errors={errors}
       />
 

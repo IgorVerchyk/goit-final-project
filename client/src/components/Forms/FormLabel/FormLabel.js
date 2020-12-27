@@ -3,6 +3,7 @@ import React from 'react';
 import s from './FormLabel.module.scss';
 
 export default function FormLabel({
+  handleBlur,
   handleChange,
   errors,
   value,
@@ -14,14 +15,24 @@ export default function FormLabel({
 
   return (
     <label className={s.formLabel}>
-      <span className={movePlaceholder(value)}>{labelText}</span>
+      <span
+        className={
+          errors[name]
+            ? `${s.lableError} ${movePlaceholder(value)}`
+            : `${s.lableNoError} ${movePlaceholder(value)}`
+        }
+      >
+        {labelText}
+      </span>
       <input
-        className={s.formInput}
+        className={
+          errors[name] ? `${s.inputError} ${s.formInput}` : s.formInput
+        }
         type={type}
         name={name}
         value={value}
         onChange={handleChange}
-        onBlur={handleChange}
+        onBlur={handleBlur}
       />
       {errors[name] && <p className={s.isError}>{errors[name]}</p>}
     </label>

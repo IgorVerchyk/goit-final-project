@@ -22,13 +22,17 @@ const useForm = (callback, validate) => {
   );
 
   const handleChange = e => {
-    setErrors(validate(values));
-
     const { name, value } = e.target;
     setValues({
       ...values,
       [name]: value,
     });
+
+    setErrors(validate(values));
+  };
+
+  const handleBlur = () => {
+    setErrors(validate(values));
   };
 
   const handleSubmit = e => {
@@ -44,7 +48,7 @@ const useForm = (callback, validate) => {
     }
   }, [callback, errors, history, isSubmitting, onLogin, values]);
 
-  return { handleChange, handleSubmit, values, errors };
+  return { handleBlur, handleChange, handleSubmit, values, errors };
 };
 
 export default useForm;
