@@ -1,9 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
+import { useHistory } from 'react-router-dom';
 
 import s from './FormSuccess.module.scss';
 
 export default function FormLoginSuccess({ title, link, textLogin }) {
+  const history = useHistory();
+
+  const handleOnClick = () => {
+    history.replace('/login');
+  };
+
   return (
     <div className={s.greeting}>
       <div className={s.wrapper}>
@@ -24,9 +32,11 @@ export default function FormLoginSuccess({ title, link, textLogin }) {
         )}
 
         {!textLogin && (
-          <Link to={'/login'} className={s.loginLink}>
-            Сторінка входу
-          </Link>
+          <PrimaryBtn
+            handleOnClick={handleOnClick}
+            text={'Увійти'}
+            classBtn={'loginLink'}
+          />
         )}
       </div>
     </div>

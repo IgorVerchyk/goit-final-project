@@ -1,12 +1,9 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 
 import { authOperations } from '../../../redux/auth/';
 
 const useForm = (callback, validate) => {
-  const history = useHistory();
-
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -39,13 +36,9 @@ const useForm = (callback, validate) => {
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      callback();
-      onLogin(values);
-      // setTimeout(() => {
-      //   history.replace('/');
-      // }, 2500);
+      callback(values);
     }
-  }, [callback, errors, history, isSubmitting, onLogin, values]);
+  }, [callback, errors, isSubmitting, onLogin, values]);
 
   return { handleChange, handleSubmit, values, errors };
 };

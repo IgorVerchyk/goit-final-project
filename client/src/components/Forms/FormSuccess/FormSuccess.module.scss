@@ -54,7 +54,23 @@
   cursor: pointer;
 }
 
-.loginLink {
-  display: block;
-  text-align: center;
-}
+// .loginLink {
+//   padding: 11px 44px;
+//   background-color: $primary-color;
+//   color: $white;
+//   border: none;
+//   box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+//   border-radius: 25px;
+//   cursor: pointer;
+//   transition: padding 0.25s linear, transform 0.1s linear;
+//   outline: none;
+
+//   &:hover,
+//   &:focus {
+//     padding: 11px 66px;
+//   }
+
+//   &:active {
+//     transform: translate(2px, 2px);
+//   }
+// }

@@ -6,7 +6,7 @@ const routes = [
     label: 'Home',
     exact: true,
     component: lazy(() => import('./views/HomeView')),
-    private: true,
+    private: false,
     restricted: false,
   },
   {

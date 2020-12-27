@@ -36,7 +36,7 @@ export default function FormLogin({ submitForm }) {
         errors={errors}
       />
 
-      <PrimaryBtn text={'Увійти'} />
+      <PrimaryBtn text={'Увійти'} classBtn={'btnSubmit'} />
       <FormTextAndLink
         accauntText={'Немає акаунту?'}
         routeTo={'/register'}

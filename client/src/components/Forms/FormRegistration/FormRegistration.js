@@ -44,7 +44,7 @@ export default function FormRegistration({ submitForm }) {
         errors={errors}
       />
 
-      <PrimaryBtn text={'Зареєструватися'} />
+      <PrimaryBtn text={'Зареєструватися'} classBtn={'btnSubmit'} />
 
       <FormTextAndLink
         accauntText={'Маєте акаунт?'}

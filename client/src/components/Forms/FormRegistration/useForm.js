@@ -16,8 +16,8 @@ const useForm = (callback, validate) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const dispatch = useDispatch();
-  const onRegister = useCallback(
-    dataUser => dispatch(authOperations.register(dataUser)),
+  const onLogin = useCallback(
+    dataUser => dispatch(authOperations.login(dataUser)),
     [dispatch],
   );
 
@@ -36,21 +36,13 @@ const useForm = (callback, validate) => {
 
     setErrors(validate(values));
     setIsSubmitting(true);
-
-    console.log(values);
-    console.log(errors);
   };
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      callback();
-      onRegister(values);
-      console.log(values);
-      // setTimeout(() => {
-      //   history.replace('/login');
-      // }, 2500);
+      callback({ email: values.email, password: values.password });
     }
-  }, [callback, errors, history, isSubmitting, onRegister, values]);
+  }, [callback, errors, history, isSubmitting, onLogin, values]);
 
   return { handleChange, handleSubmit, values, errors };
 };
