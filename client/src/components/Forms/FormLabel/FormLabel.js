@@ -3,32 +3,27 @@ import React from 'react';
 import s from './FormLabel.module.scss';
 
 export default function FormLabel({
-  value,
-  title,
-  type,
-  name,
-  text,
   handleChange,
   errors,
+  value,
+  name,
+  type,
+  labelText,
 }) {
   const movePlaceholder = value => (value ? s.labelNameOnTop : s.labelName);
 
-  // const isInputError = (er, defaultClassName) =>
-  //   er ? `${defaultClassName} ${s.inputError}` : defaultClassName;
-
   return (
-    <label className={`${s.formLabel} ${s.labelEmail}`}>
-      <span className={movePlaceholder(value)}>{title}</span>
+    <label className={s.formLabel}>
+      <span className={movePlaceholder(value)}>{labelText}</span>
       <input
-        className={s.inputEmail}
+        className={s.formInput}
         type={type}
-        value={value}
         name={name}
+        value={value}
         onChange={handleChange}
-        required
+        onBlur={handleChange}
       />
-      {errors[name] && <p className={s.isEmailError}>{errors[name]}</p>}
-      {/* {timeError && <p className={s.isEmailError}>{text}</p>} */}
+      {errors[name] && <p className={s.isError}>{errors[name]}</p>}
     </label>
   );
 }

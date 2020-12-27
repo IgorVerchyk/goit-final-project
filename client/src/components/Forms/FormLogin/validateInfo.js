@@ -11,11 +11,5 @@ export default function validateInfo(values) {
   } else if (values.password.length < 6) {
     errors.password = 'Пароль має бути білше 6 символів';
   }
-
-  // if (!values.password2) {
-  //   errors.password2 = 'Password is required';
-  // } else if (values.password2 !== values.password) {
-  //   errors.password2 = 'Passwords do not match';
-  // }
   return errors;
 }

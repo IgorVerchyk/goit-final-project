@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { authOperations } from '../../redux/auth/';
+import { authOperations } from '../../../redux/auth/';
 
 const useForm = (callback, validate) => {
   const history = useHistory();

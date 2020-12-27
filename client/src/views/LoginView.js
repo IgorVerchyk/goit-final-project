@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import AuthenticationsBlock from '../components/AuthenticationsBlock/AuthenticationsBlock';
 import FormLogin from '../components/Forms/FormLogin/FormLogin';
-import FormLoginSuccess from '../components/Forms/FormLogin/FormLoginSuccess';
+import FormSuccess from '../components/Forms/FormSuccess/FormSuccess';
 
 export default function LoginView() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -16,7 +16,7 @@ export default function LoginView() {
       {!isSubmitted ? (
         <FormLogin submitForm={submitForm} />
       ) : (
-        <FormLoginSuccess />
+        <FormSuccess title={'Вхід здійснено!'} textLogin={true} />
       )}
     </AuthenticationsBlock>
   );
