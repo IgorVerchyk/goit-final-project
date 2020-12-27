@@ -4,9 +4,12 @@
 .wrapperPage {
   position: relative;
   overflow: hidden;
-  height: calc(100vh - 50px);
-  // height: 100vh;
+  height: calc(100vh - 60px);
   width: 100%;
+
+  @include tablets {
+    height: calc(100vh - 80px);
+  }
 }
 
 .circleBg {

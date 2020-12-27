@@ -17,7 +17,11 @@ const register = dataUser => async dispatch => {
   dispatch(authActions.registerRequest());
 
   try {
+<<<<<<< HEAD
     const { data } = await axios.post(`${baseURL}`, dataUser);
+=======
+    const { data } = await axios.post(`${baseURL}/user`, dataUser);
+>>>>>>> bd11597666613bee1d465bfd87bdfa1fb9841491
 
     // token.set(data.token);
     dispatch(authActions.registerSuccess(data));
@@ -33,7 +37,8 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-    const { data } = await axios.post(`${baseURL}/users`, dataUser);
+    console.log(dataUser);
+    const { data } = await axios.post(`${baseURL}/user`, dataUser);
 
     // token.set(data.token);
     dispatch(authActions.loginSuccess(data));
@@ -44,9 +49,24 @@ const login = dataUser => async dispatch => {
   }
 };
 
+const logout = () => async dispatch => {
+  dispatch(authActions.logoutRequest());
+  try {
+    await axios.post(`${baseURL}/users/logout`);
+    console.log('logout +');
+    // token.unset();
+    dispatch(authActions.logoutSucces());
+  } catch (error) {
+    console.log('logout -');
+
+    dispatch(authActions.logoutError(error.message));
+  }
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   register,
   login,
   // token,
+  logout,
 };

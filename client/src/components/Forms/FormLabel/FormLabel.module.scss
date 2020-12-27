@@ -1,5 +1,5 @@
-@import "../../helpers/scss/mixin.scss";
-@import "../../helpers/scss/vars.module.scss";
+@import '../../../helpers/scss/mixin.scss';
+@import '../../../helpers/scss/vars.module.scss';
 
 .formLabel {
   position: relative;
@@ -50,6 +50,7 @@
 .formInput {
   width: 100%;
   padding: 10px;
+  margin-bottom: 40px;
   display: block;
   font-size: 16px;
   border: none;
@@ -62,38 +63,25 @@
   }
 
   @include tablets {
+    margin-bottom: 45px;
     padding: 8px;
   }
 }
 
-.inputEmail {
-  composes: formInput;
-  margin-bottom: 40px;
-
-  @include tablets {
-    margin-bottom: 45px;
-  }
-}
-.inputPassword {
-  composes: formInput;
-  margin-bottom: 40px;
-
-  @include tablets {
-    margin-bottom: 45px;
-  }
-}
-
-// временные стили, переделать когда будет валидация
 .inputError {
   color: $error-color;
-
-  &:focus {
-    border-bottom: 1px solid $error-color;
-  }
+  border-bottom: 1px solid $error-color;
 }
 
-.isEmailError,
-.isPasswordError {
+.lableError {
+  color: $error-color;
+}
+
+.lableNoError {
+  columns: inherit;
+}
+
+.isError {
   position: absolute;
   left: 0;
   top: 43px;

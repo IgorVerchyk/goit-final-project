@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import authOperations from '../../redux/auth/authOperations';
+
 import styles from './UserMenu.module.scss';
 
 export default function UserMenu() {
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.auth.currentUser);
+  // const name = currentUser.name ? currentUser.name : 'Guest'; //если все таки будет имя
+  const name = currentUser.email ? currentUser.email : 'Guest';
+
+  const getLogout = useCallback(() => dispatch(authOperations.logout()), [
+    dispatch,
+  ]);
+
   return (
     <section className={styles.userMenu}>
-      <span className={styles.nameText}>Username</span>
-      <button className={styles.logoutBtn}>
+      <span className={styles.nameText}>{name}</span>
+      <button className={styles.logoutBtn} onClick={getLogout}>
         <svg
           className={styles.svg}
           width="18"
