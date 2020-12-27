@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { authOperations } from '../../redux/auth';
+import { authOperations } from '../../../redux/auth';
 
-import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
+import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
 import FormLabel from '../FormLabel/FormLabel';
 import FormTextAndLink from '../FormTextAndLink/FormTextAndLink';
 
@@ -33,7 +33,7 @@ export default function FormRegistration() {
 
   return (
     <form className={s.formAuth} onSubmit={hendleSubmit}>
-      <h2 className={s.titleForm}>Реєстрація</h2>
+      {/* <h2 className={s.titleForm}>Реєстрація</h2>
       <FormLabel
         stateValue={email}
         title={'E-mail'}
@@ -69,7 +69,7 @@ export default function FormRegistration() {
         accauntText={'Маєте акаунт?'}
         routeTo={'/login'}
         linkText={'Увійти'}
-      />
+      /> */}
     </form>
   );
 }

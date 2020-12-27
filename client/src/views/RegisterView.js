@@ -1,7 +1,7 @@
 import React from 'react';
 
 import AuthenticationsBlock from '../components/AuthenticationsBlock/AuthenticationsBlock';
-import FormRegistration from '../components/FormRegistration/FormRegistration';
+import FormRegistration from '../components/Forms/FormRegistration/FormRegistration';
 
 export default function RegisterView() {
   return (

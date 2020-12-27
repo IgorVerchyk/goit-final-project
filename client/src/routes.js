@@ -13,7 +13,7 @@ const routes = [
     path: '/login',
     label: 'Home',
     exact: true,
-    component: lazy(() => import('./views/LoginView')),
+    component: lazy(() => import('./views/LoginView.js')),
     private: false,
     restricted: false,
   },
