@@ -17,7 +17,7 @@ const register = dataUser => async dispatch => {
   dispatch(authActions.registerRequest());
 
   try {
-    const { data } = await axios.post(`${baseURL}/users`, dataUser);
+    const { data } = await axios.post(`${baseURL}`, dataUser);
 
     // token.set(data.token);
     dispatch(authActions.registerSuccess(data));
