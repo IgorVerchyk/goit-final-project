@@ -1,7 +1,9 @@
-// import React from 'react';
-// import ButtonAddNew from '../../components/ButtonAddNew/ButtonAddNew.js';
-// import SingleProjectCard from '../../components/SingleProjectСard/SingleProjectCard.js';
-// import styles from './Projects.module.scss';
+
+import React from 'react';
+import ButtonAddNew from '../../components/Buttons/ButtonAddNew/ButtonAddNew';
+import SingleProjectCard from '../../components/SingleProjectСard/SingleProjectCard.js';
+import styles from './Projects.module.scss';
+
 
 // const projects = [
 //   { id: 1, title: 'ProjectName', about: 'Lorem', color: '#ff0000' },
