@@ -4,6 +4,7 @@ import SprintHeader from '../../components/SprintHeader/SprintHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TaskCard from '../../components/TaskCard/TaskCard';
 import ButtonAddNew from '../../components/Buttons/ButtonAddNew/ButtonAddNew';
+import ButtonShowGraph from '../../components/Buttons/ButtonShowGraph/ButtonShowGraph';
 
 export default function SprintPage() {
   const array = [
@@ -52,31 +53,6 @@ export default function SprintPage() {
       scheduledTime: 333,
       spentAllTime: 33,
     },
-    {
-      id: 10,
-      title: 'Excepteur sint occaecat cupidatat',
-      scheduledTime: 333,
-      spentAllTime: 33,
-    },
-    { id: 11, title: 'Task 1', scheduledTime: 8, spentAllTime: 33 },
-    {
-      id: 12,
-      title: 'Lorem ipsum dolor sit amet',
-      scheduledTime: 28,
-      spentAllTime: 11,
-    },
-    {
-      id: 13,
-      title: 'xxxzcqwd asdqw aaaasd',
-      scheduledTime: 19,
-      spentAllTime: 0,
-    },
-    {
-      id: 14,
-      title: 'Excepteur sint occaecat cupidatat',
-      scheduledTime: 333,
-      spentAllTime: 33,
-    },
   ];
   return (
     <section className={styles.sprint}>
@@ -106,6 +82,10 @@ export default function SprintPage() {
         <div className={styles.createTask}>
           <ButtonAddNew />
           <p className={styles.createTaskText}>Створити задачу</p>
+        </div>
+
+        <div className={styles.showGraph}>
+          <ButtonShowGraph />
         </div>
       </section>
     </section>

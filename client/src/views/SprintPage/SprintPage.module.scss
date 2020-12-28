@@ -5,13 +5,23 @@
   letter-spacing: 0.04em;
   // width: 100%;
 }
+
+.tasks {
+  position: relative;
+  border-radius: 50px;
+}
 .createTaskText {
   display: none;
 }
 
 .createTask {
+  border-radius: 50px;
   position: fixed;
   z-index: 10;
+}
+
+.showGraph {
+  position: fixed;
 }
 @media screen and (max-width: 767px) {
   .sprint {
@@ -28,19 +38,21 @@
     right: 20px;
     bottom: 20px;
   }
+  .showGraph {
+    left: 20px;
+    bottom: 20px;
+  }
 }
 
 @media screen and (min-width: 768px) {
   .sprint {
     min-height: calc(100vh - 80px);
   }
-  .createTask {
-    right: 40px;
-    top: 145px;
+
+  .showGraph {
+    right: 20px;
+    bottom: 20px;
   }
-  // .tasks {
-  //   border-left: 1px solid rgba(24, 28, 39, 0.1);
-  // }
 }
 @media screen and (min-width: 768px) and (max-width: 980px) {
   .list {
@@ -74,6 +86,16 @@
     margin-right: auto;
     margin-left: auto;
   }
+  .createTask {
+    position: absolute;
+    right: 20px;
+    top: 70px;
+  }
+
+  .showGraph {
+    right: 20px;
+    bottom: 110px;
+  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -85,12 +107,17 @@
     position: absolute;
     display: flex;
     align-items: center;
-    left: 960px;
-    // top: 300px;
+    left: 700px;
+    top: 70px;
   }
   .createTaskText {
     display: block;
     margin-left: 20px;
     font-size: 18px;
+  }
+
+  .showGraph {
+    right: 55px;
+    bottom: 60px;
   }
 }
