@@ -25,14 +25,6 @@ const routes = [
     private: false,
     restricted: false,
   },
-  // {
-  //   path: '/projects',
-  //   label: 'Home',
-  //   exact: true,
-  //   component: lazy(() => import('./views/Projects/Projects.js')),
-  //   private: false,
-  //   restricted: false,
-  // },
   {
     path: '/projects',
     label: 'Projects',
@@ -41,15 +33,20 @@ const routes = [
     private: false,
     restricted: false,
   },
-
   {
-    // path: '/projects/:projectId/:sprintId',
-    path: '/projects/sprint',
-
-    label: 'Home',
+    path: '/projects/:projectId',
+    label: 'ProjectDetails',
+    exact: true,
+    component: lazy(() => import('./views/ProjectDetailsView')),
+     private: true,
+    restricted: false,
+  },
+  {
+     path: '/projects/:projectId/:sprintId',
+     label: 'Home',
     exact: true,
     component: lazy(() => import('./views/SprintPage/SprintPage.js')),
-    private: false,
+    private: true,
     restricted: false,
   },
 ];
