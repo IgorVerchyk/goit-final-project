@@ -7,17 +7,13 @@ import Modal from '../Modal/Modal';
 
 import s from './Projects.module.scss';
 
-export default function ProjectsListItems({ projects, onClose }) {
+export default function ProjectsListItems({ projects }) {
   const { url } = useRouteMatch();
   const [isModal, setisModal] = useState(false);
 
-  const toggleModal = () => {
-    const toggledIsOpen = isModal ? false : true;
-    setisModal(toggledIsOpen);
-  };
-
-  const handleClick = ({ target }) => {
-    toggleModal();
+  const handleClick = e => {
+    console.log(e);
+    setisModal(true);
   };
 
   return (
@@ -41,10 +37,7 @@ export default function ProjectsListItems({ projects, onClose }) {
             <div className={s.add} onClick={handleClick}></div>
           </>
         ) : (
-          <Modal
-            onCloseModal={toggleModal}
-            children={<ProjectEditor onCloseModal={toggleModal} />}
-          />
+          <Modal isOpen="true" children={<ProjectEditor />} />
         )}
       </div>
     </section>
