@@ -13,7 +13,6 @@ class Projects extends Component {
   render() {
     return (
       <>
-        {/* <ProjectsEditor /> */}
         <ProjectsList />
       </>
     );

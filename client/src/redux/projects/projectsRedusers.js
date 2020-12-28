@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import {
+  addProjectRequest,
+  addProjectError,
+  addProjectSuccess,
   fetchProjectsRequest,
   fetchProjectsSuccess,
   fetchProjectsError,
@@ -8,9 +11,9 @@ import {
 
 const items = createReducer([], {
   [fetchProjectsSuccess]: (_, { payload }) => payload,
-  //   [addProjectSuccess]: (state, { payload }) => [...state, payload],
-  //   [deleteProjectSuccess]: (state, { payload }) =>
-  //     state.filter(({ id }) => id !== payload),
+  [addProjectSuccess]: (state, { payload }) => [...state, payload],
+  // [deleteProjectSuccess]: (state, { payload }) =>
+  //   state.filter(({ id }) => id !== payload),
 });
 
 const loading = createReducer(false, {
