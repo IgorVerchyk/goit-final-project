@@ -4,12 +4,10 @@ import s from './Modal.module.scss';
 export default class Modal extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
-    window.addEventListener('click', this.handleClick);
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
-    window.removeEventListener('click', this.handleClick);
   }
 
   handleKeyDown = ({ code }) => {
@@ -28,6 +26,8 @@ export default class Modal extends Component {
   };
 
   render() {
+    // if (this.props.isOpen === false)
+    // return null
     console.log('modal props', this.props);
     return (
       <div className={s.backdrop} id="backdrop" onClick={this.handleClickOpen}>

@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import projectsOperations from '../../redux/projects/projectsOperations';
+import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
+import FormLabel from '../FormLabel/FormLabel';
+import FormTextAndLink from '../FormTextAndLink/FormTextAndLink';
+
+import s from './ProjectEditor.module.scss';
 
 class ProjectEditor extends Component {
   state = {
@@ -28,32 +33,39 @@ class ProjectEditor extends Component {
     const { projectName, descr, color } = this.state;
     return (
       <>
-        <h2>Створення проекту</h2>
-        <form className="form" onSubmit={this.handleSubmit}>
-          <label htmlFor="projectName">
-            Project Name
+        <h2 className={s.title}>Створення проекту</h2>
+        <form className={s.form} onSubmit={this.handleSubmit}>
+          <label htmlFor="projectName" className={s.formLabel}>
+            Назва проекту
             <br />
             <input
               type="text"
               value={projectName}
               onChange={this.handleChange}
               name="projectName"
+              className={s.formInput}
             />
           </label>
-          <label htmlFor="descr">
-            description
+          <label htmlFor="descr" className={s.formLabel}>
+            Опис
             <br />
             <input
               type="text"
               value={descr}
               onChange={this.handleChange}
               name="descr"
+              className={s.formInput}
             />
           </label>
-          <label>
-            color
+          <label className={s.formLabel}>
+            Обрати колір обгортки
             <br />
-            <select value={color} name="color" onChange={this.handleChange}>
+            <select
+              className={s.formSelect}
+              value={color}
+              name="color"
+              onChange={this.handleChange}
+            >
               <option style={{ background: '#8c72df' }} value="#8c72df">
                 medium purple
               </option>
@@ -65,9 +77,8 @@ class ProjectEditor extends Component {
               </option>
             </select>
           </label>
-
-          <button type="submit">Готово</button>
-          <button type="submit">Відміна</button>
+          <PrimaryBtn text={'Готово'} />
+          <FormTextAndLink accauntText={'Відміна'} routeTo={'/'} />
         </form>
       </>
     );

@@ -1,17 +1,6 @@
 @import '../../helpers/scss/mixin.scss';
 @import '../../helpers/scss/vars.module.scss';
 
-
-//mob
-// .backdrop {
-//       position: fixed;
-//     top: 0;
-//     left: 0;
-//     width: 100vw;
-//     height: 100vh;
-//     background-color: rgba(0, 0, 0, 0.5);
-//   }
- 
   .overlay{
     position: absolute;
     width: 40%;
@@ -24,8 +13,7 @@
 
   .modalBody {
     position: absolute;
-    // top: 121px;
-    // left: 10%;
+    width: max-content;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);   
@@ -48,14 +36,10 @@
     top: 10px;
     right: 30px;
   }}
-//mobile max320 -766 tablet max-width: 767px desc min 768 
 @media screen and (min-width: 320px) {
   .overlay{
-   
-    min-width: 320px;
-//     // width: 40%;
-   
-    }
+       min-width: 320px;
+       }
 }
 
   //mobil
@@ -69,11 +53,8 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
   .overlay{
-   
-    width: 320px;
-    // width: 40%;
-   
-    }
+       width: 320px;
+      }
 
   }
 
@@ -88,10 +69,7 @@
     background-color: rgba(0, 0, 0, 0.5);
   }
   .overlay{
-
-    max-width: 512px;
-    
-    
-    }
+    max-width: 512px;  
+        }
 
   }
