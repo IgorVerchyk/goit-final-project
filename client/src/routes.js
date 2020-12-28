@@ -34,8 +34,8 @@ const routes = [
     restricted: false,
   },
   {
-    path: '/projects/:id',
-    label: 'SingleProj',
+    path: '/projects/:projectId',
+    label: 'ProjectDetails',
     exact: true,
     component: lazy(() => import('./views/ProjectDetailsView')),
     private: false,

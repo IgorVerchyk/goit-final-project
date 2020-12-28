@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 // import s from './ProjectDetails.module.css';
 
 export default function RegisterView() {
-  const { id } = useParams();
+  const { projectId } = useParams();
   const [project, setProject] = useState(null);
 
   // useEffect(() => {
@@ -13,7 +13,7 @@ export default function RegisterView() {
 
   return (
     <>
-      <h2>details of project id: {id}</h2>
+      <h2>details of project id: {projectId}</h2>
     </>
   );
 }
