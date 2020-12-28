@@ -1,0 +1,277 @@
+@import '../../helpers/scss/vars.module.scss';
+
+.sprintHeader {
+  padding-top: 20px;
+}
+
+.controlPanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+}
+.separator {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.input {
+  display: block;
+  border: none;
+  border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+  background-color: #f1f2f7;
+  outline: none;
+  padding-left: 10px;
+}
+
+.titleBlock {
+  display: flex;
+  align-items: center;
+}
+.title {
+  color: #181c27;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.totalDays,
+.separator,
+.date {
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: normal;
+  color: rgba(24, 28, 39, 0.6);
+}
+
+.day,
+.leftArrow,
+.rightArrow {
+  color: #181c27;
+}
+
+.date:hover,
+.leftArrow:hover,
+.rightArrow:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  color: #000;
+}
+
+.leftArrow {
+  margin-right: 20px;
+}
+.rightArrow {
+  margin-left: 20px;
+}
+
+.controlAndSearchBlock {
+  position: relative;
+}
+
+.inputWrapper {
+  &::after {
+    display: block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-image: url('../../assets/images/search.svg');
+    position: absolute;
+    pointer-events: none;
+  }
+}
+
+.edit:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 767px) {
+  .day,
+  .leftArrow,
+  .rightArrow {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .input {
+    width: 250px;
+
+    margin-bottom: 20px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .inputWrapper {
+    &::after {
+      left: 20px;
+      bottom: 10px;
+    }
+  }
+
+  .titleBlock {
+    justify-content: space-between;
+
+    width: 280px;
+  }
+
+  .title {
+    flex-basis: 250px;
+    font-size: 26px;
+    line-height: 32px;
+  }
+
+  .sprintHeader {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .headerWrapper {
+    border-bottom: 1px solid rgba(24, 28, 39, 0.1);
+  }
+  .sprintHeader {
+    flex-wrap: wrap;
+    width: calc(100vw - 272px);
+  }
+
+  .titleBlock {
+    justify-content: start;
+  }
+  .title {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .input {
+    height: 40px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .sprintHeader {
+    display: flex;
+
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom: 20px;
+  }
+  .controlAndSearchBlock {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .switch {
+    margin-right: 40px;
+  }
+  .input {
+    width: 215px;
+  }
+
+  .inputWrapper {
+    &::after {
+      right: 15px;
+      bottom: 10px;
+    }
+  }
+  .edit {
+    margin-left: 15px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 980px) {
+  .sprintHeader {
+    width: 450px;
+  }
+  .title {
+    max-width: 335px;
+  }
+}
+
+@media screen and (min-width: 981px) and (max-width: 1215px) {
+  .sprintHeader {
+    width: 685px;
+  }
+  .title {
+    max-width: 470px;
+  }
+}
+@media screen and (min-width: 1216px) and (max-width: 1279px) {
+  .sprintHeader {
+    width: 920px;
+  }
+  .title {
+    max-width: 680px;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .tasksHeader {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .sprintHeader {
+    padding-left: 70px;
+    padding-top: 20px;
+  }
+
+  .title {
+    max-width: 350px;
+    padding-bottom: 30px;
+  }
+
+  .tasksHeader {
+    display: flex;
+    width: 870px;
+    height: 50px;
+    font-weight: normal;
+    font-style: normal;
+
+    font-size: 14px;
+    line-height: 17px;
+    color: #181c27;
+    padding-left: 30px;
+  }
+  .tasksHeaderText {
+    width: 100px;
+    &:first-child {
+      margin-right: 100px;
+    }
+    &:nth-last-child(2) {
+      margin-right: 100px;
+    }
+    &:nth-last-child(3) {
+      margin-right: 100px;
+    }
+  }
+  .controlPanel {
+    justify-content: start;
+  }
+  .switch {
+    margin-right: 40px;
+  }
+  .sprintHeader {
+    position: relative;
+  }
+  .input {
+    border-bottom: none;
+    position: absolute;
+    // bottom: 0;
+    left: 710px;
+    top: 170px;
+    height: 35px;
+    width: 160px;
+  }
+
+  .inputWrapper {
+    &::after {
+      left: 820px;
+      top: 175px;
+    }
+  }
+}
