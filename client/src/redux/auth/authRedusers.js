@@ -12,7 +12,15 @@ const currentUser = createReducer(
       (state = { password: null, email: null }),
   },
 );
+const isRegister = createReducer(false, {
+  [authActions.registerSuccess]: (state, { payload }) => true,
+});
+const isLogin = createReducer(false, {
+  [authActions.loginSuccess]: (state, { payload }) => true,
+});
 
 export default combineReducers({
   currentUser,
+  isRegister,
+  isLogin,
 });
