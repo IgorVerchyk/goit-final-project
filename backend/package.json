@@ -36,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/IgorVerchyk/goit-final-project/issues"
   },
-  "homepage": "https://github.com/IgorVerchyk/goit-final-project#readme"
+  "homepage": "https://github.com/IgorVerchyk/goit-final-project#readme",
+  "engines": {
+    "node": ">=14.15.3"
+  }
 }
