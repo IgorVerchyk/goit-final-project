@@ -1,8 +1,8 @@
 // import React from 'react';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import s from './Projects.module.scss';
 
-import ButtonAddNew from '../ButtonAddNew/ButtonAddNew.js';
+// import ButtonAddNew from '../ButtonAddNew/ButtonAddNew.js';
 import SingleProjectCard from '../SingleProjectСard/SingleProjectCard.js';
 import ProjectEditor from './ProjectEditor';
 import Modal from '../Modal/Modal';
@@ -13,14 +13,6 @@ import Modal from '../Modal/Modal';
 //   return color;
 // }
 
-const toggleModal = state => {
-  const toggledIsOpen = state.isModal ? false : true;
-
-  this.setState({
-    isModal: toggledIsOpen,
-  });
-};
-
 export default function ProjectsListItems({ projects, onClose }) {
   const [isModal, setisModal] = useState(false);
 
@@ -30,7 +22,7 @@ export default function ProjectsListItems({ projects, onClose }) {
   };
 
   const handleClick = ({ target }) => {
-    console.log(target);
+    // console.log(target);
     toggleModal();
   };
 
