@@ -11,9 +11,9 @@ export default function ProjectsListItems({ projects }) {
   const { url } = useRouteMatch();
   const [isModal, setisModal] = useState(false);
 
-  const handleClick = e => {
-    console.log(e);
-    setisModal(true);
+  const toggleModal = () => {
+    const toggledIsOpen = isModal ? false : true;
+    setisModal(toggledIsOpen);
   };
 
   return (
@@ -26,7 +26,7 @@ export default function ProjectsListItems({ projects }) {
             projectName={projectName}
             descr={descr}
             color={color}
-            routeTo={`${url}${id}`}
+            routeTo={`${url}/${id}`}
           ></SingleProjectCard>
         ))}
       </ul>
@@ -34,10 +34,13 @@ export default function ProjectsListItems({ projects }) {
         {!isModal ? (
           <>
             <span className={s.addNewText}>Створити новий проект</span>
-            <div className={s.add} onClick={handleClick}></div>
+            <div className={s.add} onClick={toggleModal}></div>
           </>
         ) : (
-          <Modal isOpen="true" children={<ProjectEditor />} />
+          <Modal
+            closeModal={toggleModal}
+            children={<ProjectEditor onClose={toggleModal} />}
+          />
         )}
       </div>
     </section>

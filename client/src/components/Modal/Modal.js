@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import s from './Modal.module.scss';
 
 export default class Modal extends Component {
-  state = {
-    isModal: true,
-  };
+  // state = {
+  //   isModal: true,
+  // };
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
@@ -14,34 +14,30 @@ export default class Modal extends Component {
     window.removeEventListener('keydown', this.handleKeyDown);
   }
 
-  toggleModal() {
-    const isModal = this.state.isModal;
-    const toggledIsOpen = isModal ? false : true;
-    this.setState({ isModal: { toggledIsOpen } });
-  }
-
   handleKeyDown = ({ code }) => {
     if (code === 'Escape') {
-      this.toggleModal();
+      this.props.closeModal();
     }
   };
 
-  handleClickOpen = e => {
-    // console.log(e.target.className);
-    // console.log(e.target.id);
-    if (e.target.id === 'backdrop') {
-      console.log('close');
-      this.toggleModal();
+  handleClickOpen = async e => {
+    console.dir(e.target);
+    if (
+      e.target.id === 'backdrop' ||
+      e.target.nodeName === 'svg' ||
+      e.target.nodeName === 'path'
+      // ||
+      // e.target.type === 'submit'
+    ) {
+      await this.props.closeModal();
     }
   };
 
   render() {
-    if (this.props.isOpen === false) return null;
-
     return (
       <div className={s.backdrop} id="backdrop" onClick={this.handleClickOpen}>
         <div className={s.overlay} onClick={this.handleClickOpen}>
-          <div className={s.close} onClick={this.toggleModal}>
+          <div className={s.close} onClick={this.handleClickOpen}>
             <svg width="15" viewBox="0 0 15 15">
               <path
                 d="M13.365 14.2771L7.49676 8.40887L1.7805 14.1251L0.837928 13.1825L6.55418 7.46629L0.716307 1.62842L1.59807 0.746657L7.43594 6.58453L13.1826 0.837873L14.1252 1.78045L8.37852 7.52711L14.2468 13.3954L13.365 14.2771Z"
