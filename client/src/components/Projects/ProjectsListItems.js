@@ -1,19 +1,14 @@
-// import React from 'react';
 import React, { useState } from 'react';
-import s from './Projects.module.scss';
+import { useRouteMatch } from 'react-router-dom';
 
-// import ButtonAddNew from '../ButtonAddNew/ButtonAddNew.js';
 import SingleProjectCard from '../SingleProjectСard/SingleProjectCard.js';
 import ProjectEditor from './ProjectEditor';
 import Modal from '../Modal/Modal';
 
-// function colorRandom() {
-//   const color =
-//     '#' + (Math.random().toString(16) + '000000').substring(2, 8).toUpperCase();
-//   return color;
-// }
+import s from './Projects.module.scss';
 
 export default function ProjectsListItems({ projects, onClose }) {
+  const { url } = useRouteMatch();
   const [isModal, setisModal] = useState(false);
 
   const toggleModal = () => {
@@ -22,7 +17,6 @@ export default function ProjectsListItems({ projects, onClose }) {
   };
 
   const handleClick = ({ target }) => {
-    // console.log(target);
     toggleModal();
   };
 
@@ -36,6 +30,7 @@ export default function ProjectsListItems({ projects, onClose }) {
             projectName={projectName}
             descr={descr}
             color={color}
+            routeTo={`${url}/${id}`}
           ></SingleProjectCard>
         ))}
       </ul>
