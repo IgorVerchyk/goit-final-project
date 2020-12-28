@@ -1,0 +1,215 @@
+@import '../../helpers/scss/vars.module.scss';
+
+.el {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  background: #ffffff;
+  box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
+  border-radius: 5px;
+}
+
+.title {
+  color: #181c27;
+  font-size: 18px;
+  line-height: 22px;
+  &::after {
+    display: block;
+    content: '';
+    // position: absolute;
+    // width: 240px;
+    height: 0px;
+    left: 40px;
+    top: 358px;
+    padding-top: 8px;
+    border-bottom: 1px solid rgba(24, 28, 39, 0.2);
+  }
+}
+
+.spentTime {
+  all: unset;
+  width: 60px;
+  text-align: right;
+  border-bottom: 1px solid rgba(154, 155, 158, 0.2);
+  text-align: left;
+  padding-left: 10px;
+}
+
+.trashWrapper {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .el {
+    width: 280px;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    .scheduledBlock,
+    .spentBlock,
+    .spentAllBlock {
+      display: flex;
+      justify-content: space-between;
+      width: 225px;
+
+      margin-bottom: 20px;
+    }
+
+    .scheduledText,
+    .scheduledTime,
+    .spentText,
+    .spentAllText,
+    .spentAllTime {
+      font-size: 10px;
+      line-height: 12px;
+      font-weight: 400;
+      color: #000000;
+    }
+
+    .spentTime {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .spentAllBlock {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .el {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
+  }
+  .title {
+    margin-bottom: 20px;
+  }
+  .trashWrapper {
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 980px) {
+  .el {
+    &:nth-child(2n) {
+      margin-right: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 981px) and (max-width: 1215px) {
+  .el {
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+}
+@media screen and (min-width: 1216px) and (max-width: 1279px) {
+  .el {
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .el {
+    width: 215px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    // display: inline;
+    // height: 300px;
+    // max-height: 350px;
+  }
+  .scheduledText,
+  .scheduledTime,
+  .spentText,
+  .spentAllText,
+  .spentAllTime {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    color: #181c27;
+    width: 130px;
+  }
+
+  .scheduledTime,
+  .spentAllTime,
+  .spentTime {
+    text-align: right;
+  }
+  .spentTime {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #181c27;
+  }
+
+  .scheduledBlock,
+  .spentBlock,
+  .spentAllBlock {
+    width: 175px;
+    display: flex;
+    // justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .spentAllBlock {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .el {
+    flex-direction: row;
+    align-items: center;
+    height: 95px;
+    width: 870px;
+    margin-bottom: 10px;
+    padding-left: 30px;
+  }
+
+  .title {
+    width: 170px;
+    margin-right: 30px;
+  }
+
+  .scheduledBlock {
+    width: 100px;
+    margin-right: 100px;
+  }
+
+  .spentBlock {
+    width: 105px;
+    margin-right: 105px;
+  }
+  .spentAllBlock {
+    width: 100px;
+    margin-right: 80px;
+  }
+  .scheduledText,
+  .spentText,
+  .spentAllText {
+    display: none;
+  }
+
+  .trashWrapper {
+    position: relative;
+  }
+}

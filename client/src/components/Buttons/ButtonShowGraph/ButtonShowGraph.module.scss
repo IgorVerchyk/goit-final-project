@@ -1,0 +1,18 @@
+@import '../../../helpers/scss/vars.module.scss';
+
+.show {
+  height: 44px;
+  width: 44px;
+  border-radius: 50px;
+  background-color: $primary-color;
+  background-image: url('../../../assets/images/graph.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
