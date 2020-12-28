@@ -33,6 +33,17 @@ const routes = [
     private: false,
     restricted: false,
   },
+
+  {
+    // path: '/projects/:projectId/:sprintId',
+    path: '/projects/sprint',
+
+    label: 'Home',
+    exact: true,
+    component: lazy(() => import('./views/SprintPage/SprintPage.js')),
+    private: false,
+    restricted: false,
+  },
 ];
 
 export default routes;

@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonAddNew from '../../components/ButtonAddNew/ButtonAddNew.js';
+import ButtonAddNew from '../../components/Buttons/ButtonAddNew/ButtonAddNew';
 import SingleProjectCard from '../../components/SingleProjectСard/SingleProjectCard.js';
 import styles from './Projects.module.scss';
 

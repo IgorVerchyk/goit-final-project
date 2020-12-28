@@ -1,0 +1,96 @@
+.sprint {
+  display: flex;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  // width: 100%;
+}
+.createTaskText {
+  display: none;
+}
+
+.createTask {
+  position: fixed;
+  z-index: 10;
+}
+@media screen and (max-width: 767px) {
+  .sprint {
+    flex-direction: column;
+    align-items: center;
+  }
+  .list {
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .createTask {
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .sprint {
+    min-height: calc(100vh - 80px);
+  }
+  .createTask {
+    right: 40px;
+    top: 145px;
+  }
+  // .tasks {
+  //   border-left: 1px solid rgba(24, 28, 39, 0.1);
+  // }
+}
+@media screen and (min-width: 768px) and (max-width: 980px) {
+  .list {
+    width: 450px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media screen and (min-width: 981px) and (max-width: 1215px) {
+  .list {
+    width: 685px;
+  }
+}
+@media screen and (min-width: 1216px) and (max-width: 1279px) {
+  .list {
+    width: 920px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .tasks {
+    width: calc(100% - 255px);
+  }
+
+  .list {
+    padding-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .list {
+    padding-top: 20px;
+    padding-left: 70px;
+  }
+  .createTask {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 960px;
+    // top: 300px;
+  }
+  .createTaskText {
+    display: block;
+    margin-left: 20px;
+    font-size: 18px;
+  }
+}
