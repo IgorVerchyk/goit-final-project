@@ -2,9 +2,15 @@ import React from 'react';
 
 import styles from './SingleProjectCard.module.scss';
 
-export default function SingleProjectCard({ id, color, taskName, descr }) {
+export default function SingleProjectCard({
+  id,
+  color,
+  taskName,
+  descr,
+  onRemove,
+}) {
   return (
-    <li className={styles.el} style={{ backgroundColor: color }}>
+    <li className={styles.el} style={{ backgroundColor: color }} key={id}>
       <h2 className={styles.title}>{taskName}</h2>
       <p className={styles.text}>{descr}</p>
       <div className={styles.trash}>
@@ -14,6 +20,7 @@ export default function SingleProjectCard({ id, color, taskName, descr }) {
           viewBox="26 20 30 30"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={onRemove}
         >
           <g filter="url(#filter0_d)">
             <path

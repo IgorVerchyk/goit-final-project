@@ -1,4 +1,4 @@
-// import React from 'react';
+import { connect } from 'react-redux';
 import React, { useCallback, useState } from 'react';
 import s from './Projects.module.scss';
 
@@ -6,6 +6,7 @@ import ButtonAddNew from '../ButtonAddNew/ButtonAddNew.js';
 import SingleProjectCard from '../SingleProjectСard/SingleProjectCard.js';
 import ProjectEditor from './ProjectEditor';
 import Modal from '../Modal/Modal';
+import projectsOperations from '../../redux/projects/projectsOperations';
 
 // function colorRandom() {
 //   const color =
@@ -21,7 +22,7 @@ const toggleModal = state => {
   });
 };
 
-export default function ProjectsListItems({ projects, onClose }) {
+function ProjectsListItems({ projects, onRemove }) {
   const [isModal, setisModal] = useState(false);
 
   const toggleModal = () => {
@@ -44,6 +45,7 @@ export default function ProjectsListItems({ projects, onClose }) {
             projectName={projectName}
             descr={descr}
             color={color}
+            onClick={onRemove}
           ></SingleProjectCard>
         ))}
       </ul>
@@ -63,3 +65,9 @@ export default function ProjectsListItems({ projects, onClose }) {
     </section>
   );
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onRemove: () => dispatch(projectsOperations.removeProject(ownProps.id)),
+});
+
+export default connect(null, mapDispatchToProps)(ProjectsListItems);

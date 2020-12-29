@@ -1,15 +1,18 @@
 import axios from 'axios';
 
 import {
-  addProjectRequest,
-  addProjectSuccess,
-  addProjectError,
+  readyProjectRequest,
+  readyProjectSuccess,
+  readyProjectError,
   fetchProjectsRequest,
   fetchProjectsSuccess,
   fetchProjectsError,
   cancelingProjectRequest,
   cancelingProjectSuccess,
   cancelingProjectError,
+  removeProjectRequest,
+  removeProjectSuccess,
+  removeProjectError,
 } from './projectsActions';
 
 const baseURL = 'http://localhost:3456';
@@ -25,8 +28,8 @@ const fetchProjects = () => async dispatch => {
   }
 };
 
-const addProject = (projectName, descr, color) => async dispatch => {
-  dispatch(addProjectRequest());
+const readyProject = (projectName, descr, color) => async dispatch => {
+  dispatch(readyProjectRequest());
 
   try {
     const { data } = await axios.post(`${baseURL}/projects`, {
@@ -34,9 +37,9 @@ const addProject = (projectName, descr, color) => async dispatch => {
       descr,
       color,
     });
-    dispatch(addProjectSuccess(data));
+    dispatch(readyProjectSuccess(data));
   } catch (error) {
-    dispatch(addProjectError(error.message));
+    dispatch(readyProjectError(error.message));
   }
 };
 
@@ -51,9 +54,21 @@ const cancelingProject = () => async dispatch => {
   }
 };
 
+const removeProject = id => async dispatch => {
+  dispatch(removeProjectRequest());
+
+  try {
+    await axios.delete(`${baseURL}/projects/${id}`);
+    dispatch(removeProjectSuccess(id));
+  } catch (error) {
+    dispatch(removeProjectError(error.message));
+  }
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   fetchProjects,
-  addProject,
+  readyProject,
   cancelingProject,
+  removeProject,
 };

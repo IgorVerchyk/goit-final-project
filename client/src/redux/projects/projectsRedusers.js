@@ -4,11 +4,12 @@ import {
   fetchProjectsRequest,
   fetchProjectsSuccess,
   fetchProjectsError,
-  addProjectSuccess,
+  readyProjectSuccess,
   cancelingProjectSuccess,
+  removeProjectSuccess,
 } from './projectsActions';
 
-const addProject = (state, action) => {
+const readyProject = (state, action) => {
   const names = state.map(item => item.name.toLowerCase());
   const isNotUniqueProject = names.includes(
     action.payload.name.toLowerCase().trim(),
@@ -22,10 +23,15 @@ const addProject = (state, action) => {
   }
 };
 
+const removeProject = (state, action) => {
+  return state.filter(({ id }) => id !== action.payload);
+};
+
 const items = createReducer([], {
   [fetchProjectsSuccess]: (_, { payload }) => payload,
-  [addProjectSuccess]: addProject,
+  [readyProjectSuccess]: readyProject,
   [cancelingProjectSuccess]: (_, { payload }) => payload,
+  [removeProjectSuccess]: removeProject,
 });
 
 const loading = createReducer(false, {

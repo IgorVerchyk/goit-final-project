@@ -8,14 +8,24 @@ export const fetchProjectsSuccess = createAction(
 );
 export const fetchProjectsError = createAction('projects/fetchProjectsError');
 
-export const addProjectRequest = createAction('projects/addProjectRequest');
-export const addProjectSuccess = createAction('projects/addProjectSuccess');
-export const addProjectError = createAction('projects/addProjectError');
+export const readyProjectRequest = createAction('projects/readyProjectRequest');
+export const readyProjectSuccess = createAction('projects/readyProjectSuccess');
+export const readyProjectError = createAction('projects/readyProjectError');
 
 export const cancelingProjectRequest = createAction(
-  'projects/addProjectRequest',
+  'projects/cancelingProjectRequest',
 );
 export const cancelingProjectSuccess = createAction(
-  'projects/addProjectSuccess',
+  'projects/cancelingProjectSuccess',
 );
-export const cancelingProjectError = createAction('projects/addProjectError');
+export const cancelingProjectError = createAction(
+  'projects/cancelingProjectError',
+);
+
+export const removeProjectRequest = createAction(
+  'projects/removeProjectRequest',
+);
+export const removeProjectSuccess = createAction(
+  'projects/removeProjectSuccess',
+);
+export const removeProjectError = createAction('projects/removeProjectError');
