@@ -5,9 +5,15 @@ const rateLimit = require("express-rate-limit");
 const app = express();
 const { ErrorHandler } = require("./helpers/errorHandler");
 const { HttpCode } = require("./helpers/constants");
+const projectsRouter = require("./api/projects/projectsRoutes");
+
+const PORT = process.env.PORT || 3000;
 
 app.use(helmet());
-app.use(cors());
+app.use(cors({ origin: `http://localhost:${PORT}` }));
+app.use(express.json());
+
+app.use("/projects", projectsRouter);
 
 app.use((req, res, next) => {
   res.status(HttpCode.NOT_FOUND).json({
@@ -27,4 +33,5 @@ app.use((err, req, res, next) => {
     data: err.status === 500 ? "Internal Server Error" : err.data,
   });
 });
+
 module.exports = app;

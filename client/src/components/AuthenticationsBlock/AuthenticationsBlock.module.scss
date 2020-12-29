@@ -1,0 +1,88 @@
+@import '../../helpers/scss/mixin.scss';
+@import '../../helpers/scss/vars.module.scss';
+
+.wrapperPage {
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 60px);
+  width: 100%;
+
+  @include tablets {
+    height: calc(100vh - 80px);
+  }
+}
+
+.circleBg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 778px;
+  max-width: 883px;
+  height: 78px;
+  border-radius: 50%;
+  transform: translateX(-50%);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 100px;
+    border-radius: 50%;
+    display: block;
+    background: $primary-color;
+  }
+
+  &::before {
+    content: '';
+    top: 35px;
+    right: 72px;
+    width: 78px;
+    height: 78px;
+  }
+
+  @include laptop {
+    &::after {
+      content: '';
+      top: 58px;
+      right: -58px;
+      width: 26px;
+      height: 26px;
+    }
+  }
+}
+
+.wrapperForBg {
+  position: relative;
+
+  @include tablets {
+    width: 570px;
+    height: 640px;
+    margin: 0 auto;
+    margin-top: 103px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 69px;
+      left: -235px;
+      width: 332px;
+      height: 565px;
+      display: block;
+      background: url('../../assets//images/circle-2.svg') no-repeat;
+      background-position: 0 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: -430px;
+      top: 21px;
+      width: 603px;
+      height: 569px;
+      display: block;
+      background: url(../../assets/images/circle-1.svg) no-repeat;
+      background-position: 0 0;
+    }
+  }
+}

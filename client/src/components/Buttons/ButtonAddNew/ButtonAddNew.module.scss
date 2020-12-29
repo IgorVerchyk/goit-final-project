@@ -1,0 +1,39 @@
+@import '../../../helpers/scss/vars.module.scss';
+
+.add {
+  position: relative;
+  height: 44px;
+  width: 44px;
+  border-radius: 50px;
+  background-color: $primary-color;
+  box-shadow: 0px 3px 4px rgba(255, 107, 8, 0.3);
+
+  &::before {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 29%;
+    top: 50%;
+    height: 2px;
+    width: 18px;
+    background-color: $white;
+  }
+
+  &::after {
+    display: block;
+    content: '';
+    position: absolute;
+    left: 29%;
+    top: 50%;
+    height: 2px;
+    width: 18px;
+    background-color: $white;
+    transform: rotate(90deg);
+  }
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}

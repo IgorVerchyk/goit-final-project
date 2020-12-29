@@ -1,6 +1,30 @@
-{ "user":{"name": "Test Testovich",
-  "avatar": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fdonttakefake.com%2Fwp-content%2Fuploads%2F2020%2F10%2Fborat-kazakstan-dtf-magazine-692x463.jpg&imgrefurl=https%3A%2F%2Fdonttakefake.com%2Ftag%2Fborat%2F&tbnid=aVgxbL5IhL5jwM&vet=12ahUKEwjR0bvln-XtAhVHlosKHbm7Au8QMyg-egQIARBG..i&docid=FXLdrwCdpPBtsM&w=692&h=463&q=borat&ved=2ahUKEwjR0bvln-XtAhVHlosKHbm7Au8QMyg-egQIARBG",
-  "email": "evolution@killus.all"},
-  "tasks":[ { "name":"Task1", "id":"12345"},{ "name":"Task2", "id":"23456"},{ "name":"Task3", "id":"34567"}]
+{
 
+
+  "user": {
+    "email": "kol@g.com",
+    "password": "123123"
+  },
+  "tasks": [
+<<<<<<< HEAD
+    { "name": "Task1", "id": "12345" },
+    { "name": "Task2", "id": "23456" },
+    { "name": "Task3", "id": "34567" }
+  ]
 }
+=======
+    {
+      "name": "Task1",
+      "id": "12345"
+    },
+    {
+      "name": "Task2",
+      "id": "23456"
+    },
+    {
+      "name": "Task3",
+      "id": "34567"
+    }
+  ]
+}
+>>>>>>> bd11597666613bee1d465bfd87bdfa1fb9841491
