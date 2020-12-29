@@ -24,6 +24,7 @@ export default class Modal extends Component {
       this.props.onCloseModal();
     }
   };
+
   render() {
     console.log('modal props', this.props);
     return (

@@ -24,6 +24,10 @@ class ProjectEditor extends Component {
     this.props.onAddProject(this.state);
   };
 
+  handleClick = () => {
+    this.props.onCloseModal();
+  };
+
   render() {
     const { projectName, descr, color } = this.state;
     return (
@@ -67,7 +71,9 @@ class ProjectEditor extends Component {
           </label>
 
           <button type="submit">Готово</button>
-          <button type="button">Відміна</button>
+          <button type="button" onClick={this.handleClick}>
+            Відміна
+          </button>
         </form>
       </>
     );

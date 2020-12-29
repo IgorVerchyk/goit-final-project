@@ -7,7 +7,6 @@ import {
   addProjectSuccess,
   cancelingProjectSuccess,
 } from './projectsActions';
-import d from '../../';
 
 const addProject = (state, action) => {
   const names = state.map(item => item.name.toLowerCase());
@@ -15,15 +14,6 @@ const addProject = (state, action) => {
     action.payload.name.toLowerCase().trim(),
   );
 
-  if (isNotUniqueProject) {
-    // errorMessage(action.payload.name);
-    return state;
-  } else {
-    return [...state, action.payload];
-  }
-};
-
-const cancelingProject = (state, action) => {
   if (isNotUniqueProject) {
     // errorMessage(action.payload.name);
     return state;
