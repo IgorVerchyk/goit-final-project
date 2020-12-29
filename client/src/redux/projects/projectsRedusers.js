@@ -4,13 +4,38 @@ import {
   fetchProjectsRequest,
   fetchProjectsSuccess,
   fetchProjectsError,
+  addProjectSuccess,
+  cancelingProjectSuccess,
 } from './projectsActions';
+import d from '../../';
+
+const addProject = (state, action) => {
+  const names = state.map(item => item.name.toLowerCase());
+  const isNotUniqueProject = names.includes(
+    action.payload.name.toLowerCase().trim(),
+  );
+
+  if (isNotUniqueProject) {
+    // errorMessage(action.payload.name);
+    return state;
+  } else {
+    return [...state, action.payload];
+  }
+};
+
+const cancelingProject = (state, action) => {
+  if (isNotUniqueProject) {
+    // errorMessage(action.payload.name);
+    return state;
+  } else {
+    return [...state, action.payload];
+  }
+};
 
 const items = createReducer([], {
   [fetchProjectsSuccess]: (_, { payload }) => payload,
-  //   [addProjectSuccess]: (state, { payload }) => [...state, payload],
-  //   [deleteProjectSuccess]: (state, { payload }) =>
-  //     state.filter(({ id }) => id !== payload),
+  [addProjectSuccess]: addProject,
+  [cancelingProjectSuccess]: (_, { payload }) => payload,
 });
 
 const loading = createReducer(false, {

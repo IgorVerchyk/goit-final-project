@@ -67,7 +67,7 @@ class ProjectEditor extends Component {
           </label>
 
           <button type="submit">Готово</button>
-          <button type="submit">Відміна</button>
+          <button type="button">Відміна</button>
         </form>
       </>
     );
