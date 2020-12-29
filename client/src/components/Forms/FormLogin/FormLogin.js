@@ -39,7 +39,7 @@ export default function FormLogin({ submitForm }) {
       <PrimaryBtn text={'Увійти'} classBtn={'btnSubmit'} />
       <FormTextAndLink
         accauntText={'Немає акаунту?'}
-        routeTo={'/register'}
+        routeTo={'/registration'}
         linkText={'Зареєструватись'}
       />
     </form>

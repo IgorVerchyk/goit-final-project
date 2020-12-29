@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
-import FormLabel from '../FormLabel/FormLabel';
-import FormTextAndLink from '../FormTextAndLink/FormTextAndLink';
+// import FormTextAndLink from '../FormTextAndLink/FormTextAndLink';
 
 import s from './ProjectEditor.module.scss';
 
@@ -78,7 +76,7 @@ class ProjectEditor extends Component {
             </select>
           </label>
           <PrimaryBtn text={'Готово'} />
-          <FormTextAndLink accauntText={'Відміна'} routeTo={'/'} />
+          {/* <FormTextAndLink accauntText={'Відміна'} routeTo={'/'} /> */}
         </form>
       </>
     );
