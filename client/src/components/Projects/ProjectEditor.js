@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
-import FormLabel from '../FormLabel/FormLabel';
-import FormTextAndLink from '../FormTextAndLink/FormTextAndLink';
+// import FormLabel from '../Forms/FormLabel/FormLabel';
+import FormTextAndLink from '../Forms/FormTextAndLink/FormTextAndLink';
 
 import s from './ProjectEditor.module.scss';
 
@@ -15,18 +15,23 @@ class ProjectEditor extends Component {
     color: '',
   };
 
+  randomColor = () => {
+    const colors = ['#8c72df', '#71DF87', '#FF765F'];
+    return colors[Math.floor(Math.random() * 3)];
+  };
+
   handleChange = ({ target }) => {
     const { name, value } = target;
-    console.log(value);
-
     this.setState({ [name]: value });
   };
 
-  handleSubmit = e => {
-    console.log(this.state);
-    console.log(e);
+  handleSubmit = async e => {
     e.preventDefault();
-    this.props.onAddProject(this.state);
+
+    // await this.setState({ color: this.randomColor() });
+
+    await this.props.onAddProject(this.state);
+    this.props.onClose();
   };
 
   render() {
@@ -67,7 +72,7 @@ class ProjectEditor extends Component {
               onChange={this.handleChange}
             >
               <option style={{ background: '#8c72df' }} value="#8c72df">
-                medium purple
+                purple
               </option>
               <option style={{ background: '#71DF87' }} value="#71DF87">
                 green
@@ -77,6 +82,7 @@ class ProjectEditor extends Component {
               </option>
             </select>
           </label>
+
           <PrimaryBtn text={'Готово'} />
           <FormTextAndLink accauntText={'Відміна'} routeTo={'/'} />
         </form>
