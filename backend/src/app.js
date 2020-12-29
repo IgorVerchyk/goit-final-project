@@ -5,15 +5,34 @@ const rateLimit = require("express-rate-limit");
 const app = express();
 const { ErrorHandler } = require("./helpers/errorHandler");
 const { HttpCode } = require("./helpers/constants");
-const projectsRouter = require("./api/projects/projectsRoutes");
 
-const PORT = process.env.PORT || 3000;
+const { apiLimit, jsonLimit } = require("./config/rate-limit.json");
+
+const routerAuth = require("./api/auth/auth");
+// const routerProject = require("./api/projects/projects");
 
 app.use(helmet());
-app.use(cors({ origin: `http://localhost:${PORT}` }));
-app.use(express.json());
+app.use(cors());
+app.use(express.json({ limit: jsonLimit }));
 
-app.use("/projects", projectsRouter);
+app.use(
+  "/api/",
+  rateLimit({
+    windowMs: apiLimit.windowMs, // 15 minutes
+    max: apiLimit.max,
+    handler: (req, res, next) => {
+      next(
+        new ErrorHandler(
+          HttpCode.BAD_REQUEST,
+          "Вы исчерпали количество запросов за 15 минут",
+        ),
+      );
+    },
+  }),
+);
+
+app.use("/api/auth", routerAuth);
+// app.use("/api/project", routerProject);
 
 app.use((req, res, next) => {
   res.status(HttpCode.NOT_FOUND).json({
