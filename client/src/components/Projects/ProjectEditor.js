@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
-// import FormLabel from '../Forms/FormLabel/FormLabel';
 import FormTextAndLink from '../Forms/FormTextAndLink/FormTextAndLink';
 
 import s from './ProjectEditor.module.scss';
@@ -13,12 +12,14 @@ class ProjectEditor extends Component {
     projectName: '',
     descr: '',
     color: '',
+    errorName: false,
+    errorDescr: false,
   };
 
-  randomColor = () => {
-    const colors = ['#8c72df', '#71DF87', '#FF765F'];
-    return colors[Math.floor(Math.random() * 3)];
-  };
+  // randomColor = () => {
+  //   const colors = ['#8c72df', '#71DF87', '#FF765F'];
+  //   return colors[Math.floor(Math.random() * 3)];
+  // };
 
   handleChange = ({ target }) => {
     const { name, value } = target;
@@ -27,6 +28,15 @@ class ProjectEditor extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
+    if (this.state.projectName === '') {
+      this.setState({ errorName: true });
+      return;
+    } else if (this.state.descr === '') {
+      this.setState({ errorDescr: true });
+      return;
+    }
+    //  || this.state.descr === '') {
+    // return alert('Будь ласка, заповніть всі поля');
 
     // await this.setState({ color: this.randomColor() });
 
@@ -41,25 +51,25 @@ class ProjectEditor extends Component {
         <h2 className={s.title}>Створення проекту</h2>
         <form className={s.form} onSubmit={this.handleSubmit}>
           <label htmlFor="projectName" className={s.formLabel}>
-            Назва проекту
+            Назва проекту*
             <br />
             <input
               type="text"
               value={projectName}
               onChange={this.handleChange}
               name="projectName"
-              className={s.formInput}
+              className={!this.state.errorName ? s.formInput : s.error}
             />
           </label>
           <label htmlFor="descr" className={s.formLabel}>
-            Опис
+            Опис*
             <br />
             <input
               type="text"
               value={descr}
               onChange={this.handleChange}
               name="descr"
-              className={s.formInput}
+              className={!this.state.errorDescr ? s.formInput : s.error}
             />
           </label>
           <label className={s.formLabel}>

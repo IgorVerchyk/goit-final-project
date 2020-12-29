@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  addProjectRequest,
-  addProjectError,
   addProjectSuccess,
   fetchProjectsRequest,
   fetchProjectsSuccess,
