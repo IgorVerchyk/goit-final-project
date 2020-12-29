@@ -4,6 +4,7 @@ require("dotenv").config();
 const uriDb = process.env.URI_DB;
 
 const db = mongoose.connect(uriDb, {
+  promiseLibrary: global.Promise,
   useUnifiedTopology: true,
   useCreateIndex: true,
   useNewUrlParser: true,
@@ -25,7 +26,6 @@ mongoose.connection.on("disconnected", (err) => {
 
 process.on("SIGINT", () => {
   mongoose.connection.close(() => {
-    console.log("Connection for DB disconnected and app terminated");
     process.exit(1);
   });
 });
