@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
-// import FormLabel from '../Forms/FormLabel/FormLabel';
+
+import FormLabel from '../Forms/FormLabel/FormLabel';
 import FormTextAndLink from '../Forms/FormTextAndLink/FormTextAndLink';
 
 import s from './ProjectEditor.module.scss';
@@ -84,7 +84,7 @@ class ProjectEditor extends Component {
           </label>
 
           <PrimaryBtn text={'Готово'} />
-          <FormTextAndLink accauntText={'Відміна'} routeTo={'/'} />
+          {/* <FormTextAndLink accauntText={'Відміна'} routeTo={'/'} /> */}
         </form>
       </>
     );

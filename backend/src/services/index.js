@@ -3,7 +3,7 @@ const UserService = require("./user");
 const AuthService = require("./auth");
 
 module.exports = {
-  ContactsService,
+  ProjectService,
   UserService,
   AuthService,
 };
