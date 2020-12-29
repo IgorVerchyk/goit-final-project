@@ -1,0 +1,71 @@
+@import '../../../helpers/scss/vars.module.scss';
+
+.closeContainer {
+  position: absolute;
+  top: -90px;
+  right: 3%;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+  margin-top: 100px;
+  cursor: pointer;
+  &:hover .leftright {
+    transform: rotate(-45deg);
+    background-color: $tomatored;
+  }
+  &:hover .rightleft {
+    transform: rotate(45deg);
+    background-color: $tomatored;
+  }
+  &:hover label {
+    opacity: 1;
+  }
+}
+
+.leftright {
+  height: 4px;
+  width: 50px;
+  position: absolute;
+  margin-top: 24px;
+  background-color: $primary-color;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all 0.3s ease-in;
+}
+
+.rightleft {
+  height: 4px;
+  width: 50px;
+  position: absolute;
+  margin-top: 24px;
+  background-color: $primary-color;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all 0.3s ease-in;
+}
+
+label {
+  color: $tomatored;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease-in;
+  opacity: 0;
+}
+.close {
+  margin: 50px 0 0 5px;
+  position: absolute;
+}
+
+// .closeContainer:hover .leftright {
+//   transform: rotate(-45deg);
+//   background-color: $tomatored;
+// }
+// .closeContainer:hover .rightleft {
+//   transform: rotate(45deg);
+//   background-color: $tomatored;
+// }
+// .closeContainer:hover label {
+//   opacity: 1;
+// }
