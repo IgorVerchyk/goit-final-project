@@ -6,14 +6,14 @@ import styles from './SingleProjectCard.module.scss';
 export default function SingleProjectCard({
   id,
   color,
-  taskName,
+  projectName,
   descr,
   routeTo,
 }) {
   return (
     <Link to={routeTo}>
       <li className={styles.el} style={{ backgroundColor: color }}>
-        <h2 className={styles.title}>{taskName}</h2>
+        <h2 className={styles.title}>{projectName}</h2>
         <p className={styles.text}>{descr}</p>
         <div className={styles.trash}>
           <svg width="30" viewBox="26 20 30 30">
