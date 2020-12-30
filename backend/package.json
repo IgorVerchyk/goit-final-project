@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",

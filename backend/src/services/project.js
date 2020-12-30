@@ -18,7 +18,19 @@ const removeProject = (id) => {
   return Project.findByIdAndRemove({ _id: id });
 };
 
+const getProject = (id) => Project.findById({ _id: id });
+
+const updateProject = (id, update) =>
+  Project.findByIdAndUpdate(
+    {
+      _id: id,
+    },
+    update
+  );
+
 module.exports = {
   createProject,
   removeProject,
+  getProject,
+  updateProject,
 };
