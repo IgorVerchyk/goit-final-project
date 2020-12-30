@@ -1,13 +1,16 @@
 @import '../../helpers/scss/vars.module.scss';
 
-a{text-decoration: none;
+.a{text-decoration: none;
 margin: 0;
-padding: 0;}
+padding: 0;
+width: inherit;
+color: $white;
+}
+
 .el {
   position: relative;
   border-radius: 5px;
   background-color: teal;
-  color: $white;
   letter-spacing: 0.04em;
 
   &:hover,
