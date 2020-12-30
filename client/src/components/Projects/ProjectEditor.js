@@ -35,13 +35,18 @@ class ProjectEditor extends Component {
       this.setState({ errorDescr: true });
       return;
     }
-    //  || this.state.descr === '') {
-    // return alert('Будь ласка, заповніть всі поля');
 
     // await this.setState({ color: this.randomColor() });
 
     await this.props.onAddProject(this.state);
     this.props.onClose();
+  };
+
+  handleCanselingBtn = e => {
+    console.log(e);
+    this.props.onClose();
+    this.setState({ projectName: '', descr: '', color: '' });
+    console.log(this.state);
   };
 
   render() {
@@ -94,7 +99,9 @@ class ProjectEditor extends Component {
           </label>
 
           <PrimaryBtn text={'Готово'} />
-          <FormTextAndLink accauntText={'Відміна'} routeTo={'/'} />
+          <p className={s.cansel} onClick={this.handleCanselingBtn}>
+            Відміна
+          </p>
         </form>
       </>
     );
@@ -106,6 +113,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   onAddProject: projectsOperations.addProject,
+  onCanseling: projectsOperations.cancelingProject,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectEditor);

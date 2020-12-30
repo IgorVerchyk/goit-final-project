@@ -7,7 +7,7 @@ import Modal from '../Modal/Modal';
 
 import s from './Projects.module.scss';
 
-export default function ProjectsListItems({ projects }) {
+export default function ProjectsListItems({ projects, onRemove }) {
   const { url } = useRouteMatch();
   const [isModal, setisModal] = useState(false);
 
@@ -22,11 +22,13 @@ export default function ProjectsListItems({ projects }) {
       <ul className={s.list}>
         {projects.map(({ id, projectName, descr, color }) => (
           <SingleProjectCard
+            id={id}
             key={id}
             projectName={projectName}
             descr={descr}
             color={color}
-            routeTo={`${url}/${id}`}
+            routeTo={`projects/${id}`}
+            onRemove={() => onRemove(id)}
           ></SingleProjectCard>
         ))}
       </ul>

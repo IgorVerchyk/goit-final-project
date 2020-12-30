@@ -10,16 +10,22 @@ export default function SingleProjectCard({
   projectName,
   descr,
   routeTo,
+  onRemove,
 }) {
+  const handleClick = e => {
+    console.log(onRemove);
+    onRemove();
+    // onRemove(id);
+  };
   return (
     <li className={styles.el} style={{ backgroundColor: color }}>
       <Link to={routeTo} className={styles.a}>
         <h2 className={styles.title}>{projectName}</h2>
         <p className={styles.text}>{descr}</p>
-        <div className={styles.trash}>
-          <TrashBtn />
-        </div>
       </Link>
+      <div className={styles.trash} onClick={handleClick}>
+        <TrashBtn />
+      </div>
     </li>
   );
 }

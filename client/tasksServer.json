@@ -1,102 +1,6 @@
 {
   "projects": [
     {
-      "id": "1234567",
-      "projectName": "bestProject",
-      "descr": "Test project",
-      "color": "#ff0000",
-      "colaborators": [
-        "evolution@killus.all",
-        "redeyes@wantsle.ep",
-        "gypifish@revenge.org",
-        "nisepupilon@cow.net"
-      ],
-      "sprints": [
-        {
-          "id": "a1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "b234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "c1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        }
-      ]
-    },
-    {
-      "id": "12345672",
-      "projectName": "bestProject2",
-      "descr": "Test project2",
-      "color": "#ffcc00",
-      "colaborators": [
-        "evolution@killus.all",
-        "redeyes@wantsle.ep",
-        "gypifish@revenge.org",
-        "nisepupilon@cow.net"
-      ],
-      "sprints": [
-        {
-          "id": "a1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "b234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "c1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        }
-      ]
-    },
-    {
-      "id": "12345673",
-      "projectName": "bestProject3",
-      "descr": "Test project3",
-      "color": "#009900",
-      "colaborators": [
-        "evolution@killus.all",
-        "redeyes@wantsle.ep",
-        "gypifish@revenge.org",
-        "nisepupilon@cow.net"
-      ],
-      "sprints": [
-        {
-          "id": "a1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "b234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "c1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        }
-      ]
-    },
-    {
       "id": "12345674",
       "projectName": "bestProject4",
       "descr": "Test project4",
@@ -193,86 +97,34 @@
       ]
     },
     {
-      "id": "12345677",
-      "projectName": "bestProject7",
-      "descr": "Test project7",
-      "color": "#330066",
-      "colaborators": [
-        "evolution@killus.all",
-        "redeyes@wantsle.ep",
-        "gypifish@revenge.org",
-        "nisepupilon@cow.net"
-      ],
-      "sprints": [
-        {
-          "id": "a1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "b234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "c1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        }
-      ]
-    },
-    {
-      "id": "123456741",
-      "projectName": "bestProject--",
-      "descr": "Test project--",
-      "color": "#009999",
-      "colaborators": [
-        "evolution@killus.all",
-        "redeyes@wantsle.ep",
-        "gypifish@revenge.org",
-        "nisepupilon@cow.net"
-      ],
-      "sprints": [
-        {
-          "id": "a1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "b234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "c1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        }
-      ]
-    },
-    {
       "projectName": "www",
       "descr": "test",
       "color": "#FF765F",
       "id": "UnKursp"
     },
     {
-      "projectName": "test321",
-      "descr": "321",
-      "color": "",
-      "id": "AYLn9Bq"
-    },
-    {
       "projectName": "123",
       "descr": "123",
       "color": "#71DF87",
       "id": "JlBr2yL"
+    },
+    {
+      "projectName": "qwe",
+      "descr": "321",
+      "color": "#FF765F",
+      "id": "8ax2zFy"
+    },
+    {
+      "projectName": "123554",
+      "descr": "654",
+      "color": "#71DF87",
+      "id": "BN-bTXu"
+    },
+    {
+      "projectName": "13",
+      "descr": "13",
+      "color": "#71DF87",
+      "id": "KCJRHT0"
     }
   ]
 }

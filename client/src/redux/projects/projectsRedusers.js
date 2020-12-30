@@ -1,17 +1,23 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import {
-  addProjectSuccess,
   fetchProjectsRequest,
   fetchProjectsSuccess,
   fetchProjectsError,
+  addProjectSuccess,
+  cancelingProjectSuccess,
+  removeProjectSuccess,
 } from './projectsActions';
+
+const removeProject = (state, action) => {
+  return state.filter(({ id }) => id !== action.payload);
+};
 
 const items = createReducer([], {
   [fetchProjectsSuccess]: (_, { payload }) => payload,
   [addProjectSuccess]: (state, { payload }) => [...state, payload],
-  // [deleteProjectSuccess]: (state, { payload }) =>
-  //   state.filter(({ id }) => id !== payload),
+  [cancelingProjectSuccess]: (_, { payload }) => payload,
+  [removeProjectSuccess]: removeProject,
 });
 
 const loading = createReducer(false, {
