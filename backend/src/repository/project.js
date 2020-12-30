@@ -4,6 +4,11 @@ class ProjectRepository {
   constructor() {
     this.model = Project;
   }
+
+  async getProgect(id) {
+    const project = await this.model.findById({ _id: id });
+    return project;
+  }
   async createNewProject() {
     const project = new this.model();
     return project.save();

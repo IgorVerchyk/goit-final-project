@@ -33,6 +33,7 @@ const getProject = async (req, res, next) => {
     if (!result) {
       return res.status(404).send({ message: "No project with such ID" });
     }
+    return result;
   } catch (e) {
     next(e);
   }

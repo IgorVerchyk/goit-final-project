@@ -10,7 +10,7 @@ class ProjectService {
   }
 
   async getProject  (id) {
-    const result = await this.repositories.project.findById({ _id: id });
+    const result = await this.repositories.project.getProject( id );
   return result;
   } 
 
