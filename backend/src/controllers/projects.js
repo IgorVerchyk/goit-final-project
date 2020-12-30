@@ -27,9 +27,20 @@ const createProject = async (req, res, next) => {
   }
 };
 
+const getProject = async (req, res, next) => {
+  try {
+    const result = await projectService.getProject(req.id);
+    if (!result) {
+      return res.status(404).send({ message: "No project with such ID" });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
 const createSprint = async ({ body, params: { projectId } }, res, next) => {
   try {
-    const result = await service.getProject(projectId);
+    const result = await projectService.getProject(projectId);
 
     if (!result) {
       res.status(404).send({ message: "No project with such ID" });
@@ -57,7 +68,7 @@ const deleteSprint = async ({
       return res.status(404).send({ message: "No spint ID declared" });
     }
 
-    const result = await service.getProject(projectId);
+    const result = await projectService.getProject(projectId);
 
     if (!result) {
       return res.status(404).send({ message: "No project with such ID" });
@@ -94,6 +105,7 @@ const removeProject = async (req, res, next) => {
 };
 
 module.exports = {
+  getProject,
   createProject,
   removeProject,
   createSprint,
