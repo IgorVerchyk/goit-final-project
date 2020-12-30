@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
-import FormTextAndLink from '../Forms/FormTextAndLink/FormTextAndLink';
+// import FormTextAndLink from '../Forms/FormTextAndLink/FormTextAndLink';
 
 import s from './ProjectEditor.module.scss';
 
