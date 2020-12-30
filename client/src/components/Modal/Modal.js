@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import s from './Modal.module.scss';
 
 export default class Modal extends Component {
-  // state = {
-  //   isModal: true,
-  // };
-
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   }
@@ -20,16 +16,13 @@ export default class Modal extends Component {
     }
   };
 
-  handleClickOpen = async e => {
-    console.dir(e.target);
+  handleClickOpen = e => {
     if (
       e.target.id === 'backdrop' ||
       e.target.nodeName === 'svg' ||
       e.target.nodeName === 'path'
-      // ||
-      // e.target.type === 'submit'
     ) {
-      await this.props.closeModal();
+      this.props.closeModal();
     }
   };
 

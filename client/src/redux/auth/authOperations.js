@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { authActions } from './';
 
-const baseURL = 'http://localhost:3456';
+const baseURL = 'https://project-manager-goit20.herokuapp.com';
 
 // const token = {
 //   set(token) {
@@ -17,11 +17,10 @@ const register = dataUser => async dispatch => {
   dispatch(authActions.registerRequest());
 
   try {
-<<<<<<< HEAD
-    const { data } = await axios.post(`${baseURL}`, dataUser);
-=======
-    const { data } = await axios.post(`${baseURL}/user`, dataUser);
->>>>>>> bd11597666613bee1d465bfd87bdfa1fb9841491
+    const { data } = await axios.post(
+      `${baseURL}/api/auth/registration`,
+      dataUser,
+    );
 
     // token.set(data.token);
     dispatch(authActions.registerSuccess(data));
@@ -38,7 +37,7 @@ const login = dataUser => async dispatch => {
 
   try {
     console.log(dataUser);
-    const { data } = await axios.post(`${baseURL}/user`, dataUser);
+    const { data } = await axios.post(`${baseURL}/api/auth/login`, dataUser);
 
     // token.set(data.token);
     dispatch(authActions.loginSuccess(data));

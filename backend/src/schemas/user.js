@@ -5,7 +5,9 @@ const gravatar = require("gravatar");
 
 const SALT_FACTOR = 6;
 
-const taskSchema = new Schema({
+const projectSchema = new Schema({
+  projectId: {type: String,require:true},
+  isAdmin: {type:Boolean, default:true},
   title: { type: String, require: true },
   descr: { type: String, require: true },
 });
@@ -29,21 +31,15 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
-    avatarURL: {
-      type: String,
-      default: function () {
-        return gravatar.url(this.email, { s: "250" }, true);
-      },
-    },
     verify: {
       type: Boolean,
       default: false,
     },
-    verificationToken: {
-      type: String,
-      required: [true, "Verify token is required"],
+    projects: [projectSchema],
+    admin: {
+      type: Boolean,
+      default: false,
     },
-    tasks: [taskSchema],
   },
   { versionKey: false, timestamps: true }
 );

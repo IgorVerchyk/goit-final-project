@@ -1,36 +1,46 @@
-// const { ProjectRepository } = require("../repository");
+const { ProjectRepository } = require("../repository");
+const { UsersRepository } = require("../repository");
 
-// class ProgectService {
-//   constructor() {
-//     this.repositories = {
-//       contacts: new ProjectsRepository(),
-//     };
-//   }
-// }
+class ProjectService {
+  constructor() {
+    this.repositories = {
+      project: new ProjectRepository(),
+      user: new UsersRepository(),
+    };
+  }
 
-// module.exports = ProjectService;
-const Project = require("../schemas/project");
+  async getProject  (id) {
+    const result = await this.repositories.project.findById({ _id: id });
+  return result;
+  } 
 
-const createProject = ({ email, sprints }) =>
-  Project.create({ email, sprints });
+  async createProject({ id, title, descr }) {
+    const newProject = await this.repositories.project.createNewProject();
+    const projectId = newProject.id;
+    const project = await this.repositories.user.createNewProject(
+      id,
+      projectId,
+      title,
+      descr
+    );
+    return project;
+  }
 
-const removeProject = (id) => {
-  return Project.findByIdAndRemove({ _id: id });
-};
+ async updateProject (id, update){
+   this.repositories.project.findByIdAndUpdate(
+  {
+    _id: id,
+  },
+  update
+);}
 
-const getProject = (id) => Project.findById({ _id: id });
+  async removeProject({ id, projectId, repId }) {
+    const removeFromRep = await this.repositories.project.removeProject(repId);
 
-const updateProject = (id, update) =>
-  Project.findByIdAndUpdate(
-    {
-      _id: id,
-    },
-    update
-  );
+    const result = await this.repositories.user.removeProject(id, projectId);
+    return result;
+  }
+}
 
-module.exports = {
-  createProject,
-  removeProject,
-  getProject,
-  updateProject,
-};
+
+module.exports = ProjectService;

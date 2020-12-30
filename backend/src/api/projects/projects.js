@@ -5,7 +5,11 @@ const Project = require("../../schemas/project");
 
 projectsRouter.post("/", ProjectController.createProject);
 
-projectsRouter.delete("/:projectId", ProjectController.removeProject);
+
+projectsRouter.delete(
+  "/:id,:projectId,:repId",
+  ProjectController.removeProject
+);
 
 projectsRouter.post("/:projectId", ProjectController.createSprint);
 
