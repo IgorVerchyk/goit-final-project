@@ -9,23 +9,23 @@ const taskSchema = new Schema({
   spendTime: { type: Number, default: 0 },
 });
 
+const colaboratorsSchema = new Schema({
+  email: { type: String },
+});
+
 const sprintSchema = new Schema({
   title: { type: String, required: [true, "sprint title is required"] },
-  startDate: { type: Number, required: true },
-  endDate: { type: Number, required: true },
+  startDate: { type: Date, required: true },
+  endDate: { type: Date, required: true },
   tasks: [taskSchema],
 });
 
 const projectSchema = new Schema({
-  email: {
-    type: String,
-    required: [true, "email is required"],
-    minlength: 10,
-  },
-  sprints: { sprintSchema },
+  colaborators: [colaboratorsSchema],
+  sprints: [sprintSchema],
 });
 
 projectSchema.plugin(mongoosePaginate);
-const Project = mongoose.model("Task", projectSchema);
+const Project = mongoose.model("Project", projectSchema);
 
 module.exports = Project;

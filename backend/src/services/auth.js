@@ -15,11 +15,11 @@ class AuthService {
     if (!user || !user.validPassword(password)) {
       return null;
     }
-    const id = user.id;
+    const { id, projects } = user;
     const payload = { id };
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
     await this.repositories.users.updateToken(id, token);
-    return token;
+    return { token, projects };
   }
 
   async logout(id) {

@@ -5,7 +5,9 @@ const gravatar = require("gravatar");
 
 const SALT_FACTOR = 6;
 
-const taskSchema = new Schema({
+const projectSchema = new Schema({
+  projectId: {type: String,require:true},
+  isAdmin: {type:Boolean, default:true},
   title: { type: String, require: true },
   descr: { type: String, require: true },
 });
@@ -33,7 +35,7 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    tasks: [taskSchema],
+    projects: [projectSchema],
     admin: {
       type: Boolean,
       default: false,

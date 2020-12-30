@@ -24,12 +24,27 @@ class UsersRepository {
     await this.model.updateOne({ _id: id }, { token });
   }
 
-  async getCurrentUser(id) {
-    const user = await this.model.findOne(
+  async createNewProject(id, projectId, title, descr) {
+    const result = await this.model.findByIdAndUpdate(
       { _id: id },
-      "_id username email password avatar createdAt",
+      {
+        $push: {
+          projects: { projectId: projectId, title: title, descr: descr },
+        },
+      }
     );
-    return user;
+    return result;
+  }
+
+  async removeProject(id, projectId) {
+    console.log(id, projectId);
+    const result = await this.model.updateOne(
+      { _id: id },
+      {
+        $pull: { projects: { _id: projectId } },
+      }
+    );
+    return result;
   }
 }
 
