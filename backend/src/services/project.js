@@ -9,6 +9,11 @@ class ProjectService {
     };
   }
 
+  async getProject  (id) {
+    const result = await this.repositories.project.findById({ _id: id });
+  return result;
+  } 
+
   async createProject({ id, title, descr }) {
     const newProject = await this.repositories.project.createNewProject();
     const projectId = newProject.id;
@@ -21,6 +26,14 @@ class ProjectService {
     return project;
   }
 
+ async updateProject (id, update){
+   this.repositories.project.findByIdAndUpdate(
+  {
+    _id: id,
+  },
+  update
+);}
+
   async removeProject({ id, projectId, repId }) {
     const removeFromRep = await this.repositories.project.removeProject(repId);
 
@@ -28,5 +41,6 @@ class ProjectService {
     return result;
   }
 }
+
 
 module.exports = ProjectService;

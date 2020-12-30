@@ -27,6 +27,71 @@ const createProject = async (req, res, next) => {
   }
 };
 
+const getProject = async (req, res, next) => {
+  try {
+    const result = await projectService.getProject(req.id);
+    if (!result) {
+      return res.status(404).send({ message: "No project with such ID" });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
+const createSprint = async ({ body, params: { projectId } }, res, next) => {
+  try {
+    const result = await projectService.getProject(projectId);
+
+    if (!result) {
+      res.status(404).send({ message: "No project with such ID" });
+    }
+
+    result.sprints.push(body);
+
+    await service.updateProject(projectId, result);
+
+    res.status(200).json(result);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
+const deleteSprint = async ({
+  query: { sprintId },
+  params: { projectId },
+  res,
+  next,
+}) => {
+  try {
+    if (!sprintId) {
+      return res.status(404).send({ message: "No spint ID declared" });
+    }
+
+    const result = await projectService.getProject(projectId);
+
+    if (!result) {
+      return res.status(404).send({ message: "No project with such ID" });
+    }
+
+    const updatedSprints = result.sprints.filter(
+      (sprint) => sprint._id.toString() !== sprintId
+    );
+
+    const isSprintDeleted = result.sprints.length !== updatedSprints.length;
+
+    if (!isSprintDeleted)
+      return res.status(404).send({ message: "No sprint with such ID" });
+
+    result.sprints = updatedSprints;
+
+    await service.updateProject(projectId, result);
+
+    res.status(200).json(result);
+  } catch (e) {
+    next(e);
+  }
+};
 const removeProject = async (req, res, next) => {
   try {
     const result = await projectService.removeProject(req.params);
@@ -40,6 +105,9 @@ const removeProject = async (req, res, next) => {
 };
 
 module.exports = {
+  getProject,
   createProject,
   removeProject,
+  createSprint,
+  deleteSprint,
 };
