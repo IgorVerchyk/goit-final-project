@@ -1,5 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default function HomeView() {
-  return <div>HOME</div>;
+import ProjectsList from '../components/Projects/ProjectsList';
+import projectsOperations from '../redux/projects/projectsOperations';
+
+class HomeView extends Component {
+  componentDidMount() {
+    this.props.onFetchProjects();
+  }
+
+  render() {
+    return (
+      <>
+        <ProjectsList />
+      </>
+    );
+  }
 }
+
+const mapDispatchToProps = {
+  onFetchProjects: projectsOperations.fetchProjects,
+};
+
+export default connect(null, mapDispatchToProps)(HomeView);

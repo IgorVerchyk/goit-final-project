@@ -1,38 +1,6 @@
 {
   "projects": [
     {
-      "id": "12345674",
-      "projectName": "bestProject4",
-      "descr": "Test project4",
-      "color": "#009999",
-      "colaborators": [
-        "evolution@killus.all",
-        "redeyes@wantsle.ep",
-        "gypifish@revenge.org",
-        "nisepupilon@cow.net"
-      ],
-      "sprints": [
-        {
-          "id": "a1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "b234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "c1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        }
-      ]
-    },
-    {
       "id": "12345675",
       "projectName": "bestProject5",
       "descr": "Test project5",
@@ -103,12 +71,6 @@
       "id": "UnKursp"
     },
     {
-      "projectName": "123",
-      "descr": "123",
-      "color": "#71DF87",
-      "id": "JlBr2yL"
-    },
-    {
       "projectName": "qwe",
       "descr": "321",
       "color": "#FF765F",
@@ -125,6 +87,36 @@
       "descr": "13",
       "color": "#71DF87",
       "id": "KCJRHT0"
+    },
+    {
+      "projectName": "hello",
+      "descr": "hello",
+      "color": "#FF765F",
+      "id": "lPKeqig"
+    },
+    {
+      "projectName": "321",
+      "descr": "qwe",
+      "color": "#71DF87",
+      "id": "l98xQzT"
+    },
+    {
+      "projectName": "qwe3",
+      "descr": "987",
+      "color": "#FF765F",
+      "id": "n0bfqNN"
+    },
+    {
+      "projectName": "kl",
+      "descr": "6564",
+      "color": "#71DF87",
+      "id": "qMY5MBt"
+    },
+    {
+      "projectName": "qwe3",
+      "descr": "test",
+      "color": "#8c72df",
+      "id": "PL1QZX2"
     }
   ]
 }

@@ -1,119 +1,91 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
 import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
-// import FormTextAndLink from '../Forms/FormTextAndLink/FormTextAndLink';
 
 import s from './ProjectEditor.module.scss';
 
-class ProjectEditor extends Component {
-  state = {
-    projectName: '',
-    descr: '',
-    color: '',
-    errorName: false,
-    errorDescr: false,
+export default function ProjectEditor({ onClose }) {
+  const [projectName, setProjectName] = useState('');
+  const [descr, setDescr] = useState('');
+  const [color, setColor] = useState('');
+  const [errorName, setErrorName] = useState('');
+  const [errorDescr, setErrorDescr] = useState('');
+
+  const dispatch = useDispatch();
+
+  const randomColor = () => {
+    const colors = ['#8c72df', '#71DF87', '#FF765F'];
+    return colors[Math.floor(Math.random() * 3)];
   };
 
-  // randomColor = () => {
-  //   const colors = ['#8c72df', '#71DF87', '#FF765F'];
-  //   return colors[Math.floor(Math.random() * 3)];
-  // };
-
-  handleChange = ({ target }) => {
-    const { name, value } = target;
-    this.setState({ [name]: value });
+  const handleChangeName = e => {
+    setProjectName(e.target.value);
+    setColor(randomColor());
   };
-
-  handleSubmit = async e => {
-    e.preventDefault();
-    if (this.state.projectName === '') {
-      this.setState({ errorName: true });
-      return;
-    } else if (this.state.descr === '') {
-      this.setState({ errorDescr: true });
-      return;
-    }
-
-    // await this.setState({ color: this.randomColor() });
-
-    await this.props.onAddProject(this.state);
-    this.props.onClose();
+  const handleChangeDescr = e => {
+    setDescr(e.currentTarget.value);
   };
+  const handleSubmit = useCallback(
+    e => {
+      e.preventDefault();
 
-  handleCanselingBtn = e => {
+      if (projectName === '') {
+        setErrorName(true);
+        return;
+      } else if (descr === '') {
+        setErrorDescr(true);
+        return;
+      }
+      dispatch(projectsOperations.addProject({ projectName, descr, color }));
+
+      onClose();
+    },
+    [dispatch, projectName, descr, color, onClose],
+  );
+
+  const handleCanselingBtn = e => {
     console.log(e);
-    this.props.onClose();
-    this.setState({ projectName: '', descr: '', color: '' });
-    console.log(this.state);
+    onClose();
+    setProjectName('');
+    setDescr('');
+    setColor('');
+    dispatch(projectsOperations.cancelingProject());
   };
 
-  render() {
-    const { projectName, descr, color } = this.state;
-    return (
-      <>
-        <h2 className={s.title}>Створення проекту</h2>
-        <form className={s.form} onSubmit={this.handleSubmit}>
-          <label htmlFor="projectName" className={s.formLabel}>
-            Назва проекту*
-            <br />
-            <input
-              type="text"
-              value={projectName}
-              onChange={this.handleChange}
-              name="projectName"
-              className={!this.state.errorName ? s.formInput : s.error}
-            />
-          </label>
-          <label htmlFor="descr" className={s.formLabel}>
-            Опис*
-            <br />
-            <input
-              type="text"
-              value={descr}
-              onChange={this.handleChange}
-              name="descr"
-              className={!this.state.errorDescr ? s.formInput : s.error}
-            />
-          </label>
-          <label className={s.formLabel}>
-            Обрати колір обгортки
-            <br />
-            <select
-              className={s.formSelect}
-              value={color}
-              name="color"
-              onChange={this.handleChange}
-            >
-              <option style={{ background: '#8c72df' }} value="#8c72df">
-                purple
-              </option>
-              <option style={{ background: '#71DF87' }} value="#71DF87">
-                green
-              </option>
-              <option style={{ background: '#FF765F' }} value="#FF765F">
-                orange
-              </option>
-            </select>
-          </label>
+  return (
+    <>
+      <h2 className={s.title}>Створення проекту</h2>
+      <form className={s.form} onSubmit={handleSubmit}>
+        <label htmlFor="projectName" className={s.formLabel}>
+          Назва проекту*
+          <br />
+          <input
+            type="text"
+            value={projectName}
+            onChange={handleChangeName}
+            name="projectName"
+            className={!errorName ? s.formInput : s.error}
+          />
+        </label>
+        <label htmlFor="descr" className={s.formLabel}>
+          Опис*
+          <br />
+          <input
+            type="text"
+            value={descr}
+            onChange={handleChangeDescr}
+            name="descr"
+            className={!errorDescr ? s.formInput : s.error}
+          />
+        </label>
 
-          <PrimaryBtn text={'Готово'} />
-          <p className={s.cansel} onClick={this.handleCanselingBtn}>
-            Відміна
-          </p>
-        </form>
-      </>
-    );
-  }
+        <PrimaryBtn text={'Готово'} />
+        <p className={s.cansel} onClick={handleCanselingBtn}>
+          Відміна
+        </p>
+      </form>
+    </>
+  );
 }
-const mapStateToProps = state => {
-  return state.projects;
-};
-
-const mapDispatchToProps = {
-  onAddProject: projectsOperations.addProject,
-  onCanseling: projectsOperations.cancelingProject,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectEditor);

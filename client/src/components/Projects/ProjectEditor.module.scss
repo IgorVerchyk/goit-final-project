@@ -2,7 +2,7 @@
 @import "../../helpers/scss/vars.module.scss";
 
 .title{
-    font-size: 36px;
+    font-size: 26px;
     font-weight: 500;
     margin-bottom: 50px;
 }
@@ -69,4 +69,9 @@ button {
   outline: none;
   margin-bottom: 50px;
 
+}
+.cansel{
+  cursor: pointer;
+  text-decoration: underline;
+  text-align: center;
 }
