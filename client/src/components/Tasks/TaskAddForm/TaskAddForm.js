@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 // import { useDispatch } from 'react-redux';
 // import tasksOperations from '../../redux/tasks/tasksOperations';
-import PrimaryBtn from '../../components/Buttons/PrimaryBtn/PrimaryBtn';
+import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
 import styles from './TaskAddForm.module.scss';
 
 export default function TaskAddForm({ onCloseModal }) {
