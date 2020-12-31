@@ -1,9 +1,18 @@
 {
-  "users": {
-    "email": "test34512@gmail.com",
-    "password": "1"
+
+
+  "user": {
+    "email": "kol@g.com",
+    "password": "123123"
   },
   "tasks": [
+<<<<<<< HEAD
+    { "name": "Task1", "id": "12345" },
+    { "name": "Task2", "id": "23456" },
+    { "name": "Task3", "id": "34567" }
+  ]
+}
+=======
     {
       "name": "Task1",
       "id": "12345"
@@ -18,3 +27,4 @@
     }
   ]
 }
+>>>>>>> bd11597666613bee1d465bfd87bdfa1fb9841491

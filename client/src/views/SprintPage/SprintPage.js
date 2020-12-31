@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './SprintPage.module.scss';
-import SprintHeader from '../../components/SprintHeader/SprintHeader';
+import SprintHeader from '../../components/Sprint/SprintHeader/SprintHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import TaskCard from '../../components/TaskCard/TaskCard';
+import TaskCard from '../../components/Sprint/TaskCard/TaskCard';
 import ButtonAddNew from '../../components/Buttons/ButtonAddNew/ButtonAddNew';
 import ButtonShowGraph from '../../components/Buttons/ButtonShowGraph/ButtonShowGraph';
 import Modal from '../../components/Modal/Modal';
 import TaskAddForm from '../../components/TaskAddForm/TaskAddForm';
-import SprintAddForm from '../../components/SprintAddForm/SprintAddForm';
+import SprintAddForm from '../../components/Sprint/SprintAddForm/SprintAddForm';
 
 export default function SprintPage() {
   const [onModalAdd, setModalAdd] = useState(false);

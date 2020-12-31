@@ -1,12 +1,15 @@
 import { createAction } from '@reduxjs/toolkit';
 
-const registerRequest = createAction('auth/registerRequest');
-const registerSuccess = createAction('auth/registerSuccess');
-const registerError = createAction('auth/registerError');
+const registerRequest = createAction('AUTH/registerRequest');
+const registerSuccess = createAction('AUTH/registerSuccess');
+const registerError = createAction('AUTH/registerError');
 
-const loginRequest = createAction('auth/loginRequest');
-const loginSuccess = createAction('auth/loginSuccess');
-const loginError = createAction('auth/loginError');
+const loginRequest = createAction('AUTH/loginRequest');
+const loginSuccess = createAction('AUTH/loginSuccess');
+const loginError = createAction('AUTH/loginError');
+
+const isLogin = createAction('AUTH/isLogin');
+const isRegister = createAction('AUTH/isRegister');
 
 const logoutRequest = createAction('auth/logoutRequest');
 const logoutSuccess = createAction('auth/logoutSuccess');
@@ -21,6 +24,10 @@ export default {
   loginRequest,
   loginSuccess,
   loginError,
+
+
+  isLogin,
+  isRegister,
 
   logoutRequest,
   logoutSuccess,

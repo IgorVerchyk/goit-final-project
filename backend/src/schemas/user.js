@@ -29,21 +29,15 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
-    avatarURL: {
-      type: String,
-      default: function () {
-        return gravatar.url(this.email, { s: "250" }, true);
-      },
-    },
     verify: {
       type: Boolean,
       default: false,
     },
-    verificationToken: {
-      type: String,
-      required: [true, "Verify token is required"],
-    },
     tasks: [taskSchema],
+    admin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { versionKey: false, timestamps: true }
 );

@@ -1,0 +1,31 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.content {
+  position: absolute;
+  width: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+}
+
+.chartHeader {
+  font-size: 32px;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  left: 0;
+  transform: translate(-50%, 0);
+}

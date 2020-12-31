@@ -1,0 +1,94 @@
+@import '../../../helpers/scss/mixin.scss';
+@import '../../../helpers/scss/vars.module.scss';
+
+.formLabel {
+  position: relative;
+  transition: color 0.25s linear;
+
+  @include tablets {
+    font-size: 14px;
+  }
+
+  &:focus-within {
+    color: $text-color;
+
+    & .labelName {
+      top: -17px;
+      left: 0;
+      font-size: 12px;
+    }
+  }
+
+  & .labelNameOnTop {
+    top: -17px;
+    left: 0;
+    font-size: 12px;
+  }
+
+  &.labelEmail {
+  }
+
+  &.labelPassword {
+  }
+}
+
+.labelName {
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  z-index: 5;
+  white-space: nowrap;
+  transition: all 0.25s linear;
+}
+
+.labelNameOnTop {
+  composes: labelName;
+  top: -17px;
+  left: 0;
+}
+
+.formInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 40px;
+  display: block;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid rgba($text-color, 0.2);
+  transition: border-bottom 0.25s linear;
+  outline: none;
+
+  &:focus {
+    border-bottom: 1px solid $text-color;
+  }
+
+  @include tablets {
+    margin-bottom: 45px;
+    padding: 8px;
+  }
+}
+
+.inputError {
+  color: $error-color;
+  border-bottom: 1px solid $error-color;
+}
+
+.lableError {
+  color: $error-color;
+}
+
+.lableNoError {
+  columns: inherit;
+}
+
+.isError {
+  position: absolute;
+  left: 0;
+  top: 43px;
+  font-size: 12px;
+  white-space: nowrap;
+
+  @include tablets {
+    top: 40px;
+  }
+}
