@@ -1,7 +1,67 @@
-import React from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import styles from './SprintHeader.module.scss';
 
-export default function SprintHeader() {
+import ContentEditable from 'react-contenteditable';
+
+export default function SprintHeader({ handleInput, title }) {
+  const [editable, setEdit] = useState(true);
+
+  //////////////////////////////////////
+  let text = useRef(title);
+  const handleChange = evt => {
+    text.current = evt.target.value;
+  };
+
+  const handleBlur = () => {
+    if (title !== text.current) {
+      console.log('send');
+      // editSprintTitle(text.current);
+    }
+  };
+  //////////////////////////////////
+  // const inputRef = useRef(null);
+
+  // useEffect(() => {
+  // inputRef.current.focus();
+  // });
+  // }, [inputRef]);
+
+  /////////////////////////////
+  const escListener = ev => {
+    if (ev.code === 'Enter' || ev.code === 'Escape') {
+      setEdit(true);
+      window.removeEventListener('keydown', escListener);
+    }
+  };
+  const changeEditable = ev => {
+    setEdit(!editable);
+    editable && window.addEventListener('keydown', escListener);
+  };
+
+  const handleFocus = ev => {
+    window.addEventListener('keydown', offEditable);
+    window.addEventListener('click', offEditable);
+  };
+
+  const offEditable = ev => {
+    if (
+      ev.code === 'Enter' ||
+      ev.target.localName !== 'h2' ||
+      ev.code === 'Escape'
+    ) {
+      ev.target.blur();
+      setEdit(!editable);
+      if (ev.code === 'Escape') {
+        ev.target.innerText = title;
+        text.current = title;
+      }
+      ev.code === 'Escape' && (text.current = title);
+      window.removeEventListener('keydown', offEditable);
+      window.removeEventListener('click', offEditable);
+      window.removeEventListener('keydown', escListener);
+    }
+  };
+
   return (
     <div className={styles.headerWrapper}>
       <section className={styles.sprintHeader}>
@@ -17,12 +77,27 @@ export default function SprintHeader() {
             <span className={styles.date}>27.12.2020</span>
           </div>
           <div className={styles.inputWrapper}>
-            <input type="text" className={styles.input}></input>
+            <input
+              type="text"
+              name="filter"
+              onChange={handleInput}
+              className={styles.input}
+            ></input>
           </div>
         </div>
         <div className={styles.titleBlock}>
-          <h3 className={styles.title}>Sprint Burndown Chart 1</h3>
-          <div className={styles.edit}>
+          <ContentEditable
+            // ref={inputRef}
+            html={text.current}
+            onBlur={handleBlur}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            tagName="h2"
+            className={editable ? styles.title : styles.focused}
+            disabled={editable}
+          />
+
+          <div className={styles.edit} onClick={changeEditable}>
             <svg
               width="20"
               height="20"
@@ -42,6 +117,14 @@ export default function SprintHeader() {
           <p className={styles.tasksHeaderText}>Заплановано годин</p>
           <p className={styles.tasksHeaderText}>Витрачено год / день</p>
           <p className={styles.tasksHeaderText}>Витрачено годин</p>
+          <div className={styles.input1280Wrapper}>
+            <input
+              type="text"
+              name="filter"
+              onChange={handleInput}
+              className={styles.input}
+            ></input>
+          </div>
         </div>
       </section>
     </div>

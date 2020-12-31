@@ -1,8 +1,60 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styles from './TaskCard.module.scss';
 
-export default function Task({ id, title, scheduledTime, spentAllTime }) {
+export default function Task({
+  id,
+  title,
+  scheduledTime,
+  spentTime,
+  spentAllTime,
+  onDelete,
+  changeSpentTime,
+}) {
+  const [hours, setHours] = useState(0);
+  const [errMessage, setErrMessage] = useState(false);
+
+  useEffect(() => {
+    setHours(spentTime);
+  }, [spentTime]);
+
+  const handleKeyDown = ev => {
+    const keyValue = ev.key;
+    if (/[-+.]/.test(keyValue)) {
+      ev.preventDefault();
+    }
+    if (ev.key === 'Enter') {
+      ev.target.blur();
+    }
+    if (ev.key === 'Escape') {
+      ev.target.value = '';
+      setHours(spentTime);
+      setErrMessage(false);
+      ev.target.blur();
+    }
+  };
+
+  const handleChange = ev => {
+    setHours(ev.target.value);
+  };
+
+  const handleBlur = ev => {
+    if (ev.target.value === '') {
+      return;
+    }
+    if (hours > 24) {
+      ev.target.value = '';
+      setHours('');
+      setErrMessage(true);
+    } else {
+      if (Number(hours) !== Number(spentTime)) {
+        setErrMessage(false);
+        console.log('sent to server:', hours);
+        // changeSpentTime(hours);
+      }
+    }
+  };
+
   return (
     <li className={styles.el}>
       <h2 className={styles.title}>{title}</h2>
@@ -12,13 +64,21 @@ export default function Task({ id, title, scheduledTime, spentAllTime }) {
       </div>
       <div className={styles.spentBlock}>
         <p className={styles.spentText}>Витрачено год / день</p>
-        <input type="text" className={styles.spentTime}></input>
+        <input
+          type="number"
+          name="hours"
+          className={styles.spentTime}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          onBlur={handleBlur}
+          placeholder={errMessage ? `Wrong` : hours || '0'}
+        ></input>
       </div>
       <div className={styles.spentAllBlock}>
         <p className={styles.spentAllText}>Витрачено годин</p>
         <span className={styles.spentAllTime}>{spentAllTime}</span>
       </div>
-      <div className={styles.trashWrapper}>
+      <div className={styles.trashWrapper} onClick={onDelete}>
         <svg
           width="20"
           height="20"

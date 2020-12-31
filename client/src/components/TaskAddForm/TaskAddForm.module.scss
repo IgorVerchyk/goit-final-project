@@ -1,0 +1,96 @@
+@import '../../helpers/scss/mixin.scss';
+@import '../../helpers/scss/vars.module.scss';
+
+.TaskForm {
+  text-align: center;
+}
+.inputTaskForm {
+  width: 100%;
+}
+.title {
+  font-weight: 500;
+  color: #181c27;
+}
+
+.inputTitle,
+.inputTime {
+  color: rgba(24, 28, 39, 0.6);
+  line-height: 30px;
+
+  padding-left: 8px;
+  border: none;
+  border-bottom: 1px solid rgba(24, 28, 39, 0.2);
+  &:active,
+  &:hover,
+  &:focus {
+    outline: 0;
+    outline-offset: 0;
+  }
+}
+.inputTime {
+  margin-bottom: 40px;
+}
+.cancel {
+  font-size: 18px;
+  line-height: 22px;
+  margin-top: 20px;
+  color: rgba(24, 28, 39, 0.6);
+  border-bottom: 1px solid rgba(24, 28, 39, 0.2);
+  width: 100px;
+  margin-right: auto;
+  margin-left: auto;
+  cursor: pointer;
+  &:hover {
+    border-bottom: 1px solid rgba(255, 107, 8, 0.8);
+    transform: scale(1.05);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .TaskForm {
+    padding-top: 65px;
+  }
+  .title {
+    font-size: 26px;
+    line-height: 32px;
+    margin-bottom: 30px;
+  }
+
+  .inputTitle,
+  .inputTime {
+    font-size: 16px;
+    width: 280px;
+  }
+
+  .inputTitle {
+    margin-bottom: 60px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .TaskForm {
+    padding-left: 32px;
+    padding-top: 120px;
+  }
+  .inputTaskForm {
+    text-align: left;
+  }
+  .title {
+    font-size: 36px;
+    line-height: 44px;
+    margin-bottom: 50px;
+  }
+  .inputTitle,
+  .inputTime {
+    font-size: 18px;
+  }
+
+  .inputTitle {
+    margin-bottom: 50px;
+    width: 80%;
+  }
+  .inputTime {
+    width: 220px;
+    margin-right: auto;
+  }
+}

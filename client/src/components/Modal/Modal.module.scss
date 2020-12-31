@@ -1,0 +1,105 @@
+// .wrapper {
+//   background: rgba(24, 28, 39, 0.25);
+//   width: 100vw;
+//   height: 100vh;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   z-index: 20;
+// }
+
+// .page {
+//   background-color: #fff;
+//   width: 50%;
+//   height: 100%;
+// }
+.backdrop {
+  z-index: 55;
+}
+@import '../../helpers/scss/mixin.scss';
+@import '../../helpers/scss/vars.module.scss';
+
+//mob
+// .backdrop {
+//       position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100vw;
+//     height: 100vh;
+//     background-color: rgba(0, 0, 0, 0.5);
+//   }
+
+.overlay {
+  position: absolute;
+  width: 40%;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background-color: #fff;
+  padding: 10px;
+}
+
+// .modalBody {
+//   position: absolute;
+//   // top: 121px;
+//   // left: 10%;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+
+  &:hover,
+  &:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    transform: scale(1.2);
+    top: 10px;
+    right: 30px;
+  }
+}
+//mobile max320 -766 tablet max-width: 767px desc min 768
+@media screen and (min-width: 320px) {
+  .overlay {
+    min-width: 320px;
+    //     // width: 40%;
+  }
+}
+
+//mobil
+@media screen and (max-width: 767px) {
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .overlay {
+    width: 320px;
+    // width: 40%;
+  }
+}
+
+//desktop
+@media screen and (min-width: 768px) {
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .overlay {
+    max-width: 512px;
+  }
+}
