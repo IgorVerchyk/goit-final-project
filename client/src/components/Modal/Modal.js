@@ -1,45 +1,41 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
 import CloseBtn from '../CloseBtn/CloseBtn';
 import s from './Modal.module.scss';
 
-export default class Modal extends Component {
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
+export default function Modal({ closeModal, children }) {
+  useEffect(() => {
+    const handleKeyDown = ({ code }) => {
+      if (code === 'Escape') {
+        closeModal();
+      }
+    };
 
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
+    window.addEventListener('keydown', handleKeyDown);
 
-  handleKeyDown = ({ code }) => {
-    if (code === 'Escape') {
-      this.props.closeModal();
-    }
-  };
+    return window.removeEventListener('keydown', handleKeyDown);
+  }, [closeModal]);
 
-  handleClickOpen = e => {
+  const handleClickOpen = e => {
     if (
       e.target.id === 'backdrop' ||
       e.target.nodeName === 'svg' ||
       e.target.nodeName === 'path'
     ) {
-      this.props.closeModal();
+      closeModal();
     }
   };
 
-  render() {
-    return (
-      <div className={s.backdrop} id="backdrop" onClick={this.handleClickOpen}>
-        <div className={s.overlay} onClick={this.handleClickOpen}>
-          <div className={s.close} onClick={this.handleClickOpen}>
-            <CloseBtn />
-          </div>
-          <div className={s.modalBody} onClick={this.handleClickOpen}>
-            {this.props.children}
-          </div>
+  return (
+    <div className={s.backdrop} id="backdrop" onClick={handleClickOpen}>
+      <div className={s.overlay} onClick={handleClickOpen}>
+        <div className={s.close} onClick={handleClickOpen}>
+          <CloseBtn />
+        </div>
+        <div className={s.modalBody} onClick={handleClickOpen}>
+          {children}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
