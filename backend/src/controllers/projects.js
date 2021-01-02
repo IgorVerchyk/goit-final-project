@@ -29,27 +29,30 @@ const createProject = async (req, res, next) => {
 
 const getProject = async (req, res, next) => {
   try {
-    const result = await projectService.getProject(req.id);
+    const id = req.params.projectId;
+    const result = await projectService.getProject(id);
+    console.log(result);
     if (!result) {
       return res.status(404).send({ message: "No project with such ID" });
     }
-    return result;
+    return res.status(HttpCode.OK).json(result);
   } catch (e) {
     next(e);
   }
 };
 
-const createSprint = async ({ body, params: { projectId } }, res, next) => {
+const createSprint = async (req, res, next) => {
+  const id = req.params.projectId;
+  console.log(id);
+  const body = req.body;
   try {
-    const result = await projectService.getProject(projectId);
+    const project = await projectService.getProject(id);
 
-    if (!result) {
+    if (!project) {
       res.status(404).send({ message: "No project with such ID" });
     }
 
-    result.sprints.push(body);
-
-    await service.updateProject(projectId, result);
+    const result = await projectService.createNewSprint(id, body);
 
     res.status(200).json(result);
   } catch (e) {
@@ -58,43 +61,20 @@ const createSprint = async ({ body, params: { projectId } }, res, next) => {
   }
 };
 
-const deleteSprint = async ({
-  query: { sprintId },
-  params: { projectId },
-  res,
-  next,
-}) => {
+const removeSprint = async (req, res, next) => {
   try {
-    if (!sprintId) {
-      return res.status(404).send({ message: "No spint ID declared" });
-    }
-
-    const result = await projectService.getProject(projectId);
-
-    if (!result) {
-      return res.status(404).send({ message: "No project with such ID" });
-    }
-
-    const updatedSprints = result.sprints.filter(
-      (sprint) => sprint._id.toString() !== sprintId
-    );
-
-    const isSprintDeleted = result.sprints.length !== updatedSprints.length;
-
-    if (!isSprintDeleted)
-      return res.status(404).send({ message: "No sprint with such ID" });
-
-    result.sprints = updatedSprints;
-
-    await service.updateProject(projectId, result);
-
-    res.status(200).json(result);
+    const sprintId = req.params.sprintId;
+    const result = await projectService.removeSprint(req.params);
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Project ${sprintId} not found ` });
   } catch (e) {
     next(e);
   }
 };
 const removeProject = async (req, res, next) => {
   try {
+    const projectId = req.params.projectId;
     const result = await projectService.removeProject(req.params);
     return result
       ? res.status(200).json(result)
@@ -110,5 +90,5 @@ module.exports = {
   createProject,
   removeProject,
   createSprint,
-  deleteSprint,
+  removeSprint,
 };

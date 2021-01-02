@@ -29,7 +29,7 @@ class UsersRepository {
       { _id: id },
       {
         $push: {
-          projects: { projectId: projectId, title: title, descr: descr },
+          projects: { projectId, title, descr },
         },
       }
     );
