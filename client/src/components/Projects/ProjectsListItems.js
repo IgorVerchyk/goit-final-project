@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+// import { useRouteMatch } from 'react-router-dom';
 
 import SingleProjectCard from '../SingleProjectСard/SingleProjectCard.js';
 import ProjectEditor from './ProjectEditor';
@@ -8,7 +8,6 @@ import Modal from '../Modal/Modal';
 import s from './Projects.module.scss';
 
 export default function ProjectsListItems({ projects, onRemove }) {
-  const { url } = useRouteMatch();
   const [isModal, setisModal] = useState(false);
 
   const toggleModal = () => {

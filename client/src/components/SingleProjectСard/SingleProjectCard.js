@@ -12,8 +12,7 @@ export default function SingleProjectCard({
   routeTo,
   onRemove,
 }) {
-  const handleClick = e => {
-    // console.log(onRemove);
+  const handleClick = () => {
     onRemove();
   };
 
