@@ -7,9 +7,15 @@ import {
   fetchProjectsRequest,
   fetchProjectsSuccess,
   fetchProjectsError,
+  cancelingProjectRequest,
+  cancelingProjectSuccess,
+  cancelingProjectError,
+  removeProjectRequest,
+  removeProjectSuccess,
+  removeProjectError,
 } from './projectsActions';
 
-const baseURL = 'http://localhost:3456';
+const baseURL = 'https://project-manager-goit20.herokuapp.com';
 
 const fetchProjects = () => async dispatch => {
   dispatch(fetchProjectsRequest());
@@ -37,7 +43,32 @@ const addProject = ({ projectName, descr, color }) => async dispatch => {
   }
 };
 
+const cancelingProject = () => async dispatch => {
+  console.log();
+  dispatch(cancelingProjectRequest());
+
+  try {
+    await axios.get(`${baseURL}/projects`);
+    dispatch(cancelingProjectSuccess());
+  } catch (error) {
+    dispatch(cancelingProjectError(error.message));
+  }
+};
+
+const removeProject = id => async dispatch => {
+  console.log('remove operations');
+  dispatch(removeProjectRequest());
+
+  await axios
+    .delete(`${baseURL}/projects/${id}`)
+    .then(() => dispatch(removeProjectSuccess(id)))
+    .catch(error => dispatch(removeProjectError(error.message)));
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   fetchProjects,
   addProject,
+  cancelingProject,
+  removeProject,
 };
