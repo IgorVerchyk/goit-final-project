@@ -1,9 +1,13 @@
 import { connect } from 'react-redux';
 import ProjectsListItems from './ProjectsListItems';
-import projectsSelectors from '../../redux/projects/projectsSelectors';
+import { getAllProjects } from '../../redux/projects/projectsSelectors';
+import projectsOperations from '../../redux/projects/projectsOperations';
 
 const mapStateToProps = state => ({
-  projects: projectsSelectors.getAllProjects(state),
+  projects: getAllProjects(state),
 });
+const mapDispatchToProps = {
+  onRemove: projectsOperations.removeProject,
+};
 
-export default connect(mapStateToProps)(ProjectsListItems);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsListItems);

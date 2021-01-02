@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+// import { useRouteMatch } from 'react-router-dom';
 
 import SingleProjectCard from '../SingleProjectСard/SingleProjectCard.js';
 import ProjectEditor from './ProjectEditor';
@@ -7,8 +7,7 @@ import Modal from '../Modal/Modal';
 
 import s from './Projects.module.scss';
 
-export default function ProjectsListItems({ projects }) {
-  const { url } = useRouteMatch();
+export default function ProjectsListItems({ projects, onRemove }) {
   const [isModal, setisModal] = useState(false);
 
   const toggleModal = () => {
@@ -22,11 +21,13 @@ export default function ProjectsListItems({ projects }) {
       <ul className={s.list}>
         {projects.map(({ id, projectName, descr, color }) => (
           <SingleProjectCard
+            id={id}
             key={id}
             projectName={projectName}
             descr={descr}
             color={color}
-            routeTo={`${url}/${id}`}
+            routeTo={`/${id}`}
+            onRemove={() => onRemove(id)}
           ></SingleProjectCard>
         ))}
       </ul>

@@ -2,7 +2,7 @@
 @import "../../helpers/scss/vars.module.scss";
 
 .title{
-    font-size: 36px;
+    font-size: 26px;
     font-weight: 500;
     margin-bottom: 50px;
 }
@@ -58,3 +58,20 @@ button {
   margin-bottom: 50px;
 }
 
+.error{
+  width: 100%;
+  padding: 10px;
+  display: block;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid red;
+  transition: border-bottom 0.25s linear;
+  outline: none;
+  margin-bottom: 50px;
+
+}
+.cansel{
+  cursor: pointer;
+  text-decoration: underline;
+  text-align: center;
+}

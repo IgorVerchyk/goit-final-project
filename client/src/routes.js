@@ -25,6 +25,7 @@ const routes = [
     private: false,
     restricted: false,
   },
+
   {
     path: '/projects/:projectId',
     label: 'ProjectDetails',
