@@ -6,7 +6,7 @@ class EmailService {
   #sender = sgMail;
   #GenerateTemplate = Mailgen;
 
-  #createTemplate = (verifyToken, name) => {
+  #createTemplate = (verifyToken) => {
     const mailGenerator = new this.#GenerateTemplate({
       theme: "default",
       product: {
@@ -16,7 +16,6 @@ class EmailService {
     });
     const template = {
       body: {
-        name,
         intro:
           "Welcome to GoIT Projects! We're very excited to have you on board.",
         action: {
@@ -35,8 +34,8 @@ class EmailService {
     return emailBody;
   };
 
-  async sendEmail(verifyToken, email, name) {
-    const emailBody = this.#createTemplate(verifyToken, name);
+  async sendEmail(verifyToken, email) {
+    const emailBody = this.#createTemplate(verifyToken);
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
