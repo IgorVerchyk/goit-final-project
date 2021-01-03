@@ -1,4 +1,4 @@
-const User = require("../schemas/user");
+const User = require('../schemas/user');
 
 class UsersRepository {
   constructor() {
@@ -12,6 +12,10 @@ class UsersRepository {
 
   async findByEmail(email) {
     const result = await this.model.findOne({ email });
+    return result;
+  }
+  async findByToken(token) {
+    const result = await this.model.findOne({ verifyToken: token });
     return result;
   }
 
