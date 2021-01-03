@@ -20,24 +20,34 @@ class ProjectRepository {
     return result;
   }
   async createNewSprint(id, title, startDate, endDate) {
-    const result = await this.model.updateOne(
-      { _id: id },
-      {
-        $push: {
-          sprints: { title, startDate, endDate },
-        },
-      }
-    );
+    const project = await this.model.findById(id);
+    project.sprints.push({ title, startDate, endDate });
+    project.save();
+    return project;
   }
+
   async removeSprint(projectId, sprintId) {
-    console.log(projectId, sprintId);
-    const result = await this.model.updateOne(
-      { _id: projectId },
-      {
-        $pull: { sprints: { _id: sprintId } },
-      }
-    );
-    return result;
+    const project = await this.model.findById(projectId);
+    project.sprints.remove(sprintId);
+
+    project.save();
+    return project;
+  }
+
+  async createNewTask(id, sprintId, descr, planTime) {
+    const project = await this.model.findById(id);
+    project.sprints.id(sprintId).tasks.push({ descr, planTime });
+
+    project.save();
+    return project;
+  }
+
+  async removeTask(projectId, sprintId, taskId) {
+    const project = await this.model.findById(projectId);
+    project.sprints.id(sprintId).tasks.remove(taskId);
+
+    project.save();
+    return project;
   }
 }
 module.exports = ProjectRepository;

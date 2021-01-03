@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const mongoosePaginate = require("mongoose-paginate-v2");
 
 const taskSchema = new Schema({
-  deskr: { type: String, required: [true, "task title is required"] },
+  descr: { type: String, required: [true, "task description is required"] },
 
   planTime: { type: Number, required: true },
   spendTime: { type: Number, default: 0 },

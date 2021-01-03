@@ -55,6 +55,28 @@ class ProjectService {
     );
     return result;
   }
+
+  async createNewTask(id, sprintId, body) {
+    const { descr, planTime } = body;
+    const result = await this.repositories.project.createNewTask(
+      id,
+      sprintId,
+      descr,
+      planTime
+    );
+    return result;
+  }
+
+  async removeTask(params) {
+    const { projectId, sprintId, taskId } = params;
+    console.log(projectId, sprintId, taskId);
+    const result = await this.repositories.project.removeTask(
+      projectId,
+      sprintId,
+      taskId
+    );
+    return result;
+  }
 }
 
 module.exports = ProjectService;
