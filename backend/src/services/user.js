@@ -6,7 +6,7 @@ require('dotenv').config();
 
 class UserService {
   constructor() {
-    this.emailService = new EmailService();
+    this.emailService = EmailService.sendEmail;
     this.repositories = {
       users: new UsersRepository(),
     };
@@ -16,7 +16,7 @@ class UserService {
     const verifyToken = nanoid();
     const { email, name } = body;
     try {
-      await this.emailService.sendEmail(verifyToken, email, name);
+      await this.emailService(verifyToken, email, name);
     } catch (e) {
       throw new ErrorHandler(503, e.message, 'Service unavailable');
     }
