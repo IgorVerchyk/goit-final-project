@@ -14,6 +14,7 @@ const currentUser = createReducer(
 );
 const isRegister = createReducer(false, {
   [authActions.registerSuccess]: (state, { payload }) => true,
+  [authActions.isRegister]: (state, { payload }) => payload,
 });
 const isLogin = createReducer(false, {
   [authActions.loginSuccess]: (state, { payload }) => true,

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import notification from 'toastr';
 
 import { authActions } from './';
 
@@ -27,7 +28,18 @@ const register = dataUser => async dispatch => {
     console.log('Пользователь зарегестрирован');
   } catch (error) {
     dispatch(authActions.registerError());
+
     console.log('Пользователь НЕ зарегестрирован');
+
+    if (error.message === 'Request failed with status code 503') {
+      notification.error(
+        `Вибачте, сервер не відповідає, зареєструйтесь пізніше.`,
+        `Виникла помилка!`,
+      );
+
+      return;
+    }
+
     console.error(error);
   }
 };
