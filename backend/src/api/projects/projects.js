@@ -18,4 +18,14 @@ projectsRouter.delete(
   ProjectController.removeSprint
 );
 
+projectsRouter.post(
+  "/tasks/:projectId,:sprintId",
+  ProjectController.createTask
+);
+
+projectsRouter.delete(
+  "/tasks/:projectId,:sprintId,:taskId",
+  ProjectController.removeTask
+);
+
 module.exports = projectsRouter;

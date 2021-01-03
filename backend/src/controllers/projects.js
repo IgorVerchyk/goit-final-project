@@ -85,10 +85,46 @@ const removeProject = async (req, res, next) => {
   }
 };
 
+const createTask = async (req, res, next) => {
+  const id = req.params.projectId;
+  const sprintId = req.params.sprintId;
+  console.log(id, sprintId);
+  const body = req.body;
+  try {
+    const project = await projectService.getProject(id);
+
+    if (!project) {
+      res.status(404).send({ message: "No project with such ID" });
+    }
+
+    const result = await projectService.createNewTask(id, sprintId, body);
+
+    res.status(200).json(result);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+const removeTask = async (req, res, next) => {
+  try {
+    const taskId = req.params.taskId;
+    console.log(taskId);
+    const result = await projectService.removeTask(req.params);
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Project ${taskId} not found ` });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
 module.exports = {
   getProject,
   createProject,
   removeProject,
   createSprint,
   removeSprint,
+  createTask,
+  removeTask,
 };
