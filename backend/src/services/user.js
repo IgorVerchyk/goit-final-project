@@ -1,8 +1,8 @@
-const { UsersRepository } = require('../repository');
-const EmailService = require('./email');
-const { ErrorHandler } = require('../helpers/errorHandler');
-const { nanoid } = require('nanoid');
-require('dotenv').config();
+const { UsersRepository } = require("../repository");
+const EmailService = require("./email");
+const { ErrorHandler } = require("../helpers/errorHandler");
+const { nanoid } = require("nanoid");
+require("dotenv").config();
 
 class UserService {
   constructor() {
@@ -14,11 +14,11 @@ class UserService {
 
   async create(body) {
     const verifyToken = nanoid();
-    const { email, name } = body;
+    const { email } = body;
     try {
-      await this.emailService.sendEmail(verifyToken, email, name);
+      await this.emailService.sendEmail(verifyToken, email);
     } catch (e) {
-      throw new ErrorHandler(503, e.message, 'Service unavailable');
+      throw new ErrorHandler(503, e.message, "Service unavailable");
     }
     const data = await this.repositories.users.create({ ...body, verifyToken });
     return data;
