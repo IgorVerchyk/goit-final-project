@@ -1,6 +1,6 @@
-const sgMail = require('@sendgrid/mail');
-const Mailgen = require('mailgen');
-require('dotenv').config();
+const sgMail = require("@sendgrid/mail");
+const Mailgen = require("mailgen");
+require("dotenv").config();
 
 class EmailService {
   #sender = sgMail;
@@ -8,10 +8,10 @@ class EmailService {
 
   #createTemplate = (verifyToken, name) => {
     const mailGenerator = new this.#GenerateTemplate({
-      theme: 'default',
+      theme: "default",
       product: {
-        name: 'GoIT Projecst',
-        link: 'http://localhost:3000/',
+        name: "GoIT Projects",
+        link: "http://localhost:3000/",
       },
     });
     const template = {
@@ -20,11 +20,11 @@ class EmailService {
         intro:
           "Welcome to GoIT Projects! We're very excited to have you on board.",
         action: {
-          instructions: 'To get started with GoIT Projects, please click here:',
+          instructions: "To get started with GoIT Projects, please click here:",
           button: {
-            color: '#FF6B08',
-            text: 'Confirm your account',
-            link: `http://localhost:3000/api/auth/verify/${verifyToken}`,
+            color: "#FF6B08",
+            text: "Confirm your account",
+            link: ` https://project-manager-goit20.herokuapp.com/api/auth/verify/${verifyToken}`,
           },
         },
         outro:
@@ -41,8 +41,8 @@ class EmailService {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
       to: email,
-      from: 'goit20online@gmail.com', // Change to your verified sender
-      subject: 'Please Verify Your GoIT Projects Account',
+      from: "goit20online@gmail.com", // Change to your verified sender
+      subject: "Please Verify Your GoIT Projects Account",
       html: emailBody,
     };
 
