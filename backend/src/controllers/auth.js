@@ -89,9 +89,32 @@ const current = async (req, res, next) => {
   }
 };
 
+const verify = async (req, res, next) => {
+  try {
+    const result = await userServise.verify(req.params);
+    if (result) {
+      return res.status(HttpCode.OK).json({
+        status: "success",
+        code: HttpCode.OK,
+        data: {
+          message: "Verification successful",
+        },
+      });
+    } else {
+      return next({
+        status: HttpCode.BAD_REQUEST,
+        message: "Verification token is not valid",
+      });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
   reg,
   login,
   logout,
   current,
+  verify,
 };

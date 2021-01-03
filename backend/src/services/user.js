@@ -27,6 +27,15 @@ class UserService {
     const data = await this.repositories.users.getCurrentUser(id);
     return data;
   }
+
+  async verify({ token }) {
+    const user = await this.repositories.users.findByToken(token);
+    if (user) {
+      await user.updateOne({ verify: true, verifyToken: null });
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = UserService;

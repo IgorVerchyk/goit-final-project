@@ -6,14 +6,19 @@ const gravatar = require("gravatar");
 const SALT_FACTOR = 6;
 
 const projectSchema = new Schema({
-  projectId: {type: String,require:true},
-  isAdmin: {type:Boolean, default:true},
+  projectId: { type: String, require: true },
+  isAdmin: { type: Boolean, default: true },
   title: { type: String, require: true },
   descr: { type: String, require: true },
 });
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      minlength: 3,
+      default: "Guest",
+    },
     email: {
       type: String,
       required: [true, "Email is required"],
@@ -35,13 +40,14 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    verifyToken: { type: String, required: [true, "Verify token is required"] },
     projects: [projectSchema],
     admin: {
       type: Boolean,
       default: false,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 userSchema.pre("save", async function (next) {
@@ -50,7 +56,7 @@ userSchema.pre("save", async function (next) {
   }
   this.password = await bcrypt.hash(
     this.password,
-    bcrypt.genSaltSync(SALT_FACTOR)
+    bcrypt.genSaltSync(SALT_FACTOR),
   );
   next();
 });
