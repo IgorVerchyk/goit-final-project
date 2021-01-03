@@ -4,6 +4,7 @@
   "description": "Node20_final_progect",
   "main": "index.js",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -16,6 +17,7 @@
     "mailgen": "^2.0.14",
     "mongoose": "^5.11.8",
     "mongoose-paginate-v2": "^1.3.13",
+    "nanoid": "^3.1.20",
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"
