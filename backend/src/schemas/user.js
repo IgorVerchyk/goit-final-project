@@ -1,22 +1,27 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const bcrypt = require("bcryptjs");
-const gravatar = require("gravatar");
+const bcrypt = require('bcryptjs');
+const gravatar = require('gravatar');
 
 const SALT_FACTOR = 6;
 
 const projectSchema = new Schema({
-  projectId: {type: String,require:true},
-  isAdmin: {type:Boolean, default:true},
+  projectId: { type: String, require: true },
+  isAdmin: { type: Boolean, default: true },
   title: { type: String, require: true },
   descr: { type: String, require: true },
 });
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      minlength: 3,
+      default: 'Guest',
+    },
     email: {
       type: String,
-      required: [true, "Email is required"],
+      required: [true, 'Email is required'],
       unique: true,
       validate(value) {
         const re = /\S+@\S+\.\S+/;
@@ -25,16 +30,19 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
+      required: [true, 'Password is required'],
     },
     token: {
       type: String,
       default: null,
     },
+
     verify: {
       type: Boolean,
       default: false,
     },
+    verifyToken: { type: String, required: [true, 'Verify token is required'] },
+
     projects: [projectSchema],
     admin: {
       type: Boolean,
@@ -44,8 +52,8 @@ const userSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
     return next();
   }
   this.password = await bcrypt.hash(
@@ -59,6 +67,6 @@ userSchema.methods.validPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model('user', userSchema);
 
 module.exports = User;
