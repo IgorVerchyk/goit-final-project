@@ -17,7 +17,9 @@ const userSchema = new Schema(
     name: {
       type: String,
       minlength: 3,
-      default: 'Guest',
+
+      default: "Guest",
+
     },
     email: {
       type: String,
@@ -41,7 +43,8 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    verifyToken: { type: String, required: [true, 'Verify token is required'] },
+
+    verifyToken: { type: String, required: [true, "Verify token is required"] },
 
     projects: [projectSchema],
     admin: {
@@ -49,7 +52,7 @@ const userSchema = new Schema(
       default: false,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 userSchema.pre('save', async function (next) {
@@ -58,7 +61,7 @@ userSchema.pre('save', async function (next) {
   }
   this.password = await bcrypt.hash(
     this.password,
-    bcrypt.genSaltSync(SALT_FACTOR)
+    bcrypt.genSaltSync(SALT_FACTOR),
   );
   next();
 });

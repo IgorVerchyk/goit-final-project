@@ -19,6 +19,11 @@ class UsersRepository {
     return result;
   }
 
+  async findByToken(token) {
+    const result = await this.model.findOne({ verifyToken: token });
+    return result;
+  }
+
   async create(body) {
     const user = new this.model(body);
     return user.save();
@@ -33,9 +38,9 @@ class UsersRepository {
       { _id: id },
       {
         $push: {
-          projects: { projectId: projectId, title: title, descr: descr },
+          projects: { projectId, title, descr },
         },
-      }
+      },
     );
     return result;
   }
@@ -46,7 +51,7 @@ class UsersRepository {
       { _id: id },
       {
         $pull: { projects: { _id: projectId } },
-      }
+      },
     );
     return result;
   }
