@@ -1,4 +1,4 @@
-const User = require('../schemas/user');
+const User = require("../schemas/user");
 
 class UsersRepository {
   constructor() {
@@ -14,11 +14,6 @@ class UsersRepository {
     const result = await this.model.findOne({ email });
     return result;
   }
-  async findByToken(token) {
-    const result = await this.model.findOne({ verifyToken: token });
-    return result;
-  }
-
   async findByToken(token) {
     const result = await this.model.findOne({ verifyToken: token });
     return result;
@@ -40,7 +35,7 @@ class UsersRepository {
         $push: {
           projects: { projectId, title, descr },
         },
-      },
+      }
     );
     return result;
   }
@@ -51,7 +46,7 @@ class UsersRepository {
       { _id: id },
       {
         $pull: { projects: { _id: projectId } },
-      },
+      }
     );
     return result;
   }
