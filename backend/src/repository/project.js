@@ -36,6 +36,7 @@ class ProjectRepository {
 
   async createNewTask(id, sprintId, descr, planTime) {
     const project = await this.model.findById(id);
+    console.log(project);
     project.sprints.id(sprintId).tasks.push({ descr, planTime });
 
     project.save();
@@ -44,11 +45,11 @@ class ProjectRepository {
 
   async updateTaskTime(id, sprintId, taskId, spendTime) {
     const project = await this.model.findById(id);
-    console.log('updateTaskTime repositories', project);
-    const sprint = await project.sprints.findById(sprintId);
-    await sprint.tasks.findByIdAndUpdate(taskId, spendTime, {
+    project.sprints.id(sprintId).tasks.findByIdAndUpdate(taskId, spendTime, {
       new: true,
     });
+    console.log('updateTaskTime repositories', project);
+    return project;
   }
 
   async removeTask(projectId, sprintId, taskId) {

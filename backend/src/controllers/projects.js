@@ -70,6 +70,7 @@ const removeSprint = async (req, res, next) => {
     next(e);
   }
 };
+
 const removeProject = async (req, res, next) => {
   try {
     const projectId = req.params.projectId;
@@ -127,7 +128,7 @@ const updateTaskTime = async (req, res, next) => {
       sprintId,
       taskId,
       body
-    ); //боді - spendTime
+    );
 
     res.status(200).json(result);
   } catch (e) {

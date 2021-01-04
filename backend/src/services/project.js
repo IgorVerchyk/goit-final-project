@@ -46,17 +46,6 @@ class ProjectService {
     return result;
   }
 
-  async updateTaskTime(id, sprintId, taskId, body) {
-    const { spendTime } = body;
-    const result = await this.repositories.project.updateTaskTime(
-      id,
-      sprintId,
-      taskId,
-      spendTime
-    );
-    return result;
-  }
-
   async removeSprint(params) {
     const { projectId, sprintId } = params;
     console.log(projectId, sprintId);
@@ -74,6 +63,19 @@ class ProjectService {
       sprintId,
       descr,
       planTime
+    );
+    return result;
+  }
+
+  async updateTaskTime(id, sprintId, taskId, body) {
+    const { spendTime } = body;
+    console.log('udate services', id, sprintId, taskId, spendTime);
+
+    const result = await this.repositories.project.updateTaskTime(
+      id,
+      sprintId,
+      taskId,
+      spendTime
     );
     return result;
   }
