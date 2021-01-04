@@ -26,7 +26,7 @@ export default function ProjectsListItems({ projects }) {
             projectName={projectName}
             descr={descr}
             color={color}
-            routeTo={`${url}/${id}`}
+            routeTo={`projects/${id}`}
           ></SingleProjectCard>
         ))}
       </ul>
