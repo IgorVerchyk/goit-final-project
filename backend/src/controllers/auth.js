@@ -1,33 +1,32 @@
-const AuthService = require('../services/auth');
-const UsersService = require('../services/user');
-const { HttpCode } = require('../helpers/constants');
+const AuthService = require("../services/auth");
+const UsersService = require("../services/user");
+const { HttpCode } = require("../helpers/constants");
 
 const userServise = new UsersService();
 const authService = new AuthService();
+const tokenList = {};
 
 const reg = async (req, res, next) => {
-  const { email, password, name } = req.body;
+  const { email, password } = req.body;
   const user = await userServise.findByEmail(email);
   if (user) {
     return next({
       status: HttpCode.CONFLICT,
-      data: 'Conflict',
-      message: 'This email is already use',
+      data: "Conflict",
+      message: "This email is already use",
     });
   }
   try {
     const newUser = await userServise.create({
       email,
       password,
-      name,
     });
     return res.status(HttpCode.CREATED).json({
-      status: 'success',
+      status: "success",
       code: HttpCode.CREATED,
       data: {
         id: newUser.id,
         email: newUser.email,
-        name: newUser.name,
       },
     });
   } catch (e) {
@@ -39,19 +38,46 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const token = await authService.login({ email, password });
-    if (token) {
-      return res.status(HttpCode.OK).json({
-        status: 'success',
+    const result = await authService.login({ email, password });
+
+    if (result.token || result.refreshToken) {
+      const response = {
         code: HttpCode.OK,
-        data: {
-          token,
-        },
-      });
+        id: result.id,
+        token: result.token,
+        refreshToken: result.refreshToken,
+        projects: result.projects,
+      };
+      tokenList[result.refreshToken] = response;
+
+      return res.status(HttpCode.OK).json(response);
     }
     next({
       status: HttpCode.UNAUTHORIZED,
-      message: 'Invalid creadentials',
+      message: "Invalid creadentials",
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const token = async (req, res, next) => {
+  const { email, password, refreshToken } = req.body;
+  // console.log(req.body);
+  try {
+    const result = await authService.token({ email, password, refreshToken });
+    console.log(result.token);
+
+    if (result.refreshToken && result.refreshToken in tokenList) {
+      const response = {
+        token: result.token,
+      };
+      tokenList[result.refreshToken].token = result.token;
+      return res.status(HttpCode.OK).json(response);
+    }
+    next({
+      status: HttpCode.UNAUTHORIZED,
+      message: "Invalid creadentials",
     });
   } catch (e) {
     next(e);
@@ -62,7 +88,7 @@ const logout = async (req, res, next) => {
   const id = req.user.id;
   await userServise.logout(id);
   return res.status(HttpCode.NO_CONTENT).json({
-    status: 'success',
+    status: "success",
     code: HttpCode.NO_CONTENT,
   });
 };
@@ -73,7 +99,7 @@ const current = async (req, res, next) => {
     const user = await userServise.getCurrentUser(userId);
     if (user) {
       return res.status(HttpCode.OK).json({
-        status: 'success',
+        status: "success",
         code: HttpCode.OK,
         data: {
           user,
@@ -82,7 +108,7 @@ const current = async (req, res, next) => {
     } else {
       return next({
         status: HttpCode.UNAUTHORIZED,
-        message: 'Invalid credentials',
+        message: "Invalid credentials",
       });
     }
   } catch (e) {
@@ -95,12 +121,10 @@ const verify = async (req, res, next) => {
     const result = await userServise.verify(req.params);
     if (result) {
       return res.status(HttpCode.OK).json({
-
         status: "success",
         code: HttpCode.OK,
         data: {
           message: "Verification successful",
-
         },
       });
     } else {
@@ -118,6 +142,7 @@ const verify = async (req, res, next) => {
 module.exports = {
   reg,
   login,
+  token,
   logout,
   current,
   verify,
