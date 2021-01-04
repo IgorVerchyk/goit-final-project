@@ -11,7 +11,7 @@ class EmailService {
       theme: "default",
       product: {
         name: "GoIT Projects",
-        link: "http://localhost:3000/",
+        link: "https://project-manager-goit20.herokuapp.com/",
       },
     });
     const template = {

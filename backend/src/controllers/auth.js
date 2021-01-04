@@ -4,6 +4,7 @@ const { HttpCode } = require("../helpers/constants");
 
 const userServise = new UsersService();
 const authService = new AuthService();
+const tokenList = {};
 
 const reg = async (req, res, next) => {
   const { email, password } = req.body;
@@ -37,15 +38,42 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const token = await authService.login({ email, password });
-    if (token) {
-      return res.status(HttpCode.OK).json({
-        status: "success",
+    const result = await authService.login({ email, password });
+
+    if (result.token || result.refreshToken) {
+      const response = {
         code: HttpCode.OK,
-        data: {
-          token,
-        },
-      });
+        id: result.id,
+        token: result.token,
+        refreshToken: result.refreshToken,
+        projects: result.projects,
+      };
+      tokenList[result.refreshToken] = response;
+
+      return res.status(HttpCode.OK).json(response);
+    }
+    next({
+      status: HttpCode.UNAUTHORIZED,
+      message: "Invalid creadentials",
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const token = async (req, res, next) => {
+  const { email, password, refreshToken } = req.body;
+  // console.log(req.body);
+  try {
+    const result = await authService.token({ email, password, refreshToken });
+    console.log(result.token);
+
+    if (result.refreshToken && result.refreshToken in tokenList) {
+      const response = {
+        token: result.token,
+      };
+      tokenList[result.refreshToken].token = result.token;
+      return res.status(HttpCode.OK).json(response);
     }
     next({
       status: HttpCode.UNAUTHORIZED,
@@ -114,6 +142,7 @@ const verify = async (req, res, next) => {
 module.exports = {
   reg,
   login,
+  token,
   logout,
   current,
   verify,
