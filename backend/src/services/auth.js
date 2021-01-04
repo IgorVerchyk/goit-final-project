@@ -33,20 +33,7 @@ class AuthService {
 
   async token({ email, password, refreshToken }) {
     const user = await this.repositories.users.findByEmail(email);
-
-    // if (!user || !user.validPassword(password)) {
-    //   return null;
-    // }
-    // const { id, projects } = user;
-    // const payload = { id };
-    // const token = jwt.sign(payload, SECRET_KEY, {
-    //   expiresIn: config.tokenLife,
-    // });
-    // const refreshToken = jwt.sign(payload, REFRESH_TOKEN_KEY, {
-    //   expiresIn: config.refreshTokenLife,
-    // });
-    // user.refreshToken = refreshToken;
-    // // console.log(user);
+    user.refreshToken = refreshToken;
     return user;
   }
 
