@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { authOperations } from '../redux/auth';
+import { authOperations, authActions } from '../redux/auth';
 
 import AuthenticationsBlock from '../components/AuthenticationsBlock/AuthenticationsBlock';
 import FormLogin from '../components/Forms/FormLogin/FormLogin';
@@ -18,6 +18,11 @@ export default function LoginView() {
     [dispatch],
   );
 
+  const changeIsLogin = useCallback(
+    status => dispatch(authActions.isLogin(status)),
+    [dispatch],
+  );
+
   const submitForm = dataUser => {
     onLogin(dataUser);
   };
@@ -25,6 +30,7 @@ export default function LoginView() {
   if (isLogin) {
     setTimeout(() => {
       history.replace('/');
+      changeIsLogin(false);
     }, 1500);
   }
 

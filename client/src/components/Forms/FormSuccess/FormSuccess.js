@@ -3,12 +3,16 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
+import { authActions } from '../../../redux/auth';
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
 
 import s from './FormSuccess.module.scss';
-import { authActions } from '../../../redux/auth';
 
-export default function FormLoginSuccess({ title, link, textLogin }) {
+export default function FormLoginSuccess({
+  title,
+  textLogin = false,
+  textRegister = false,
+}) {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -41,12 +45,17 @@ export default function FormLoginSuccess({ title, link, textLogin }) {
           </>
         )}
 
-        {!textLogin && (
-          <PrimaryBtn
-            handleOnClick={handleOnClick}
-            text={'Увійти'}
-            classBtn={'loginLink'}
-          />
+        {textRegister && (
+          <>
+            <p className={s.text}>
+              На Ваш e-mail, було відправлено листа для підтвердження.
+            </p>
+            <PrimaryBtn
+              handleOnClick={handleOnClick}
+              text={'Увійти'}
+              classBtn={'loginLink'}
+            />
+          </>
         )}
       </div>
     </div>

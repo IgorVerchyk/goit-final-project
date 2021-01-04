@@ -21,9 +21,9 @@ const useForm = (callback, validate) => {
     [dispatch],
   );
 
-  const handleChange = e => {
+  const handleChange = async e => {
     const { name, value } = e.target;
-    setValues({
+    await setValues({
       ...values,
       [name]: value,
     });

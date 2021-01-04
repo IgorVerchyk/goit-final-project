@@ -5,14 +5,14 @@ import { authActions } from './';
 
 const baseURL = 'https://project-manager-goit20.herokuapp.com';
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = '';
-//   },
-// };
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
 
 const register = dataUser => async dispatch => {
   dispatch(authActions.registerRequest());
@@ -23,20 +23,23 @@ const register = dataUser => async dispatch => {
       dataUser,
     );
 
-    // token.set(data.token);
-    dispatch(authActions.registerSuccess(data));
-    console.log('Пользователь зарегестрирован');
+    dispatch(authActions.registerSuccess(data.data));
   } catch (error) {
-    dispatch(authActions.registerError());
-
-    console.log('Пользователь НЕ зарегестрирован');
+    dispatch(authActions.registerError(error));
 
     if (error.message === 'Request failed with status code 503') {
       notification.error(
         `Вибачте, сервер не відповідає, зареєструйтесь пізніше.`,
         `Виникла помилка!`,
       );
+      return;
+    }
 
+    if (error.message === 'Request failed with status code 409') {
+      notification.error(
+        `Цей e-mail вже використовується.`,
+        `Виникла помилка!`,
+      );
       return;
     }
 
@@ -48,15 +51,29 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-    console.log(dataUser);
     const { data } = await axios.post(`${baseURL}/api/auth/login`, dataUser);
 
-    // token.set(data.token);
+    token.set(data.data.token.token);
+
     dispatch(authActions.loginSuccess(data));
-    console.log('Пользователь вошел');
   } catch (error) {
-    console.log('Пользователь НЕ вошел');
     dispatch(authActions.loginError(error));
+
+    if (error.message === 'Request failed with status code 503') {
+      notification.error(
+        `Вибачте, сервер не відповідає, спробуйте увійти пізніше.`,
+        `Виникла помилка!`,
+      );
+
+      return;
+    }
+
+    if (error.message === 'Request failed with status code 401') {
+      notification.error(`Не вірний e-mail або пароль.`, `Виникла помилка!`);
+      return;
+    }
+
+    console.error(error);
   }
 };
 
@@ -78,6 +95,6 @@ const logout = () => async dispatch => {
 export default {
   register,
   login,
-  // token,
+  token,
   logout,
 };

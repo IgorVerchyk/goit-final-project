@@ -9,7 +9,7 @@ import FormTextAndLink from '../FormTextAndLink/FormTextAndLink';
 import s from './FormLogin.module.scss';
 
 export default function FormLogin({ submitForm }) {
-  const { handleChange, handleSubmit, values, errors } = useForm(
+  const { handleBlur, handleChange, handleSubmit, values, errors } = useForm(
     submitForm,
     validate,
   );
@@ -24,6 +24,7 @@ export default function FormLogin({ submitForm }) {
         type={'email'}
         name={'email'}
         handleChange={handleChange}
+        handleBlur={handleBlur}
         errors={errors}
       />
 
@@ -33,6 +34,7 @@ export default function FormLogin({ submitForm }) {
         type={'password'}
         name={'password'}
         handleChange={handleChange}
+        handleBlur={handleBlur}
         errors={errors}
       />
 

@@ -27,6 +27,10 @@ const useForm = (callback, validate) => {
     });
   };
 
+  const handleBlur = () => {
+    setErrors(validate(values));
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -40,7 +44,7 @@ const useForm = (callback, validate) => {
     }
   }, [callback, errors, isSubmitting, onLogin, values]);
 
-  return { handleChange, handleSubmit, values, errors };
+  return { handleBlur, handleChange, handleSubmit, values, errors };
 };
 
 export default useForm;

@@ -25,7 +25,7 @@ export default function RegisterView() {
       {!isRegister ? (
         <FormRegistration submitForm={submitForm} />
       ) : (
-        <FormSuccess title={'Зареєстровано'} textLogin={false} />
+        <FormSuccess title={'Зареєстровано'} textRegister={true} />
       )}
     </AuthenticationsBlock>
   );
