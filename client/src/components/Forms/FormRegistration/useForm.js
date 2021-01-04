@@ -43,6 +43,16 @@ const useForm = (callback, validate) => {
   };
 
   useEffect(() => {
+    if (values.email === '') {
+      return;
+    } else if (values.password === '') {
+      return;
+    } else {
+      setErrors(validate(values));
+    }
+  }, [validate, values]);
+
+  useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback({ email: values.email, password: values.password });
     }

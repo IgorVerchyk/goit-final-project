@@ -25,7 +25,7 @@ const register = dataUser => async dispatch => {
 
     dispatch(authActions.registerSuccess(data.data));
   } catch (error) {
-    dispatch(authActions.registerError(error));
+    dispatch(authActions.registerError());
 
     if (error.message === 'Request failed with status code 503') {
       notification.error(
@@ -57,7 +57,7 @@ const login = dataUser => async dispatch => {
 
     dispatch(authActions.loginSuccess(data));
   } catch (error) {
-    dispatch(authActions.loginError(error));
+    dispatch(authActions.loginError());
 
     if (error.message === 'Request failed with status code 503') {
       notification.error(

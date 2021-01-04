@@ -18,13 +18,14 @@ const useForm = (callback, validate) => {
   );
 
   const handleChange = e => {
-    setErrors(validate(values));
-
     const { name, value } = e.target;
+
     setValues({
       ...values,
       [name]: value,
     });
+
+    setErrors(validate(values));
   };
 
   const handleBlur = () => {
@@ -37,6 +38,16 @@ const useForm = (callback, validate) => {
     setErrors(validate(values));
     setIsSubmitting(true);
   };
+
+  useEffect(() => {
+    if (values.email === '') {
+      return;
+    } else if (values.password === '') {
+      return;
+    } else {
+      setErrors(validate(values));
+    }
+  }, [validate, values]);
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
