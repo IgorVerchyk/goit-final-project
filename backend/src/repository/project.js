@@ -1,4 +1,4 @@
-const Project = require("../schemas/project");
+const Project = require('../schemas/project');
 
 class ProjectRepository {
   constructor() {
@@ -36,9 +36,19 @@ class ProjectRepository {
 
   async createNewTask(id, sprintId, descr, planTime) {
     const project = await this.model.findById(id);
+    console.log(project);
     project.sprints.id(sprintId).tasks.push({ descr, planTime });
 
     project.save();
+    return project;
+  }
+
+  async updateTaskTime(id, sprintId, taskId, spendTime) {
+    const project = await this.model.findById(id);
+    project.sprints.id(sprintId).tasks.findByIdAndUpdate(taskId, spendTime, {
+      new: true,
+    });
+    console.log('updateTaskTime repositories', project);
     return project;
   }
 

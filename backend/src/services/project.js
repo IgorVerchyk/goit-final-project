@@ -1,7 +1,7 @@
-const { ProjectRepository } = require("../repository");
-const { UsersRepository } = require("../repository");
-const { Repository } = require("../repository");
-const Project = require("../schemas/project");
+const { ProjectRepository } = require('../repository');
+const { UsersRepository } = require('../repository');
+const { Repository } = require('../repository');
+const Project = require('../schemas/project');
 
 class ProjectService {
   constructor() {
@@ -63,6 +63,19 @@ class ProjectService {
       sprintId,
       descr,
       planTime
+    );
+    return result;
+  }
+
+  async updateTaskTime(id, sprintId, taskId, body) {
+    const { spendTime } = body;
+    console.log('udate services', id, sprintId, taskId, spendTime);
+
+    const result = await this.repositories.project.updateTaskTime(
+      id,
+      sprintId,
+      taskId,
+      spendTime
     );
     return result;
   }
