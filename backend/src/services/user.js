@@ -18,7 +18,7 @@ class UserService {
     try {
       await this.emailService.sendEmail(verifyToken, email);
     } catch (e) {
-      throw new ErrorHandler(503, e.message, "Service unavailable");
+      // throw new ErrorHandler(503, e.message, "Service unavailable");
     }
     const data = await this.repositories.users.create({ ...body, verifyToken });
     return data;

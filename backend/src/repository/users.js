@@ -14,10 +14,6 @@ class UsersRepository {
     const result = await this.model.findOne({ email });
     return result;
   }
-  async findByToken(token) {
-    const result = await this.model.findOne({ verifyToken: token });
-    return result;
-  }
 
   async create(body) {
     const user = new this.model(body);
