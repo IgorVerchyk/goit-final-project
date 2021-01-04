@@ -26,8 +26,12 @@ export default function ProjectsListItems({ projects, onRemove }) {
             projectName={projectName}
             descr={descr}
             color={color}
-            routeTo={`/${id}`}
+
+            routeTo={`projects/${id}`}
+
+           
             onRemove={() => onRemove(id)}
+
           ></SingleProjectCard>
         ))}
       </ul>
