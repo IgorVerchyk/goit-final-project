@@ -15,13 +15,13 @@ import {
   removeProjectError,
 } from './projectsActions';
 
-const baseURL = 'https://project-manager-goit20.herokuapp.com/projects/';
+const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects/';
 
-const fetchProjects = () => async dispatch => {
+const fetchProjects = id => async dispatch => {
   dispatch(fetchProjectsRequest());
 
   try {
-    const { data } = await axios.get(`${baseURL}/projects`);
+    const { data } = await axios.get(`${baseURL}/:${id}`);
     dispatch(fetchProjectsSuccess(data));
   } catch (error) {
     dispatch(fetchProjectsError(error.message));
@@ -32,7 +32,7 @@ const addProject = ({ projectName, descr, color }) => async dispatch => {
   dispatch(addProjectRequest());
 
   try {
-    const { data } = await axios.post(`${baseURL}/projects`, {
+    const { data } = await axios.post(`${baseURL}`, {
       projectName,
       descr,
       color,
@@ -48,7 +48,7 @@ const cancelingProject = () => async dispatch => {
   dispatch(cancelingProjectRequest());
 
   try {
-    await axios.get(`${baseURL}/projects`);
+    await axios.get(`${baseURL}`);
     dispatch(cancelingProjectSuccess());
   } catch (error) {
     dispatch(cancelingProjectError(error.message));
@@ -60,7 +60,7 @@ const removeProject = id => async dispatch => {
   dispatch(removeProjectRequest());
 
   await axios
-    .delete(`${baseURL}/projects/${id}`)
+    .delete(`${baseURL}/${id}`)
     .then(() => dispatch(removeProjectSuccess(id)))
     .catch(error => dispatch(removeProjectError(error.message)));
 };
