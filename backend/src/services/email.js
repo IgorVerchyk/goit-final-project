@@ -1,3 +1,4 @@
+
 const sgMail = require("@sendgrid/mail");
 const Mailgen = require("mailgen");
 require("dotenv").config();
@@ -48,5 +49,6 @@ class EmailService {
     await this.#sender.send(msg);
   }
 }
-
-module.exports = EmailService;
+module.exports = {
+  sendEmail,
+};
