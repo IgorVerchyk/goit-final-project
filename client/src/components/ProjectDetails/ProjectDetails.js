@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-// import { FetchProjectDetails } from '../../';
-// import s from './ProjectDetails.module.css';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-export default function RegisterView() {
+export default function ProjectDetails() {
   const { projectId } = useParams();
-  const [project, setProject] = useState(null);
+  const proj = useSelector(state => state.projects);
+  console.log(proj);
+  // find(i => i._id === projectId));
+  // console.log(proj.items.iterable.find(item => item._id === { projectId }));
+  // const [project, setProject] = useState(null);
 
   // useEffect(() => {
   //  fetchProjectDetails(id).then(setProject);
