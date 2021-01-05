@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import PrivateRoute from './PrivateRoute';
@@ -28,6 +28,7 @@ class App extends Component {
                   <PublicRoute key={route.label} {...route} />
                 ),
               )}
+              <Redirect to="/" />
             </Switch>
           </Suspense>
         </AppLayout>

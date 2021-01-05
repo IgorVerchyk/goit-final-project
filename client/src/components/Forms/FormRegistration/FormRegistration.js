@@ -39,7 +39,7 @@ export default function FormRegistration({ submitForm }) {
 
       <FormLabel
         value={values.password2}
-        labelText={'Пароль'}
+        labelText={'Повторить пароль'}
         type={'password'}
         name={'password2'}
         handleChange={handleChange}

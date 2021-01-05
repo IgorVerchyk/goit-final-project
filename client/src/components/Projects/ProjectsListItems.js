@@ -19,7 +19,7 @@ export default function ProjectsListItems({ projects, onRemove }) {
     <section className={s.projects}>
       <h2 className={s.title}>Проекти</h2>
       <ul className={s.list}>
-        {projects.map(({ id, projectName, descr, color }) => (
+        {projects.map(({ _id: id, title: projectName, descr, color }) => (
           <SingleProjectCard
             id={id}
             key={id}

@@ -4,9 +4,9 @@ import {
   addProjectRequest,
   addProjectSuccess,
   addProjectError,
-  fetchProjectsRequest,
+  // fetchProjectsRequest,
   fetchProjectsSuccess,
-  fetchProjectsError,
+  // fetchProjectsError,
   cancelingProjectRequest,
   cancelingProjectSuccess,
   cancelingProjectError,
@@ -15,28 +15,54 @@ import {
   removeProjectError,
 } from './projectsActions';
 
-const baseURL = 'http://localhost:3456';
+const baseURL = 'http://localhost:3456/api';
 
-const fetchProjects = () => async dispatch => {
-  dispatch(fetchProjectsRequest());
+// const fetchProjects = () => async (dispatch, getState) => {
+//   dispatch(fetchProjectsRequest());
 
-  try {
-    const { data } = await axios.get(`${baseURL}/projects`);
-    dispatch(fetchProjectsSuccess(data));
-  } catch (error) {
-    dispatch(fetchProjectsError(error.message));
-  }
+//   const {
+//     auth: {
+//       currentUser: { id },
+//     },
+//   } = getState();
+//   try {
+//     const { data } = await axios.get(`${baseURL}/projects/${id}`);
+//     dispatch(fetchProjectsSuccess(data));
+//   } catch (error) {
+//     dispatch(fetchProjectsError(error.message));
+//   }
+// };
+
+const fetchProjects = () => async (dispatch, getState) => {
+  const {
+    auth: {
+      currentUser: { projects },
+    },
+  } = getState();
+  dispatch(fetchProjectsSuccess(projects));
 };
 
-const addProject = ({ projectName, descr, color }) => async dispatch => {
+const addProject = ({ projectName: title, descr, color }) => async (
+  dispatch,
+  getState,
+) => {
   dispatch(addProjectRequest());
+
+  const {
+    auth: {
+      currentUser: { id },
+    },
+  } = getState();
 
   try {
     const { data } = await axios.post(`${baseURL}/projects`, {
-      projectName,
+      id,
+      title,
       descr,
       color,
     });
+
+    console.log(data);
     dispatch(addProjectSuccess(data));
   } catch (error) {
     dispatch(addProjectError(error));
@@ -55,12 +81,18 @@ const cancelingProject = () => async dispatch => {
   }
 };
 
-const removeProject = id => async dispatch => {
+const removeProject = id => async (dispatch, getState) => {
   console.log('remove operations');
   dispatch(removeProjectRequest());
 
+  const {
+    auth: {
+      currentUser: { id: userId },
+    },
+  } = getState();
+
   await axios
-    .delete(`${baseURL}/projects/${id}`)
+    .delete(`${baseURL}/projects/${id}`, { data: { id: userId } })
     .then(() => dispatch(removeProjectSuccess(id)))
     .catch(error => dispatch(removeProjectError(error.message)));
 };
