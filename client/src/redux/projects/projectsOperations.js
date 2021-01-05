@@ -43,18 +43,6 @@ const addProject = ({ projectName, descr, color }) => async dispatch => {
   }
 };
 
-const cancelingProject = () => async dispatch => {
-  console.log();
-  dispatch(cancelingProjectRequest());
-
-  try {
-    await axios.get(`${baseURL}/projects`);
-    dispatch(cancelingProjectSuccess());
-  } catch (error) {
-    dispatch(cancelingProjectError(error.message));
-  }
-};
-
 const removeProject = id => async dispatch => {
   console.log('remove operations');
   dispatch(removeProjectRequest());
@@ -69,6 +57,5 @@ const removeProject = id => async dispatch => {
 export default {
   fetchProjects,
   addProject,
-  cancelingProject,
   removeProject,
 };
