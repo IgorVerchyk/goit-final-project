@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './SprintHeader.module.scss';
 
 import ContentEditable from 'react-contenteditable';

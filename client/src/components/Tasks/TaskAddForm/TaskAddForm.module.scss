@@ -2,9 +2,15 @@
 
 .TaskForm {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding-right: 30px;
 }
 .inputTaskForm {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .title {
   font-weight: 500;
@@ -25,6 +31,9 @@
     outline: 0;
     outline-offset: 0;
   }
+}
+.inputTitle {
+  margin-right: auto;
 }
 .inputTime {
   margin-bottom: 40px;
@@ -68,7 +77,6 @@
 
 @media screen and (min-width: 768px) {
   .TaskForm {
-    padding-left: 32px;
     padding-top: 120px;
   }
   .inputTaskForm {

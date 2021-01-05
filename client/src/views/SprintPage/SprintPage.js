@@ -147,7 +147,7 @@ export default function SprintPage() {
       {/* /////////////ModalTasks/////////////////////// */}
 
       {onModalAdd && (
-        <Modal onCloseModal={setShowModal}>
+        <Modal closeModal={setShowModal}>
           <TaskAddForm onClick={setShowModal} onCloseModal={setShowModal} />
         </Modal>
       )}

@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 // import { useDispatch } from 'react-redux';
 // import tasksOperations from '../../redux/tasks/tasksOperations';
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
@@ -42,6 +42,7 @@ export default function TaskAddForm({ onCloseModal }) {
           className={styles.inputTime}
           placeholder={'Заплановано годин'}
         ></input>
+        <br />
         <PrimaryBtn text={'Готово'} />
       </form>
       <div className={styles.cancel} onClick={onCloseModal}>
