@@ -129,38 +129,6 @@
       ]
     },
     {
-      "id": "12345675",
-      "projectName": "bestProject5",
-      "descr": "Test project5",
-      "color": "#00f00f",
-      "colaborators": [
-        "evolution@killus.all",
-        "redeyes@wantsle.ep",
-        "gypifish@revenge.org",
-        "nisepupilon@cow.net"
-      ],
-      "sprints": [
-        {
-          "id": "a1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "b234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        },
-        {
-          "id": "c1234567",
-          "description": "bla bla",
-          "startDate": "2020, 12, 10",
-          "finDate": "2020, 12, 12"
-        }
-      ]
-    },
-    {
       "id": "12345676",
       "projectName": "bestProject6",
       "descr": "Test project6",

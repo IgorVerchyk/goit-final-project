@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ProjectsList from '../components/Projects/ProjectsList';
 import projectsOperations from '../redux/projects/projectsOperations';
 
-class Projects extends Component {
+class HomeView extends Component {
   componentDidMount() {
     this.props.onFetchProjects();
   }
@@ -22,4 +22,4 @@ const mapDispatchToProps = {
   onFetchProjects: projectsOperations.fetchProjects,
 };
 
-export default connect(null, mapDispatchToProps)(Projects);
+export default connect(null, mapDispatchToProps)(HomeView);
