@@ -17,7 +17,7 @@ export default function SingleProjectCard({
   };
 
   return (
-    <li className={styles.el} style={{ backgroundColor: color }}>
+    <li id={id} className={styles.el} style={{ backgroundColor: color }}>
       <Link to={routeTo} className={styles.a}>
         <h2 className={styles.title}>{projectName}</h2>
         <p className={styles.text}>{descr}</p>
