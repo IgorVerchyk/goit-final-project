@@ -48,6 +48,4 @@ class EmailService {
     await this.#sender.send(msg);
   }
 }
-module.exports = {
-  EmailService,
-};
+module.exports = EmailService;
