@@ -6,7 +6,7 @@ require("dotenv").config();
 
 class UserService {
   constructor() {
-    this.emailService = EmailService.sendEmail;
+    this.emailService = EmailService;
     this.repositories = {
       users: new UsersRepository(),
     };
@@ -16,10 +16,8 @@ class UserService {
     const verifyToken = nanoid();
     const { email } = body;
     try {
-
-
       await this.emailService.sendEmail(verifyToken, email);
-
+      console.log(verifyToken);
     } catch (e) {
       // throw new ErrorHandler(503, e.message, "Service unavailable");
     }
@@ -28,7 +26,7 @@ class UserService {
   }
 
   async findByEmail(email) {
-    const data = await this.repositories.users.findByEmail(email);
+    const data = await this.repositories.users.findByField(email);
     return data;
   }
 
@@ -43,7 +41,8 @@ class UserService {
   }
 
   async verify({ token }) {
-    const user = await this.repositories.users.findByToken(token);
+    console.log(token);
+    const user = await this.repositories.users.findByField(token);
     if (user) {
       await user.updateOne({ verify: true, verifyToken: null });
       return true;

@@ -118,7 +118,9 @@ const current = async (req, res, next) => {
 
 const verify = async (req, res, next) => {
   try {
-    const result = await userServise.verify(req.params);
+    const token = req.params.token;
+    const result = await userServise.verify(token);
+    console.log(token);
     if (result) {
       return res.status(HttpCode.OK).json({
         status: "success",
