@@ -27,7 +27,7 @@ const routes = [
   },
 
   {
-    path: '/projects/:projectId',
+    path: '/:projectId',
     label: 'ProjectDetails',
     exact: true,
     component: lazy(() => import('./views/ProjectDetailsView')),
