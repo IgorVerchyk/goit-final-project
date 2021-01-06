@@ -11,9 +11,22 @@ class ProjectService {
     };
   }
 
-  async getProject(id) {
-    const result = await this.repositories.project.getProject(id);
-    return result;
+  async getProjectByTitle(title) {
+    try {
+      const result = await this.repositories.project.findByField(title);
+      return result;
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getProjectById(id) {
+    try {
+      const result = await this.repositories.project.getProject(id);
+      return result;
+    } catch (e) {
+      throw new Error("No project with such ID");
+    }
   }
 
   async createProject({ id }, { title, descr }) {
@@ -23,23 +36,21 @@ class ProjectService {
       owner: id,
     });
 
-    const updatedUser = await this.repositories.user.createNewProject(
-      id,
-      newProject._id
-    );
+    await this.repositories.user.createNewProject(id, newProject.id);
 
-    return newProject;
+    const updatedUser = await this.repositories.user.findById(id);
+
+    return updatedUser;
   }
 
   async removeProject({ projectId }, { id }) {
-    console.log(projectId);
-    const removeFromRep = await this.repositories.project.removeProject(
-      projectId
-    );
-    console.log(removeFromRep);
-    const result = await this.repositories.user.removeProject(id, projectId);
-    console.log(result);
-    return result;
+    await this.repositories.project.removeProject(projectId);
+
+    await this.repositories.user.removeProject(id, projectId);
+
+    const updatedUser = await this.repositories.user.findById(id);
+
+    return updatedUser;
   }
 
   async createNewSprint(id, body) {

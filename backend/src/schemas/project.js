@@ -22,7 +22,7 @@ const sprintSchema = new Schema({
 const projectSchema = new Schema({
   colaborators: [colaboratorsSchema],
   sprints: [sprintSchema],
-  owner: { type: Types.ObjectId, ref: "User" },
+  owner: { type: Types.ObjectId, ref: "user" },
   title: { type: String },
   descr: { type: String },
 });

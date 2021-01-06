@@ -3,6 +3,8 @@ const ProjectController = require("../../controllers/projects");
 const projectsRouter = express.Router();
 const auth = require("../../middleware/auth.middleware");
 
+//TODO: обсудить нужно ли возвращать целого юзера, или только удаленный/созданный проект
+
 projectsRouter.post("/", auth, ProjectController.createProject);
 
 projectsRouter.delete("/:projectId", auth, ProjectController.removeProject);

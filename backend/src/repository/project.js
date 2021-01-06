@@ -5,9 +5,16 @@ class ProjectRepository {
     this.model = Project;
   }
 
-  async getProject(id) {
-    const project = await this.model.findById({ _id: id });
-    return project;
+  // async getProject(id) {
+  //   const project = await this.model.findById({ _id: id });
+  //   return project;
+  // }
+  async findByField(input) {
+    return await this.model.findOne({ ...input });
+  }
+
+  getProject(id) {
+    return this.model.findById({ _id: id });
   }
   async createNewProject({ title, descr, owner }) {
     const project = new this.model({
@@ -17,6 +24,7 @@ class ProjectRepository {
     });
     return project.save();
   }
+
   async removeProject(id) {
     const result = await this.model.findByIdAndRemove({
       _id: id,

@@ -7,6 +7,7 @@ const projectService = new ProjectService();
 
 const createProject = async (req, res, next) => {
   const { body, user } = req;
+  const project = await projectService.getProjectByTitle(body.title);
 
   // const project = projectService.
   // const project = await user.projects.find(
@@ -19,6 +20,9 @@ const createProject = async (req, res, next) => {
   //     message: "Project with that title already exist",
   //   });
   // }
+
+  //TODO: добавить проверку имени проекта
+
   try {
     const result = await projectService.createProject(user, body);
     res.status(201).json(result);
@@ -31,11 +35,17 @@ const createProject = async (req, res, next) => {
 const getProject = async (req, res, next) => {
   try {
     const id = req.params.projectId;
-    const result = await projectService.getProject(id);
-    console.log(result);
+    if (!id) {
+      res
+        .status(HttpCode.BAD_REQUEST)
+        .send({ message: "Project's ID not defiened" });
+    }
+    const result = await projectService.getProjectById(id);
+
     if (!result) {
       return res.status(404).send({ message: "No project with such ID" });
     }
+
     return res.status(HttpCode.OK).json(result);
   } catch (e) {
     next(e);
@@ -47,7 +57,7 @@ const createSprint = async (req, res, next) => {
   console.log(id);
   const body = req.body;
   try {
-    const project = await projectService.getProject(id);
+    const project = await projectService.getProjectById(id);
 
     if (!project) {
       res.status(404).send({ message: "No project with such ID" });
@@ -93,7 +103,7 @@ const createTask = async (req, res, next) => {
   console.log(id, sprintId);
   const body = req.body;
   try {
-    const project = await projectService.getProject(id);
+    const project = await projectService.getProjectById(id);
 
     if (!project) {
       res.status(404).send({ message: "No project with such ID" });
@@ -116,7 +126,7 @@ const updateTaskTime = async (req, res, next) => {
   console.log(id, sprintId, taskId);
   const body = req.body;
   try {
-    const project = await projectService.getProject(id);
+    const project = await projectService.getProjectById(id);
     if (!project) {
       res.status(404).send({ message: "No project with such ID" });
     }

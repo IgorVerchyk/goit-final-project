@@ -85,7 +85,7 @@ const token = async (req, res, next) => {
 
 const logout = async (req, res, next) => {
   const id = req.user.id;
-  await userServise.logout(id);
+  await authService.logout(id);
   return res.status(HttpCode.NO_CONTENT).json({
     status: "success",
     code: HttpCode.NO_CONTENT,
