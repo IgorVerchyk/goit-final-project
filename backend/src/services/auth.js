@@ -13,12 +13,12 @@ class AuthService {
   }
 
   async login({ email, password }) {
-    const user = await this.repositories.users.findByEmail(email);
+    const user = await this.repositories.users.findByField(email);
 
     if (!user || !user.validPassword(password)) {
       return null;
     }
-    const { id, projects } = user;
+    const { id, email, projects } = user;
     const payload = { id };
     const token = jwt.sign(payload, SECRET_KEY, {
       expiresIn: config.tokenLife,
@@ -28,7 +28,7 @@ class AuthService {
     });
     await this.repositories.users.updateToken(id, token);
 
-    return { id, token, refreshToken, projects };
+    return { id, email, token, refreshToken, projects };
   }
 
   async token({ email, password, refreshToken }) {
