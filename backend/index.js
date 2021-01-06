@@ -2,7 +2,7 @@ const app = require("./src/app");
 const db = require("./src/db");
 const config = require("./src/config/config.json");
 
-const PORT = config.port || process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 db.then(() => {
   app.listen(PORT, () => {
