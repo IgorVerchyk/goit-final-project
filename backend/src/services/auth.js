@@ -18,7 +18,7 @@ class AuthService {
     if (!user || !user.validPassword(password)) {
       return null;
     }
-    const { id, email, projects } = user;
+    const { id, projects } = user;
     const payload = { id };
     const token = jwt.sign(payload, SECRET_KEY, {
       expiresIn: config.tokenLife,
