@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const { Schema, Types } = mongoose;
 const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
 
 const SALT_FACTOR = 6;
 
-const projectSchema = new Schema({
-  projectId: { type: String, require: true },
-  isAdmin: { type: Boolean, default: true },
-  title: { type: String, require: true },
-  descr: { type: String, require: true },
-});
+// const projectSchema = new Schema({
+//   projectId: { type: String, require: true },
+//   isAdmin: { type: Boolean, default: true },
+//   title: { type: String, require: true },
+//   descr: { type: String, require: true },
+// });
 
 const userSchema = new Schema(
   {
@@ -44,7 +44,7 @@ const userSchema = new Schema(
 
     verifyToken: { type: String, required: [true, "Verify token is required"] },
 
-    projects: [projectSchema],
+    projects: [{ type: Types.ObjectId, ref: "Project" }],
     admin: {
       type: Boolean,
       default: false,

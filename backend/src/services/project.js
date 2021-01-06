@@ -1,7 +1,7 @@
-const { ProjectRepository } = require('../repository');
-const { UsersRepository } = require('../repository');
-const { Repository } = require('../repository');
-const Project = require('../schemas/project');
+const { ProjectRepository } = require("../repository");
+const { UsersRepository } = require("../repository");
+const { Repository } = require("../repository");
+const Project = require("../schemas/project");
 
 class ProjectService {
   constructor() {
@@ -16,22 +16,29 @@ class ProjectService {
     return result;
   }
 
-  async createProject({ id, title, descr }) {
-    const newProject = await this.repositories.project.createNewProject();
-    const projectId = newProject.id;
-    const project = await this.repositories.user.createNewProject(
-      id,
-      projectId,
+  async createProject({ id }, { title, descr }) {
+    const newProject = await this.repositories.project.createNewProject({
       title,
-      descr
+      descr,
+      owner: id,
+    });
+
+    const updatedUser = await this.repositories.user.createNewProject(
+      id,
+      newProject._id
     );
-    return project;
+
+    return newProject;
   }
 
-  async removeProject({ id, projectId, repId }) {
-    const removeFromRep = await this.repositories.project.removeProject(repId);
-
+  async removeProject({ projectId }, { id }) {
+    console.log(projectId);
+    const removeFromRep = await this.repositories.project.removeProject(
+      projectId
+    );
+    console.log(removeFromRep);
     const result = await this.repositories.user.removeProject(id, projectId);
+    console.log(result);
     return result;
   }
 
@@ -69,7 +76,7 @@ class ProjectService {
 
   async updateTaskTime(id, sprintId, taskId, body) {
     const { spendTime } = body;
-    console.log('udate services', id, sprintId, taskId, spendTime);
+    console.log("udate services", id, sprintId, taskId, spendTime);
 
     const result = await this.repositories.project.updateTaskTime(
       id,

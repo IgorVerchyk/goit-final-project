@@ -13,7 +13,7 @@ class AuthService {
   }
 
   async login({ email, password }) {
-    const user = await this.repositories.users.findByField(email);
+    const user = await this.repositories.users.findByField({ email: email });
 
     if (!user || !user.validPassword(password)) {
       return null;
@@ -21,14 +21,14 @@ class AuthService {
     const { id, projects } = user;
     const payload = { id };
     const token = jwt.sign(payload, SECRET_KEY, {
-      expiresIn: config.tokenLife,
+      // expiresIn: config.tokenLife,
     });
-    const refreshToken = jwt.sign(payload, REFRESH_TOKEN_KEY, {
-      expiresIn: config.refreshTokenLife,
-    });
+    // const refreshToken = jwt.sign(payload, REFRESH_TOKEN_KEY, {
+    //   expiresIn: config.refreshTokenLife,
+    // });
     await this.repositories.users.updateToken(id, token);
 
-    return { id, email, token, refreshToken, projects };
+    return { id, email, token, projects };
   }
 
   async token({ email, password, refreshToken }) {

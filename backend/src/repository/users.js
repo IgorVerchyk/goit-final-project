@@ -11,8 +11,7 @@ class UsersRepository {
   }
 
   async findByField(input) {
-    console.log(input);
-    const result = await this.model.findOne({ input });
+    const result = await this.model.findOne({ ...input });
     return result;
   }
 
@@ -25,12 +24,12 @@ class UsersRepository {
     await this.model.updateOne({ _id: id }, { token });
   }
 
-  async createNewProject(id, projectId, title, descr) {
+  async createNewProject(id, projectId) {
     const result = await this.model.findByIdAndUpdate(
       { _id: id },
       {
         $push: {
-          projects: { projectId, title, descr },
+          projects: { _id: projectId },
         },
       }
     );
@@ -38,11 +37,10 @@ class UsersRepository {
   }
 
   async removeProject(id, projectId) {
-    console.log(id, projectId);
-    const result = await this.model.updateOne(
+    const result = await this.model.findOneAndUpdate(
       { _id: id },
       {
-        $pull: { projects: { _id: projectId } },
+        $pull: { projects: projectId },
       }
     );
     return result;
