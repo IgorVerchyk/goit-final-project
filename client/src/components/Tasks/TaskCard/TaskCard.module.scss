@@ -1,4 +1,4 @@
-@import '../../helpers/scss/vars.module.scss';
+@import '../../../helpers/scss/vars.module.scss';
 
 .el {
   position: relative;
@@ -29,11 +29,27 @@
 
 .spentTime {
   all: unset;
-  width: 60px;
+  width: 65px;
   text-align: right;
   border-bottom: 1px solid rgba(154, 155, 158, 0.2);
-  text-align: left;
-  padding-left: 10px;
+  // text-align: left;
+  // padding-left: 10px;
+
+  &::placeholder {
+    color: black;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  &:focus::placeholder {
+    opacity: 0;
+  }
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 .trashWrapper {
