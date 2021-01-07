@@ -47,6 +47,14 @@ class UsersRepository {
     );
     return result;
   }
+
+  async updateProjectTitle (id, projectId, title) {
+    const result = await this.model.findById(id);
+    result.projects.id(projectId).push({title: title});
+    result.save();
+    return result;
+  }
+    
 }
 
 module.exports = UsersRepository;
