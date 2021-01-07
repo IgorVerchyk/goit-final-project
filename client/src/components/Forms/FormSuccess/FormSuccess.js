@@ -54,6 +54,7 @@ export default function FormLoginSuccess({
               handleOnClick={handleOnClick}
               text={'Увійти'}
               classBtn={'loginLink'}
+              typeBtn={'button'}
             />
           </>
         )}

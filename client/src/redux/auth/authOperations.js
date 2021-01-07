@@ -27,21 +27,21 @@ const register = dataUser => async dispatch => {
   } catch (error) {
     dispatch(authActions.registerError());
 
-    if (error.message === 'Request failed with status code 503') {
-      notification.error(
-        `Вибачте, сервер не відповідає, зареєструйтесь пізніше.`,
-        `Виникла помилка!`,
-      );
-      return;
-    }
+    // if (error.message === 'Request failed with status code 503') {
+    //   notification.error(
+    //     `Вибачте, сервер не відповідає, зареєструйтесь пізніше.`,
+    //     `Виникла помилка!`,
+    //   );
+    //   return;
+    // }
 
-    if (error.message === 'Request failed with status code 409') {
-      notification.error(
-        `Цей e-mail вже використовується.`,
-        `Виникла помилка!`,
-      );
-      return;
-    }
+    // if (error.message === 'Request failed with status code 409') {
+    //   notification.error(
+    //     `Цей e-mail вже використовується.`,
+    //     `Виникла помилка!`,
+    //   );
+    //   return;
+    // }
 
     console.error(error);
   }
@@ -51,7 +51,11 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
+    console.log('dataUser', dataUser);
+
     const { data } = await axios.post(`${baseURL}/api/auth/login`, dataUser);
+
+    console.log('data', data);
 
     token.set(data.data.token.token);
 

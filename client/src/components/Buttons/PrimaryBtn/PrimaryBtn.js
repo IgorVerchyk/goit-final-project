@@ -2,12 +2,19 @@ import React from 'react';
 
 import s from './PrimaryBtn.module.scss';
 
-export default function PrimaryBtn({ text, handleOnClick, classBtn }) {
+export default function PrimaryBtn({
+  text,
+  isSubmitting,
+  classBtn,
+  typeBtn,
+  handleOnClick,
+}) {
   return (
     <button
-      // onClick={handleOnClick}
       className={`${s.primaryBtn} ${s[classBtn]}`}
-      type={'submit'}
+      type={typeBtn}
+      disabled={isSubmitting}
+      onClick={handleOnClick}
     >
       {text}
     </button>
