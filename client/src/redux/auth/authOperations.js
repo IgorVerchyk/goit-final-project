@@ -19,10 +19,7 @@ const register = dataUser => async dispatch => {
   dispatch(authActions.registerRequest());
 
   try {
-    const { data } = await axios.post(
-      `${baseURL}/api/auth/registration`,
-      dataUser,
-    );
+    const { data } = await axios.post(`${baseURL}/registration`, dataUser);
 
     // token.set(data.token);
     dispatch(authActions.registerSuccess(data));
@@ -41,8 +38,6 @@ const login = dataUser => async dispatch => {
     const { data } = await axios.post(`${baseURL}/login`, dataUser);
 
     const { projects, ...user } = data;
-
-    console.log(data);
 
     token.set(data.token);
 
