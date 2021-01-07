@@ -1,5 +1,4 @@
 import axios from 'axios';
-import notification from 'toastr';
 
 import { authActions } from './';
 
@@ -26,7 +25,6 @@ const register = dataUser => async dispatch => {
     dispatch(authActions.registerSuccess(data.data));
   } catch (error) {
     dispatch(authActions.registerError(error.response.data));
-
     console.error(error);
   }
 };
@@ -36,27 +34,13 @@ const login = dataUser => async dispatch => {
 
   try {
     const { data } = await axios.post(`${baseURL}/api/auth/login`, dataUser);
+    console.log(data);
 
-    token.set(data.data.token.token);
+    token.set(data.token);
 
     dispatch(authActions.loginSuccess(data));
   } catch (error) {
-    dispatch(authActions.loginError());
-
-    // if (error.message === 'Request failed with status code 503') {
-    //   notification.error(
-    //     `Вибачте, сервер не відповідає, спробуйте увійти пізніше.`,
-    //     `Виникла помилка!`,
-    //   );
-
-    //   return;
-    // }
-
-    // if (error.message === 'Request failed with status code 401') {
-    //   notification.error(`Не вірний e-mail або пароль.`, `Виникла помилка!`);
-    //   return;
-    // }
-
+    dispatch(authActions.loginError(error.response.data));
     console.error(error);
   }
 };
