@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const { Schema, Types } = mongoose;
 const mongoosePaginate = require("mongoose-paginate-v2");
 
 const taskSchema = new Schema({
@@ -22,6 +22,9 @@ const sprintSchema = new Schema({
 const projectSchema = new Schema({
   colaborators: [colaboratorsSchema],
   sprints: [sprintSchema],
+  owner: { type: Types.ObjectId, ref: "user" },
+  title: { type: String },
+  descr: { type: String },
 });
 
 projectSchema.plugin(mongoosePaginate);

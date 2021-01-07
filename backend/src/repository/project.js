@@ -1,18 +1,30 @@
-const Project = require('../schemas/project');
+const Project = require("../schemas/project");
 
 class ProjectRepository {
   constructor() {
     this.model = Project;
   }
 
-  async getProject(id) {
-    const project = await this.model.findById({ _id: id });
-    return project;
+  // async getProject(id) {
+  //   const project = await this.model.findById({ _id: id });
+  //   return project;
+  // }
+  async findByField(input) {
+    return await this.model.findOne({ ...input });
   }
-  async createNewProject() {
-    const project = new this.model();
+
+  getProject(id) {
+    return this.model.findById({ _id: id });
+  }
+  async createNewProject({ title, descr, owner }) {
+    const project = new this.model({
+      title,
+      descr,
+      owner,
+    });
     return project.save();
   }
+
   async removeProject(id) {
     const result = await this.model.findByIdAndRemove({
       _id: id,
@@ -48,7 +60,7 @@ class ProjectRepository {
     project.sprints.id(sprintId).tasks.findByIdAndUpdate(taskId, spendTime, {
       new: true,
     });
-    console.log('updateTaskTime repositories', project);
+    console.log("updateTaskTime repositories", project);
     return project;
   }
 
