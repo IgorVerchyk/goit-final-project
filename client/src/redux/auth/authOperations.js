@@ -25,23 +25,7 @@ const register = dataUser => async dispatch => {
 
     dispatch(authActions.registerSuccess(data.data));
   } catch (error) {
-    dispatch(authActions.registerError());
-
-    // if (error.message === 'Request failed with status code 503') {
-    //   notification.error(
-    //     `Вибачте, сервер не відповідає, зареєструйтесь пізніше.`,
-    //     `Виникла помилка!`,
-    //   );
-    //   return;
-    // }
-
-    // if (error.message === 'Request failed with status code 409') {
-    //   notification.error(
-    //     `Цей e-mail вже використовується.`,
-    //     `Виникла помилка!`,
-    //   );
-    //   return;
-    // }
+    dispatch(authActions.registerError(error.response.data));
 
     console.error(error);
   }
@@ -51,11 +35,7 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-    console.log('dataUser', dataUser);
-
     const { data } = await axios.post(`${baseURL}/api/auth/login`, dataUser);
-
-    console.log('data', data);
 
     token.set(data.data.token.token);
 
@@ -63,19 +43,19 @@ const login = dataUser => async dispatch => {
   } catch (error) {
     dispatch(authActions.loginError());
 
-    if (error.message === 'Request failed with status code 503') {
-      notification.error(
-        `Вибачте, сервер не відповідає, спробуйте увійти пізніше.`,
-        `Виникла помилка!`,
-      );
+    // if (error.message === 'Request failed with status code 503') {
+    //   notification.error(
+    //     `Вибачте, сервер не відповідає, спробуйте увійти пізніше.`,
+    //     `Виникла помилка!`,
+    //   );
 
-      return;
-    }
+    //   return;
+    // }
 
-    if (error.message === 'Request failed with status code 401') {
-      notification.error(`Не вірний e-mail або пароль.`, `Виникла помилка!`);
-      return;
-    }
+    // if (error.message === 'Request failed with status code 401') {
+    //   notification.error(`Не вірний e-mail або пароль.`, `Виникла помилка!`);
+    //   return;
+    // }
 
     console.error(error);
   }
