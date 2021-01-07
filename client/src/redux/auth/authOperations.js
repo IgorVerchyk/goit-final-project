@@ -1,17 +1,19 @@
 import axios from 'axios';
 
 import { authActions } from './';
+import { fetchProjectsSuccess } from '../projects/projectsActions';
 
-const baseURL = 'https://project-manager-goit20.herokuapp.com';
+// const baseURL = 'https://project-manager-goit20.herokuapp.com';
+const baseURL = 'http://localhost:3456/api/auth';
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = '';
-//   },
-// };
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
 
 const register = dataUser => async dispatch => {
   dispatch(authActions.registerRequest());
@@ -36,11 +38,18 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-    console.log(dataUser);
-    const { data } = await axios.post(`${baseURL}/api/auth/login`, dataUser);
+    const { data } = await axios.post(`${baseURL}/login`, dataUser);
 
-    // token.set(data.token);
-    dispatch(authActions.loginSuccess(data));
+    const { projects, ...user } = data;
+
+    console.log(data);
+
+    token.set(data.token);
+
+    dispatch(fetchProjectsSuccess(projects));
+
+    dispatch(authActions.loginSuccess(user));
+
     console.log('Пользователь вошел');
   } catch (error) {
     console.log('Пользователь НЕ вошел');
@@ -51,11 +60,13 @@ const login = dataUser => async dispatch => {
 const logout = () => async dispatch => {
   dispatch(authActions.logoutRequest());
   try {
-    await axios.post(`${baseURL}/users/logout`);
+    await axios.post(`${baseURL}/logout`);
     console.log('logout +');
-    // token.unset();
-    dispatch(authActions.logoutSucces());
+    await token.unset();
+    dispatch(authActions.logoutSuccess());
+    return;
   } catch (error) {
+    console.log(error);
     console.log('logout -');
 
     dispatch(authActions.logoutError(error.message));
@@ -66,6 +77,6 @@ const logout = () => async dispatch => {
 export default {
   register,
   login,
-  // token,
+  token,
   logout,
 };

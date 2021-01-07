@@ -5,14 +5,16 @@ class UsersRepository {
     this.model = User;
   }
 
-  async findById(id) {
-    const result = await this.model.findOne({ _id: id });
-    return result;
+  // async findById(id) {
+  //   const result = await this.model.findOne({ _id: id });
+  //   return result;
+  // }
+  findById(id) {
+    return this.model.findOne({ _id: id }).populate("projects");
   }
 
   async findByField(input) {
-    console.log(input);
-    const result = await this.model.findOne({ input });
+    const result = await this.model.findOne({ ...input });
     return result;
   }
 
@@ -25,24 +27,33 @@ class UsersRepository {
     await this.model.updateOne({ _id: id }, { token });
   }
 
-  async createNewProject(id, projectId, title, descr) {
-    const result = await this.model.findByIdAndUpdate(
+  // async createNewProject(id, projectId) {
+  //   const result = await this.model.findByIdAndUpdate(
+  //     { _id: id },
+  //     {
+  //       $push: {
+  //         projects: { _id: projectId },
+  //       },
+  //     }
+  //   );
+  //   return result;
+  // }
+  createNewProject(id, projectId) {
+    return this.model.findByIdAndUpdate(
       { _id: id },
       {
         $push: {
-          projects: { projectId, title, descr },
+          projects: { _id: projectId },
         },
       }
     );
-    return result;
   }
 
   async removeProject(id, projectId) {
-    console.log(id, projectId);
-    const result = await this.model.updateOne(
+    const result = await this.model.findOneAndUpdate(
       { _id: id },
       {
-        $pull: { projects: { _id: projectId } },
+        $pull: { projects: projectId },
       }
     );
     return result;

@@ -1,7 +1,7 @@
-const { ProjectRepository } = require('../repository');
-const { UsersRepository } = require('../repository');
-const { Repository } = require('../repository');
-const Project = require('../schemas/project');
+const { ProjectRepository } = require("../repository");
+const { UsersRepository } = require("../repository");
+const { Repository } = require("../repository");
+const Project = require("../schemas/project");
 
 class ProjectService {
   constructor() {
@@ -11,28 +11,46 @@ class ProjectService {
     };
   }
 
-  async getProject(id) {
-    const result = await this.repositories.project.getProject(id);
-    return result;
+  async getProjectByTitle(title) {
+    try {
+      const result = await this.repositories.project.findByField(title);
+      return result;
+    } catch (e) {
+      next(e);
+    }
   }
 
-  async createProject({ id, title, descr }) {
-    const newProject = await this.repositories.project.createNewProject();
-    const projectId = newProject.id;
-    const project = await this.repositories.user.createNewProject(
-      id,
-      projectId,
+  async getProjectById(id) {
+    try {
+      const result = await this.repositories.project.getProject(id);
+      return result;
+    } catch (e) {
+      throw new Error("No project with such ID");
+    }
+  }
+
+  async createProject({ id }, { title, descr }) {
+    const newProject = await this.repositories.project.createNewProject({
       title,
-      descr
-    );
-    return project;
+      descr,
+      owner: id,
+    });
+
+    await this.repositories.user.createNewProject(id, newProject.id);
+
+    const updatedUser = await this.repositories.user.findById(id);
+
+    return updatedUser;
   }
 
-  async removeProject({ id, projectId, repId }) {
-    const removeFromRep = await this.repositories.project.removeProject(repId);
+  async removeProject({ projectId }, { id }) {
+    await this.repositories.project.removeProject(projectId);
 
-    const result = await this.repositories.user.removeProject(id, projectId);
-    return result;
+    await this.repositories.user.removeProject(id, projectId);
+
+    const updatedUser = await this.repositories.user.findById(id);
+
+    return updatedUser;
   }
 
   async createNewSprint(id, body) {
@@ -69,7 +87,7 @@ class ProjectService {
 
   async updateTaskTime(id, sprintId, taskId, body) {
     const { spendTime } = body;
-    console.log('udate services', id, sprintId, taskId, spendTime);
+    console.log("udate services", id, sprintId, taskId, spendTime);
 
     const result = await this.repositories.project.updateTaskTime(
       id,
