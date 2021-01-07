@@ -53,48 +53,66 @@ class ProjectService {
     return updatedUser;
   }
 
-  async createNewSprint(id, body) {
-    const { title, startDate, endDate } = body;
-    const result = await this.repositories.project.createNewSprint(
-      id,
-      title,
-      startDate,
-      endDate
-    );
-    return result;
+  async createNewSprint(userId, projectId, body) {
+    try {
+      const updatedProject = await this.repositories.project.createNewSprint(
+        projectId,
+        body
+      );
+
+      if (!updatedProject) {
+        return null;
+      }
+
+      const updatedUser = await this.repositories.user.findById(userId);
+
+      return updatedUser;
+    } catch (e) {
+      throw e;
+    }
   }
 
-  async removeSprint(params) {
-    const { projectId, sprintId } = params;
-    console.log(projectId, sprintId);
-    const result = await this.repositories.project.removeSprint(
-      projectId,
-      sprintId
-    );
-    return result;
+  async removeSprint(userId, sprintId) {
+    try {
+      const updatedProject = await this.repositories.project.removeSprint(
+        sprintId
+      );
+
+      if (!updatedProject) {
+        return null;
+      }
+
+      const updatedUser = await this.repositories.user.findById(userId);
+
+      return updatedUser;
+    } catch (e) {
+      throw e;
+    }
   }
 
-  async createNewTask(id, sprintId, body) {
-    const { descr, planTime } = body;
-    const result = await this.repositories.project.createNewTask(
-      id,
+  async createNewTask(userId, sprintId, body) {
+    const updatedProject = await this.repositories.project.createNewTask(
       sprintId,
-      descr,
-      planTime
+      body
     );
-    return result;
+
+    if (!updatedProject) {
+      return null;
+    }
+
+    const updatedUser = await this.repositories.user.findById(userId);
+
+    return updatedUser;
   }
 
-  async updateTaskTime(id, sprintId, taskId, body) {
+  async updateTaskTime(userId, taskId, body) {
     const { spendTime } = body;
-    console.log("udate services", id, sprintId, taskId, spendTime);
 
     const result = await this.repositories.project.updateTaskTime(
-      id,
-      sprintId,
       taskId,
       spendTime
     );
+
     return result;
   }
 
