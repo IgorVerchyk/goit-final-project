@@ -5,6 +5,16 @@ class ProjectRepository {
     this.model = Project;
   }
 
+  getByTaskId(taskId) {
+    return this.model.findOne({
+      sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
+    });
+  }
+
+  getBySprintId(sprintId) {
+    return this.model.findOne({ "sprints._id": sprintId });
+  }
+
   findByField(input) {
     return this.model.findOne({ ...input });
   }
@@ -21,18 +31,17 @@ class ProjectRepository {
     }).save();
   }
 
-  async removeProject(id) {
-    const result = await this.model.findByIdAndRemove({
+  removeProject(id) {
+    return this.model.findByIdAndRemove({
       _id: id,
     });
-    return result;
   }
 
   createNewSprint(id, { title, startDate, endDate }) {
     return this.model.findByIdAndUpdate(
       { _id: id },
       { $push: { sprints: { title, startDate, endDate } } },
-      { safe: true, multi: true }
+      { safe: true, multi: false }
     );
   }
 
@@ -40,7 +49,7 @@ class ProjectRepository {
     return this.model.findOneAndUpdate(
       { "sprints._id": sprintId },
       { $pull: { sprints: { _id: sprintId } } },
-      { safe: true, multi: true }
+      { safe: true, multi: false }
     );
   }
 
@@ -52,31 +61,25 @@ class ProjectRepository {
     );
   }
 
-  // async updateTaskTime(taskId, spendTime) {
-  //   const project = await this.model.findOne({ "sprints.tasks._id": taskId });
-  //   const sprint = await project.sprints.findOne({ "tasks._id": taskId });
-  //   project.sprints.findByIdAndUpdate(taskId, spendTime, {
-  //     new: true,
-  //   });
+  updateTaskTime(taskId, spendTime) {
+    return this.model.findOneAndUpdate(
+      {
+        sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
+      },
+      { $set: { "sprints.$[].tasks.$[task].spendTime": spendTime } },
+      {
+        arrayFilters: [{ "task._id": taskId }],
+      }
+    );
+  }
 
-  //   return project;
-  //   // return this.model.findOneAndUpdate(
-  //   //   { "sprints.tasks._id": taskId },
-  //   //   { $push: { "sprints.$[outer].tasks": spendTime } },
-  //   //   {
-  //   //     arrayFilters: [{ "outer._id": taskId }],
-  //   //     safe: true,
-  //   //     multi: false,
-  //   //   }
-  //   // );
-  // }
-
-  async removeTask(projectId, sprintId, taskId) {
-    const project = await this.model.findById(projectId);
-    project.sprints.id(sprintId).tasks.remove(taskId);
-
-    project.save();
-    return project;
+  removeTask(taskId) {
+    return this.model.findOneAndUpdate(
+      {
+        sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
+      },
+      { $pull: { "sprints.$[].tasks": { _id: taskId } } }
+    );
   }
 }
 module.exports = ProjectRepository;

@@ -1,7 +1,9 @@
 const express = require("express");
 const ProjectController = require("../../controllers/projects");
-const projectsRouter = express.Router();
+const roles = require("../../middleware/roles.middleware");
 const auth = require("../../middleware/auth.middleware");
+
+const projectsRouter = express.Router();
 
 projectsRouter.post("/", auth, ProjectController.createProject);
 
@@ -12,6 +14,7 @@ projectsRouter.get("/:projectId", ProjectController.getProject);
 projectsRouter.post(
   "/sprints/:projectId",
   auth,
+
   ProjectController.createSprint
 );
 
@@ -21,13 +24,15 @@ projectsRouter.delete(
   ProjectController.removeSprint
 );
 
-projectsRouter.post("/tasks/:sprintId", auth, ProjectController.createTask);
+projectsRouter.post(
+  "/tasks/:sprintId",
+  auth,
+
+  ProjectController.createTask
+);
 
 projectsRouter.patch("/tasks/:taskId", auth, ProjectController.updateTaskTime);
 
-projectsRouter.delete(
-  "/tasks/:projectId,:sprintId,:taskId",
-  ProjectController.removeTask
-);
+projectsRouter.delete("/tasks/:taskId", auth, ProjectController.removeTask);
 
 module.exports = projectsRouter;

@@ -42,11 +42,9 @@ const getProject = async (req, res, next) => {
     }
     const result = await projectService.getProjectById(id);
 
-    if (!result) {
-      return res.status(404).send({ message: "No project with such ID" });
-    }
-
-    return res.status(HttpCode.OK).json(result);
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Project ${projectId} not found ` });
   } catch (e) {
     next(e);
   }
@@ -117,7 +115,7 @@ const createTask = async (req, res, next) => {
 
     return result
       ? res.status(200).json(result)
-      : res.status(404).json({ message: `Task ${sprintId} not found ` });
+      : res.status(404).json({ message: `Sprint ${sprintId} not found ` });
   } catch (e) {
     console.log(e);
     next(e);
@@ -134,7 +132,9 @@ const updateTaskTime = async (req, res, next) => {
 
     const result = await projectService.updateTaskTime(userId, taskId, body);
 
-    res.status(200).json(result);
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Task ${taskId} not found ` });
   } catch (e) {
     console.log(e);
     next(e);
@@ -143,12 +143,16 @@ const updateTaskTime = async (req, res, next) => {
 
 const removeTask = async (req, res, next) => {
   try {
-    const taskId = req.params.taskId;
-    console.log(taskId);
-    const result = await projectService.removeTask(req.params);
+    const {
+      params: { taskId },
+      user: { id: userId },
+    } = req;
+
+    const result = await projectService.removeTask(userId, taskId);
+
     return result
       ? res.status(200).json(result)
-      : res.status(404).json({ message: `Project ${taskId} not found ` });
+      : res.status(404).json({ message: `Task ${taskId} not found ` });
   } catch (e) {
     console.log(e);
     next(e);

@@ -1,3 +1,4 @@
+const projectsRouter = require("../api/projects/projects");
 const { ProjectRepository } = require("../repository");
 const { UsersRepository } = require("../repository");
 const { Repository } = require("../repository");
@@ -55,18 +56,12 @@ class ProjectService {
 
   async createNewSprint(userId, projectId, body) {
     try {
-      const updatedProject = await this.repositories.project.createNewSprint(
+      const result = await this.repositories.project.createNewSprint(
         projectId,
         body
       );
 
-      if (!updatedProject) {
-        return null;
-      }
-
-      const updatedUser = await this.repositories.user.findById(userId);
-
-      return updatedUser;
+      return this.checkResultAndGetUser(result, userId);
     } catch (e) {
       throw e;
     }
@@ -74,35 +69,21 @@ class ProjectService {
 
   async removeSprint(userId, sprintId) {
     try {
-      const updatedProject = await this.repositories.project.removeSprint(
-        sprintId
-      );
+      const result = await this.repositories.project.removeSprint(sprintId);
 
-      if (!updatedProject) {
-        return null;
-      }
-
-      const updatedUser = await this.repositories.user.findById(userId);
-
-      return updatedUser;
+      return this.checkResultAndGetUser(result, userId);
     } catch (e) {
       throw e;
     }
   }
 
   async createNewTask(userId, sprintId, body) {
-    const updatedProject = await this.repositories.project.createNewTask(
+    const result = await this.repositories.project.createNewTask(
       sprintId,
       body
     );
 
-    if (!updatedProject) {
-      return null;
-    }
-
-    const updatedUser = await this.repositories.user.findById(userId);
-
-    return updatedUser;
+    return this.checkResultAndGetUser(result, userId);
   }
 
   async updateTaskTime(userId, taskId, body) {
@@ -113,18 +94,23 @@ class ProjectService {
       spendTime
     );
 
-    return result;
+    return this.checkResultAndGetUser(result, userId);
   }
 
-  async removeTask(params) {
-    const { projectId, sprintId, taskId } = params;
-    console.log(projectId, sprintId, taskId);
-    const result = await this.repositories.project.removeTask(
-      projectId,
-      sprintId,
-      taskId
-    );
-    return result;
+  async removeTask(userId, taskId) {
+    const result = await this.repositories.project.removeTask(taskId);
+
+    return this.checkResultAndGetUser(result, userId);
+  }
+
+  async checkResultAndGetUser(result, userId) {
+    if (!result) {
+      return null;
+    }
+
+    const updatedUser = await this.repositories.user.findById(userId);
+
+    return updatedUser;
   }
 }
 
