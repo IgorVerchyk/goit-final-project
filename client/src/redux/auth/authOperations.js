@@ -3,8 +3,8 @@ import axios from 'axios';
 import { authActions } from './';
 import { fetchProjectsSuccess } from '../projects/projectsActions';
 
-// const baseURL = 'https://project-manager-goit20.herokuapp.com';
-const baseURL = 'http://localhost:3456/api/auth';
+const baseURL = 'https://project-manager-goit20.herokuapp.com';
+// const baseURL = 'http://localhost:3456/api/auth';
 
 const token = {
   set(token) {
@@ -21,12 +21,9 @@ const register = dataUser => async dispatch => {
   try {
     const { data } = await axios.post(`${baseURL}/registration`, dataUser);
 
-    // token.set(data.token);
-    dispatch(authActions.registerSuccess(data));
-    console.log('Пользователь зарегестрирован');
+    dispatch(authActions.registerSuccess(data.data));
   } catch (error) {
-    dispatch(authActions.registerError());
-    console.log('Пользователь НЕ зарегестрирован');
+    dispatch(authActions.registerError(error.response.data));
     console.error(error);
   }
 };
@@ -35,20 +32,18 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
+
     const { data } = await axios.post(`${baseURL}/login`, dataUser);
 
     const { projects, ...user } = data;
 
+
     token.set(data.token);
 
-    dispatch(fetchProjectsSuccess(projects));
-
-    dispatch(authActions.loginSuccess(user));
-
-    console.log('Пользователь вошел');
+    dispatch(authActions.loginSuccess(data));
   } catch (error) {
-    console.log('Пользователь НЕ вошел');
-    dispatch(authActions.loginError(error));
+    dispatch(authActions.loginError(error.response.data));
+    console.error(error);
   }
 };
 

@@ -6,6 +6,7 @@ export default function FormLabel({
   handleBlur,
   handleChange,
   errors,
+  touched,
   value,
   name,
   type,
@@ -13,11 +14,13 @@ export default function FormLabel({
 }) {
   const movePlaceholder = value => (value ? s.labelNameOnTop : s.labelName);
 
+  const isValid = errors[name] && touched[name];
+
   return (
     <label className={s.formLabel}>
       <span
         className={
-          errors[name]
+          isValid
             ? `${s.lableError} ${movePlaceholder(value)}`
             : `${s.lableNoError} ${movePlaceholder(value)}`
         }
@@ -25,16 +28,14 @@ export default function FormLabel({
         {labelText}
       </span>
       <input
-        className={
-          errors[name] ? `${s.inputError} ${s.formInput}` : s.formInput
-        }
+        className={isValid ? `${s.inputError} ${s.formInput}` : s.formInput}
         type={type}
         name={name}
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
       />
-      {errors[name] && <p className={s.isError}>{errors[name]}</p>}
+      {isValid && <p className={s.isError}>{errors[name]}</p>}
     </label>
   );
 }

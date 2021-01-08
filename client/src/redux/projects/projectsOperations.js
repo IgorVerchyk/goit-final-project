@@ -15,7 +15,7 @@ import {
   removeProjectError,
 } from './projectsActions';
 
-// const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects/';
+//const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects/';
 const baseURL = 'http://localhost:3456/api/projects';
 
 const fetchProjects = id => async dispatch => {
