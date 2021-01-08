@@ -42,9 +42,7 @@ const currentUser = createReducer(
       return payload;
     },
     [authActions.loginSuccess]: (state, { payload }) => payload,
-    [authActions.logoutSucces]: (state, action) =>
-      // (state = { name: null, email: null }),
-      (state = { password: null, email: null }),
+    [authActions.logoutSuccess]: (state, action) => ({}),
   },
 );
 
@@ -56,6 +54,7 @@ const isRegister = createReducer(false, {
 const isLogin = createReducer(false, {
   [authActions.isLogin]: (state, { payload }) => payload,
   [authActions.loginSuccess]: (state, { payload }) => true,
+  [authActions.logoutSuccess]: (state, { payload }) => false,
 });
 
 const token = createReducer(null, {
