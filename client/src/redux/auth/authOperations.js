@@ -19,10 +19,7 @@ const register = dataUser => async dispatch => {
   dispatch(authActions.registerRequest());
 
   try {
-    const { data } = await axios.post(
-      `${baseURL}/api/auth/registration`,
-      dataUser,
-    );
+    const { data } = await axios.post(`${baseURL}/registration`, dataUser);
 
     dispatch(authActions.registerSuccess(data.data));
   } catch (error) {
@@ -35,8 +32,11 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-    const { data } = await axios.post(`${baseURL}/api/auth/login`, dataUser);
-    console.log(data);
+
+    const { data } = await axios.post(`${baseURL}/login`, dataUser);
+
+    const { projects, ...user } = data;
+
 
     token.set(data.token);
 
