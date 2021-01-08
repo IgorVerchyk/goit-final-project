@@ -81,7 +81,7 @@ export default function ProjectEditor({ onClose }) {
           />
         </label>
 
-        <PrimaryBtn text={'Готово'} />
+        <PrimaryBtn text={'Готово'} typeBtn={'button'} />
         <p className={s.cansel} onClick={handleCanselingBtn}>
           Відміна
         </p>

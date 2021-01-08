@@ -1,14 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+
+import { authActions } from '../../../redux/auth';
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
-import { useHistory } from 'react-router-dom';
 
 import s from './FormSuccess.module.scss';
 
-export default function FormLoginSuccess({ title, link, textLogin }) {
+export default function FormLoginSuccess({
+  title,
+  textLogin = false,
+  textRegister = false,
+}) {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const changeIsRegister = useCallback(
+    status => dispatch(authActions.isRegister(status)),
+    [dispatch],
+  );
 
   const handleOnClick = () => {
+    changeIsRegister(false);
     history.replace('/login');
   };
 
@@ -31,12 +45,18 @@ export default function FormLoginSuccess({ title, link, textLogin }) {
           </>
         )}
 
-        {!textLogin && (
-          <PrimaryBtn
-            handleOnClick={handleOnClick}
-            text={'Увійти'}
-            classBtn={'loginLink'}
-          />
+        {textRegister && (
+          <>
+            <p className={s.text}>
+              На Ваш e-mail, було відправлено листа для підтвердження.
+            </p>
+            <PrimaryBtn
+              handleOnClick={handleOnClick}
+              text={'Увійти'}
+              classBtn={'loginLink'}
+              typeBtn={'button'}
+            />
+          </>
         )}
       </div>
     </div>
