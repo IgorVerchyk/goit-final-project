@@ -5,9 +5,9 @@ import ProjectsList from '../components/Projects/ProjectsList';
 import projectsOperations from '../redux/projects/projectsOperations';
 
 class Projects extends Component {
-  // componentDidMount() {
-  //   this.props.onFetchProjects();
-  // }
+  componentDidMount() {
+    this.props.onFetchProjects();
+  }
 
   render() {
     return (
@@ -19,7 +19,7 @@ class Projects extends Component {
 }
 
 const mapDispatchToProps = {
-  // onFetchProjects: projectsOperations.fetchProjects,
+  onFetchProjects: projectsOperations.fetchProjects,
 };
 
 export default connect(null, mapDispatchToProps)(Projects);

@@ -23,7 +23,6 @@ export default function ProjectsListItems({ projects, onRemove }) {
           <SingleProjectCard
             id={id}
             key={id}
-            s
             projectName={projectName}
             descr={descr}
             color={color}

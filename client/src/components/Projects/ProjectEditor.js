@@ -51,7 +51,6 @@ export default function ProjectEditor({ onClose }) {
     setProjectName('');
     setDescr('');
     setColor('');
-    dispatch(projectsOperations.cancelingProject());
   };
 
   return (

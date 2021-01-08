@@ -14,7 +14,7 @@ const removeProject = (state, action) => {
 
 const items = createReducer([], {
   [fetchProjectsSuccess]: (_, { payload }) => payload,
-  [addProjectSuccess]: (state, { payload }) => payload,
+  [addProjectSuccess]: (state, { payload }) => [...state, payload],
   [removeProjectSuccess]: removeProject,
 });
 
