@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { authOperations } from '../redux/auth';
+import { authActions } from '../redux/auth';
 
 import AuthenticationsBlock from '../components/AuthenticationsBlock/AuthenticationsBlock';
 import FormLogin from '../components/Forms/FormLogin/FormLogin';
@@ -13,25 +13,23 @@ export default function LoginView() {
   const isLogin = useSelector(state => state.auth.isLogin);
 
   const dispatch = useDispatch();
-  const onLogin = useCallback(
-    dataUser => dispatch(authOperations.login(dataUser)),
+
+  const changeIsLogin = useCallback(
+    status => dispatch(authActions.isLogin(status)),
     [dispatch],
   );
-
-  const submitForm = dataUser => {
-    onLogin(dataUser);
-  };
 
   if (isLogin) {
     setTimeout(() => {
       history.replace('/');
+      changeIsLogin(false);
     }, 1500);
   }
 
   return (
     <AuthenticationsBlock>
       {!isLogin ? (
-        <FormLogin submitForm={submitForm} />
+        <FormLogin />
       ) : (
         <FormSuccess title={'Вхід здійснено!'} textLogin={true} />
       )}

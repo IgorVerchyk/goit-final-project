@@ -4,14 +4,14 @@ import { authActions } from './';
 
 const baseURL = 'https://project-manager-goit20.herokuapp.com';
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = '';
-//   },
-// };
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
 
 const register = dataUser => async dispatch => {
   dispatch(authActions.registerRequest());
@@ -22,12 +22,9 @@ const register = dataUser => async dispatch => {
       dataUser,
     );
 
-    // token.set(data.token);
-    dispatch(authActions.registerSuccess(data));
-    console.log('Пользователь зарегестрирован');
+    dispatch(authActions.registerSuccess(data.data));
   } catch (error) {
-    dispatch(authActions.registerError());
-    console.log('Пользователь НЕ зарегестрирован');
+    dispatch(authActions.registerError(error.response.data));
     console.error(error);
   }
 };
@@ -36,15 +33,15 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-    console.log(dataUser);
     const { data } = await axios.post(`${baseURL}/api/auth/login`, dataUser);
+    console.log(data);
 
-    // token.set(data.token);
+    token.set(data.token);
+
     dispatch(authActions.loginSuccess(data));
-    console.log('Пользователь вошел');
   } catch (error) {
-    console.log('Пользователь НЕ вошел');
-    dispatch(authActions.loginError(error));
+    dispatch(authActions.loginError(error.response.data));
+    console.error(error);
   }
 };
 
@@ -66,6 +63,6 @@ const logout = () => async dispatch => {
 export default {
   register,
   login,
-  // token,
+  token,
   logout,
 };
