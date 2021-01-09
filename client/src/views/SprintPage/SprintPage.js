@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import projectsOperations from '../../redux/projects/projectsOperations';
 import styles from './SprintPage.module.scss';
 import SprintHeader from '../../components/Sprint/SprintHeader/SprintHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -9,7 +11,7 @@ import Modal from '../../components/Modal/Modal';
 import TaskAddForm from '../../components/Tasks/TaskAddForm/TaskAddForm';
 import SprintAddForm from '../../components/Sprint/SprintAddForm/SprintAddForm';
 
-export default function SprintPage() {
+function SprintPage({ onRemove }) {
   const [onModalAdd, setModalAdd] = useState(false);
   const [filter, setFilter] = useState('');
 
@@ -21,9 +23,6 @@ export default function SprintPage() {
     setModalAdd(!onModalAdd);
   };
 
-  const deleteTask = () => {
-    console.log('deleted');
-  };
   //////////валидация и отправка/////
   const changeSpentTime = () => {};
 
@@ -122,12 +121,13 @@ export default function SprintPage() {
         <ul className={styles.list}>
           {filtredTasks.map(task => (
             <TaskCard
+              id={task.id}
               key={task.id}
               title={task.title}
               scheduledTime={task.scheduledTime}
               spentTime={task.spentTime}
               spentAllTime={task.spentAllTime}
-              onDelete={deleteTask}
+              onDelete={() => onRemove(task.id)}
               changeSpentTime={changeSpentTime}
             />
           ))}
@@ -155,3 +155,9 @@ export default function SprintPage() {
     </section>
   );
 }
+
+const mapDispatchToProps = {
+  onRemove: projectsOperations.removeProject,
+};
+
+export default connect(null, mapDispatchToProps)(SprintPage);

@@ -55,8 +55,12 @@ export default function Task({
     }
   };
 
+  const handleClick = () => {
+    onDelete();
+  };
+
   return (
-    <li className={styles.el}>
+    <li id={id} className={styles.el}>
       <h2 className={styles.title}>{title}</h2>
       <div className={styles.scheduledBlock}>
         <p className={styles.scheduledText}>Заплановано годин</p>
@@ -78,7 +82,7 @@ export default function Task({
         <p className={styles.spentAllText}>Витрачено годин</p>
         <span className={styles.spentAllTime}>{spentAllTime}</span>
       </div>
-      <div className={styles.trashWrapper} onClick={onDelete}>
+      <div className={styles.trashWrapper} onClick={handleClick}>
         <svg
           width="20"
           height="20"

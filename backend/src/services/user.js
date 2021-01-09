@@ -16,13 +16,16 @@ class UserService {
     const verifyToken = nanoid();
     const { email } = body;
     try {
-      await this.emailService.sendEmail(verifyToken, email);
+      // await this.emailService.sendEmail(verifyToken, email);
       console.log(verifyToken);
+      const data = await this.repositories.users.create({
+        ...body,
+        verifyToken,
+      });
+      return data;
     } catch (e) {
-      // throw new ErrorHandler(503, e.message, "Service unavailable");
+      throw new ErrorHandler(503, e.message, "Service unavailable");
     }
-    const data = await this.repositories.users.create({ ...body, verifyToken });
-    return data;
   }
 
   async findByEmail(email) {
@@ -32,11 +35,9 @@ class UserService {
 
   async findById(id) {
     const data = await this.repositories.users.findById(id);
-    return data;
-  }
-
-  async getCurrentUser(id) {
-    const data = await this.repositories.users.getCurrentUser(id);
+    if (!data) {
+      return null;
+    }
     return data;
   }
 
