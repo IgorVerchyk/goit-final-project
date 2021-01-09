@@ -35,11 +35,9 @@ class UserService {
 
   async findById(id) {
     const data = await this.repositories.users.findById(id);
-    return data;
-  }
-
-  async getCurrentUser(id) {
-    const data = await this.repositories.users.getCurrentUser(id);
+    if (!data) {
+      return null;
+    }
     return data;
   }
 

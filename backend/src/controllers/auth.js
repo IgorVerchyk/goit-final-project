@@ -85,26 +85,26 @@ const token = async (req, res, next) => {
 };
 
 const logout = async (req, res, next) => {
-  const id = req.user.id;
-  await authService.logout(id);
-  return res.status(HttpCode.NO_CONTENT).json({
-    status: "success",
-    code: HttpCode.NO_CONTENT,
-  });
+  try {
+    const id = req.user.id;
+    await authService.logout(id);
+    return res.status(HttpCode.NO_CONTENT).json({
+      status: "success",
+      code: HttpCode.NO_CONTENT,
+    });
+  } catch (e) {
+    res.status(500).send({ message: "Something went wrong, please try again" });
+  }
 };
 
 const current = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const user = await userServise.getCurrentUser(userId);
-    if (user) {
-      return res.status(HttpCode.OK).json({
-        status: "success",
-        code: HttpCode.OK,
-        data: {
-          user,
-        },
-      });
+
+    const user = await userServise.findById(userId);
+
+    if (user && user.token) {
+      return res.status(HttpCode.OK).json(user);
     } else {
       return next({
         status: HttpCode.UNAUTHORIZED,
@@ -112,7 +112,7 @@ const current = async (req, res, next) => {
       });
     }
   } catch (e) {
-    next(e);
+    res.status(500).send({ message: "Something went wrong, please try again" });
   }
 };
 
