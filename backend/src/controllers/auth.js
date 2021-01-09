@@ -7,16 +7,16 @@ const authService = new AuthService();
 const tokenList = {};
 
 const reg = async (req, res, next) => {
-  const { email, password } = req.body;
-  const user = await userServise.findByEmail(email);
-  if (user) {
-    return next({
-      status: HttpCode.CONFLICT,
-      data: "Conflict",
-      message: "This email is already use",
-    });
-  }
   try {
+    const { email, password } = req.body;
+    const user = await userServise.findByEmail(email);
+    if (user) {
+      return next({
+        status: HttpCode.CONFLICT,
+        data: "Conflict",
+        message: "This email is already use",
+      });
+    }
     const newUser = await userServise.create({
       email,
       password,
@@ -40,22 +40,23 @@ const login = async (req, res, next) => {
   try {
     const result = await authService.login({ email, password });
 
-    if (result.token || result.refreshToken) {
-      const response = {
-        id: result.id,
-        token: result.token,
-        refreshToken: result.refreshToken,
-        projects: result.projects,
-        email: result.email,
-      };
-      tokenList[result.refreshToken] = response;
-
-      return res.status(HttpCode.OK).json(response);
+    if (!result) {
+      return next({
+        status: HttpCode.UNAUTHORIZED,
+        message: "Invalid creadentials",
+      });
     }
-    next({
-      status: HttpCode.UNAUTHORIZED,
-      message: "Invalid creadentials",
-    });
+
+    const response = {
+      id: result.id,
+      token: result.token,
+      refreshToken: result.refreshToken,
+      projects: result.projects,
+      email: result.email,
+    };
+    tokenList[result.refreshToken] = response;
+
+    return res.status(HttpCode.OK).json(response);
   } catch (e) {
     next(e);
   }

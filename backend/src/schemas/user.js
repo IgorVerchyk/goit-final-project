@@ -5,13 +5,6 @@ const gravatar = require("gravatar");
 
 const SALT_FACTOR = 6;
 
-// const projectSchema = new Schema({
-//   projectId: { type: String, require: true },
-//   isAdmin: { type: Boolean, default: true },
-//   title: { type: String, require: true },
-//   descr: { type: String, require: true },
-// });
-
 const userSchema = new Schema(
   {
     email: {
@@ -64,8 +57,8 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-userSchema.methods.validPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+userSchema.methods.validPassword = async function (password, userPassword) {
+  return bcrypt.compare(password, userPassword);
 };
 
 const User = mongoose.model("user", userSchema);
