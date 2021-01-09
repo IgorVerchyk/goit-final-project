@@ -4,7 +4,7 @@ const guard = require("../../helpers/guard");
 const auth = require("../../middleware/auth.middleware");
 const controllerUsers = require("../../controllers/auth");
 
-router.get("/current", controllerUsers.current);
+router.get("/current", auth, controllerUsers.current);
 router.get("/verify/:token", controllerUsers.verify);
 router.post("/registration", controllerUsers.reg);
 router.post("/login", controllerUsers.login);

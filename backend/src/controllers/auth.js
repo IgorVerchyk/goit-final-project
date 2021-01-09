@@ -7,16 +7,16 @@ const authService = new AuthService();
 const tokenList = {};
 
 const reg = async (req, res, next) => {
-  const { email, password } = req.body;
-  const user = await userServise.findByEmail(email);
-  if (user) {
-    return next({
-      status: HttpCode.CONFLICT,
-      data: "Conflict",
-      message: "This email is already use",
-    });
-  }
   try {
+    const { email, password } = req.body;
+    const user = await userServise.findByEmail(email);
+    if (user) {
+      return next({
+        status: HttpCode.CONFLICT,
+        data: "Conflict",
+        message: "This email is already use",
+      });
+    }
     const newUser = await userServise.create({
       email,
       password,
@@ -40,22 +40,23 @@ const login = async (req, res, next) => {
   try {
     const result = await authService.login({ email, password });
 
-    if (result.token || result.refreshToken) {
-      const response = {
-        id: result.id,
-        token: result.token,
-        refreshToken: result.refreshToken,
-        projects: result.projects,
-        email: result.email,
-      };
-      tokenList[result.refreshToken] = response;
-
-      return res.status(HttpCode.OK).json(response);
+    if (!result) {
+      return next({
+        status: HttpCode.UNAUTHORIZED,
+        message: "Invalid creadentials",
+      });
     }
-    next({
-      status: HttpCode.UNAUTHORIZED,
-      message: "Invalid creadentials",
-    });
+
+    const response = {
+      id: result.id,
+      token: result.token,
+      refreshToken: result.refreshToken,
+      projects: result.projects,
+      email: result.email,
+    };
+    tokenList[result.refreshToken] = response;
+
+    return res.status(HttpCode.OK).json(response);
   } catch (e) {
     next(e);
   }
@@ -84,26 +85,26 @@ const token = async (req, res, next) => {
 };
 
 const logout = async (req, res, next) => {
-  const id = req.user.id;
-  await authService.logout(id);
-  return res.status(HttpCode.NO_CONTENT).json({
-    status: "success",
-    code: HttpCode.NO_CONTENT,
-  });
+  try {
+    const id = req.user.id;
+    await authService.logout(id);
+    return res.status(HttpCode.NO_CONTENT).json({
+      status: "success",
+      code: HttpCode.NO_CONTENT,
+    });
+  } catch (e) {
+    res.status(500).send({ message: "Something went wrong, please try again" });
+  }
 };
 
 const current = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    const user = await userServise.getCurrentUser(userId);
-    if (user) {
-      return res.status(HttpCode.OK).json({
-        status: "success",
-        code: HttpCode.OK,
-        data: {
-          user,
-        },
-      });
+
+    const user = await userServise.findById(userId);
+
+    if (user && user.token) {
+      return res.status(HttpCode.OK).json(user);
     } else {
       return next({
         status: HttpCode.UNAUTHORIZED,
@@ -111,7 +112,7 @@ const current = async (req, res, next) => {
       });
     }
   } catch (e) {
-    next(e);
+    res.status(500).send({ message: "Something went wrong, please try again" });
   }
 };
 
