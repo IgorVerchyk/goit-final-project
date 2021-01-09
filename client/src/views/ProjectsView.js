@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import ProjectsList from '../components/Projects/ProjectsList';
-import projectsOperations from '../redux/projects/projectsOperations';
 
 class Projects extends Component {
-  // componentDidMount() {
-  //   this.props.onFetchProjects();
-  // }
-
   render() {
     return (
       <>
@@ -18,8 +13,6 @@ class Projects extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  // onFetchProjects: projectsOperations.fetchProjects,
-};
+const mapDispatchToProps = {};
 
 export default connect(null, mapDispatchToProps)(Projects);

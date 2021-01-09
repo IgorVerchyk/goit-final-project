@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ProjectDetails from '../components/ProjectDetails/ProjectDetails';
+import Project from '../components/Projects/Project';
 
-export default function RegisterView() {
-  return <ProjectDetails />;
+export default function RegisterView(id) {
+  return <Project id={id} />;
 }
