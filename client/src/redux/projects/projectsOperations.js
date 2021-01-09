@@ -15,11 +15,11 @@ import {
 const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
 // const baseURL = 'http://localhost:3456/api/projects';
 
-const fetchProjects = id => async dispatch => {
+const fetchProjects = () => async dispatch => {
   dispatch(fetchProjectsRequest());
 
   try {
-    const { data } = await axios.get(`${baseURL}/:${id}`);
+    const { data } = await axios.get(`${baseURL}/`);
     dispatch(fetchProjectsSuccess(data));
   } catch (error) {
     dispatch(fetchProjectsError(error.message));
@@ -47,7 +47,7 @@ const removeProject = id => async dispatch => {
   dispatch(removeProjectRequest());
 
   await axios
-    .delete(`${baseURL}/projects/${id}`)
+    .delete(`${baseURL}/${id}`)
     .then(() => dispatch(removeProjectSuccess(id)))
     .catch(error => dispatch(removeProjectError(error.message)));
 };
