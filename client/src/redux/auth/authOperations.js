@@ -1,8 +1,9 @@
 import axios from 'axios';
 
+
 import { authActions } from './';
 
-const baseURL = 'https://project-manager-goit20.herokuapp.com';
+const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
 // const baseURL = 'http://localhost:3456/api/auth';
 
 const token = {
@@ -32,11 +33,9 @@ const login = dataUser => async dispatch => {
 
   try {
 
-
     const { data } = await axios.post(`${baseURL}/login`, dataUser);
 
     const { projects, ...user } = data;
-
 
     token.set(data.token);
 
