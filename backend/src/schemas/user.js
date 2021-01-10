@@ -12,8 +12,8 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
       validate(value) {
-        const re = /\S+@\S+\.\S+/;
-        return re.test(String(value).toLocaleLowerCase());
+        const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        return re.test(String(value));
       },
     },
     password: {
@@ -43,7 +43,7 @@ const userSchema = new Schema(
       default: false,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 userSchema.pre("save", async function (next) {
@@ -52,7 +52,7 @@ userSchema.pre("save", async function (next) {
   }
   this.password = await bcrypt.hash(
     this.password,
-    bcrypt.genSaltSync(SALT_FACTOR)
+    bcrypt.genSaltSync(SALT_FACTOR),
   );
   next();
 });
