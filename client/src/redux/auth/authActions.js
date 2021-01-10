@@ -15,10 +15,10 @@ const logoutRequest = createAction('auth/logoutRequest');
 const logoutSuccess = createAction('auth/logoutSuccess');
 const logoutError = createAction('auth/logoutError');
 
-const currentUserRequest = createAction('auth/logoutRequest');
-const currentUserSuccess = createAction('auth/logoutSuccess');
-const currentUserError = createAction('auth/logoutError');
 
+const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
+const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
+const getCurrentUserError = createAction('auth/getCurrentUserError');
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   registerRequest,
@@ -36,7 +36,9 @@ export default {
   logoutSuccess,
   logoutError,
 
-  currentUserRequest,
-  currentUserSuccess,
-  currentUserError,
+
+  getCurrentUserRequest,
+  getCurrentUserSuccess,
+  getCurrentUserError,
+
 };
