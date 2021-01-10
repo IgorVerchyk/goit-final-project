@@ -2,8 +2,6 @@ import axios from 'axios';
 
 import { authActions } from './';
 
-import { fetchProjectsSuccess } from '../projects/projectsActions';
-
 const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
 // const baseURL = 'http://localhost:3456/api/auth';
 
