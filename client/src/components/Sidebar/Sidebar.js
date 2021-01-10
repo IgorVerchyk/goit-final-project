@@ -6,7 +6,7 @@ import styles from './Sidebar.module.scss';
 
 export default function Sidebar({ type, list, backTo, children }) {
   const [onModalAdd, setModalAdd] = useState(false);
-
+  console.log(list);
   const setShowModal = () => {
     setModalAdd(!onModalAdd);
   };

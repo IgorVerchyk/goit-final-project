@@ -78,7 +78,7 @@ const getCurrent = () => async (dispatch, getState) => {
     return;
   } catch (error) {
     console.log(error);
-    console.log('logout -');
+    console.log('current -');
 
     dispatch(authActions.currentUserError(error.message));
   }

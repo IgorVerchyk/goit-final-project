@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+
+import Sidebar from '../Sidebar/Sidebar';
 
 import SectionScroll from '../SectionScroll/SectionScroll';
 import SprintCard from '../Sprint/SprintCard';
 
 import s from './Projects.module.scss';
-
 
 export default function Project(props) {
   const projectId = props.id.location.state.id;
@@ -15,13 +15,20 @@ export default function Project(props) {
     state.auth.currentUser.projects.find(project => project._id === projectId),
   );
   const allProjects = useSelector(state => state.auth.currentUser.projects);
+  const type = 'проект';
+  const backTo = '/';
+
   return (
     <div>
-      <SectionScroll arr={[...allProjects]} />
+      <Sidebar
+        type={type}
+        list={[...allProjects]}
+        backTo={backTo}
+        children={SectionScroll}
+      />
       <ul className={s.scrollList}>
         {project.sprints.map(sprint => (
           <SprintCard key={sprint.objectId} {...sprint} />
-
         ))}
       </ul>
     </div>
