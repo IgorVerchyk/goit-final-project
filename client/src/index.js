@@ -11,8 +11,6 @@ import './helpers/js/toastrSetting';
 import 'modern-normalize/modern-normalize.css';
 import './main.scss';
 
-console.log(store.getState());
-
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>

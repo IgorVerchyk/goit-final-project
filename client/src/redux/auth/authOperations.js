@@ -60,13 +60,11 @@ const logout = () => async dispatch => {
   }
 };
 
-
 const getCurrentUser = () => async (dispatch, getState) => {
   try {
     const {
       auth: { token: existingToken },
     } = getState();
-    console.log(existingToken);
 
     if (existingToken) {
       dispatch(authActions.getCurrentUserRequest());
@@ -89,7 +87,6 @@ const getCurrentUser = () => async (dispatch, getState) => {
   } catch (e) {
     console.log(e);
     dispatch(authActions.getCurrentUserError(e));
-
   }
 };
 
@@ -101,5 +98,4 @@ export default {
   logout,
 
   getCurrentUser,
-
 };

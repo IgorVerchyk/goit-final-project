@@ -32,6 +32,7 @@
 }
 
 .projectTitle {
+  position: absolute;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
@@ -47,27 +48,27 @@
   &:hover {
     cursor: pointer;
   }
-  .addPeople {
-    position: absolute;
-    width: 147px;
-    height: 22px;
-    left: 50px;
-    top: 189px;
+}
+.addPeople {
+  position: absolute;
+  width: 147px;
+  height: 22px;
+  left: 50px;
+  top: 189px;
 
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    /* identical to box height */
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
 
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.04em;
-    text-decoration-line: underline;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  text-decoration-line: underline;
 
-    color: #181c27;
-  }
+  color: #181c27;
 }
 .editTitle {
   position: absolute;
@@ -85,7 +86,6 @@
     width: 282px;
   }
   .projectTitle {
-    position: absolute;
     width: 120px;
     height: 32px;
     left: 20px;
@@ -98,7 +98,6 @@
     width: 428px;
   }
   .projectTitle {
-    position: absolute;
     left: 276px;
     top: 120px;
     font-size: 36px;
