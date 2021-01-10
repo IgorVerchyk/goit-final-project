@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { useSelector } from 'react-redux';
-import projectOperations from '../../redux/projects/projectsOperations';
+import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { getAllProjects } from '../../redux/projects/projectsSelectors';
+import projectsOperations from '../../redux/projects/projectsOperations';
 
 import SingleProjectCard from '../SingleProjectСard/SingleProjectCard.js';
 import ProjectEditor from './ProjectEditor';
@@ -8,15 +9,15 @@ import Modal from '../Modal/Modal';
 
 import s from './Projects.module.scss';
 
-const onRemoveContext = React.createContext(projectOperations.removeProject());
+// const onRemoveContext = React.createContext(projectOperations.removeProject());
 
-export default function ProjectsList() {
+function ProjectsList({ projects, onRemove }) {
   const [isModal, setisModal] = useState(false);
 
-  const onRemove = useContext(onRemoveContext);
+  // const onRemove = useContext(onRemoveContext);
 
-  const projects = useSelector(state => state.auth.currentUser.projects);
-
+  // const projects = useSelector(state => state.auth.currentUser.projects);
+  console.log(projects);
   const toggleModal = () => {
     const toggledIsOpen = isModal ? false : true;
     setisModal(toggledIsOpen);
@@ -30,7 +31,6 @@ export default function ProjectsList() {
           <SingleProjectCard
             id={id}
             key={id}
-            s
             projectName={projectName}
             descr={descr}
             color={color}
@@ -55,3 +55,12 @@ export default function ProjectsList() {
     </section>
   );
 }
+
+const mapStateToProps = state => ({
+  projects: getAllProjects(state),
+});
+const mapDispatchToProps = {
+  onRemove: projectsOperations.removeProject,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsList);
