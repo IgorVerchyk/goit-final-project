@@ -18,6 +18,10 @@ class UsersRepository {
     return result;
   }
 
+  async findByToken(token) {
+    return await this.model.findOne({ token: token });
+  }
+
   async create(body) {
     const user = new this.model(body);
     return user.save();

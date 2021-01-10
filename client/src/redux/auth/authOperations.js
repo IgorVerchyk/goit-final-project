@@ -3,7 +3,7 @@ import axios from 'axios';
 import { authActions } from './';
 
 const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
-// const baseURL = 'http://localhost:3456/api/auth';
+//const baseURL = 'http://localhost:3001/api/auth';
 
 const token = {
   set(token) {
@@ -60,13 +60,11 @@ const logout = () => async dispatch => {
   }
 };
 
-
 const getCurrentUser = () => async (dispatch, getState) => {
   try {
     const {
       auth: { token: existingToken },
     } = getState();
-    console.log(existingToken);
 
     if (existingToken) {
       dispatch(authActions.getCurrentUserRequest());
@@ -89,7 +87,6 @@ const getCurrentUser = () => async (dispatch, getState) => {
   } catch (e) {
     console.log(e);
     dispatch(authActions.getCurrentUserError(e));
-
   }
 };
 
@@ -101,5 +98,4 @@ export default {
   logout,
 
   getCurrentUser,
-
 };
