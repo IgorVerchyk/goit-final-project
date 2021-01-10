@@ -24,11 +24,12 @@ module.exports = async (req, res, next) => {
 
       const user = await userRepo.findById(userId);
 
-      if (project.admins.includes(user.email)) {
-        return next();
-      }
+      // !!delete slashes after schema update!!
+      // if (project.admins.includes(user.email)) {
+      //   return next();
+      // }
 
-      return res.send(404).send({
+      return res.status(404).send({
         message: "You don't have permission",
       });
     }
@@ -36,22 +37,24 @@ module.exports = async (req, res, next) => {
       project = await projectRepo.getBySprintId(sprintId);
 
       if (project.owner.toString() === userId) {
-        //Checks whether the user is the owner of project
+        //Checks whether the user is the owner of project - !!delete slashes after schema update!!
         return next();
       }
-
-      console.log(
-        project.collaborators.includes(user.email),
-        project.admins.includes(user.email)
-      );
 
       const user = await userRepo.findById(userId);
 
-      if (project.admins.includes(user.email)) {
+      // Enables tasks creation via sprintId
+      console.log(project.colaborators.includes(user.email));
+      if (req.method === "POST" && project.collaborators.includes(user.email)) {
         return next();
       }
 
-      return res.send(404).send({
+      // !!delete slashes after schema update!!
+      // if (project.admins.includes(user.email)) {
+      //   return next();
+      // }
+
+      return res.status(404).send({
         message: "You don't have permission",
       });
     }
@@ -66,13 +69,13 @@ module.exports = async (req, res, next) => {
       const user = await userRepo.findById(userId);
 
       if (
-        project.collaborators.includes(user.email) ||
-        project.admins.includes(user.email)
+        project.colaborators.includes(user.email)
+        // || project.admins.includes(user.email) - !!delete slashes after schema update!!
       ) {
         return next();
       }
 
-      return res.send(404).send({
+      return res.status(404).send({
         message: "You don't have permission",
       });
     }

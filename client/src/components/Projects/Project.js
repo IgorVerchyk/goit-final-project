@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import SectionScroll from '../SectionScroll/SectionScroll';
 import SprintCard from '../Sprint/SprintCard';
 
 import s from './Projects.module.scss';
+
 
 export default function Project(props) {
   const projectId = props.id.location.state.id;
@@ -19,6 +21,7 @@ export default function Project(props) {
       <ul className={s.scrollList}>
         {project.sprints.map(sprint => (
           <SprintCard key={sprint.objectId} {...sprint} />
+
         ))}
       </ul>
     </div>
