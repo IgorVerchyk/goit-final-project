@@ -4,7 +4,7 @@ require("dotenv").config();
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 module.exports = (req, res, next) => {
-  console.log(req.headers.authorization);
+  console.log("middleware", req.headers.authorization);
   if (req.method === "OPTIONS") {
     return next();
   }

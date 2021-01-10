@@ -99,12 +99,14 @@ const logout = async (req, res, next) => {
 
 const current = async (req, res, next) => {
   try {
-    const userId = req.user.id;
+    const token = req.headers.authorization.split(" ")[1];
+    console.log(token);
 
-    const user = await userServise.findById(userId);
-
+    const user = await userServise.current(token);
+    const result = await userServise.findById(user.id);
+    console.log(result);
     if (user && user.token) {
-      return res.status(HttpCode.OK).json(user);
+      return res.status(HttpCode.OK).json(result);
     } else {
       return next({
         status: HttpCode.UNAUTHORIZED,

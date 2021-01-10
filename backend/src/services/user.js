@@ -50,6 +50,15 @@ class UserService {
     }
     return false;
   }
+
+  async current(token) {
+    const user = await this.repositories.users.findByToken(token);
+    console.log(user);
+    if (!user) {
+      return null;
+    }
+    return user;
+  }
 }
 
 module.exports = UserService;
