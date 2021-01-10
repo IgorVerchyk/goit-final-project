@@ -6,13 +6,13 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import AppLayout from './AppLayout';
 
-// import { authOperations } from '../redux/auth/';
+import { authOperations } from '../redux/auth/';
 
 import routes from '../routes';
 
 class App extends Component {
   componentDidMount() {
-    // this.props.onGetCurrentUser();
+    this.props.onGetCurrentUser();
   }
 
   render() {
@@ -37,5 +37,5 @@ class App extends Component {
 }
 
 export default connect(null, {
-  // onGetCurrentUser: authOperations.getCurrentUser,
+  onGetCurrentUser: authOperations.getCurrentUser,
 })(App);
