@@ -42,6 +42,14 @@ const routes = [
     private: true,
     restricted: false,
   },
+  {
+    path: '/unautorised',
+    label: 'Unautorised',
+    exact: true,
+    component: lazy(() => import('./views/UnautorisedView')),
+    private: false,
+    restricted: false,
+  },
 ];
 
 export default routes;
