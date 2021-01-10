@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
