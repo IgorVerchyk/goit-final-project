@@ -1,7 +1,5 @@
-import React, { Component, Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import AppLayout from './AppLayout';
@@ -9,6 +7,7 @@ import AppLayout from './AppLayout';
 import { authOperations } from '../redux/auth/';
 
 import routes from '../routes';
+
 
 class App extends Component {
   componentDidMount() {
@@ -39,3 +38,4 @@ class App extends Component {
 export default connect(null, {
   onGetCurrentUser: authOperations.getCurrentUser,
 })(App);
+

@@ -60,6 +60,7 @@ const logout = () => async dispatch => {
   }
 };
 
+
 const getCurrentUser = () => async (dispatch, getState) => {
   try {
     const {
@@ -88,6 +89,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
   } catch (e) {
     console.log(e);
     dispatch(authActions.getCurrentUserError(e));
+
   }
 };
 
@@ -97,5 +99,7 @@ export default {
   login,
   token,
   logout,
+
   getCurrentUser,
+
 };

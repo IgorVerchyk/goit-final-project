@@ -1,28 +1,34 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+
+import Sidebar from '../Sidebar/Sidebar';
 
 import SectionScroll from '../SectionScroll/SectionScroll';
 import SprintCard from '../Sprint/SprintCard';
 
 import s from './Projects.module.scss';
 
-export default function Project(id) {
-  const { projectId } = useParams();
+export default function Project(props) {
+  const projectId = props.id.location.state.id;
 
-  const projects = useSelector(state => state.projects.items);
-  const sprints = projects.find(item => item.id === projectId).sprints;
-  console.log(sprints);
+  const project = useSelector(state =>
+    state.auth.currentUser.projects.find(project => project._id === projectId),
+  );
+  const allProjects = useSelector(state => state.auth.currentUser.projects);
+  const type = 'проект';
+  const backTo = '/';
+
   return (
     <div>
-      {/* <SectionScroll /> */}
+      <Sidebar
+        type={type}
+        list={[...allProjects]}
+        backTo={backTo}
+        children={SectionScroll}
+      />
       <ul className={s.scrollList}>
-        {sprints.map(sprint => (
-          <SprintCard
-            routeTo={`/projects/${projectId}/${sprint.id}`}
-            key={sprint.id}
-            {...sprint}
-          />
+        {project.sprints.map(sprint => (
+          <SprintCard key={sprint.objectId} {...sprint} />
         ))}
       </ul>
     </div>
