@@ -8,27 +8,34 @@ import { authOperations } from '../redux/auth/';
 
 import routes from '../routes';
 
-function App() {
-  useEffect(() => {
-    authOperations.getCurrent();
-  });
-  return (
-    <BrowserRouter>
-      <AppLayout>
-        <Suspense fallback={<h1>Loading...</h1>}>
-          <Switch>
-            {routes.map(route =>
-              route.private ? (
-                <PrivateRoute key={route.label} {...route} />
-              ) : (
-                <PublicRoute key={route.label} {...route} />
-              ),
-            )}
-          </Switch>
-        </Suspense>
-      </AppLayout>
-    </BrowserRouter>
-  );
+
+class App extends Component {
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <AppLayout>
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Switch>
+              {routes.map(route =>
+                route.private ? (
+                  <PrivateRoute key={route.label} {...route} />
+                ) : (
+                  <PublicRoute key={route.label} {...route} />
+                ),
+              )}
+            </Switch>
+          </Suspense>
+        </AppLayout>
+      </BrowserRouter>
+    );
+  }
 }
 
-export default App;
+export default connect(null, {
+  onGetCurrentUser: authOperations.getCurrentUser,
+})(App);
+

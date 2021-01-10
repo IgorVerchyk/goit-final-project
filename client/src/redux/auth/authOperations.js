@@ -60,27 +60,36 @@ const logout = () => async dispatch => {
   }
 };
 
-const getCurrent = () => async (dispatch, getState) => {
-  const {
-    auth: { token: persistedToken },
-  } = getState();
 
-  if (!persistedToken) {
-    return;
-  }
-
-  token.set(persistedToken);
-  dispatch(authActions.currentUserRequest());
+const getCurrentUser = () => async (dispatch, getState) => {
   try {
-    await axios.post(`${baseURL}/current`);
-    console.log('current');
-    dispatch(authActions.currentUserSuccess());
-    return;
-  } catch (error) {
-    console.log(error);
-    console.log('current -');
+    const {
+      auth: { token: existingToken },
+    } = getState();
+    console.log(existingToken);
 
-    dispatch(authActions.currentUserError(error.message));
+    if (existingToken) {
+      dispatch(authActions.getCurrentUserRequest());
+
+      await token.set(existingToken);
+
+      const { data } = await axios.get(`${baseURL}/current`);
+
+      if (!data) {
+        await token.unset();
+
+        dispatch(authActions.getCurrentUserError());
+        return;
+      }
+
+      console.log(data);
+
+      dispatch(authActions.getCurrentUserSuccess(data));
+    }
+  } catch (e) {
+    console.log(e);
+    dispatch(authActions.getCurrentUserError(e));
+
   }
 };
 
@@ -90,5 +99,7 @@ export default {
   login,
   token,
   logout,
-  getCurrent,
+
+  getCurrentUser,
+
 };
