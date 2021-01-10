@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 import { authActions } from './';
+
 import { fetchProjectsSuccess } from '../projects/projectsActions';
 
-const baseURL = 'https://project-manager-goit20.herokuapp.com';
+const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
 // const baseURL = 'http://localhost:3456/api/auth';
 
 const token = {
@@ -32,11 +33,9 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-
     const { data } = await axios.post(`${baseURL}/login`, dataUser);
 
     const { projects, ...user } = data;
-
 
     token.set(data.token);
 
@@ -63,10 +62,35 @@ const logout = () => async dispatch => {
   }
 };
 
+const getCurrent = () => async (dispatch, getState) => {
+  const {
+    auth: { token: persistedToken },
+  } = getState();
+
+  if (!persistedToken) {
+    return;
+  }
+
+  token.set(persistedToken);
+  dispatch(authActions.currentUserRequest());
+  try {
+    await axios.post(`${baseURL}/current`);
+    console.log('current');
+    dispatch(authActions.currentUserSuccess());
+    return;
+  } catch (error) {
+    console.log(error);
+    console.log('logout -');
+
+    dispatch(authActions.currentUserError(error.message));
+  }
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   register,
   login,
   token,
   logout,
+  getCurrent,
 };

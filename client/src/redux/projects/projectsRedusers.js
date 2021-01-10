@@ -6,6 +6,7 @@ import {
   fetchProjectsError,
   addProjectSuccess,
   cancelingProjectSuccess,
+  removeProjectRequest,
   removeProjectSuccess,
 } from './projectsActions';
 

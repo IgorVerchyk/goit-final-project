@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 import {
   addProjectRequest,
@@ -15,8 +16,8 @@ import {
   removeProjectError,
 } from './projectsActions';
 
-//const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects/';
-const baseURL = 'http://localhost:3456/api/projects';
+const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
+//const baseURL = 'http://localhost:3456/api/projects';
 
 const fetchProjects = id => async dispatch => {
   dispatch(fetchProjectsRequest());
@@ -30,6 +31,12 @@ const fetchProjects = id => async dispatch => {
 };
 
 const addProject = ({ projectName, descr, color }) => async dispatch => {
+  // const header = {
+  //   headers: {
+  //     authorization: `Bearer ${token}`,
+  //   },
+  // };
+  // console.log(header);
   dispatch(addProjectRequest());
 
   try {
@@ -61,7 +68,7 @@ const cancelingProject = () => async dispatch => {
 
 const removeProject = id => async dispatch => {
   console.log('remove operations');
-  dispatch(removeProjectRequest());
+  dispatch(removeProjectRequest(id));
 
   const { data } = await axios.delete(`${baseURL}/${id}`);
 
