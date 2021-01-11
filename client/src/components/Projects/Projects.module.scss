@@ -19,6 +19,12 @@
   position: absolute;
 }
 
+.addPeopleBlock {
+  position: absolute;
+  left: 15%;
+  top: 0%;
+}
+
 .list {
   position: relative;
   display: flex;
@@ -51,6 +57,7 @@
 }
 .addPeople {
   position: absolute;
+  cursor: pointer;
   width: 147px;
   height: 22px;
   left: 50px;

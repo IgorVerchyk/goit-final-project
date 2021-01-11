@@ -50,10 +50,12 @@ export default function Project(props) {
           />
         </svg>
       </div>
-      <div>
+      <div className={s.addPeopleBlock}>
         {!isModal ? (
           <>
-            <p className={s.addPeople}>Додати людей</p>
+            <p className={s.addPeople} onClick={toggleModal}>
+              Додати людей
+            </p>
             <div className={s.addPeopleIcon}>
               <svg
                 width="20"

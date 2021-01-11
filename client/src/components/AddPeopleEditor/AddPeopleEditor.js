@@ -40,16 +40,16 @@ export default function AddPeopleEditor({ onClose }) {
 
   return (
     <>
-      <h2 className={s.title}>Додати людину</h2>
+      <h2 className={s.title}> Додати людину</h2>
       <form className={s.form} onSubmit={handleSubmit}>
-        <label htmlFor="projectName" className={s.formLabel}>
-          Назва проекту*
+        <label htmlFor="email" className={s.formLabel}>
+          Введіть адресу електронної пошти:
           <br />
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={handleChangeEmail}
-            name="projectName"
+            name="email"
             className={!errorEmail ? s.formInput : s.error}
           />
         </label>

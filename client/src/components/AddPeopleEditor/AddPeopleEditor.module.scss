@@ -1,19 +1,17 @@
-@import "../../helpers/scss/mixin.scss";
-@import "../../helpers/scss/vars.module.scss";
+@import '../../helpers/scss/mixin.scss';
+@import '../../helpers/scss/vars.module.scss';
 
-.title{
-    font-size: 26px;
-    font-weight: 500;
-    margin-bottom: 50px;
+.title {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 50px;
 }
- 
-    
+
 button {
   display: block;
-  margin: 0 auto ;
+  margin: 0 auto;
   margin-bottom: 30px;
-  }
-  
+}
 
 .labelName {
   position: absolute;
@@ -24,11 +22,11 @@ button {
   transition: all 0.25s linear;
 }
 
-.labelNameOnTop {
-  composes: labelName;
-  top: -17px;
-  left: 0;
-}
+// .labelNameOnTop {
+//   composes: labelName;
+//   top: -17px;
+//   left: 0;
+// }
 
 .formInput {
   width: 100%;
@@ -50,15 +48,15 @@ button {
   }
 }
 
-.formSelect{
+.formSelect {
   width: 30%;
-  padding: 10px;  
+  padding: 10px;
   border: none;
   border-bottom: 1px solid rgba($text-color, 0.2);
   margin-bottom: 50px;
 }
 
-.error{
+.error {
   width: 100%;
   padding: 10px;
   display: block;
@@ -68,9 +66,8 @@ button {
   transition: border-bottom 0.25s linear;
   outline: none;
   margin-bottom: 50px;
-
 }
-.cansel{
+.cansel {
   cursor: pointer;
   text-decoration: underline;
   text-align: center;
