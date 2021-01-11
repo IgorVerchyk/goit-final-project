@@ -58,7 +58,11 @@ export default function Project(props) {
       <p className={s.addPeople}>додати людей</p>
       <ul className={s.list}>
         {project.sprints.map(sprint => (
-          <SprintCard key={sprint.objectId} {...sprint} />
+          <SprintCard
+            routeTo={`/projects/${projectId}/${sprint.id}`}
+            key={sprint.objectId}
+            {...sprint}
+          />
         ))}
       </ul>
     </div>
