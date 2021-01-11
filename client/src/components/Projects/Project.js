@@ -47,7 +47,11 @@ export default function Project(props) {
 
       <ul className={s.list}>
         {project.sprints.map(sprint => (
-          <SprintCard key={sprint.id} {...sprint} />
+          <SprintCard
+            routeTo={`/projects/${projectId}/${sprint.id}`}
+            key={sprint.objectId}
+            {...sprint}
+          />
         ))}
       </ul>
     </div>
