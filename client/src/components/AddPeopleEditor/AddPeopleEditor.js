@@ -1,39 +1,34 @@
-import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
 
-import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
 
 import s from './AddPeopleEditor.module.scss';
 
-export default function AddPeopleEditor({ onClose }) {
+export default function AddPeopleEditor({ onClose, project}) {
   const [email, setEmail] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
 
-  const dispatch = useDispatch();
-
+  
   const handleChangeEmail = e => {
-    setEmail(e.currentTarget.value);
+    setEmail(e.target.value);
   };
 
-  const handleSubmit = useCallback(
-    e => {
-      e.preventDefault();
+  
 
-      if (email === '') {
-        setErrorEmail(true);
-        return;
-      }
-
-      dispatch(projectsOperations.addProject({ email }));
-
-      onClose();
-    },
-    [dispatch, email, onClose],
-  );
+  const handleSubmit= e => {
+    e.preventDefault();
+    if (email === '') {
+      setErrorEmail(true);
+      return;
+    }
+    console.log(project.colaborators);
+    console.log(email);
+    project.colaborators.push(email);
+    
+    onClose();
+  };
 
   const handleCanselingBtn = e => {
-    console.log(e);
     onClose();
     setEmail('');
   };

@@ -10,8 +10,7 @@ export default function Sidebar({ type, list, backTo, children }) {
     const toggledIsOpen = isModal ? false : true;
     setisModal(toggledIsOpen);
   };
-  console.log(list);
-  console.log(children);
+
   const Children = children;
 
   return (

@@ -22,6 +22,7 @@ export default function Project(props) {
   const project = useSelector(state =>
     state.auth.currentUser.projects.find(project => project._id === projectId),
   );
+
   const allProjects = useSelector(state => state.auth.currentUser.projects);
   const type = 'проект';
   const backTo = '/';
@@ -74,7 +75,7 @@ export default function Project(props) {
         ) : (
           <Modal
             closeModal={toggleModal}
-            children={<AddPeopleEditor onClose={toggleModal} />}
+            children={<AddPeopleEditor onClose={toggleModal} project={project} />}
           />
         )}
       </div>

@@ -15,7 +15,7 @@ export default function SingleProjectCard({
   const handleClick = () => {
     onRemove();
   };
-  console.log(id);
+
 
   return (
     <li className={styles.el} style={{ backgroundColor: color }}>

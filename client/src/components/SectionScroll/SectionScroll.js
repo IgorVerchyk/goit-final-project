@@ -5,7 +5,6 @@ import SectionScrollItem from './SectionScrollItem';
 import s from './SectionScroll.module.scss';
 
 export default function SectionScroll({ arr }) {
-  console.log(arr);
 
   const [index, setIndex] = useState(0);
   const [list, setList] = useState([]);

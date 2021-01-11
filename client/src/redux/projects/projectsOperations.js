@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 import {
   addProjectRequest,
@@ -48,6 +48,8 @@ const addProject = ({ projectName, descr, color }) => async dispatch => {
     dispatch(addProjectError(error));
   }
 };
+
+
 
 const removeProject = id => async dispatch => {
   console.log('remove operations');
