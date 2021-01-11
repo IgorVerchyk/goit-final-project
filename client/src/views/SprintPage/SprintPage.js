@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './SprintPage.module.scss';
 import SprintHeader from '../../components/SprintHeader/SprintHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TaskCard from '../../components/TaskCard/TaskCard';
 import ButtonAddNew from '../../components/Buttons/ButtonAddNew/ButtonAddNew';
 import ButtonShowGraph from '../../components/Buttons/ButtonShowGraph/ButtonShowGraph';
+import Modal from '../../components/Modal/Modal';
+import SprintEditor from '../../components/Sprints/SprintEditor';
 
 export default function SprintPage() {
+  const [isModal, setisModal] = useState(false);
+
+  const toggleModal = () => {
+    const toggledIsOpen = isModal ? false : true;
+    setisModal(toggledIsOpen);
+  };
   const array = [
     { id: 1, title: 'Sprint 1', color: '#00ff00' },
     { id: 2, title: 'Very long name of boring sprint' },
@@ -59,13 +67,12 @@ export default function SprintPage() {
       <Sidebar
         type={'спринт'}
         list={array}
-        addNew={() => {
-          console.log('added!');
-        }}
+        addNew={toggleModal}
         backTo={() => {
           console.log('Back to ...');
         }}
       />
+
       <section className={styles.tasks}>
         <SprintHeader />
 
@@ -88,6 +95,12 @@ export default function SprintPage() {
           <ButtonShowGraph />
         </div>
       </section>
+      {isModal && (
+        <Modal
+          closeModal={toggleModal}
+          children={<SprintEditor onClose={toggleModal} />}
+        />
+      )}
     </section>
   );
 }
