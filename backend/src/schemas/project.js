@@ -2,10 +2,16 @@ const mongoose = require("mongoose");
 const { Schema, Types } = mongoose;
 const mongoosePaginate = require("mongoose-paginate-v2");
 
+const spendTimeSchema = new Schema({
+  data: { type: Date, required: true },
+  time: { type: Number, default: 0 },
+});
+
 const taskSchema = new Schema({
   descr: { type: String, required: [true, "task description is required"] },
   planTime: { type: Number, required: true },
-  spendTime: { type: Number, default: 0 },
+  spendTime: [spendTimeSchema],
+  total: { type: Number, default: 0 },
 });
 
 const colaboratorsSchema = new Schema({

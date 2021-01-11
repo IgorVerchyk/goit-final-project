@@ -1,0 +1,8 @@
+.container {
+  display: grid;
+}
+@media screen and (max-width: 469px) {
+  .container {
+    grid-template-rows: 100px auto;
+  }
+}

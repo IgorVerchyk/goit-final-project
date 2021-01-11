@@ -25,7 +25,7 @@ export default function SingleProjectCard({
           state: { id: id },
         }}
         className={styles.a}
-        projectId={{ id }}
+        id={{ id }}
       >
         <h2 className={styles.title}>{projectName}</h2>
         <p className={styles.text}>{descr}</p>
