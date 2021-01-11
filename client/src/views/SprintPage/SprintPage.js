@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
 import { connect } from 'react-redux';
 import projectsOperations from '../../redux/projects/projectsOperations';
-
 import styles from './SprintPage.module.scss';
 import SprintHeader from '../../components/Sprint/SprintHeader/SprintHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -10,7 +8,6 @@ import TaskCard from '../../components/Tasks/TaskCard/TaskCard';
 import ButtonAddNew from '../../components/Buttons/ButtonAddNew/ButtonAddNew';
 import ButtonShowGraph from '../../components/Buttons/ButtonShowGraph/ButtonShowGraph';
 import Modal from '../../components/Modal/Modal';
-
 import TaskAddForm from '../../components/Tasks/TaskAddForm/TaskAddForm';
 import SprintAddForm from '../../components/Sprint/SprintAddForm/SprintAddForm';
 
@@ -30,7 +27,6 @@ function SprintPage({ onRemove }) {
   const changeSpentTime = () => {};
 
   /////////////////////////////////
-
   const array = [
     { id: 1, title: 'Sprint 1', color: '#00ff00' },
     { id: 2, title: 'Very long name of boring sprint' },
@@ -111,7 +107,6 @@ function SprintPage({ onRemove }) {
         type={'спринт'}
         // list={}
         list={array}
-
         backTo={() => {
           console.log('Back to ...');
         }}
@@ -119,7 +114,6 @@ function SprintPage({ onRemove }) {
         <SprintAddForm />
       </Sidebar>
       {/* ////////////////////////////////////////////// */}
-
 
       <section className={styles.tasks}>
         <SprintHeader handleInput={handleInputFilter} title={sprintTitle} />
@@ -150,7 +144,6 @@ function SprintPage({ onRemove }) {
           <ButtonShowGraph />
         </div>
       </section>
-
       {/* /////////////ModalTasks/////////////////////// */}
 
       {onModalAdd && (
@@ -159,7 +152,6 @@ function SprintPage({ onRemove }) {
         </Modal>
       )}
       {/* ////////////////////////////////////////////// */}
-
     </section>
   );
 }
