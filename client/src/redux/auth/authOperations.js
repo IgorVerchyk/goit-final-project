@@ -2,32 +2,27 @@ import axios from 'axios';
 
 import { authActions } from './';
 
-const baseURL = 'https://project-manager-goit20.herokuapp.com';
+const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
+//const baseURL = 'http://localhost:3001/api/auth';
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = '';
-//   },
-// };
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
 
 const register = dataUser => async dispatch => {
   dispatch(authActions.registerRequest());
 
   try {
-    const { data } = await axios.post(
-      `${baseURL}/api/auth/registration`,
-      dataUser,
-    );
+    const { data } = await axios.post(`${baseURL}/registration`, dataUser);
 
-    // token.set(data.token);
-    dispatch(authActions.registerSuccess(data));
-    console.log('Пользователь зарегестрирован');
+    dispatch(authActions.registerSuccess(data.data));
   } catch (error) {
-    dispatch(authActions.registerError());
-    console.log('Пользователь НЕ зарегестрирован');
+    dispatch(authActions.registerError(error.response.data));
     console.error(error);
   }
 };
@@ -36,29 +31,62 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-    console.log(dataUser);
-    const { data } = await axios.post(`${baseURL}/api/auth/login`, dataUser);
+    const { data } = await axios.post(`${baseURL}/login`, dataUser);
 
-    // token.set(data.token);
+    const { projects, ...user } = data;
+
+    token.set(data.token);
+
     dispatch(authActions.loginSuccess(data));
-    console.log('Пользователь вошел');
   } catch (error) {
-    console.log('Пользователь НЕ вошел');
-    dispatch(authActions.loginError(error));
+    dispatch(authActions.loginError(error.response.data));
+    console.error(error);
   }
 };
 
 const logout = () => async dispatch => {
   dispatch(authActions.logoutRequest());
   try {
-    await axios.post(`${baseURL}/users/logout`);
+    await axios.post(`${baseURL}/logout`);
     console.log('logout +');
-    // token.unset();
-    dispatch(authActions.logoutSucces());
+    await token.unset();
+    dispatch(authActions.logoutSuccess());
+    return;
   } catch (error) {
+    console.log(error);
     console.log('logout -');
 
     dispatch(authActions.logoutError(error.message));
+  }
+};
+
+const getCurrentUser = () => async (dispatch, getState) => {
+  try {
+    const {
+      auth: { token: existingToken },
+    } = getState();
+
+    if (existingToken) {
+      dispatch(authActions.getCurrentUserRequest());
+
+      await token.set(existingToken);
+
+      const { data } = await axios.get(`${baseURL}/current`);
+
+      if (!data) {
+        await token.unset();
+
+        dispatch(authActions.getCurrentUserError());
+        return;
+      }
+
+      console.log(data);
+
+      dispatch(authActions.getCurrentUserSuccess(data));
+    }
+  } catch (e) {
+    console.log(e);
+    dispatch(authActions.getCurrentUserError(e));
   }
 };
 
@@ -66,6 +94,8 @@ const logout = () => async dispatch => {
 export default {
   register,
   login,
-  // token,
+  token,
   logout,
+
+  getCurrentUser,
 };

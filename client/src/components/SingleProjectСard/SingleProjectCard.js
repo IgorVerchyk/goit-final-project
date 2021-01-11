@@ -15,10 +15,18 @@ export default function SingleProjectCard({
   const handleClick = () => {
     onRemove();
   };
+  console.log(id);
 
   return (
     <li className={styles.el} style={{ backgroundColor: color }}>
-      <Link to={routeTo} className={styles.a}>
+      <Link
+        to={{
+          pathname: `${routeTo}`,
+          state: { id: id },
+        }}
+        className={styles.a}
+        projectId={{ id }}
+      >
         <h2 className={styles.title}>{projectName}</h2>
         <p className={styles.text}>{descr}</p>
       </Link>

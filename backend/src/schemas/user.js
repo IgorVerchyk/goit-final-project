@@ -1,16 +1,9 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const { Schema, Types } = mongoose;
 const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
 
 const SALT_FACTOR = 6;
-
-const projectSchema = new Schema({
-  projectId: {type: String,require:true},
-  isAdmin: {type:Boolean, default:true},
-  title: { type: String, require: true },
-  descr: { type: String, require: true },
-});
 
 const userSchema = new Schema(
   {
@@ -19,8 +12,8 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
       validate(value) {
-        const re = /\S+@\S+\.\S+/;
-        return re.test(String(value).toLocaleLowerCase());
+        const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        return re.test(String(value).toLowerCase());
       },
     },
     password: {
@@ -31,17 +24,26 @@ const userSchema = new Schema(
       type: String,
       default: null,
     },
+
+    refreshToken: {
+      type: String,
+      default: null,
+    },
+
     verify: {
       type: Boolean,
       default: false,
     },
-    projects: [projectSchema],
+
+    verifyToken: { type: String, required: [true, "Verify token is required"] },
+
+    projects: [{ type: Types.ObjectId, ref: "Project" }],
     admin: {
       type: Boolean,
       default: false,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 userSchema.pre("save", async function (next) {
@@ -50,13 +52,13 @@ userSchema.pre("save", async function (next) {
   }
   this.password = await bcrypt.hash(
     this.password,
-    bcrypt.genSaltSync(SALT_FACTOR)
+    bcrypt.genSaltSync(SALT_FACTOR),
   );
   next();
 });
 
-userSchema.methods.validPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+userSchema.methods.validPassword = async function (password, userPassword) {
+  return bcrypt.compare(password, userPassword);
 };
 
 const User = mongoose.model("user", userSchema);

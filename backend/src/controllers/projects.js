@@ -6,20 +6,25 @@ const userServise = new UsersService();
 const projectService = new ProjectService();
 
 const createProject = async (req, res, next) => {
-  const { id, title } = req.body;
-  const user = await userServise.findById(id);
-  const project = await user.projects.find(
-    (project) => project.title === title
-  );
-  if (project) {
-    return next({
-      status: HttpCode.CONFLICT,
-      data: "Conflict",
-      message: "Project with that title already exist",
-    });
-  }
+  const { body, user } = req;
+  const project = await projectService.getProjectByTitle(body.title);
+
+  // const project = projectService.
+  // const project = await user.projects.find(
+  //   (project) => project.title === body.createNewSprinttitle
+  // );
+  // if (project) {
+  //   return next({
+  //     status: HttpCode.CONFLICT,
+  //     data: "Conflict",
+  //     message: "Project with that title already exist",
+  //   });
+  // }
+
+  //TODO: добавить проверку имени проекта
+
   try {
-    const result = await projectService.createProject(req.body);
+    const result = await projectService.createProject(user, body);
     res.status(201).json(result);
   } catch (e) {
     console.log(e);
@@ -29,76 +34,125 @@ const createProject = async (req, res, next) => {
 
 const getProject = async (req, res, next) => {
   try {
-    const result = await projectService.getProject(req.id);
-    if (!result) {
-      return res.status(404).send({ message: "No project with such ID" });
+    const id = req.params.projectId;
+    if (!id) {
+      res
+        .status(HttpCode.BAD_REQUEST)
+        .send({ message: "Project's ID not defiened" });
     }
-    return result;
+    const result = await projectService.getProjectById(id);
+
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Project ${projectId} not found ` });
   } catch (e) {
     next(e);
   }
 };
 
-const createSprint = async ({ body, params: { projectId } }, res, next) => {
+const removeProject = async (req, res, next) => {
   try {
-    const result = await projectService.getProject(projectId);
-
-    if (!result) {
-      res.status(404).send({ message: "No project with such ID" });
-    }
-
-    result.sprints.push(body);
-
-    await service.updateProject(projectId, result);
-
-    res.status(200).json(result);
+    const { params, user } = req;
+    const result = await projectService.removeProject(params, user);
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Project ${projectId} not found ` });
   } catch (e) {
     console.log(e);
     next(e);
   }
 };
 
-const deleteSprint = async ({
-  query: { sprintId },
-  params: { projectId },
-  res,
-  next,
-}) => {
+const createSprint = async (req, res, next) => {
   try {
-    if (!sprintId) {
-      return res.status(404).send({ message: "No spint ID declared" });
-    }
+    const {
+      params: { projectId },
+      body,
+      user: { id: userId },
+    } = req;
 
-    const result = await projectService.getProject(projectId);
-
-    if (!result) {
-      return res.status(404).send({ message: "No project with such ID" });
-    }
-
-    const updatedSprints = result.sprints.filter(
-      (sprint) => sprint._id.toString() !== sprintId
+    const result = await projectService.createNewSprint(
+      userId,
+      projectId,
+      body
     );
 
-    const isSprintDeleted = result.sprints.length !== updatedSprints.length;
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Project ${projectId} not found ` });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
 
-    if (!isSprintDeleted)
-      return res.status(404).send({ message: "No sprint with such ID" });
+const removeSprint = async (req, res, next) => {
+  try {
+    const {
+      params: { sprintId },
+      user: { id: userId },
+    } = req;
 
-    result.sprints = updatedSprints;
+    const result = await projectService.removeSprint(userId, sprintId);
 
-    await service.updateProject(projectId, result);
-
-    res.status(200).json(result);
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Sprint ${sprintId} not found ` });
   } catch (e) {
     next(e);
   }
 };
-const removeProject = async (req, res, next) => {
+
+const createTask = async (req, res, next) => {
   try {
-    const result = await projectService.removeProject(req.params);
+    const {
+      params: { sprintId },
+      body,
+      user: { id: userId },
+    } = req;
+
+    const result = await projectService.createNewTask(userId, sprintId, body);
+
     return result
       ? res.status(200).json(result)
-      : res.status(404).json({ message: `Project ${projectId} not found ` });
+      : res.status(404).json({ message: `Sprint ${sprintId} not found ` });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
+const updateTaskTime = async (req, res, next) => {
+  try {
+    const {
+      params: { taskId },
+      body,
+      user: { id: userId },
+    } = req;
+
+    const result = await projectService.updateTaskTime(userId, taskId, body);
+
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Task ${taskId} not found ` });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
+const removeTask = async (req, res, next) => {
+  try {
+    const {
+      params: { taskId },
+      user: { id: userId },
+    } = req;
+
+    const result = await projectService.removeTask(userId, taskId);
+
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Task ${taskId} not found ` });
   } catch (e) {
     console.log(e);
     next(e);
@@ -110,5 +164,8 @@ module.exports = {
   createProject,
   removeProject,
   createSprint,
-  deleteSprint,
+  removeSprint,
+  createTask,
+  removeTask,
+  updateTaskTime,
 };

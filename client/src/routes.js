@@ -6,7 +6,7 @@ const routes = [
     label: 'Home',
     exact: true,
     component: lazy(() => import('./views/ProjectsView')),
-    private: false,
+    private: true,
     restricted: false,
   },
   {
@@ -31,7 +31,7 @@ const routes = [
     label: 'ProjectDetails',
     exact: true,
     component: lazy(() => import('./views/ProjectDetailsView')),
-    private: false,
+    private: true,
     restricted: false,
   },
   {
@@ -39,6 +39,14 @@ const routes = [
     label: 'Home',
     exact: true,
     component: lazy(() => import('./views/SprintPage/SprintPage.js')),
+    private: true,
+    restricted: false,
+  },
+  {
+    path: '/unautorised',
+    label: 'Unautorised',
+    exact: true,
+    component: lazy(() => import('./views/UnautorisedView')),
     private: false,
     restricted: false,
   },

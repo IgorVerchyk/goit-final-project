@@ -5,14 +5,21 @@ class UsersRepository {
     this.model = User;
   }
 
-  async findById(id) {
-    const result = await this.model.findOne({ _id: id });
+  // async findById(id) {
+  //   const result = await this.model.findOne({ _id: id });
+  //   return result;
+  // }
+  findById(id) {
+    return this.model.findOne({ _id: id }).populate("projects");
+  }
+
+  async findByField(input) {
+    const result = await this.model.findOne({ ...input });
     return result;
   }
 
-  async findByEmail(email) {
-    const result = await this.model.findOne({ email });
-    return result;
+  async findByToken(token) {
+    return await this.model.findOne({ token: token });
   }
 
   async create(body) {
@@ -24,26 +31,46 @@ class UsersRepository {
     await this.model.updateOne({ _id: id }, { token });
   }
 
-  async createNewProject(id, projectId, title, descr) {
-    const result = await this.model.findByIdAndUpdate(
+  validatePassword(password, userPassword) {
+    return User.schema.methods.validPassword(password, userPassword);
+  }
+
+  // async createNewProject(id, projectId) {
+  //   const result = await this.model.findByIdAndUpdate(
+  //     { _id: id },
+  //     {
+  //       $push: {
+  //         projects: { _id: projectId },
+  //       },
+  //     }
+  //   );
+  //   return result;
+  // }
+  createNewProject(id, projectId) {
+    return this.model.findByIdAndUpdate(
       { _id: id },
       {
         $push: {
-          projects: { projectId: projectId, title: title, descr: descr },
+          projects: { _id: projectId },
         },
+      }
+    );
+  }
+
+  async removeProject(id, projectId) {
+    const result = await this.model.findOneAndUpdate(
+      { _id: id },
+      {
+        $pull: { projects: projectId },
       }
     );
     return result;
   }
 
-  async removeProject(id, projectId) {
-    console.log(id, projectId);
-    const result = await this.model.updateOne(
-      { _id: id },
-      {
-        $pull: { projects: { _id: projectId } },
-      }
-    );
+  async updateProjectTitle(id, projectId, title) {
+    const result = await this.model.findById(id);
+    result.projects.id(projectId).push({ title: title });
+    result.save();
     return result;
   }
 }

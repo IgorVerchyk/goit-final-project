@@ -2,6 +2,8 @@ const { UsersRepository } = require("../repository");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
+const REFRESH_TOKEN_KEY = process.env.REFRESH_TOKEN_SECRET;
+const config = require("../config/config.json");
 
 class AuthService {
   constructor() {
@@ -11,20 +13,40 @@ class AuthService {
   }
 
   async login({ email, password }) {
-    const user = await this.repositories.users.findByEmail(email);
-    if (!user || !user.validPassword(password)) {
+    const user = await this.repositories.users.findByField({ email: email });
+
+    const isPasswordValid = await this.repositories.users.validatePassword(
+      password,
+      user.password
+    );
+
+    if (!user || !isPasswordValid) {
       return null;
     }
+
     const { id, projects } = user;
     const payload = { id };
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
+    const token = jwt.sign(payload, SECRET_KEY, {
+      expiresIn: config.tokenLife,
+    });
+    // const refreshToken = jwt.sign(payload, REFRESH_TOKEN_KEY, {
+    //   expiresIn: config.refreshTokenLife,
+    // });
     await this.repositories.users.updateToken(id, token);
-    return { token, projects };
+
+    const createdUser = await this.repositories.users.findById(id);
+
+    return createdUser;
+  }
+
+  async token({ email, password, refreshToken }) {
+    const user = await this.repositories.users.findByEmail(email);
+    user.refreshToken = refreshToken;
+    return user;
   }
 
   async logout(id) {
-    const data = await this.repositories.users.updateToken(id, null);
-    return data;
+    return await this.repositories.users.updateToken(id, null);
   }
 }
 

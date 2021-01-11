@@ -1,10 +1,19 @@
-import React from 'react';
-import SidebarElement from '../SidebarElement/SidebarElement';
+import React, { useState } from 'react';
 import ButtonAddNew from '../Buttons/ButtonAddNew/ButtonAddNew';
-
+import Modal from '../../components/Modal/Modal';
+import SectionScroll from '../SectionScroll/SectionScroll';
 import styles from './Sidebar.module.scss';
 
-export default function Sidebar({ type, list, addNew, backTo }) {
+export default function Sidebar({ type, list, backTo, children }) {
+  const [isModal, setisModal] = useState(false);
+  const toggleModal = () => {
+    const toggledIsOpen = isModal ? false : true;
+    setisModal(toggledIsOpen);
+  };
+  console.log(list);
+  console.log(children);
+  const Children = children;
+
   return (
     <section className={styles.sidebar}>
       <div className={styles.backToAll}>
@@ -13,16 +22,18 @@ export default function Sidebar({ type, list, addNew, backTo }) {
         </p>
       </div>
 
-      <ul className={styles.list}>
-        {list.map(el => (
-          <SidebarElement key={el.id} title={el.title} color={el.color} />
-        ))}
-      </ul>
+      <SectionScroll arr={list} className={styles.list} />
 
-      <div className={styles.addNew} onClick={addNew}>
-        <ButtonAddNew />
+      <div className={styles.addNew}>
+        <ButtonAddNew setShowModal={toggleModal} />
         <p className={styles.addNewText}>Створити {type}</p>
       </div>
+      {isModal && (
+        <Modal
+          closeModal={toggleModal}
+          children={<Children onClose={toggleModal}></Children>}
+        />
+      )}
     </section>
   );
 }

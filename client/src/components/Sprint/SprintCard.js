@@ -1,24 +1,44 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import s from './SprintCard.module.scss';
 
-import styles from './TaskCard.module.scss';
+export default function SprintCard(sprint) {
+  const { routeTo, id, description, startDate, finDate } = sprint;
 
-export default function Task({ id, title, scheduledTime, spentAllTime }) {
+  // const nstartDate = mydate.toLocaleString('uk', {
+  //   month: 'short',
+  //   day: 'numeric',
+  // }).slice(0, nstartDate.length - 1)
+
+  const newDates = date => {
+    const mydate = new Date(date);
+    const nDate = mydate.toLocaleString('uk', {
+      month: 'short',
+      day: 'numeric',
+    });
+    const newDate = nDate.slice(0, nDate.length - 1);
+    return newDate;
+  };
+
   return (
-    <li className={styles.el}>
-      <h2 className={styles.title}>{title}</h2>
-      <div className={styles.scheduledBlock}>
-        <p className={styles.scheduledText}>Заплановано годин</p>
-        <span className={styles.scheduledTime}>{scheduledTime}</span>
-      </div>
-      <div className={styles.spentBlock}>
-        <p className={styles.spentText}>Витрачено год / день</p>
-        <input type="text" className={styles.spentTime}></input>
-      </div>
-      <div className={styles.spentAllBlock}>
-        <p className={styles.spentAllText}>Витрачено годин</p>
-        <span className={styles.spentAllTime}>{spentAllTime}</span>
-      </div>
-      <div className={styles.trashWrapper}>
+    <li key={id} className={s.el}>
+      <Link to={routeTo} className="link" id={id}>
+        <h2 className={s.description}>{description}</h2>
+        <div className={s.wrap}>
+          <p className={s.dataStart}>Дата початку</p>
+          <span>{newDates(startDate)}</span>
+        </div>
+        <div className={s.wrap}>
+          <p className={s.dataStart}>Дата закінчення</p>
+          <span>{newDates(finDate)}</span>
+        </div>
+        <div className={s.wrap}>
+          <p>Тривалість</p>
+          <span>226</span>
+        </div>
+      </Link>
+
+      <div className={s.trashWrapper}>
         <svg
           width="20"
           height="20"

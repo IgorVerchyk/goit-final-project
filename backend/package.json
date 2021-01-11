@@ -4,6 +4,7 @@
   "description": "Node20_final_progect",
   "main": "index.js",
   "dependencies": {
+    "@sendgrid/mail": "^7.4.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -15,14 +16,14 @@
     "jsonwebtoken": "^8.5.1",
     "mailgen": "^2.0.14",
     "mongoose": "^5.11.8",
-    "mongoose-paginate-v2": "^1.3.13",
+    "mongoose-paginate-v2": "^1.3.52",
+    "nanoid": "^3.1.20",
+    "nodemailer": "^6.4.17",
     "nodemon": "^2.0.6",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"
   },
-  "devDependencies": {
-    "heroku": "^7.47.6"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
