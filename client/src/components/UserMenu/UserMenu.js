@@ -9,12 +9,13 @@ export default function UserMenu() {
   const currentUser = useSelector(state => state.auth.currentUser);
   const name = currentUser.email;
 
+  const cutSymbols = (window.innerWidth - 145) / 15;
+
   const Trimmer = name => {
-    if (name.lenght <= 10) {
-      return name;
-    } else {
-      return name.substr(0, 12) + '...';
+    if (cutSymbols < name.length) {
+      return name.substr(0, cutSymbols) + '...';
     }
+    return name;
   };
 
   const getLogout = useCallback(() => dispatch(authOperations.logout()), [
@@ -24,6 +25,7 @@ export default function UserMenu() {
   return (
     <section className={styles.userMenu}>
       <span className={styles.nameText}>{Trimmer(name)}</span>
+
       <button className={styles.logoutBtn} onClick={getLogout}>
         <svg
           className={styles.svg}

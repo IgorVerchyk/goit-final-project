@@ -31,6 +31,12 @@
     display: none;
   }
 
+  .nameText {
+    margin-left: 15px;
+    overflow: hidden;
+    text-align: right;
+  }
+
   .logoutBtn::before {
     display: inline-block;
     content: '';
