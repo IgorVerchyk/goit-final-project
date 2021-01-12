@@ -49,10 +49,12 @@
 
 @media screen and (min-width: 768px) {
   .sidebar {
+    position: relative;
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
     width: 255px;
+    height: 960px;
     border-right: 1px solid rgba(24, 28, 39, 0.1);
   }
 
@@ -66,7 +68,7 @@
   }
 
   .addNew {
-    position: fixed;
+    position: absolute;
     bottom: 80px;
     left: 70px;
     width: 140px;

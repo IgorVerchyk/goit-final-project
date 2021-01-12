@@ -9,7 +9,7 @@ import { store, persistor } from './redux/store';
 
 import './helpers/js/toastrSetting';
 import 'modern-normalize/modern-normalize.css';
-import './main.scss';
+import './main.module.scss';
 
 ReactDOM.render(
   <Provider store={store}>

@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import { authActions } from './';
 
-const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
-//const baseURL = 'http://localhost:3001/api/auth';
+//const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
+const baseURL = 'http://localhost:3001/api/auth';
 
 const token = {
   set(token) {
@@ -72,6 +72,9 @@ const getCurrentUser = () => async (dispatch, getState) => {
       await token.set(existingToken);
 
       const { data } = await axios.get(`${baseURL}/current`);
+      console.log('data', data);
+      const { user } = data.data;
+      console.log('user', user);
 
       if (!data) {
         await token.unset();
@@ -82,7 +85,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
 
       console.log(data);
 
-      dispatch(authActions.getCurrentUserSuccess(data));
+      dispatch(authActions.getCurrentUserSuccess(user));
     }
   } catch (e) {
     console.log(e);

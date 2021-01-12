@@ -35,7 +35,7 @@ const routes = [
     restricted: false,
   },
   {
-    path: '/projects/:projectId/:sprintId',
+    path: '/sprints/:sprintId',
     label: 'Home',
     exact: true,
     component: lazy(() => import('./views/SprintPage/SprintPage.js')),
