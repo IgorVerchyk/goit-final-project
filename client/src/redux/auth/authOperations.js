@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import { authActions } from './';
 
-//const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
-const baseURL = 'http://localhost:3001/api/auth';
+const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
+//const baseURL = 'http://localhost:3001/api/auth';
 
 const token = {
   set(token) {
