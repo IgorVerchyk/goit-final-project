@@ -18,7 +18,7 @@ export default function Project(props) {
   };
 
   const projectId = props.id.location.state.id;
-
+  console.log(' proj projectid', projectId);
   const project = useSelector(state =>
     state.auth.currentUser.projects.find(project => project._id === projectId),
   );
@@ -50,6 +50,7 @@ export default function Project(props) {
             <SprintCard
               routeTo={`/sprints/${sprint.id}`}
               key={sprint.objectId}
+              projectId={projectId}
               {...sprint}
             />
           ))}

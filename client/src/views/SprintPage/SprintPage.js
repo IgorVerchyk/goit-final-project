@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useLocation, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import projectsOperations from '../../redux/projects/projectsOperations';
 import styles from './SprintPage.module.scss';
 import SprintHeader from '../../components/Sprint/SprintHeader/SprintHeader';
@@ -14,7 +15,15 @@ import SprintAddForm from '../../components/Sprint/SprintAddForm/SprintAddForm';
 function SprintPage({ onRemove }) {
   const [onModalAdd, setModalAdd] = useState(false);
   const [filter, setFilter] = useState('');
+  const { projectId } = useLocation();
+  const { sprintId } = useParams();
 
+  const project = useSelector(state =>
+    state.auth.currentUser.projects.find(project => project._id === projectId),
+  );
+  const tasks = project.sprints.find(sprint => sprint.id === sprintId).tasks;
+
+  console.log('SprintPage', projectId, sprintId, tasks); ///
   const handleInputFilter = ev => {
     setFilter(ev.target.value);
   };
@@ -32,63 +41,6 @@ function SprintPage({ onRemove }) {
     { id: 2, title: 'Very long name of boring sprint' },
     { id: 3, title: 'Sprint3' },
     { id: 4, title: 'zzzzzzzzzz zzzzzzzz xxxxx' },
-  ];
-
-  const tasks = [
-    {
-      id: 1,
-      title: 'Task 1',
-      scheduledTime: 8,
-      spentTime: 2,
-      spentAllTime: 33,
-    },
-    {
-      id: 3,
-      title: 'Lorem ipsum dolor sit amet',
-      scheduledTime: 28,
-      spentTime: '',
-      spentAllTime: 11,
-    },
-    {
-      id: 4,
-      title: 'xxxzcqwd asdqw aaaasd',
-      scheduledTime: 19,
-      spentTime: 6,
-      spentAllTime: 0,
-    },
-    {
-      id: 5,
-      title: 'Excepteur sint occaecat cupidatat',
-      scheduledTime: 333,
-      spentTime: '',
-      spentAllTime: 33,
-    },
-    {
-      id: 6,
-      title: 'Task 1',
-      scheduledTime: 8,
-      spentTime: 2,
-      spentAllTime: 33,
-    },
-    {
-      id: 7,
-      title: 'Lorem ipsum dolor sit amet',
-      scheduledTime: 28,
-      spentTime: 11,
-      spentAllTime: 11,
-    },
-    {
-      id: 8,
-      title: 'xxxzcqwd asdqw aaaasd',
-      scheduledTime: 19,
-      spentAllTime: 0,
-    },
-    {
-      id: 9,
-      title: 'Excepteur sint occaecat cupidatat',
-      scheduledTime: 333,
-      spentAllTime: 33,
-    },
   ];
 
   const sprintTitle = 'Sprint Burndown Chart 1';
@@ -156,8 +108,4 @@ function SprintPage({ onRemove }) {
   );
 }
 
-const mapDispatchToProps = {
-  onRemove: projectsOperations.removeProject,
-};
-
-export default connect(null, mapDispatchToProps)(SprintPage);
+export default SprintPage;

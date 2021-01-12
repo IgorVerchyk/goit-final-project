@@ -1,14 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import s from './SprintCard.module.scss';
+import { useParams } from 'react-router-dom';
 
 export default function SprintCard(sprint) {
   const { routeTo, id, description, startDate, finDate } = sprint;
-
-  // const nstartDate = mydate.toLocaleString('uk', {
-  //   month: 'short',
-  //   day: 'numeric',
-  // }).slice(0, nstartDate.length - 1)
+  const { projectId } = useParams();
+  console.log('SprintCard', projectId);
 
   const newDates = date => {
     const mydate = new Date(date);
@@ -22,7 +20,14 @@ export default function SprintCard(sprint) {
 
   return (
     <li key={id} className={s.el}>
-      <Link to={routeTo} className="link" id={id}>
+      <Link
+        to={{
+          pathname: `${routeTo}`,
+          projectId: `${projectId}`,
+        }}
+        className="link"
+        id={id}
+      >
         <h2 className={s.description}>{description}</h2>
         <div className={s.wrap}>
           <p className={s.dataStart}>Дата початку</p>
