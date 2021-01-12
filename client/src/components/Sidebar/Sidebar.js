@@ -10,18 +10,17 @@ export default function Sidebar({ type, list, backTo, children }) {
     const toggledIsOpen = isModal ? false : true;
     setisModal(toggledIsOpen);
   };
-
   const Children = children;
 
   return (
-    <section className={styles.sidebar}>
+    <div className={styles.sidebar}>
       <div className={styles.backToAll}>
         <p className={styles.backToAllText} onClick={backTo}>
           Показати <span className={styles.backToAllTextAccent}>{type}и</span>
         </p>
       </div>
 
-      <SectionScroll arr={list} className={styles.list} />
+      <SectionScroll arr={list} />
 
       <div className={styles.addNew}>
         <ButtonAddNew setShowModal={toggleModal} />
@@ -33,6 +32,6 @@ export default function Sidebar({ type, list, backTo, children }) {
           children={<Children onClose={toggleModal}></Children>}
         />
       )}
-    </section>
+    </div>
   );
 }

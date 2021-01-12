@@ -7,8 +7,15 @@ import styles from './UserMenu.module.scss';
 export default function UserMenu() {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.auth.currentUser);
-  // const name = currentUser.name ? currentUser.name : 'Guest'; //если все таки будет имя
-  const name = currentUser.email ? currentUser.email : 'Guest';
+  const name = currentUser.email;
+
+  const Trimmer = name => {
+    if (name.lenght <= 10) {
+      return name;
+    } else {
+      return name.substr(0, 12) + '...';
+    }
+  };
 
   const getLogout = useCallback(() => dispatch(authOperations.logout()), [
     dispatch,
@@ -16,7 +23,7 @@ export default function UserMenu() {
 
   return (
     <section className={styles.userMenu}>
-      <span className={styles.nameText}>{name}</span>
+      <span className={styles.nameText}>{Trimmer(name)}</span>
       <button className={styles.logoutBtn} onClick={getLogout}>
         <svg
           className={styles.svg}

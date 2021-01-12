@@ -99,14 +99,17 @@ const logout = async (req, res, next) => {
 
 const current = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
-    console.log(token);
-
-    const user = await userServise.current(token);
-    const result = await userServise.findById(user.id);
-    console.log(result);
-    if (user && user.token) {
-      return res.status(HttpCode.OK).json(result);
+    const userId = req.user.id;
+    console.log(userId);
+    const user = await userServise.findById(userId);
+    if (user) {
+      return res.status(HttpCode.OK).json({
+        status: "success",
+        code: HttpCode.OK,
+        data: {
+          user,
+        },
+      });
     } else {
       return next({
         status: HttpCode.UNAUTHORIZED,
@@ -114,7 +117,7 @@ const current = async (req, res, next) => {
       });
     }
   } catch (e) {
-    res.status(500).send({ message: "Something went wrong, please try again" });
+    next(e);
   }
 };
 

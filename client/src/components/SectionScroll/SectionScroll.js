@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import SectionScrollItem from './SectionScrollItem';
 
-import s from './SectionScroll.module.scss';
+import styles from './SectionScroll.module.scss';
 
 export default function SectionScroll({ arr }) {
 
@@ -26,16 +26,16 @@ export default function SectionScroll({ arr }) {
   };
 
   return (
-    <div className={s.scrollContainer}>
-      <button className={s.scrollButtom} onClick={decrementIndex}>
+    <div className={styles.scrollContainer}>
+      <button className={styles.scrollButtom} onClick={decrementIndex}>
         ...
       </button>
-      <ul className={s.scrollList}>
+      <ul className={styles.scrollList}>
         {list.map(listItem => (
-          <SectionScrollItem key={listItem.objectId} {...listItem} />
+          <SectionScrollItem key={listItem.id} {...listItem} />
         ))}
       </ul>
-      <button className={s.scrollButtom} onClick={incrementIndex}>
+      <button className={styles.scrollButtom} onClick={incrementIndex}>
         ...
       </button>
     </div>
