@@ -31,13 +31,13 @@ export default function ProjectsList() {
     <section className={s.projects}>
       <h2 className={s.title}>Проекти</h2>
       <ul className={s.list}>
+
         {!projects
           ? null
           : projects.map(({ _id: id, title: projectName, descr, color }) => (
               <SingleProjectCard
                 id={id}
                 key={id}
-                s
                 projectName={projectName}
                 descr={descr}
                 color={color}
@@ -45,6 +45,7 @@ export default function ProjectsList() {
                 onRemove={() => onRemove(id)}
               ></SingleProjectCard>
             ))}
+
       </ul>
       <div className={s.addNewWrapper}>
         {!isModal ? (

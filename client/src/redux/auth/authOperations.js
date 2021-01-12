@@ -33,8 +33,6 @@ const login = dataUser => async dispatch => {
   try {
     const { data } = await axios.post(`${baseURL}/login`, dataUser);
 
-    const { projects, ...user } = data;
-
     token.set(data.token);
 
     dispatch(authActions.loginSuccess(data));
@@ -88,7 +86,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
       dispatch(authActions.getCurrentUserSuccess(user));
     }
   } catch (e) {
-    console.log(e);
+    
     dispatch(authActions.getCurrentUserError(e));
   }
 };

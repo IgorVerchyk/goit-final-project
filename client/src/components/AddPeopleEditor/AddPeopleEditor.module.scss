@@ -1,0 +1,74 @@
+@import '../../helpers/scss/mixin.scss';
+@import '../../helpers/scss/vars.module.scss';
+
+.title {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 50px;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.labelName {
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  z-index: 5;
+  white-space: nowrap;
+  transition: all 0.25s linear;
+}
+
+// .labelNameOnTop {
+//   composes: labelName;
+//   top: -17px;
+//   left: 0;
+// }
+
+.formInput {
+  width: 100%;
+  padding: 10px;
+  display: block;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid rgba($text-color, 0.2);
+  transition: border-bottom 0.25s linear;
+  outline: none;
+  margin-bottom: 50px;
+
+  &:focus {
+    border-bottom: 1px solid $text-color;
+  }
+
+  @include tablets {
+    padding: 8px;
+  }
+}
+
+.formSelect {
+  width: 30%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid rgba($text-color, 0.2);
+  margin-bottom: 50px;
+}
+
+.error {
+  width: 100%;
+  padding: 10px;
+  display: block;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid red;
+  transition: border-bottom 0.25s linear;
+  outline: none;
+  margin-bottom: 50px;
+}
+.cansel {
+  cursor: pointer;
+  text-decoration: underline;
+  text-align: center;
+}
