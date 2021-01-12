@@ -11,13 +11,13 @@ const loginError = createAction('AUTH/loginError');
 const isLogin = createAction('AUTH/isLogin');
 const isRegister = createAction('AUTH/isRegister');
 
-const logoutRequest = createAction('auth/logoutRequest');
-const logoutSuccess = createAction('auth/logoutSuccess');
-const logoutError = createAction('auth/logoutError');
+const logoutRequest = createAction('AUTH/logoutRequest');
+const logoutSuccess = createAction('AUTH/logoutSuccess');
+const logoutError = createAction('AUTH/logoutError');
 
-const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
-const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
-const getCurrentUserError = createAction('auth/getCurrentUserError');
+const getCurrentUserRequest = createAction('AUTH/getCurrentUserRequest');
+const getCurrentUserSuccess = createAction('AUTH/getCurrentUserSuccess');
+const getCurrentUserError = createAction('AUTH/getCurrentUserError');
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   registerRequest,

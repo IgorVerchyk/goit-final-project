@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 // import { useHistory } from 'react-router-dom';
 
-import { authOperations } from '../../../redux/auth';
+import { userOperations } from '../../../redux/user';
 
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
 import FormLabel from '../FormLabel/FormLabel';
@@ -15,7 +15,7 @@ const FormRegistration = () => {
   const dispatch = useDispatch();
 
   const onRegistration = useCallback(
-    dataUser => dispatch(authOperations.register(dataUser)),
+    dataUser => dispatch(userOperations.register(dataUser)),
     [dispatch],
   );
   return (

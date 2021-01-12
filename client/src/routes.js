@@ -21,7 +21,7 @@ const routes = [
     path: '/registration',
     label: 'Home',
     exact: true,
-    component: lazy(() => import('./views/RegisterView')),
+    component: lazy(() => import('./views/RegistrationView')),
     private: false,
     restricted: false,
   },

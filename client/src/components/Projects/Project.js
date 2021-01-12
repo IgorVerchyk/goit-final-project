@@ -20,9 +20,9 @@ export default function Project(props) {
   const projectId = props.id.location.state.id;
 
   const project = useSelector(state =>
-    state.auth.currentUser.projects.find(project => project._id === projectId),
+    state.user.currentUser.projects.find(project => project._id === projectId),
   );
-  const allProjects = useSelector(state => state.auth.currentUser.projects);
+  const allProjects = useSelector(state => state.user.currentUser.projects);
   const type = 'проект';
   const backTo = '/';
   const descr = project.descr;

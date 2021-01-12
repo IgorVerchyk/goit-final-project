@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 
-import { authActions } from '../../../redux/auth';
+import { userActions } from '../../../redux/user';
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
 
 import s from './FormSuccess.module.scss';
@@ -17,7 +17,7 @@ export default function FormLoginSuccess({
   const dispatch = useDispatch();
 
   const changeIsRegister = useCallback(
-    status => dispatch(authActions.isRegister(status)),
+    status => dispatch(userActions.isRegister(status)),
     [dispatch],
   );
 

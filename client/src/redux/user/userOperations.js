@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { authActions } from './';
+import { userActions } from '.';
 
 const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
 //const baseURL = 'http://localhost:3001/api/auth';
@@ -15,20 +15,20 @@ const token = {
 };
 
 const register = dataUser => async dispatch => {
-  dispatch(authActions.registerRequest());
+  dispatch(userActions.registerRequest());
 
   try {
     const { data } = await axios.post(`${baseURL}/registration`, dataUser);
 
-    dispatch(authActions.registerSuccess(data.data));
+    dispatch(userActions.registerSuccess(data.data));
   } catch (error) {
-    dispatch(authActions.registerError(error.response.data));
+    dispatch(userActions.registerError(error.response.data));
     console.error(error);
   }
 };
 
 const login = dataUser => async dispatch => {
-  dispatch(authActions.loginRequest());
+  dispatch(userActions.loginRequest());
 
   try {
     const { data } = await axios.post(`${baseURL}/login`, dataUser);
@@ -37,37 +37,37 @@ const login = dataUser => async dispatch => {
 
     token.set(data.token);
 
-    dispatch(authActions.loginSuccess(data));
+    dispatch(userActions.loginSuccess(data));
   } catch (error) {
-    dispatch(authActions.loginError(error.response.data));
+    dispatch(userActions.loginError(error.response.data));
     console.error(error);
   }
 };
 
 const logout = () => async dispatch => {
-  dispatch(authActions.logoutRequest());
+  dispatch(userActions.logoutRequest());
   try {
     await axios.post(`${baseURL}/logout`);
     console.log('logout +');
     await token.unset();
-    dispatch(authActions.logoutSuccess());
+    dispatch(userActions.logoutSuccess());
     return;
   } catch (error) {
     console.log(error);
     console.log('logout -');
 
-    dispatch(authActions.logoutError(error.message));
+    dispatch(userActions.logoutError(error.message));
   }
 };
 
 const getCurrentUser = () => async (dispatch, getState) => {
   try {
     const {
-      auth: { token: existingToken },
+      user: { token: existingToken },
     } = getState();
 
     if (existingToken) {
-      dispatch(authActions.getCurrentUserRequest());
+      dispatch(userActions.getCurrentUserRequest());
 
       await token.set(existingToken);
 
@@ -79,17 +79,17 @@ const getCurrentUser = () => async (dispatch, getState) => {
       if (!data) {
         await token.unset();
 
-        dispatch(authActions.getCurrentUserError());
+        dispatch(userActions.getCurrentUserError());
         return;
       }
 
       console.log(data);
 
-      dispatch(authActions.getCurrentUserSuccess(user));
+      dispatch(userActions.getCurrentUserSuccess(user));
     }
   } catch (e) {
     console.log(e);
-    dispatch(authActions.getCurrentUserError(e));
+    dispatch(userActions.getCurrentUserError(e));
   }
 };
 

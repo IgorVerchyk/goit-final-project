@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 
-import { authOperations } from '../../../redux/auth';
+import { userOperations } from '../../../redux/user';
 
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
 import FormLabel from '../FormLabel/FormLabel';
@@ -14,7 +14,7 @@ const FormLogin = () => {
   const dispatch = useDispatch();
 
   const onLogin = useCallback(
-    dataUser => dispatch(authOperations.login(dataUser)),
+    dataUser => dispatch(userOperations.login(dataUser)),
     [dispatch],
   );
   return (

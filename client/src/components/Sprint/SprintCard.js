@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import projectOperations from '../../redux/projects/projectsOperations';
 import s from './SprintCard.module.scss';
 
 export default function SprintCard(sprint) {
@@ -19,6 +21,11 @@ export default function SprintCard(sprint) {
     const newDate = nDate.slice(0, nDate.length - 1);
     return newDate;
   };
+  const route = '/sprints/';
+  const dispatch = useDispatch();
+  const handleClick = useCallback(() =>
+    dispatch(projectOperations.removeDocument(route, id)),
+  );
 
   return (
     <li key={id} className={s.el}>
@@ -38,7 +45,7 @@ export default function SprintCard(sprint) {
         </div>
       </Link>
 
-      <div className={s.trashWrapper}>
+      <div className={s.trashWrapper} onClick={handleClick}>
         <svg
           width="20"
           height="20"

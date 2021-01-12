@@ -1,23 +1,25 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import authOperations from '../../redux/auth/authOperations';
+import userOperations from '../../redux/user/userOperations';
 
 import styles from './UserMenu.module.scss';
 
 export default function UserMenu() {
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => state.auth.currentUser);
+  const currentUser = useSelector(state => state.user.currentUser);
   const name = currentUser.email;
 
   const Trimmer = name => {
-    if (name.lenght <= 10) {
+    if (!name) {
+      return '';
+    } else if (name.lenght <= 10) {
       return name;
     } else {
       return name.substr(0, 12) + '...';
     }
   };
 
-  const getLogout = useCallback(() => dispatch(authOperations.logout()), [
+  const getLogout = useCallback(() => dispatch(userOperations.logout()), [
     dispatch,
   ]);
 

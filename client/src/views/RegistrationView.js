@@ -6,7 +6,7 @@ import FormRegistration from '../components/Forms/FormRegistration/FormRegistrat
 import FormSuccess from '../components/Forms/FormSuccess/FormSuccess';
 
 export default function RegisterView() {
-  const isRegister = useSelector(state => state.auth.isRegister);
+  const isRegister = useSelector(state => state.user.isRegister);
 
   return (
     <AuthenticationsBlock>

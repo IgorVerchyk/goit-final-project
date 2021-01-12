@@ -5,22 +5,11 @@ import projectsActions from './projectsActions';
 const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
 // const baseURL = 'http://localhost:3456/api/projects';
 
-const fetchProjects = () => async dispatch => {
-  dispatch(projectsActions.fetchProjectsRequest());
-
-  try {
-    const { data } = await axios.get(`${baseURL}/`);
-    dispatch(projectsActions.fetchProjectsSuccess(data));
-  } catch (error) {
-    dispatch(projectsActions.fetchProjectsError(error.message));
-  }
-};
-
-const addProject = ({ projectName, descr, color }) => async dispatch => {
+const addProject = ({ title, descr, color }) => async dispatch => {
   dispatch(projectsActions.addProjectRequest());
   try {
     const { data } = await axios.post(`${baseURL}/`, {
-      title: projectName,
+      title,
       descr,
       color,
     });
@@ -31,42 +20,33 @@ const addProject = ({ projectName, descr, color }) => async dispatch => {
   }
 };
 
-const removeDocument = ({ route, id }) => async dispatch => {
-  dispatch(projectsActions.removeProjectRequest(id));
-
-  await axios
-    .delete(`${baseURL}${route}${id}`)
-    .then(() => dispatch(projectsActions.removeProjectSuccess(id)))
-    .catch(error =>
-      dispatch(projectsActions.removeProjectError(error.message)),
-    );
+const removeDocument = (route, id) => async dispatch => {
+  dispatch(projectsActions.removeDocumentRequest());
+  try {
+    const { data } = await axios.delete(`${baseURL}${route}${id}`);
+    dispatch(projectsActions.removeDocumentSuccess(data));
+  } catch (error) {
+    dispatch(projectsActions.removeDocumentError(error.message));
+  }
 };
 
-const addSprint = ({
-  projectId,
-  sprintTitle,
-  startDate,
-  endDate,
-}) => async dispatch => {
-  dispatch(projectsActions.addProjectRequest());
+const addDocument = ({ id, route, body }) => async dispatch => {
+  console.log(body);
+  dispatch(projectsActions.addDocumentRequest);
   try {
-    const { data } = await axios.post(`${baseURL}/Sprints/${projectId}`, {
-      title: sprintTitle,
-      startDate,
-      endDate,
+    const { data } = await axios.post(`${baseURL}${route}${id}`, {
+      body,
     });
 
-    dispatch(projectsActions.addProjectSuccess(data));
+    dispatch(projectsActions.addDocumentSuccess(data));
   } catch (error) {
-    dispatch(projectsActions.addProjectError(error));
+    dispatch(projectsActions.addDocumentError(error));
   }
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  fetchProjects,
   addProject,
-  removeProject,
-  addSprint,
-  removeSprint,
+  addDocument,
+  removeDocument,
 };

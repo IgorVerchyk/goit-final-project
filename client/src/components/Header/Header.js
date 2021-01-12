@@ -4,8 +4,7 @@ import styles from './Header.module.scss';
 import UserMenu from '../UserMenu/UserMenu';
 
 export default function Header() {
-  const isAuth = useSelector(state => state.auth.currentUser.email); //временный вариант
-  // let isAuth = useSelector(state => state.auth.token);
+  const isAuth = useSelector(state => state.user.token);
   return (
     <header className={styles.header}>
       <a href="/" className={styles.link}>
