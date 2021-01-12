@@ -31,15 +31,77 @@
   }
 }
 
+.projectTitle {
+  position: absolute;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 32px;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+
+  color: #181c27;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.addPeople {
+  position: absolute;
+  width: 147px;
+  height: 22px;
+  left: 50px;
+  top: 189px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  text-decoration-line: underline;
+
+  color: #181c27;
+}
+.editTitle {
+  position: absolute;
+
+  left: 140px;
+  top: 130px;
+}
+.addPeopleIcon {
+  position: absolute;
+  left: 20px;
+  top: 190px;
+}
 @media screen and (max-width: 469px) {
   .list {
     width: 282px;
+  }
+  .projectTitle {
+    width: 120px;
+    height: 32px;
+    left: 20px;
+    top: 127px;
   }
 }
 
 @media screen and (min-width: 470px) and (max-width: 767px) {
   .list {
     width: 428px;
+  }
+  .projectTitle {
+    left: 276px;
+    top: 120px;
+    font-size: 36px;
+    line-height: 44px;
   }
 }
 

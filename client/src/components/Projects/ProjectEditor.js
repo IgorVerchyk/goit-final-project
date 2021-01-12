@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
@@ -12,6 +12,8 @@ export default function ProjectEditor({ onClose }) {
   const [color, setColor] = useState('');
   const [errorName, setErrorName] = useState('');
   const [errorDescr, setErrorDescr] = useState('');
+
+  // const token = useSelector(state => state.auth.token);
 
   const dispatch = useDispatch();
 
@@ -51,7 +53,6 @@ export default function ProjectEditor({ onClose }) {
     setProjectName('');
     setDescr('');
     setColor('');
-    dispatch(projectsOperations.cancelingProject());
   };
 
   return (
@@ -81,7 +82,7 @@ export default function ProjectEditor({ onClose }) {
           />
         </label>
 
-        <PrimaryBtn text={'Готово'} typeBtn={'button'} />
+        <PrimaryBtn text={'Готово'} typeBtn={'submit'} />
         <p className={s.cansel} onClick={handleCanselingBtn}>
           Відміна
         </p>

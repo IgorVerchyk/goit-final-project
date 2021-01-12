@@ -41,8 +41,10 @@ const currentUser = createReducer(
 
       return payload;
     },
+    [authActions.currentUserSuccess]: (state, { payload }) => payload,
     [authActions.loginSuccess]: (state, { payload }) => payload,
     [authActions.logoutSuccess]: (state, action) => ({}),
+    [authActions.getCurrentUserSuccess]: (state, { payload }) => payload,
   },
 );
 
@@ -54,18 +56,25 @@ const isRegister = createReducer(false, {
 const isLogin = createReducer(false, {
   [authActions.isLogin]: (state, { payload }) => payload,
   [authActions.loginSuccess]: (state, { payload }) => true,
+  [authActions.currentUserSuccess]: (state, { payload }) => true,
   [authActions.logoutSuccess]: (state, { payload }) => false,
+  [authActions.getCurrentUserSuccess]: (state, { payload }) => true,
 });
 
 const token = createReducer(null, {
   [authActions.loginSuccess]: (_, { payload }) => payload.token,
+  [authActions.getCurrentUserSuccess]: (_, { payload }) => payload.token,
+  [authActions.getCurrentUserError]: (_, { payload }) => null,
 });
 
 const error = createReducer(null, {
   [authActions.loginSuccess]: () => resetErrorMessage,
   [authActions.registerSuccess]: (_, action) => resetErrorMessage,
+  [authActions.currentUserSuccess]: (_, action) => resetErrorMessage,
   [authActions.registerError]: (state, { payload }) => errors(state, payload),
   [authActions.loginError]: (state, { payload }) => errors(state, payload),
+  [authActions.currentUserError]: (state, { payload }) =>
+    errors(state, payload),
 });
 
 export default combineReducers({

@@ -6,6 +6,7 @@ import {
   fetchProjectsError,
   addProjectSuccess,
   cancelingProjectSuccess,
+  removeProjectRequest,
   removeProjectSuccess,
 } from './projectsActions';
 
@@ -15,9 +16,8 @@ const removeProject = (state, action) => {
 
 const items = createReducer([], {
   [fetchProjectsSuccess]: (_, { payload }) => payload,
-  [addProjectSuccess]: (state, { payload }) => payload,
-  [cancelingProjectSuccess]: (_, { payload }) => payload,
-  [removeProjectSuccess]: (_, { payload }) => payload,
+  [addProjectSuccess]: (state, { payload }) => [...state, payload],
+  [removeProjectSuccess]: removeProject,
 });
 
 const loading = createReducer(false, {

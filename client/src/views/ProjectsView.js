@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ProjectsList from '../components/Projects/ProjectsList';
 
 class Projects extends Component {
+
   render() {
     return (
       <>
@@ -13,6 +14,8 @@ class Projects extends Component {
   }
 }
 
+
 const mapDispatchToProps = {};
+
 
 export default connect(null, mapDispatchToProps)(Projects);

@@ -1,10 +1,9 @@
 import axios from 'axios';
 
 import { authActions } from './';
-import { fetchProjectsSuccess } from '../projects/projectsActions';
 
-const baseURL = 'https://project-manager-goit20.herokuapp.com';
-// const baseURL = 'http://localhost:3456/api/auth';
+const baseURL = 'https://project-manager-goit20.herokuapp.com/api/auth';
+//const baseURL = 'http://localhost:3001/api/auth';
 
 const token = {
   set(token) {
@@ -32,11 +31,9 @@ const login = dataUser => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-
     const { data } = await axios.post(`${baseURL}/login`, dataUser);
 
     const { projects, ...user } = data;
-
 
     token.set(data.token);
 
@@ -63,10 +60,42 @@ const logout = () => async dispatch => {
   }
 };
 
+const getCurrentUser = () => async (dispatch, getState) => {
+  try {
+    const {
+      auth: { token: existingToken },
+    } = getState();
+
+    if (existingToken) {
+      dispatch(authActions.getCurrentUserRequest());
+
+      await token.set(existingToken);
+
+      const { data } = await axios.get(`${baseURL}/current`);
+
+      if (!data) {
+        await token.unset();
+
+        dispatch(authActions.getCurrentUserError());
+        return;
+      }
+
+      console.log(data);
+
+      dispatch(authActions.getCurrentUserSuccess(data));
+    }
+  } catch (e) {
+    console.log(e);
+    dispatch(authActions.getCurrentUserError(e));
+  }
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   register,
   login,
   token,
   logout,
+
+  getCurrentUser,
 };

@@ -5,13 +5,6 @@ const gravatar = require("gravatar");
 
 const SALT_FACTOR = 6;
 
-// const projectSchema = new Schema({
-//   projectId: { type: String, require: true },
-//   isAdmin: { type: Boolean, default: true },
-//   title: { type: String, require: true },
-//   descr: { type: String, require: true },
-// });
-
 const userSchema = new Schema(
   {
     email: {
@@ -19,8 +12,8 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
       validate(value) {
-        const re = /\S+@\S+\.\S+/;
-        return re.test(String(value).toLocaleLowerCase());
+        const re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        return re.test(String(value).toLowerCase());
       },
     },
     password: {
@@ -50,7 +43,7 @@ const userSchema = new Schema(
       default: false,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 userSchema.pre("save", async function (next) {
@@ -59,13 +52,13 @@ userSchema.pre("save", async function (next) {
   }
   this.password = await bcrypt.hash(
     this.password,
-    bcrypt.genSaltSync(SALT_FACTOR)
+    bcrypt.genSaltSync(SALT_FACTOR),
   );
   next();
 });
 
-userSchema.methods.validPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+userSchema.methods.validPassword = async function (password, userPassword) {
+  return bcrypt.compare(password, userPassword);
 };
 
 const User = mongoose.model("user", userSchema);

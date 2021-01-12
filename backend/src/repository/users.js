@@ -18,6 +18,10 @@ class UsersRepository {
     return result;
   }
 
+  async findByToken(token) {
+    return await this.model.findOne({ token: token });
+  }
+
   async create(body) {
     const user = new this.model(body);
     return user.save();
@@ -25,6 +29,10 @@ class UsersRepository {
 
   async updateToken(id, token) {
     await this.model.updateOne({ _id: id }, { token });
+  }
+
+  validatePassword(password, userPassword) {
+    return User.schema.methods.validPassword(password, userPassword);
   }
 
   // async createNewProject(id, projectId) {
@@ -59,13 +67,12 @@ class UsersRepository {
     return result;
   }
 
-  async updateProjectTitle (id, projectId, title) {
+  async updateProjectTitle(id, projectId, title) {
     const result = await this.model.findById(id);
-    result.projects.id(projectId).push({title: title});
+    result.projects.id(projectId).push({ title: title });
     result.save();
     return result;
   }
-    
 }
 
 module.exports = UsersRepository;

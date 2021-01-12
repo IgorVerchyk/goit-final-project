@@ -1,18 +1,18 @@
-import React, { Component, Suspense } from 'react';
+import React, { Suspense, Component } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import AppLayout from './AppLayout';
 
-// import { authOperations } from '../redux/auth/';
+import { authOperations } from '../redux/auth/';
 
 import routes from '../routes';
 
 class App extends Component {
   componentDidMount() {
-    // this.props.onGetCurrentUser();
+    this.props.onGetCurrentUser();
+    console.log('trying');
   }
 
   render() {
@@ -37,5 +37,5 @@ class App extends Component {
 }
 
 export default connect(null, {
-  // onGetCurrentUser: authOperations.getCurrentUser,
+  onGetCurrentUser: authOperations.getCurrentUser,
 })(App);
