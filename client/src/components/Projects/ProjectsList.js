@@ -37,7 +37,6 @@ export default function ProjectsList() {
               <SingleProjectCard
                 id={id}
                 key={id}
-                s
                 projectName={projectName}
                 descr={descr}
                 color={color}
