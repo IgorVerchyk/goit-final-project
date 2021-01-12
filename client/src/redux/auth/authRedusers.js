@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import { authActions } from './';
+import projectsActions from '../projects/projectsActions';
 import notification from 'toastr';
 
 const resetErrorMessage = null;
@@ -45,6 +46,8 @@ const currentUser = createReducer(
     [authActions.loginSuccess]: (state, { payload }) => payload,
     [authActions.logoutSuccess]: (state, action) => ({}),
     [authActions.getCurrentUserSuccess]: (state, { payload }) => payload,
+    [projectsActions.addProjectSuccess]: (state, { payload }) => payload,
+    [projectsActions.removeProjectSuccess]: (state, { payload }) => payload,
   },
 );
 

@@ -15,7 +15,7 @@
   font-size: 18px;
 }
 .addNewWrapper {
-  position: absolute;
+  position: fixed;
 }
 
 .list {
@@ -92,7 +92,7 @@
   }
 }
 
-@media screen and (min-width: 470px) and (max-width: 767px) {
+@media screen and (min-width: 468px) and (max-width: 767px) {
   .list {
     width: 428px;
   }
@@ -114,11 +114,16 @@
     padding-bottom: 35px;
   }
   .addNewWrapper {
+    position: fixed;
     bottom: 20px;
     right: 20px;
   }
 }
-
+@media screen and (min-width: 768px) {
+  .addNewWrapper {
+    position: absolute;
+  }
+}
 @media screen and (min-width: 768px) and (max-width: 1003px) {
   .list,
   .list::after {
