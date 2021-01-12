@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import tasksOperations from '../../redux/tasks/tasksOperations';
+import { useDispatch } from 'react-redux';
+import tasksOperations from '../../../redux/tasks/tasksOperations';
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
 import styles from './TaskAddForm.module.scss';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-export default function TaskAddForm({ onCloseModal }) {
+export default function TaskAddForm({ onCloseModal, sprintId }) {
   const [title, setTitle] = useState('');
   const [time, setTime] = useState('');
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleInputTitle = ev => {
     setTitle(ev.target.value);
@@ -18,11 +20,12 @@ export default function TaskAddForm({ onCloseModal }) {
     setTime(ev.target.value);
   };
   const handleSubmit = ev => {
-    console.log('title', title);
+    console.log('form', sprintId, title, time);
     ev.preventDefault();
-    const createTask = task => console.log(`add task with: `, task);
-    // dispatch(tasksOperations.createTask(task));
-    createTask({ title, time });
+    // const createTask = task => console.log(`add task with: `, task);
+    dispatch(tasksOperations.addTask({ sprintId, title, time }));
+    // createTask({ title, time });
+    onCloseModal();
   };
 
   return (
