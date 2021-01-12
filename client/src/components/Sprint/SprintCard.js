@@ -4,9 +4,9 @@ import s from './SprintCard.module.scss';
 import { useParams } from 'react-router-dom';
 
 export default function SprintCard(sprint) {
-  const { routeTo, id, description, startDate, finDate } = sprint;
+  const { routeTo, _id, title, startDate, endDate } = sprint;
   const { projectId } = useParams();
-  console.log('SprintCard', projectId);
+  console.log('SprintCard', projectId, _id);
 
   const newDates = date => {
     const mydate = new Date(date);
@@ -19,23 +19,23 @@ export default function SprintCard(sprint) {
   };
 
   return (
-    <li key={id} className={s.el}>
+    <li key={_id} className={s.el}>
       <Link
         to={{
           pathname: `${routeTo}`,
           projectId: `${projectId}`,
         }}
         className="link"
-        id={id}
+        id={_id}
       >
-        <h2 className={s.description}>{description}</h2>
+        <h2 className={s.description}>{title}</h2>
         <div className={s.wrap}>
           <p className={s.dataStart}>Дата початку</p>
           <span>{newDates(startDate)}</span>
         </div>
         <div className={s.wrap}>
           <p className={s.dataStart}>Дата закінчення</p>
-          <span>{newDates(finDate)}</span>
+          <span>{newDates(endDate)}</span>
         </div>
         <div className={s.wrap}>
           <p>Тривалість</p>

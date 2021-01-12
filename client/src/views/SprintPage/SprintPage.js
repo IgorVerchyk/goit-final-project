@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import projectsOperations from '../../redux/projects/projectsOperations';
+// import projectsOperations from '../../redux/tasks/tasksOperations';
 import styles from './SprintPage.module.scss';
 import SprintHeader from '../../components/Sprint/SprintHeader/SprintHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -21,9 +21,9 @@ function SprintPage({ onRemove }) {
   const project = useSelector(state =>
     state.auth.currentUser.projects.find(project => project._id === projectId),
   );
-  const tasks = project.sprints.find(sprint => sprint.id === sprintId).tasks;
-
+  const tasks = project.sprints.find(sprint => sprint._id === sprintId).tasks;
   console.log('SprintPage', projectId, sprintId, tasks); ///
+
   const handleInputFilter = ev => {
     setFilter(ev.target.value);
   };
@@ -47,7 +47,7 @@ function SprintPage({ onRemove }) {
 
   const filterTasks = (tasks, filter) => {
     return tasks.filter(task =>
-      task.title.toLowerCase().includes(filter.toLowerCase()),
+      task.descr.toLowerCase().includes(filter.toLowerCase()),
     );
   };
   let filtredTasks = filter.length > 0 ? filterTasks(tasks, filter) : tasks;
@@ -75,10 +75,10 @@ function SprintPage({ onRemove }) {
             <TaskCard
               id={task.id}
               key={task.id}
-              title={task.title}
-              scheduledTime={task.scheduledTime}
-              spentTime={task.spentTime}
-              spentAllTime={task.spentAllTime}
+              title={task.descr}
+              scheduledTime={task.planTime}
+              spentTime={task.spendTime}
+              spentAllTime={task.total}
               onDelete={() => onRemove(task.id)}
               changeSpentTime={changeSpentTime}
             />
@@ -100,7 +100,11 @@ function SprintPage({ onRemove }) {
 
       {onModalAdd && (
         <Modal closeModal={setShowModal}>
-          <TaskAddForm onClick={setShowModal} onCloseModal={setShowModal} />
+          <TaskAddForm
+            onClick={setShowModal}
+            onCloseModal={setShowModal}
+            sprintId={sprintId}
+          />
         </Modal>
       )}
       {/* ////////////////////////////////////////////// */}

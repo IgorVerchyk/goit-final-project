@@ -48,7 +48,7 @@ export default function Project(props) {
         <ul className={s.list}>
           {project.sprints.map(sprint => (
             <SprintCard
-              routeTo={`/sprints/${sprint.id}`}
+              routeTo={`/sprints/${sprint._id}`}
               key={sprint.objectId}
               projectId={projectId}
               {...sprint}
