@@ -38,7 +38,6 @@ const login = dataUser => async dispatch => {
     dispatch(authActions.loginSuccess(data));
   } catch (error) {
     dispatch(authActions.loginError(error.response.data));
-    console.error(error);
   }
 };
 
@@ -67,27 +66,18 @@ const getCurrentUser = () => async (dispatch, getState) => {
     if (existingToken) {
       dispatch(authActions.getCurrentUserRequest());
 
-      await token.set(existingToken);
+      await token.set(123);
 
       const { data } = await axios.get(`${baseURL}/current`);
-      console.log('data', data);
+      console.log('После фетча');
+
       const { user } = data.data;
-      console.log('user', user);
-
-      if (!data) {
-        await token.unset();
-
-        dispatch(authActions.getCurrentUserError());
-        return;
-      }
-
-      console.log(data);
 
       dispatch(authActions.getCurrentUserSuccess(user));
     }
   } catch (e) {
-    
-    dispatch(authActions.getCurrentUserError(e));
+    token.unset();
+    dispatch(authActions.getCurrentUserError(e.response.data));
   }
 };
 

@@ -1,18 +1,19 @@
 import React, { Suspense, Component } from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import { connect, useSelector } from 'react-redux';
+
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import AppLayout from './AppLayout';
 
-import { authOperations } from '../redux/auth/';
+import { authOperations, authSelectors } from '../redux/auth/';
 
 import routes from '../routes';
 
 class App extends Component {
   componentDidMount() {
     this.props.onGetCurrentUser();
-    console.log('trying');
+    console.log(this.props.error);
   }
 
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
                   <PublicRoute key={route.label} {...route} />
                 ),
               )}
+              {/* <Redirect to="/" /> */}
             </Switch>
           </Suspense>
         </AppLayout>
@@ -36,6 +38,6 @@ class App extends Component {
   }
 }
 
-export default connect(null, {
+export default connect(state => ({ error: authSelectors.error(state) }), {
   onGetCurrentUser: authOperations.getCurrentUser,
 })(App);

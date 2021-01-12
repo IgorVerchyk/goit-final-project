@@ -21,8 +21,14 @@ const errors = (state, payload) => {
       `Виникла помилка!`,
     );
   }
+  if (payload.message === 'Нет авторизации') {
+    notification.error(`Не удалось авторизироваться.`);
+  }
 
-  if (payload.message === 'Request failed with status code 401') {
+  if (
+    payload.message === 'Request failed with status code 401' ||
+    payload.message === 'Invalid creadentials'
+  ) {
     notification.error(`Не вірний e-mail або пароль.`, `Виникла помилка!`);
     return;
   }
@@ -73,7 +79,7 @@ const error = createReducer(null, {
   [authActions.currentUserSuccess]: (_, action) => resetErrorMessage,
   [authActions.registerError]: (state, { payload }) => errors(state, payload),
   [authActions.loginError]: (state, { payload }) => errors(state, payload),
-  [authActions.currentUserError]: (state, { payload }) =>
+  [authActions.getCurrentUserError]: (state, { payload }) =>
     errors(state, payload),
 });
 

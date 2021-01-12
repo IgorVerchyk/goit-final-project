@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 import s from './SprintCard.module.scss';
 
 export default function SprintCard(sprint) {
-  const { routeTo, id, description, startDate, finDate } = sprint;
+  const {
+    routeTo,
+    _id: id,
+    title: description,
+    startDate,
+    endDate: finDate,
+  } = sprint;
 
   // const nstartDate = mydate.toLocaleString('uk', {
   //   month: 'short',

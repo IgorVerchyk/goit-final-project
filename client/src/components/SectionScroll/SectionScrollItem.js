@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 
 import s from './SectionScroll.module.scss';
 
-export default function SectionScrollItem({ id, projectName, descr }) {
-  const link = `projects/:${id}`;
+export default function SectionScrollItem({
+  _id: id,
+  title: projectName,
+  descr,
+}) {
+  const link = `/projects/${id}`;
   return (
     <li className={s.scrollItem}>
       <Link to={link}>
