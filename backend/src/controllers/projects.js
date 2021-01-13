@@ -66,8 +66,8 @@ const updateColaborators = async (req, res, next) => {
   try {
     const {
       params: { projectId },
-      body,
       user: { id: userId },
+      body,
     } = req;
 
     const result = await projectService.updateColaborators(
