@@ -3,55 +3,75 @@ import { useDispatch } from 'react-redux';
 import projectOperations from '../../../redux/projects/projectsOperations';
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
 import styles from './TaskAddForm.module.scss';
+import { useFormik } from 'formik';
+import validate from './validateTaskForm';
 
-export default function TaskAddForm({ onCloseModal, sprintId }) {
-  const [descr, setTitle] = useState('');
-  const [planTime, setTime] = useState(Number);
+export default function TaskAddForm({ onClose, sprintId }) {
+  const [descr, setDescr] = useState('');
+  const [planTime, setPlanTime] = useState(Number);
 
-  const dispatch = useDispatch();
-
-  const handleInputTitle = ev => {
-    setTitle(ev.target.value);
+  const initialValues = {
+    descr: '',
+    planTime: '',
   };
 
-  const handleInputTime = ev => {
-    setTime(ev.target.value);
-  };
-  const handleSubmit = ev => {
-    ev.preventDefault();
+  const onSubmit = values => {
+    console.log(values);
 
     // form body
+
     const route = '/tasks/';
 
-    const body = { descr, planTime };
+    const body = values;
     const id = sprintId;
-
+    //here your code to Dispatch value to backend
     dispatch(projectOperations.addDocument({ route, id, body }));
-
-    onCloseModal();
+    onClose();
   };
+
+  const formik = useFormik({
+    initialValues,
+    onSubmit,
+    validate,
+  });
+
+  const dispatch = useDispatch();
 
   return (
     <section className={styles.TaskForm}>
       <h2 className={styles.title}>Створення задачі</h2>
-      <form className={styles.inputTaskForm} onSubmit={handleSubmit}>
+      <form className={styles.inputTaskForm} onSubmit={formik.handleSubmit}>
         <input
           type="text"
-          name="title"
-          onChange={handleInputTitle}
-          className={[styles.inputTitle]}
+          name="descr"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className={
+            formik.touched.descr && formik.errors.descr
+              ? `${styles.inputTitle} ${styles.validateTask}`
+              : styles.inputTitle
+          }
           placeholder={'Назва задачі'}
         ></input>
         <input
-          type="text"
-          onChange={handleInputTime}
-          className={styles.inputTime}
+          value={formik.values.planTime}
+          type="number"
+          min="1"
+          max="24"
+          name="planTime"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className={
+            formik.touched.planTime && formik.errors.planTime
+              ? `${styles.inputTime} ${styles.validateTask}`
+              : styles.inputTime
+          }
           placeholder={'Заплановано годин'}
         ></input>
         <br />
         <PrimaryBtn text={'Готово'} />
       </form>
-      <div className={styles.cancel} onClick={onCloseModal}>
+      <div className={styles.cancel} onClick={onClose}>
         Відміна
       </div>
     </section>
