@@ -12,17 +12,16 @@ import Modal from '../../components/Modal/Modal';
 import TaskAddForm from '../../components/Tasks/TaskAddForm/TaskAddForm';
 import SprintAddForm from '../../components/Sprint/SprintAddForm/SprintAddForm';
 
-function SprintPage({ onRemove }) {
+function SprintPage() {
   const [onModalAdd, setModalAdd] = useState(false);
   const [filter, setFilter] = useState('');
   const { projectId } = useLocation();
   const { sprintId } = useParams();
 
   const project = useSelector(state =>
-    state.auth.currentUser.projects.find(project => project._id === projectId),
+    state.user.currentUser.projects.find(project => project._id === projectId),
   );
   const tasks = project.sprints.find(sprint => sprint._id === sprintId).tasks;
-  console.log('SprintPage', projectId, sprintId, tasks); ///
 
   const handleInputFilter = ev => {
     setFilter(ev.target.value);
@@ -73,13 +72,12 @@ function SprintPage({ onRemove }) {
         <ul className={styles.list}>
           {filtredTasks.map(task => (
             <TaskCard
-              id={task.id}
-              key={task.id}
+              id={task._id}
+              key={task._id}
               title={task.descr}
               scheduledTime={task.planTime}
               spentTime={task.spendTime}
               spentAllTime={task.total}
-              onDelete={() => onRemove(task.id)}
               changeSpentTime={changeSpentTime}
             />
           ))}

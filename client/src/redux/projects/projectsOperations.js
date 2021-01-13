@@ -31,12 +31,11 @@ const removeDocument = (route, id) => async dispatch => {
 };
 
 const addDocument = ({ id, route, body }) => async dispatch => {
+  console.log(id);
   console.log(body);
   dispatch(projectsActions.addDocumentRequest);
   try {
-    const { data } = await axios.post(`${baseURL}${route}${id}`, {
-      body,
-    });
+    const { data } = await axios.post(`${baseURL}${route}${id}`, body);
 
     dispatch(projectsActions.addDocumentSuccess(data));
   } catch (error) {

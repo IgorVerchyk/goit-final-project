@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import projectOperations from '../../../redux/projects/projectsOperations';
 
 import styles from './TaskCard.module.scss';
 
@@ -8,7 +10,6 @@ export default function Task({
   scheduledTime,
   spentTime,
   spentAllTime,
-  onDelete,
   changeSpentTime,
 }) {
   const [hours, setHours] = useState(0);
@@ -55,9 +56,11 @@ export default function Task({
     }
   };
 
-  const handleClick = () => {
-    onDelete();
-  };
+  const route = '/tasks/';
+  const dispatch = useDispatch();
+  const handleClick = useCallback(() =>
+    dispatch(projectOperations.removeDocument(route, id)),
+  );
 
   return (
     <li id={id} className={styles.el}>

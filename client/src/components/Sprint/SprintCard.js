@@ -22,7 +22,7 @@ export default function SprintCard(sprint) {
   const route = '/sprints/';
   const dispatch = useDispatch();
   const handleClick = useCallback(() =>
-    dispatch(projectOperations.removeDocument(route, id)),
+    dispatch(projectOperations.removeDocument(route, _id)),
   );
 
   return (

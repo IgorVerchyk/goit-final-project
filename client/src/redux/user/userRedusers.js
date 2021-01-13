@@ -79,6 +79,10 @@ const error = createReducer(null, {
   [userActions.loginError]: (state, { payload }) => errors(state, payload),
   [userActions.currentUserError]: (state, { payload }) =>
     errors(state, payload),
+  [projectsActions.addProjectError]: (state, { payload }) =>
+    errors(state, payload),
+  [projectsActions.addDocumentError]: (state, { payload }) =>
+    errors(state, payload),
 });
 
 export default combineReducers({

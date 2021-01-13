@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import tasksOperations from '../../../redux/tasks/tasksOperations';
+import projectOperations from '../../../redux/projects/projectsOperations';
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
 import styles from './TaskAddForm.module.scss';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 export default function TaskAddForm({ onCloseModal, sprintId }) {
-  const [title, setTitle] = useState('');
-  const [time, setTime] = useState('');
+  const [descr, setTitle] = useState('');
+  const [planTime, setTime] = useState(Number);
 
   const dispatch = useDispatch();
 
@@ -20,11 +18,16 @@ export default function TaskAddForm({ onCloseModal, sprintId }) {
     setTime(ev.target.value);
   };
   const handleSubmit = ev => {
-    console.log('form', sprintId, title, time);
     ev.preventDefault();
-    // const createTask = task => console.log(`add task with: `, task);
-    dispatch(tasksOperations.addTask({ sprintId, title, time }));
-    // createTask({ title, time });
+
+    // form body
+    const route = '/tasks/';
+
+    const body = { descr, planTime };
+    const id = sprintId;
+
+    dispatch(projectOperations.addDocument({ route, id, body }));
+
     onCloseModal();
   };
 
