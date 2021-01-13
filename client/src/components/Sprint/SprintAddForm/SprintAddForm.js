@@ -5,7 +5,7 @@ import './datePicker.scss';
 import './calendar.scss';
 import s from './SprintAddForm.module.scss';
 
-export default function SprintEditor({ onClose }) {
+export default function SprintAddForm({ onClose }) {
   const [sprintName, setSprintName] = useState('');
   const [value, onChange] = useState(new Date());
   const [duration, setSprintDuration] = useState('');
