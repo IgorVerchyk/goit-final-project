@@ -17,6 +17,8 @@ function SprintPage() {
   const [filter, setFilter] = useState('');
   const { projectId } = useLocation();
   const { sprintId } = useParams();
+  const type = 'спринт';
+  const backTo = '/sprints';
 
   const project = useSelector(state =>
     state.user.currentUser.projects.find(project => project._id === projectId),
@@ -35,12 +37,6 @@ function SprintPage() {
   const changeSpentTime = () => {};
 
   /////////////////////////////////
-  const array = [
-    { id: 1, title: 'Sprint 1', color: '#00ff00' },
-    { id: 2, title: 'Very long name of boring sprint' },
-    { id: 3, title: 'Sprint3' },
-    { id: 4, title: 'zzzzzzzzzz zzzzzzzz xxxxx' },
-  ];
 
   const sprintTitle = 'Sprint Burndown Chart 1';
 
@@ -55,15 +51,11 @@ function SprintPage() {
     <section className={styles.sprint}>
       {/* ////////////////Sidebar///////////////////// */}
       <Sidebar
-        type={'спринт'}
-        // list={}
-        list={array}
-        backTo={() => {
-          console.log('Back to ...');
-        }}
-      >
-        <SprintAddForm />
-      </Sidebar>
+        type={type}
+        list={[...project.sprints]}
+        backTo={backTo}
+        children={SprintAddForm}
+      ></Sidebar>
       {/* ////////////////////////////////////////////// */}
 
       <section className={styles.tasks}>

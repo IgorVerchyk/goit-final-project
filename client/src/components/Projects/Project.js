@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Sidebar from '../Sidebar/Sidebar';
 import ProjectEditor from './ProjectEditor';
 import AddSprint from '../Sprint/SprintAddForm/SprintAddForm';
+import AddPeopleEditor from '../AddPeopleEditor//AddPeopleEditor';
 import SprintCard from '../Sprint/SprintCard';
 import Modal from '../Modal/Modal';
 import AddNewBtn from '../Buttons/ButtonAddNew/ButtonAddNew';
@@ -10,6 +11,7 @@ import AddNewBtn from '../Buttons/ButtonAddNew/ButtonAddNew';
 import s from './SingleProject.module.scss';
 
 export default function Project(props) {
+  ///modal for create project
   const [isModal, setisModal] = useState(false);
 
   const toggleModal = () => {
@@ -17,10 +19,22 @@ export default function Project(props) {
     setisModal(toggledIsOpen);
   };
 
+  const [isColModal, setisColModal] = useState(false);
+
+  const toggleColModal = () => {
+    const toggledIsOpen = isModal ? false : true;
+    setisColModal(toggledIsOpen);
+  };
+
   const projectId = props.id.location.state.id;
   console.log(' proj projectid', projectId);
   const project = useSelector(state =>
     state.user.currentUser.projects.find(project => project._id === projectId),
+  );
+  const colaborators = useSelector(
+    state =>
+      state.user.currentUser.projects.find(project => project._id === projectId)
+        .colaborators,
   );
   const allProjects = useSelector(state => state.user.currentUser.projects);
   const type = 'проект';
@@ -42,7 +56,9 @@ export default function Project(props) {
             <div className={s.editTitle} />
           </div>
           <p className={s.descr}>{descr}</p>
-          <p className={s.addPeople}>Додати людей</p>
+          <p className={s.addPeople} onClick={setisColModal}>
+            Додати людей
+          </p>
         </div>
 
         <ul className={s.list}>
@@ -64,6 +80,17 @@ export default function Project(props) {
         <Modal
           closeModal={toggleModal}
           children={<AddSprint onClose={toggleModal} />}
+        />
+      )}
+      {isColModal && (
+        <Modal
+          closeModal={toggleColModal}
+          children={
+            <AddPeopleEditor
+              onClose={toggleColModal}
+              colaborators={[...colaborators]}
+            />
+          }
         />
       )}
     </section>
