@@ -1,21 +1,30 @@
 import { createAction } from '@reduxjs/toolkit';
 
-export const fetchProjectsRequest = createAction(
-  'projects/fetchProjectsRequest',
-);
-export const fetchProjectsSuccess = createAction(
-  'projects/fetchProjectsSuccess',
-);
-export const fetchProjectsError = createAction('projects/fetchProjectsError');
+// create new project
+const addProjectRequest = createAction('projects/addProjectRequest');
+const addProjectSuccess = createAction('projects/addProjectSuccess');
+const addProjectError = createAction('projects/addProjectError');
+// create document
+const addDocumentRequest = createAction('projects/addDocumentRequest');
+const addDocumentSuccess = createAction('projects/addDocumentSuccess');
+const addDocumentError = createAction('projects/addDocumentError');
+// remove document
+const removeDocumentRequest = createAction('projects/removeDocumentRequest');
+const removeDocumentSuccess = createAction('projects/removeDocumentSuccess');
+const removeDocumentError = createAction('projects/removeDocumentError');
 
-export const addProjectRequest = createAction('projects/addProjectRequest');
-export const addProjectSuccess = createAction('projects/addProjectSuccess');
-export const addProjectError = createAction('projects/addProjectError');
+// eslint-disable-next-line import/no-anonymous-default-export
+const projectsActions = {
+  addProjectRequest,
+  addProjectSuccess,
+  addProjectError,
 
-export const removeProjectRequest = createAction(
-  'projects/removeProjectRequest',
-);
-export const removeProjectSuccess = createAction(
-  'projects/removeProjectSuccess',
-);
-export const removeProjectError = createAction('projects/removeProjectError');
+  addDocumentRequest,
+  addDocumentSuccess,
+  addDocumentError,
+
+  removeDocumentRequest,
+  removeDocumentSuccess,
+  removeDocumentError,
+};
+export default projectsActions;

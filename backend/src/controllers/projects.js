@@ -1,6 +1,6 @@
-const ProjectService = require("../services/project");
-const UsersService = require("../services/user");
-const { HttpCode } = require("../helpers/constants");
+const ProjectService = require('../services/project');
+const UsersService = require('../services/user');
+const { HttpCode } = require('../helpers/constants');
 
 const userServise = new UsersService();
 const projectService = new ProjectService();
@@ -54,6 +54,28 @@ const removeProject = async (req, res, next) => {
   try {
     const { params, user } = req;
     const result = await projectService.removeProject(params, user);
+    return result
+      ? res.status(200).json(result)
+      : res.status(404).json({ message: `Project ${projectId} not found ` });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+const updateColaborators = async (req, res, next) => {
+  try {
+    const {
+      params: { projectId },
+      body,
+      user: { id: userId },
+    } = req;
+
+    const result = await projectService.updateColaborators(
+      userId,
+      projectId,
+      body
+    );
+
     return result
       ? res.status(200).json(result)
       : res.status(404).json({ message: `Project ${projectId} not found ` });
@@ -168,4 +190,5 @@ module.exports = {
   createTask,
   removeTask,
   updateTaskTime,
+  updateColaborators,
 };

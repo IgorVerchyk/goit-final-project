@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import TrashBtn from '../TrashBtn/TrashBtn';
 import styles from './SingleProjectCard.module.scss';
+import projectOperations from '../../redux/projects/projectsOperations';
 
 export default function SingleProjectCard({
   id,
@@ -10,12 +12,12 @@ export default function SingleProjectCard({
   projectName,
   descr,
   routeTo,
-  onRemove,
 }) {
-  const handleClick = () => {
-    onRemove();
-  };
-  console.log(id);
+  const route = '/';
+  const dispatch = useDispatch();
+  const handleClick = useCallback(() =>
+    dispatch(projectOperations.removeDocument(route, id)),
+  );
 
   return (
     <li className={styles.el} style={{ backgroundColor: color }}>
@@ -25,7 +27,7 @@ export default function SingleProjectCard({
           state: { id: id },
         }}
         className={styles.a}
-        projectId={{ id }}
+        id={{ id }}
       >
         <h2 className={styles.title}>{projectName}</h2>
         <p className={styles.text}>{descr}</p>

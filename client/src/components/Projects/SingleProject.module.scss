@@ -1,0 +1,163 @@
+@import '../../helpers/scss/vars.module.scss';
+.container {
+  display: flex;
+}
+.projectContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+}
+.projectTitle {
+  letter-spacing: 0.04em;
+}
+.editTitle {
+  overflow: hidden;
+  background-image: url('../../assets/images/editTitle.svg');
+  background-position: center;
+}
+.descr {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.04em;
+  margin-top: 20px;
+}
+.addPeople {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.04em;
+  text-decoration-line: underline;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  &::before {
+    position: absolute;
+    display: inline-block;
+    content: '';
+    width: 20px;
+    height: 20px;
+    left: 10px;
+    background-image: url('../../assets/images/addPeople.svg');
+  }
+}
+@media screen and (max-width: 469px) {
+  .container {
+    flex-direction: column;
+  }
+  .titleContainer {
+    margin-top: 30px;
+  }
+  .addSprint {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+  }
+  .createSprint {
+    display: none;
+  }
+  .projectTitle {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 32px;
+    margin-left: 20px;
+  }
+  .editTitle {
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+  }
+  .descr {
+    width: 280px;
+    margin-left: 20px;
+  }
+  .addPeople {
+    margin-left: 40px;
+  }
+  .list {
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media screen and (max-width: 1204px) {
+  .createSprint {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) {
+  .titleContainer {
+    margin-top: 40px;
+  }
+  .addSprint {
+    position: absolute;
+    right: 40px;
+    top: 120px;
+  }
+
+  .projectTitle {
+    font-size: 36px;
+    line-height: 42px;
+    margin-left: 20px;
+  }
+  .editTitle {
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+  }
+  .descr {
+    width: 452px;
+    margin-left: 20px;
+  }
+  .addPeople {
+    margin-left: 50px;
+    &::before {
+      left: 15px;
+    }
+  }
+  .list {
+    width: 453px;
+    margin-left: 20px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .projectTitle {
+    margin-left: 70px;
+  }
+  .addSprint {
+    right: 281px;
+    top: 120px;
+  }
+  .createSprint {
+    position: absolute;
+    right: 86px;
+    top: 131px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0.04em;
+  }
+  .descr {
+    width: 400px;
+    margin-left: 70px;
+  }
+  .addPeople {
+    margin-left: 100px;
+    &::before {
+      left: 70px;
+    }
+  }
+  .list {
+    width: 870px;
+    margin-left: 70px;
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { authSelectors } from '../redux/auth/';
+import { userSelectors } from '../redux/user/';
 
 const PublicRoute = ({
   component: Component,
@@ -23,7 +23,7 @@ const PublicRoute = ({
 );
 
 const mapStateToProps = state => ({
-  isAuthenticated: authSelectors.isAuthenticated(state),
+  isAuthenticated: userSelectors.isAuthenticated(state),
 });
 
 export default connect(mapStateToProps)(PublicRoute);

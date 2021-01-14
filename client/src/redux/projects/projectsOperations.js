@@ -1,67 +1,51 @@
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 
-import {
-  addProjectRequest,
-  addProjectSuccess,
-  addProjectError,
-  fetchProjectsRequest,
-  fetchProjectsSuccess,
-  fetchProjectsError,
-  removeProjectRequest,
-  removeProjectSuccess,
-  removeProjectError,
-} from './projectsActions';
+import projectsActions from './projectsActions';
 
 const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
 // const baseURL = 'http://localhost:3456/api/projects';
 
-const fetchProjects = () => async dispatch => {
-  dispatch(fetchProjectsRequest());
-
-  try {
-    const { data } = await axios.get(`${baseURL}/`);
-    dispatch(fetchProjectsSuccess(data));
-  } catch (error) {
-    dispatch(fetchProjectsError(error.message));
-  }
-};
-
-const addProject = ({ projectName, descr, color }) => async dispatch => {
-  // const header = {
-  //   headers: {
-  //     authorization: `Bearer ${token}`,
-  //   },
-  // };
-  // console.log(header);
-  dispatch(addProjectRequest());
-
+const addProject = ({ title, descr, color }) => async dispatch => {
+  dispatch(projectsActions.addProjectRequest());
   try {
     const { data } = await axios.post(`${baseURL}/`, {
-      title: projectName,
+      title,
       descr,
       color,
     });
 
-    dispatch(addProjectSuccess(data));
+    dispatch(projectsActions.addProjectSuccess(data));
   } catch (error) {
-    dispatch(addProjectError(error));
+    dispatch(projectsActions.addProjectError(error));
   }
 };
 
-const removeProject = id => async dispatch => {
-  console.log('remove operations');
-  dispatch(removeProjectRequest(id));
+const removeDocument = (route, id) => async dispatch => {
+  dispatch(projectsActions.removeDocumentRequest());
+  try {
+    const { data } = await axios.delete(`${baseURL}${route}${id}`);
+    dispatch(projectsActions.removeDocumentSuccess(data));
+  } catch (error) {
+    dispatch(projectsActions.removeDocumentError(error.message));
+  }
+};
 
-  await axios
-    .delete(`${baseURL}/${id}`)
-    .then(() => dispatch(removeProjectSuccess(id)))
-    .catch(error => dispatch(removeProjectError(error.message)));
+const addDocument = ({ id, route, body }) => async dispatch => {
+  console.log(id);
+  console.log(body);
+  dispatch(projectsActions.addDocumentRequest);
+  try {
+    const { data } = await axios.post(`${baseURL}${route}${id}`, body);
+
+    dispatch(projectsActions.addDocumentSuccess(data));
+  } catch (error) {
+    dispatch(projectsActions.addDocumentError(error));
+  }
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  fetchProjects,
   addProject,
-  removeProject,
+  addDocument,
+  removeDocument,
 };

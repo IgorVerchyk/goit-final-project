@@ -21,7 +21,7 @@ const routes = [
     path: '/registration',
     label: 'Home',
     exact: true,
-    component: lazy(() => import('./views/RegisterView')),
+    component: lazy(() => import('./views/RegistrationView')),
     private: false,
     restricted: false,
   },
@@ -35,7 +35,7 @@ const routes = [
     restricted: false,
   },
   {
-    path: '/projects/:projectId/:sprintId',
+    path: '/sprints/:sprintId',
     label: 'Home',
     exact: true,
     component: lazy(() => import('./views/SprintPage/SprintPage.js')),

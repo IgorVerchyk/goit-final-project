@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import projectOperations from '../../redux/projects/projectsOperations';
 import s from './SprintCard.module.scss';
+import { useParams } from 'react-router-dom';
 
 export default function SprintCard(sprint) {
-  const { routeTo, id, description, startDate, finDate } = sprint;
-
-  // const nstartDate = mydate.toLocaleString('uk', {
-  //   month: 'short',
-  //   day: 'numeric',
-  // }).slice(0, nstartDate.length - 1)
+  const { routeTo, _id, title, startDate, endDate } = sprint;
+  const { projectId } = useParams();
+  console.log('SprintCard', projectId, _id);
 
   const newDates = date => {
     const mydate = new Date(date);
@@ -19,18 +19,30 @@ export default function SprintCard(sprint) {
     const newDate = nDate.slice(0, nDate.length - 1);
     return newDate;
   };
+  const route = '/sprints/';
+  const dispatch = useDispatch();
+  const handleClick = useCallback(() =>
+    dispatch(projectOperations.removeDocument(route, _id)),
+  );
 
   return (
-    <li key={id} className={s.el}>
-      <Link to={routeTo} className="link" id={id}>
-        <h2 className={s.description}>{description}</h2>
+    <li key={_id} className={s.el}>
+      <Link
+        to={{
+          pathname: `${routeTo}`,
+          projectId: `${projectId}`,
+        }}
+        className="link"
+        id={_id}
+      >
+        <h2 className={s.description}>{title}</h2>
         <div className={s.wrap}>
           <p className={s.dataStart}>Дата початку</p>
           <span>{newDates(startDate)}</span>
         </div>
         <div className={s.wrap}>
           <p className={s.dataStart}>Дата закінчення</p>
-          <span>{newDates(finDate)}</span>
+          <span>{newDates(endDate)}</span>
         </div>
         <div className={s.wrap}>
           <p>Тривалість</p>
@@ -38,7 +50,7 @@ export default function SprintCard(sprint) {
         </div>
       </Link>
 
-      <div className={s.trashWrapper}>
+      <div className={s.trashWrapper} onClick={handleClick}>
         <svg
           width="20"
           height="20"

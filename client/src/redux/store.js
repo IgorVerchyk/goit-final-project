@@ -10,19 +10,17 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import projectsReducer from './projects/projectsRedusers';
-import { authReducers } from './auth/';
+import { userReducers } from './user/';
 
 const authPersistConfig = {
-  key: 'auth',
+  key: 'user',
   storage,
   whitelist: ['token'],
 };
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(authPersistConfig, authReducers),
-    projects: projectsReducer,
+    user: persistReducer(authPersistConfig, userReducers),
   },
   middleware: getDefaultMiddleware({
     serializableCheck: {

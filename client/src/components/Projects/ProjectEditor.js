@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import projectsOperations from '../../redux/projects/projectsOperations';
 import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
@@ -7,7 +7,7 @@ import PrimaryBtn from '../Buttons/PrimaryBtn/PrimaryBtn';
 import s from './ProjectEditor.module.scss';
 
 export default function ProjectEditor({ onClose }) {
-  const [projectName, setProjectName] = useState('');
+  const [title, setProjectName] = useState('');
   const [descr, setDescr] = useState('');
   const [color, setColor] = useState('');
   const [errorName, setErrorName] = useState('');
@@ -33,18 +33,18 @@ export default function ProjectEditor({ onClose }) {
     e => {
       e.preventDefault();
 
-      if (projectName === '') {
+      if (title === '') {
         setErrorName(true);
         return;
       } else if (descr === '') {
         setErrorDescr(true);
         return;
       }
-      dispatch(projectsOperations.addProject({ projectName, descr, color }));
+      dispatch(projectsOperations.addProject({ title, descr, color }));
 
       onClose();
     },
-    [dispatch, projectName, descr, color, onClose],
+    [dispatch, title, descr, color, onClose],
   );
 
   const handleCanselingBtn = e => {
@@ -64,7 +64,7 @@ export default function ProjectEditor({ onClose }) {
           <br />
           <input
             type="text"
-            value={projectName}
+            value={title}
             onChange={handleChangeName}
             name="projectName"
             className={!errorName ? s.formInput : s.error}

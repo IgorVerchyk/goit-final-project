@@ -1,24 +1,26 @@
-.el{
+.el {
+  display: inline-block;
+  margin: 0;
   box-shadow: 0px 6px 26px rgba(0, 5, 97, 0.1);
-  border-radius : 5px;
+  border-radius: 5px;
   padding: 20px;
   background: #ffff;
-  }
-  a{
-    text-decoration: none;
-    color: #181C27;
-  }
-  .wrap{
-    display: flex;
-    justify-content: space-between;
-  }
-.description{
+}
+a {
+  text-decoration: none;
+  color: #181c27;
+}
+.wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.description {
   margin-bottom: 20px;
 }
 .trashWrapper {
   position: absolute;
   height: 20px;
-  width: 20px; 
+  width: 20px;
 
   &:hover,
   &:focus {
@@ -28,64 +30,71 @@
 }
 
 @media screen and (max-width: 767px) {
-.el{
-width: 280px;
-height: 170px;
-&:not(:last-child) {
-  margin-bottom: 10px;
-}
-}
+  .el {
+    width: 280px;
+    height: 170px;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
 
-.description{
-  font-size: 16px;
-}
+  .description {
+    font-size: 16px;
+  }
 
-.wrap{
-  font-size: 10px;
-  margin-bottom: 15px;
-}
-.trashWrapper {
+  .wrap {
+    font-size: 10px;
+    margin-bottom: 15px;
+  }
+  .trashWrapper {
     margin-left: 220px;
   }
 }
 
-  @media screen and (min-width: 768px) {
-    .el {
-  width: 216px;
-  height: 255px;
-    &:not(:last-child) {
-      margin-right: 20px;
-    }
-    }
-  .description{
+@media screen and (min-width: 768px) {
+  .description {
     font-size: 18px;
     margin-bottom: 30px;
   }
-  .wrap{
+  .wrap {
     font-size: 14px;
     margin-bottom: 22px;
   }
-  .dataStart{
+  .dataStart {
     width: 98px;
   }
   .trashWrapper {
     margin-left: 157px;
   }
 }
-  
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .el {
+    width: 216px;
+    height: 255px;
+    margin-bottom: 20px;
+    &:not(:nth-child(2n)) {
+      margin-right: 20px;
+    }
+  }
+}
+
 @media screen and (min-width: 1280px) {
   .el {
     width: 270px;
-    height: 224px;}
-    .description{
-    
-      margin-bottom: 25px;
+    height: 224px;
+    margin: 0;
+    margin-bottom: 30px;
+    &:not(:nth-child(3n)) {
+      margin-right: 30px;
     }
-    .wrap{
-     
-      margin-bottom: 18px;
-    }
-    .trashWrapper {
-      margin-left: 220px;
-    }
+  }
+  .description {
+    margin-bottom: 25px;
+  }
+  .wrap {
+    margin-bottom: 18px;
+  }
+  .trashWrapper {
+    margin-left: 220px;
+  }
 }

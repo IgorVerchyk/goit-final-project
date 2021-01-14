@@ -5,7 +5,7 @@ import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import AppLayout from './AppLayout';
 
-import { authOperations } from '../redux/auth/';
+import { userOperations } from '../redux/user/';
 
 import routes from '../routes';
 
@@ -37,5 +37,5 @@ class App extends Component {
 }
 
 export default connect(null, {
-  onGetCurrentUser: authOperations.getCurrentUser,
+  onGetCurrentUser: userOperations.getCurrentUser,
 })(App);

@@ -1,21 +1,11 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 
 import ProjectsList from '../components/Projects/ProjectsList';
 
-class Projects extends Component {
-
-  render() {
-    return (
-      <>
-        <ProjectsList />
-      </>
-    );
-  }
+export default function Projects() {
+  return (
+    <>
+      <ProjectsList />
+    </>
+  );
 }
-
-
-const mapDispatchToProps = {};
-
-
-export default connect(null, mapDispatchToProps)(Projects);
