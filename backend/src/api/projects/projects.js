@@ -12,7 +12,7 @@ projectsRouter.delete('/:projectId', auth, ProjectController.removeProject);
 
 projectsRouter.get('/:projectId', ProjectController.getProject);
 
-projectsRouter.patch('/:projectId', ProjectController.updateColaborators);
+projectsRouter.patch('/:projectId', auth, ProjectController.updateColaborators);
 
 projectsRouter.post(
   '/sprints/:projectId',
