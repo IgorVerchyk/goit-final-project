@@ -1,0 +1,122 @@
+@import '../../../helpers/scss/mixin.scss';
+@import '../../../helpers/scss/vars.module.scss';
+
+.title {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 50px;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.formInput {
+  width: 100%;
+  padding: 10px;
+  display: block;
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid rgba($text-color, 0.2);
+  transition: border-bottom 0.25s linear;
+  outline: none;
+  margin-bottom: 50px;
+
+  &:focus {
+    border-bottom: 1px solid $text-color;
+  }
+
+  @include tablets {
+    padding: 8px;
+  }
+}
+.durationInput {
+  width: 180px;
+  padding: 10px 0;
+  font-size: 18px;
+  border: none;
+  border-bottom: 1px solid rgba($text-color, 0.2);
+  transition: border-bottom 0.25s linear;
+  outline: none;
+  margin-bottom: 50px;
+
+  &:focus {
+    border-bottom: 1px solid $text-color;
+  }
+}
+
+.formSelect {
+  width: 30%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid rgba($text-color, 0.2);
+  margin-bottom: 50px;
+}
+
+.error {
+  width: 100%;
+  padding: 10px;
+  display: block;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid red;
+  transition: border-bottom 0.25s linear;
+  outline: none;
+  margin-bottom: 50px;
+}
+.cansel {
+  cursor: pointer;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+
+  + label {
+    display: flex;
+    width: 200px;
+    align-items: center;
+    user-select: none;
+    color: $textShaded;
+    letter-spacing: 0.04em;
+    margin-bottom: 50px;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 1px solid #d1d2d4;
+      border-radius: 50%;
+      margin-right: 0.5em;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 50% 50%;
+    }
+  }
+}
+
+.checkbox:not(:disabled):not(:checked) + label:hover::before {
+  border-color: $primary-color;
+}
+
+.checkbox:checked + label::before {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3ccircle cx='8' cy='8' r='8' fill='%23FF6B08' /%3e%3c/svg%3e");
+}
+
+.calendar {
+  display: inline-block;
+}
+.calendarLabel {
+  display: block;
+  font-size: 14px;
+  line-height: 17px;
+  color: $textShaded;
+}
