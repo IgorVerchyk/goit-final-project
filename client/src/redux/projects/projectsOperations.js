@@ -43,25 +43,9 @@ const addDocument = ({ id, route, body }) => async dispatch => {
   }
 };
 
-const addColaborators = ({ projectId, email }) => async dispatch => {
-  console.log(email);
-  // const update = { colaborators: [email] };
-  dispatch(projectsActions.addColaboratorsRequest());
-  try {
-    const { data } = await axios.patch(`${baseURL}/${projectId}`, {
-      email,
-    });
-
-    dispatch(projectsActions.addColaboratorsSuccess(data));
-  } catch (error) {
-    dispatch(projectsActions.addColaboratorsError(error));
-  }
-};
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   addProject,
   addDocument,
-  addColaborators,
   removeDocument,
 };

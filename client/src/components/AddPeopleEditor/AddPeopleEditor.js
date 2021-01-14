@@ -26,14 +26,14 @@ export default function AddPeopleEditor({ onClose, props }) {
         return;
       }
 
-      dispatch(projectsOperations.addColaborators({ email, projectId }));
+      dispatch(projectsOperations.addDocument({ email, projectId }));
 
       onClose();
     },
     [dispatch, email, projectId, onClose],
   );
 
-  const handleCanselingBtn = e => {
+  const handleCanselingBtn = () => {
     onClose();
     setEmail('');
   };
