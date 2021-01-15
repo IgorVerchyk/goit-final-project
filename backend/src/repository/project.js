@@ -23,10 +23,11 @@ class ProjectRepository {
     return this.model.findById({ _id: id });
   }
 
-  createNewProject({ title, descr, owner }) {
+  createNewProject({ title, descr, color, owner }) {
     return new this.model({
       title,
       descr,
+      color,
       owner,
     }).save();
   }
@@ -48,7 +49,7 @@ class ProjectRepository {
   updateColaborators(id, data) {
     return this.model.findByIdAndUpdate(
       { _id: id },
-      { $push: { colaborators: [{ data }] } },
+      { $push: { colaborators: data } },
       { safe: true, multi: false }
     );
   }

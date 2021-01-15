@@ -30,10 +30,11 @@ class ProjectService {
     }
   }
 
-  async createProject({ id }, { title, descr }) {
+  async createProject({ id }, { title, descr, color }) {
     const newProject = await this.repositories.project.createNewProject({
       title,
       descr,
+      color,
       owner: id,
     });
 
