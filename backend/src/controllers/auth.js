@@ -63,10 +63,10 @@ const login = async (req, res, next) => {
 };
 
 const token = async (req, res, next) => {
-  const { email, password, refreshToken } = req.body;
-  // console.log(req.body);
+  const { email, refreshToken } = req.body;
+  console.log(req.body);
   try {
-    const result = await authService.token({ email, password, refreshToken });
+    const result = await authService.token({ email, refreshToken });
 
     if (result.refreshToken && result.refreshToken in tokenList) {
       const response = {
