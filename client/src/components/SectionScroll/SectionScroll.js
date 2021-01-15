@@ -33,7 +33,7 @@ export default function SectionScroll({ arr }) {
       </button>
       <ul className={styles.scrollList}>
         {list.map(listItem => (
-          <SectionScrollItem key={listItem.id} {...listItem} />
+          <SectionScrollItem key={listItem._id} {...listItem} />
         ))}
       </ul>
       <button className={styles.scrollButtom} onClick={incrementIndex}>

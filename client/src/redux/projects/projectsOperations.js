@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import projectsActions from './projectsActions';
 
-const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
-// const baseURL = 'http://localhost:3456/api/projects';
+//const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
+const baseURL = 'http://localhost:3001/api/projects';
 
 const addProject = ({ title, descr, color }) => async dispatch => {
   dispatch(projectsActions.addProjectRequest());
@@ -42,10 +42,23 @@ const addDocument = ({ id, route, body }) => async dispatch => {
     dispatch(projectsActions.addDocumentError(error));
   }
 };
+const updateDocument = ({ id, route, body }) => async dispatch => {
+  console.log(id);
+  console.log(body);
+  dispatch(projectsActions.updateDocumentRequest);
+  try {
+    const { data } = await axios.patch(`${baseURL}${route}${id}`, body);
+
+    dispatch(projectsActions.updateDocumentSuccess(data));
+  } catch (error) {
+    dispatch(projectsActions.updateDocumentError(error));
+  }
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   addProject,
   addDocument,
   removeDocument,
+  updateDocument,
 };
