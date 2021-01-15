@@ -8,6 +8,10 @@ const addProjectError = createAction('projects/addProjectError');
 const addDocumentRequest = createAction('projects/addDocumentRequest');
 const addDocumentSuccess = createAction('projects/addDocumentSuccess');
 const addDocumentError = createAction('projects/addDocumentError');
+// add coaborators
+const addColaboratorsRequest = createAction('projects/addColaboratorsRequest');
+const addColaboratorsSuccess = createAction('projects/addColaboratorsSuccess');
+const addColaboratorsError = createAction('projects/addColaboratorsError');
 // remove document
 const removeDocumentRequest = createAction('projects/removeDocumentRequest');
 const removeDocumentSuccess = createAction('projects/removeDocumentSuccess');
@@ -22,6 +26,10 @@ const projectsActions = {
   addDocumentRequest,
   addDocumentSuccess,
   addDocumentError,
+
+  addColaboratorsRequest,
+  addColaboratorsSuccess,
+  addColaboratorsError,
 
   removeDocumentRequest,
   removeDocumentSuccess,

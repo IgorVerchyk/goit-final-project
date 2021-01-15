@@ -48,6 +48,7 @@ const currentUser = createReducer(
     [userActions.getCurrentUserSuccess]: (state, { payload }) => payload,
     [projectsActions.addProjectSuccess]: (state, { payload }) => payload,
     [projectsActions.addDocumentSuccess]: (state, { payload }) => payload,
+    [projectsActions.addColaboratorsSuccess]: (state, { payload }) => payload,
     [projectsActions.removeDocumentSuccess]: (state, { payload }) => payload,
   },
 );
@@ -83,6 +84,8 @@ const error = createReducer(null, {
   [projectsActions.addProjectError]: (state, { payload }) =>
     errors(state, payload),
   [projectsActions.addDocumentError]: (state, { payload }) =>
+    errors(state, payload),
+  [projectsActions.addColaboratorsError]: (state, { payload }) =>
     errors(state, payload),
 });
 
