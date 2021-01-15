@@ -12,7 +12,7 @@ export default function SectionScroll({ arr }) {
 
   useEffect(() => {
     setList(
-      arr.map(
+      arr.filter(
         project =>
           arr.indexOf(project) >= index && arr.indexOf(project) < index + 6,
       ),
