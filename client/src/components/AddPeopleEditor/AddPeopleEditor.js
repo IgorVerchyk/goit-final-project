@@ -26,7 +26,7 @@ export default function AddPeopleEditor({ onClose, props }) {
         return;
       }
 
-      dispatch(projectsOperations.addDocument({ email, projectId }));
+      dispatch(projectsOperations.addColaborators({ projectId, email }));
 
       onClose();
     },

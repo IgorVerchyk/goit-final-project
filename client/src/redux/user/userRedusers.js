@@ -48,6 +48,7 @@ const currentUser = createReducer(
     [userActions.getCurrentUserSuccess]: (state, { payload }) => payload,
     [projectsActions.addProjectSuccess]: (state, { payload }) => payload,
     [projectsActions.addDocumentSuccess]: (state, { payload }) => payload,
+    [projectsActions.addColaboratorsSuccess]: (state, { payload }) => payload,
     [projectsActions.removeDocumentSuccess]: (state, { payload }) => payload,
   },
 );
