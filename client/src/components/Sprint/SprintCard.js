@@ -8,11 +8,9 @@ import { useParams } from 'react-router-dom';
 export default function SprintCard(sprint) {
   const { routeTo, _id, title, startDate, endDate } = sprint;
   const { projectId } = useParams();
-  console.log('SprintCard', projectId, _id);
+  // console.log('SprintCard', projectId, _id);
 
   const newDates = date => {
-    console.log(date);
-
     const mydate = new Date(date);
     const nDate = mydate.toLocaleString('uk', {
       month: 'short',
