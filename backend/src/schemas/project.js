@@ -21,6 +21,7 @@ const projectSchema = new Schema({
   owner: { type: Types.ObjectId, ref: 'user' },
   title: { type: String },
   descr: { type: String },
+  color: { type: String },
 });
 
 projectSchema.plugin(mongoosePaginate);
