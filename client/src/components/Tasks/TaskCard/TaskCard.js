@@ -58,8 +58,9 @@ export default function Task({
 
   const route = '/tasks/';
   const dispatch = useDispatch();
-  const handleClick = useCallback(() =>
-    dispatch(projectOperations.removeDocument(route, id)),
+  const handleClick = useCallback(
+    () => dispatch(projectOperations.removeDocument(route, id)),
+    [dispatch, id],
   );
 
   return (

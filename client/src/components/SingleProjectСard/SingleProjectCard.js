@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -15,8 +15,10 @@ export default function SingleProjectCard({
 }) {
   const route = '/';
   const dispatch = useDispatch();
-  const handleClick = () =>
-    dispatch(projectOperations.removeDocument(route, id));
+  const handleClick = useCallback(
+    () => dispatch(projectOperations.removeDocument(route, id)),
+    [dispatch, id],
+  );
 
   return (
     <li className={styles.el} style={{ backgroundColor: color }}>
