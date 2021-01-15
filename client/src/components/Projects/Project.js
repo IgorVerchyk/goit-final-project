@@ -27,7 +27,7 @@ export default function Project(props) {
   };
 
   const projectId = props.id.location.state.id;
-  console.log(' proj projectid', projectId);
+
   const project = useSelector(state =>
     state.user.currentUser.projects.find(project => project._id === projectId),
   );
