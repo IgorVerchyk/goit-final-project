@@ -22,7 +22,7 @@ const errors = (state, payload) => {
 
   if (payload.message === 'Request failed with status code 503') {
     notification.error(
-      `Вибачте, сервер не відповідає пізніше.`,
+      `Вибачте, сервер не відповідає, спробуйте пізніше.`,
       `Виникла помилка!`,
     );
   }
