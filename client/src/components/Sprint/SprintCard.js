@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import projectOperations from '../../redux/projects/projectsOperations';
@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 export default function SprintCard(sprint) {
   const { routeTo, _id, title, startDate, endDate } = sprint;
   const { projectId } = useParams();
-  console.log('SprintCard', projectId, _id);
+  // console.log('SprintCard', projectId, _id);
 
   const newDates = date => {
     const mydate = new Date(date);
@@ -19,12 +19,16 @@ export default function SprintCard(sprint) {
     const newDate = nDate.slice(0, nDate.length - 1);
     return newDate;
   };
+
+  const dateDif = (d1, d2) => {
+    const start = new Date(d1);
+    const end = new Date(d2);
+    return Math.floor((end - start) / (1000 * 60 * 60));
+  };
+
   const route = '/sprints/';
   const dispatch = useDispatch();
-  const handleClick = useCallback(() =>
-    dispatch(projectOperations.removeDocument(route, _id)),
-  );
-
+  const handleClick = dispatch(projectOperations.removeDocument(route, _id));
   return (
     <li key={_id} className={s.el}>
       <Link
@@ -46,7 +50,7 @@ export default function SprintCard(sprint) {
         </div>
         <div className={s.wrap}>
           <p>Тривалість</p>
-          <span>226</span>
+          <span>{dateDif(startDate, endDate)}</span>
         </div>
       </Link>
 

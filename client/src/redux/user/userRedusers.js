@@ -12,13 +12,17 @@ const errors = (state, payload) => {
     notification.error(`Цей e-mail вже використовується.`, `Виникла помилка!`);
   }
 
-  if (payload.message === `Cannot read property 'token' of null`) {
+  if (payload.message === `Cannot read property 'password' of null`) {
     notification.error(`Цей e-mail не зареєстровано.`, `Виникла помилка!`);
+  }
+
+  if (payload.message === `Invalid creadentials` && payload.code === 401) {
+    notification.error(`Не вірний email або пароль.`, `Виникла помилка!`);
   }
 
   if (payload.message === 'Request failed with status code 503') {
     notification.error(
-      `Вибачте, сервер не відповідає пізніше.`,
+      `Вибачте, сервер не відповідає, спробуйте пізніше.`,
       `Виникла помилка!`,
     );
   }
@@ -50,6 +54,7 @@ const currentUser = createReducer(
     [projectsActions.addDocumentSuccess]: (state, { payload }) => payload,
     [projectsActions.addColaboratorsSuccess]: (state, { payload }) => payload,
     [projectsActions.removeDocumentSuccess]: (state, { payload }) => payload,
+    [projectsActions.updateDocumentSuccess]: (state, { payload }) => payload,
   },
 );
 
@@ -85,8 +90,11 @@ const error = createReducer(null, {
     errors(state, payload),
   [projectsActions.addDocumentError]: (state, { payload }) =>
     errors(state, payload),
-  [projectsActions.addColaboratorsError]: (state, { payload }) =>
+
+  [projectsActions.removeDocumentError]: (state, { payload }) =>
     errors(state, payload),
+  // [projectsActions.updateDocumentError]: (state, { payload }) =>
+
 });
 
 export default combineReducers({

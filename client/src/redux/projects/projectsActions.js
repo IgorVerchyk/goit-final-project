@@ -16,6 +16,10 @@ const addColaboratorsError = createAction('projects/addColaboratorsError');
 const removeDocumentRequest = createAction('projects/removeDocumentRequest');
 const removeDocumentSuccess = createAction('projects/removeDocumentSuccess');
 const removeDocumentError = createAction('projects/removeDocumentError');
+// update update
+const updateDocumentRequest = createAction('projects/updateDocumentRequest');
+const updateDocumentSuccess = createAction('projects/updateDocumentSuccess');
+const updateDocumentError = createAction('projects/updateDocumentError');
 
 // eslint-disable-next-line import/no-anonymous-default-export
 const projectsActions = {
@@ -34,5 +38,9 @@ const projectsActions = {
   removeDocumentRequest,
   removeDocumentSuccess,
   removeDocumentError,
+
+  updateDocumentRequest,
+  updateDocumentSuccess,
+  updateDocumentError,
 };
 export default projectsActions;
