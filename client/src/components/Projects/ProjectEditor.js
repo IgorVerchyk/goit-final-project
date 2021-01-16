@@ -9,7 +9,6 @@ import s from './ProjectEditor.module.scss';
 export default function ProjectEditor({ onClose }) {
   const [title, setProjectName] = useState('');
   const [descr, setDescr] = useState('');
-  const [color, setColor] = useState('');
   const [errorName, setErrorName] = useState('');
   const [errorDescr, setErrorDescr] = useState('');
 
@@ -24,7 +23,6 @@ export default function ProjectEditor({ onClose }) {
 
   const handleChangeName = e => {
     setProjectName(e.target.value);
-    setColor(randomColor());
   };
   const handleChangeDescr = e => {
     setDescr(e.currentTarget.value);
@@ -40,19 +38,20 @@ export default function ProjectEditor({ onClose }) {
         setErrorDescr(true);
         return;
       }
-      dispatch(projectsOperations.addProject({ title, descr, color }));
+      const color = randomColor();
+      // console.log('editor', color);
+      dispatch(projectsOperations.addProject({ title, descr }, color));
 
       onClose();
     },
-    [dispatch, title, descr, color, onClose],
+    [dispatch, title, descr, onClose],
   );
 
   const handleCanselingBtn = e => {
-    console.log(e);
+    // console.log(e);
     onClose();
     setProjectName('');
     setDescr('');
-    setColor('');
   };
 
   return (
