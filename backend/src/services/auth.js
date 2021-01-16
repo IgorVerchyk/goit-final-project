@@ -17,7 +17,7 @@ class AuthService {
 
     const isPasswordValid = await this.repositories.users.validatePassword(
       password,
-      user.password
+      user.password,
     );
 
     if (!user || !isPasswordValid) {
@@ -29,17 +29,18 @@ class AuthService {
     const token = jwt.sign(payload, SECRET_KEY, {
       expiresIn: config.tokenLife,
     });
-    // const refreshToken = jwt.sign(payload, REFRESH_TOKEN_KEY, {
-    //   expiresIn: config.refreshTokenLife,
-    // });
+    const refreshToken = jwt.sign(payload, REFRESH_TOKEN_KEY, {
+      expiresIn: config.refreshTokenLife,
+    });
     await this.repositories.users.updateToken(id, token);
 
     const createdUser = await this.repositories.users.findById(id);
-
+    createdUser.refreshToken = refreshToken;
+    console.log(createdUser);
     return createdUser;
   }
 
-  async token({ email, password, refreshToken }) {
+  async token({ email, refreshToken }) {
     const user = await this.repositories.users.findByEmail(email);
     user.refreshToken = refreshToken;
     return user;

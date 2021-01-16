@@ -32,15 +32,11 @@ export default function Project(props) {
   };
 
   const projectId = props.id.location.state.id;
-  console.log(' proj projectid', projectId);
+
   const project = useSelector(state =>
     state.user.currentUser.projects.find(project => project._id === projectId),
   );
-  const colaborators = useSelector(
-    state =>
-      state.user.currentUser.projects.find(project => project._id === projectId)
-        .colaborators,
-  );
+
   const allProjects = useSelector(state => state.user.currentUser.projects);
   const type = 'проект';
   const backTo = '/';
@@ -99,12 +95,7 @@ export default function Project(props) {
       {isColModal && (
         <Modal
           closeModal={toggleColModal}
-          children={
-            <AddPeopleEditor
-              onClose={toggleColModal}
-              colaborators={[...colaborators]}
-            />
-          }
+          children={<AddPeopleEditor onClose={toggleColModal} props={props} />}
         />
       )}
     </section>
