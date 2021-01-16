@@ -17,6 +17,7 @@ export default function SingleProjectCard({
   const dispatch = useDispatch();
   const handleClick = useCallback(
     () => dispatch(projectOperations.removeDocument(route, id)),
+
     [dispatch, id],
   );
 

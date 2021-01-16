@@ -7,6 +7,7 @@ import AddPeopleEditor from '../AddPeopleEditor//AddPeopleEditor';
 import SprintCard from '../Sprint/SprintCard';
 import Modal from '../Modal/Modal';
 import AddNewBtn from '../Buttons/ButtonAddNew/ButtonAddNew';
+import TitleEditor from '../TitleEditor/TitleEditor';
 
 import s from './SingleProject.module.scss';
 
@@ -35,6 +36,7 @@ export default function Project(props) {
   const type = 'проект';
   const backTo = '/';
   const descr = project.descr;
+  const routeForTitleReduact = '/projects/';
 
   return (
     <section className={s.container}>
@@ -46,10 +48,12 @@ export default function Project(props) {
       />
       <div className={s.projectContainer}>
         <div className={s.project}>
-          <div className={s.titleContainer}>
-            <h2 className={s.projectTitle}>{project.title}</h2>
-            <div className={s.editTitle} />
-          </div>
+          <TitleEditor
+            id={projectId}
+            route={routeForTitleReduact}
+            title={project.title}
+          />
+
           <p className={s.descr}>{descr}</p>
           <p className={s.addPeople} onClick={setisColModal}>
             Додати людей

@@ -16,8 +16,7 @@ class UserService {
     const verifyToken = nanoid();
     const { email } = body;
     try {
-      // await this.emailService.sendEmail(verifyToken, email);
-      console.log(verifyToken);
+      await this.emailService.sendEmail(verifyToken, email);
       const data = await this.repositories.users.create({
         ...body,
         verifyToken,
