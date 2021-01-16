@@ -39,7 +39,6 @@ export default function ProjectEditor({ onClose }) {
         return;
       }
       const color = randomColor();
-      // console.log('editor', color);
       dispatch(projectsOperations.addProject({ title, descr }, color));
 
       onClose();
