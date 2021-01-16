@@ -13,8 +13,13 @@
   align-items: center;
 }
 .projectTitle {
+  display: inline-block;
   letter-spacing: 0.04em;
 }
+.projectTitle[disabled] {
+  border: 0;
+}
+
 .editTitle {
   overflow: hidden;
   background-image: url('../../assets/images/editTitle.svg');

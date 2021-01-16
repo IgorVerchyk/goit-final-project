@@ -25,6 +25,12 @@ export default function Project(props) {
     setisColModal(!isColModal);
   };
 
+  const [redact, isRedact] = useState(false);
+
+  const toggleIsRedact = () => {
+    isRedact(!redact);
+  };
+
   const projectId = props.id.location.state.id;
   console.log(' proj projectid', projectId);
   const project = useSelector(state =>
@@ -51,7 +57,16 @@ export default function Project(props) {
       <div className={s.projectContainer}>
         <div className={s.project}>
           <div className={s.titleContainer}>
-            <h2 className={s.projectTitle}>{project.title}</h2>
+            <form onClick={toggleIsRedact}>
+              <input
+                input
+                type="string"
+                value={project.title}
+                className={s.projectTitle}
+                disabled
+              />
+            </form>
+            {/* <h2 className={s.projectTitle}>{project.title}</h2> */}
             <div className={s.editTitle} />
           </div>
           <p className={s.descr}>{descr}</p>
