@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import projectsOperations from '../../redux/projects/projectsOperations';
 import { useDispatch } from 'react-redux';
+import AutosizeInput from 'react-input-autosize';
 
 import styles from './TitleEditor.module.scss';
 
-export default function TitleEditor(id, title, route) {
+export default function TitleEditor({ id, title, route }) {
   const [isActive, setIsActive] = useState(false);
 
   const toRedactTitle = () => {
@@ -20,14 +21,19 @@ export default function TitleEditor(id, title, route) {
     [dispatch, id, route, body],
   );
   return (
-    <form onClick={toRedactTitle}>
-      <input
-        input
-        type="string"
-        value={title}
-        className={styles.projectTitle}
-        disabled={!isActive}
-      />
-    </form>
+    <div className={styles.titleContainer}>
+      <form onClick={toRedactTitle}>
+        <AutosizeInput
+          name="title"
+          type="string"
+          value={title}
+          placeholder={title}
+          className={styles.projectTitle}
+          disabled={!isActive}
+          onChange={onChangeTitle}
+        />
+      </form>
+      <div className={styles.editTitle} onClick={onChangeTitle} />
+    </div>
   );
 }

@@ -1,10 +1,60 @@
 @import '../../helpers/scss/vars.module.scss';
 
+.titleContainer {
+  display: flex;
+  align-items: center;
+}
+.titleEditForm {
+  display: inline-flex;
+  width: auto;
+}
 .projectTitle {
   border: none;
-  display: inline-block;
+  display: flex;
   box-sizing: inherit;
   margin: 0;
   padding: 0;
   background-color: inherit;
+  max-width: 200px;
+}
+.editTitle {
+  overflow: hidden;
+  background-image: url('../../assets/images/editTitle.svg');
+  background-position: center;
+}
+@media screen and (max-width: 469px) {
+  .titleContainer {
+    margin-top: 30px;
+  }
+  .projectTitle {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 32px;
+    margin-left: 20px;
+  }
+  .editTitle {
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .titleContainer {
+    margin-top: 40px;
+  }
+  .projectTitle {
+    font-size: 36px;
+    line-height: 42px;
+    margin-left: 20px;
+  }
+  .editTitle {
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .projectTitle {
+    margin-left: 70px;
+  }
 }

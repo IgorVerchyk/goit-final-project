@@ -8,31 +8,6 @@
   flex-direction: column;
 }
 
-.titleContainer {
-  display: flex;
-  align-items: center;
-}
-.titleEditForm {
-  display: inline-flex;
-  width: auto;
-}
-.projectTitle {
-  border: none;
-  display: inline-block;
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-  background-color: inherit;
-}
-.projectTitle[disabled] {
-  border: 0;
-}
-
-.editTitle {
-  overflow: hidden;
-  background-image: url('../../assets/images/editTitle.svg');
-  background-position: center;
-}
 .descr {
   font-style: normal;
   font-weight: 500;
@@ -66,9 +41,7 @@
   .container {
     flex-direction: column;
   }
-  .titleContainer {
-    margin-top: 30px;
-  }
+
   .addSprint {
     position: fixed;
     right: 20px;
@@ -77,17 +50,7 @@
   .createSprint {
     display: none;
   }
-  .projectTitle {
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 32px;
-    margin-left: 20px;
-  }
-  .editTitle {
-    width: 20px;
-    height: 20px;
-    margin-left: 20px;
-  }
+
   .descr {
     width: 280px;
     margin-left: 20px;
@@ -107,25 +70,12 @@
   }
 }
 @media screen and (min-width: 768px) {
-  .titleContainer {
-    margin-top: 40px;
-  }
   .addSprint {
     position: absolute;
     right: 40px;
     top: 120px;
   }
 
-  .projectTitle {
-    font-size: 36px;
-    line-height: 42px;
-    margin-left: 20px;
-  }
-  .editTitle {
-    width: 20px;
-    height: 20px;
-    margin-left: 20px;
-  }
   .descr {
     width: 452px;
     margin-left: 20px;
@@ -142,9 +92,6 @@
   }
 }
 @media screen and (min-width: 1280px) {
-  .projectTitle {
-    margin-left: 70px;
-  }
   .addSprint {
     right: 281px;
     top: 120px;

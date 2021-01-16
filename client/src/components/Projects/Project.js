@@ -26,12 +26,6 @@ export default function Project(props) {
     setisColModal(!isColModal);
   };
 
-  const [redact, isRedact] = useState(false);
-
-  const toggleIsRedact = () => {
-    isRedact(!redact);
-  };
-
   const projectId = props.id.location.state.id;
 
   const project = useSelector(state =>
@@ -54,15 +48,12 @@ export default function Project(props) {
       />
       <div className={s.projectContainer}>
         <div className={s.project}>
-          <div className={s.titleContainer}>
-            <TitleEditor
-              id={projectId}
-              route={routeForTitleReduact}
-              title={project.title}
-            />
-            {/* <h2 className={s.projectTitle}>{project.title}</h2> */}
-            <div className={s.editTitle} onClick={toggleIsRedact} />
-          </div>
+          <TitleEditor
+            id={projectId}
+            route={routeForTitleReduact}
+            title={project.title}
+          />
+
           <p className={s.descr}>{descr}</p>
           <p className={s.addPeople} onClick={setisColModal}>
             Додати людей
