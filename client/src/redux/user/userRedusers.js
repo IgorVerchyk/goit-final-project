@@ -12,7 +12,7 @@ const errors = (state, payload) => {
     notification.error(`Цей e-mail вже використовується.`, `Виникла помилка!`);
   }
 
-  if (payload.message === `Cannot read property 'token' of null`) {
+  if (payload.message === `Cannot read property 'password' of null`) {
     notification.error(`Цей e-mail не зареєстровано.`, `Виникла помилка!`);
   }
 
