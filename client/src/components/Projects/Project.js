@@ -36,7 +36,6 @@ export default function Project(props) {
   const type = 'проект';
   const backTo = '/';
   const descr = project.descr;
-  const routeForTitleReduact = '/projects/';
 
   return (
     <section className={s.container}>
@@ -50,8 +49,8 @@ export default function Project(props) {
         <div className={s.project}>
           <TitleEditor
             id={projectId}
-            route={routeForTitleReduact}
-            title={project.title}
+            route={backTo}
+            initialTitle={project.title}
           />
 
           <p className={s.descr}>{descr}</p>

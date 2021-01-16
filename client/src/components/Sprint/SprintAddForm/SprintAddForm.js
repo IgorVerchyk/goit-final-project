@@ -7,7 +7,7 @@ import './datePicker.scss';
 import './calendar.scss';
 import s from './SprintAddForm.module.scss';
 
-export default function SprintAddForm({ onClose }) {
+export default function SprintAddForm({ id, onClose }) {
   const [title, setSprintName] = useState('');
   const [startDate, onChange] = useState(new Date());
   const [duration, setSprintDuration] = useState('');
@@ -23,6 +23,9 @@ export default function SprintAddForm({ onClose }) {
   };
   const dispatch = useDispatch();
 
+  const body = { title, startDate, duration };
+  const route = '/sprints/';
+
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
@@ -33,14 +36,13 @@ export default function SprintAddForm({ onClose }) {
       } else if (duration === '') {
         setErrorDuration(true);
       }
+
       //backend logic
-      else
-        dispatch(
-          projectsOperations.addDocument({ title, startDate, duration }),
-        );
+      else dispatch(projectsOperations.addDocument({ id, route, body }));
+      console.log(body);
       onClose();
     },
-    [dispatch, title, startDate, duration, onClose],
+    [dispatch, id, title, startDate, duration, onClose],
   );
 
   const handleCanselingBtn = e => {
@@ -68,9 +70,9 @@ export default function SprintAddForm({ onClose }) {
           value="yes"
           className={s.checkbox}
         ></input>
-        <label for="days">Попередні дні</label>
+        <label htmlFor="days">Попередні дні</label>
         <div className={s.calendar}>
-          <label for="date" className={s.calendarLabel}>
+          <label htmlFor="date" className={s.calendarLabel}>
             Дата закінчення
           </label>
           <DatePicker
