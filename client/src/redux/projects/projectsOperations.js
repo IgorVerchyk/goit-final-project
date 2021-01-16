@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import projectsActions from './projectsActions';
 
-//const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
-const baseURL = 'http://localhost:3001/api/projects';
+const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
+// const baseURL = 'http://localhost:3001/api/projects';
 
 const addProject = ({ title, descr }, color) => async dispatch => {
   // console.log(color);
