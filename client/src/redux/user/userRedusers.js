@@ -16,6 +16,10 @@ const errors = (state, payload) => {
     notification.error(`Цей e-mail не зареєстровано.`, `Виникла помилка!`);
   }
 
+  if (payload.message === `Invalid creadentials` && payload.code === 401) {
+    notification.error(`Не вірний email або пароль.`, `Виникла помилка!`);
+  }
+
   if (payload.message === 'Request failed with status code 503') {
     notification.error(
       `Вибачте, сервер не відповідає пізніше.`,
@@ -89,7 +93,7 @@ const error = createReducer(null, {
 
   [projectsActions.removeDocumentError]: (state, { payload }) =>
     errors(state, payload),
-  [projectsActions.updateDocumentError]: (state, { payload }) =>
+  // [projectsActions.updateDocumentError]: (state, { payload }) =>
 
 });
 
