@@ -22,8 +22,7 @@ export default function Project(props) {
   const [isColModal, setisColModal] = useState(false);
 
   const toggleColModal = () => {
-    const toggledIsOpen = isModal ? false : true;
-    setisColModal(toggledIsOpen);
+    setisColModal(!isColModal);
   };
 
   const projectId = props.id.location.state.id;

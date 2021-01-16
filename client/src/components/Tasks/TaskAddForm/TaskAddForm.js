@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import projectOperations from '../../../redux/projects/projectsOperations';
 import PrimaryBtn from '../../Buttons/PrimaryBtn/PrimaryBtn';
@@ -7,9 +7,6 @@ import { useFormik } from 'formik';
 import validate from './validateTaskForm';
 
 export default function TaskAddForm({ onClose, sprintId }) {
-  const [descr, setDescr] = useState('');
-  const [planTime, setPlanTime] = useState(Number);
-
   const initialValues = {
     descr: '',
     planTime: '',

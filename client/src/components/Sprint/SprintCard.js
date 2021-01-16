@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import projectOperations from '../../redux/projects/projectsOperations';
@@ -21,10 +21,7 @@ export default function SprintCard(sprint) {
   };
   const route = '/sprints/';
   const dispatch = useDispatch();
-  const handleClick = useCallback(() =>
-    dispatch(projectOperations.removeDocument(route, _id)),
-  );
-
+  const handleClick = dispatch(projectOperations.removeDocument(route, _id));
   return (
     <li key={_id} className={s.el}>
       <Link

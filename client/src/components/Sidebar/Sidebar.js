@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ButtonAddNew from '../Buttons/ButtonAddNew/ButtonAddNew';
+import { Link } from 'react-router-dom';
 import Modal from '../../components/Modal/Modal';
 import SectionScroll from '../SectionScroll/SectionScroll';
 import styles from './Sidebar.module.scss';
@@ -15,9 +16,11 @@ export default function Sidebar({ type, list, backTo, children }) {
   return (
     <div className={styles.sidebar}>
       <div className={styles.backToAll}>
-        <p className={styles.backToAllText} onClick={backTo}>
-          Показати <span className={styles.backToAllTextAccent}>{type}и</span>
-        </p>
+        <Link to={backTo}>
+          <p className={styles.backToAllText}>
+            Показати <span className={styles.backToAllTextAccent}>{type}и</span>
+          </p>
+        </Link>
       </div>
 
       <SectionScroll arr={list} />

@@ -50,6 +50,7 @@ const currentUser = createReducer(
     [projectsActions.addDocumentSuccess]: (state, { payload }) => payload,
     [projectsActions.addColaboratorsSuccess]: (state, { payload }) => payload,
     [projectsActions.removeDocumentSuccess]: (state, { payload }) => payload,
+    [projectsActions.updateDocumentSuccess]: (state, { payload }) => payload,
   },
 );
 
@@ -85,8 +86,11 @@ const error = createReducer(null, {
     errors(state, payload),
   [projectsActions.addDocumentError]: (state, { payload }) =>
     errors(state, payload),
-  [projectsActions.addColaboratorsError]: (state, { payload }) =>
+
+  [projectsActions.removeDocumentError]: (state, { payload }) =>
     errors(state, payload),
+  [projectsActions.updateDocumentError]: (state, { payload }) =>
+
 });
 
 export default combineReducers({

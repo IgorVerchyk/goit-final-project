@@ -12,9 +12,11 @@ projectsRouter.delete("/:projectId", auth, ProjectController.removeProject);
 
 projectsRouter.get("/:projectId", ProjectController.getProject);
 
+
 projectsRouter.patch("/:projectId", auth, ProjectController.updateProjectTitle);
 
 projectsRouter.patch("/:projectId", auth, ProjectController.updateColaborators);
+
 
 projectsRouter.post(
   "/sprints/:projectId",
@@ -36,7 +38,9 @@ projectsRouter.delete(
 
 projectsRouter.post("/tasks/:sprintId", auth, ProjectController.createTask);
 
+
 projectsRouter.patch("/tasks/:taskId", auth, ProjectController.updateTaskTitle);
+
 
 projectsRouter.patch("/tasks/:taskId", auth, ProjectController.updateTaskTime);
 

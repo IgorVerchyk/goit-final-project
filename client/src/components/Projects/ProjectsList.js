@@ -14,7 +14,7 @@ export default function ProjectsList() {
   const currentProjects = useSelector(state => state.user.currentUser.projects);
   useEffect(() => {
     setProjects(currentProjects);
-  });
+  }, [currentProjects]);
 
   const toggleModal = () => {
     const toggledIsOpen = isModal ? false : true;
