@@ -1,8 +1,8 @@
-const projectsRouter = require('../api/projects/projects');
-const { ProjectRepository } = require('../repository');
-const { UsersRepository } = require('../repository');
-const { Repository } = require('../repository');
-const Project = require('../schemas/project');
+const projectsRouter = require("../api/projects/projects");
+const { ProjectRepository } = require("../repository");
+const { UsersRepository } = require("../repository");
+const { Repository } = require("../repository");
+const Project = require("../schemas/project");
 
 class ProjectService {
   constructor() {
@@ -26,7 +26,7 @@ class ProjectService {
       const result = await this.repositories.project.getProject(id);
       return result;
     } catch (e) {
-      throw new Error('No project with such ID');
+      throw new Error("No project with such ID");
     }
   }
 
@@ -67,12 +67,41 @@ class ProjectService {
       throw e;
     }
   }
+  async updateProjectTitle(userId, projectId, body) {
+    try {
+      const { title } = body;
+
+      const result = await this.repositories.project.updateProjectTitle(
+        projectId,
+        title
+      );
+
+      return this.checkResultAndGetUser(result, userId);
+    } catch (e) {
+      throw e;
+    }
+  }
 
   async updateColaborators(userId, projectId, body) {
     try {
       const result = await this.repositories.project.updateColaborators(
         projectId,
         body
+      );
+
+      return this.checkResultAndGetUser(result, userId);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async updateSprintTitle(userId, sprintId, body) {
+    try {
+      const { title } = body;
+
+      const result = await this.repositories.project.updateSprintTitle(
+        sprintId,
+        title
       );
 
       return this.checkResultAndGetUser(result, userId);
@@ -95,6 +124,17 @@ class ProjectService {
     const result = await this.repositories.project.createNewTask(
       sprintId,
       body
+    );
+
+    return this.checkResultAndGetUser(result, userId);
+  }
+
+  async updateTaskTitle(userId, taskId, body) {
+    const { descr } = body;
+
+    const result = await this.repositories.project.updateTaskTitle(
+      taskId,
+      descr
     );
 
     return this.checkResultAndGetUser(result, userId);
