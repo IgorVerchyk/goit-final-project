@@ -90,7 +90,7 @@ const error = createReducer(null, {
   [projectsActions.removeDocumentError]: (state, { payload }) =>
     errors(state, payload),
   [projectsActions.updateDocumentError]: (state, { payload }) =>
-
+    errors(state, payload),
 });
 
 export default combineReducers({
