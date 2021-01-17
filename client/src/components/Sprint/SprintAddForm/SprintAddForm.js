@@ -12,7 +12,7 @@ export default function SprintAddForm({ id, onClose }) {
   const [initialDate, onChange] = useState(new Date());
   const test1 = initialDate.getTime();
   console.log(test1);
-  const [duration, setSprintDuration] = useState('');
+  const [sprintDuration, setSprintDuration] = useState('');
   const [errorName, setErrorName] = useState('');
   const [errorDuration, setErrorDuration] = useState('');
 
@@ -38,16 +38,17 @@ export default function SprintAddForm({ id, onClose }) {
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
-      const endDate = getEndDate(initialDate, duration);
+      const endDate = getEndDate(initialDate, sprintDuration);
       const startDate = initialDate.getTime();
-      const body = { title, startDate, endDate };
+      const duration = Number(sprintDuration);
+      const body = { title, startDate, endDate, duration };
       const test = new Date(endDate);
       console.log(test);
 
       if (title === '') {
         setErrorName(true);
         return;
-      } else if (duration === '') {
+      } else if (sprintDuration === '') {
         setErrorDuration(true);
       }
 
@@ -56,7 +57,7 @@ export default function SprintAddForm({ id, onClose }) {
       console.log(body);
       onClose();
     },
-    [dispatch, id, title, initialDate, duration, onClose],
+    [dispatch, id, title, initialDate, sprintDuration, onClose],
   );
 
   const handleCanselingBtn = e => {
@@ -103,7 +104,7 @@ export default function SprintAddForm({ id, onClose }) {
         </div>
         <input
           type="text"
-          value={duration}
+          value={sprintDuration}
           onChange={handleChangeDuration}
           name="duration"
           className={!errorDuration ? s.durationInput : s.error}

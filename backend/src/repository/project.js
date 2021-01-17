@@ -38,10 +38,10 @@ class ProjectRepository {
     });
   }
 
-  createNewSprint(id, { title, startDate, endDate }) {
+  createNewSprint(id, { title, startDate, endDate, duration }) {
     return this.model.findByIdAndUpdate(
       { _id: id },
-      { $push: { sprints: { title, startDate, endDate } } },
+      { $push: { sprints: { title, startDate, endDate, duration } } },
       { safe: true, multi: false }
     );
   }
