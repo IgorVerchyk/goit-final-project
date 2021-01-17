@@ -20,12 +20,6 @@ export default function SprintCard(sprint) {
     return newDate;
   };
 
-  const dateDif = (d1, d2) => {
-    const start = new Date(d1);
-    const end = new Date(d2);
-    return Math.floor((end - start) / (1000 * 60 * 60));
-  };
-
   const route = '/sprints/';
   const dispatch = useDispatch();
   const handleClick = useCallback(
@@ -53,7 +47,7 @@ export default function SprintCard(sprint) {
         </div>
         <div className={s.wrap}>
           <p>Тривалість</p>
-          <span>{dateDif(startDate, endDate)}</span>
+          <span>{sprint.duration}</span>
         </div>
       </Link>
 

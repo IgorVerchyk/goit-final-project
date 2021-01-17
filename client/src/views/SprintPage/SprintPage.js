@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import projectsOperations from '../../redux/tasks/tasksOperations';
 import styles from './SprintPage.module.scss';
 import SprintHeader from '../../components/Sprint/SprintHeader/SprintHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';

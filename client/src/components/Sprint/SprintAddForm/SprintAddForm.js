@@ -9,7 +9,9 @@ import s from './SprintAddForm.module.scss';
 
 export default function SprintAddForm({ id, onClose }) {
   const [title, setSprintName] = useState('');
-  const [startDate, onChange] = useState(new Date());
+  const [initialDate, onChange] = useState(new Date());
+  const test1 = initialDate.getTime();
+  console.log(test1);
   const [duration, setSprintDuration] = useState('');
   const [errorName, setErrorName] = useState('');
   const [errorDuration, setErrorDuration] = useState('');
@@ -23,12 +25,24 @@ export default function SprintAddForm({ id, onClose }) {
   };
   const dispatch = useDispatch();
 
-  const body = { title, startDate, duration };
+  const getEndDate = (startDate, duration) => {
+    const days = Math.ceil((duration / 9) * 86400000);
+    console.log(days);
+    const initial = startDate.getTime();
+    const endDate = initial + days;
+    return endDate;
+  };
+
   const route = '/sprints/';
 
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
+      const endDate = getEndDate(initialDate, duration);
+      const startDate = initialDate.getTime();
+      const body = { title, startDate, endDate };
+      const test = new Date(endDate);
+      console.log(test);
 
       if (title === '') {
         setErrorName(true);
@@ -42,7 +56,7 @@ export default function SprintAddForm({ id, onClose }) {
       console.log(body);
       onClose();
     },
-    [dispatch, id, title, startDate, duration, onClose],
+    [dispatch, id, title, initialDate, duration, onClose],
   );
 
   const handleCanselingBtn = e => {
@@ -77,7 +91,7 @@ export default function SprintAddForm({ id, onClose }) {
           </label>
           <DatePicker
             onChange={onChange}
-            value={startDate}
+            value={initialDate}
             locale="Uk"
             name="date"
             required={true}

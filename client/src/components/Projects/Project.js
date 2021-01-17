@@ -77,7 +77,7 @@ export default function Project(props) {
       {isModal && (
         <Modal
           closeModal={toggleModal}
-          children={<AddSprint onClose={toggleModal} />}
+          children={<AddSprint onClose={toggleModal} id={projectId} />}
         />
       )}
       {isColModal && (
