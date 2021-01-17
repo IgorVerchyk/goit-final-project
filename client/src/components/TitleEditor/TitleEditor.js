@@ -16,7 +16,6 @@ export default function TitleEditor({ id, initialTitle, route }) {
   const onChangeTitle = useCallback(
     () => dispatch(projectsOperations.updateDocument({ id, route, body })),
     [dispatch, id, route, body],
-    console.log('title', body),
   );
 
   const toRedactTitle = () => {

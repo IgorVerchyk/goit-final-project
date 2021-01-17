@@ -15,6 +15,7 @@
   line-height: 17px;
   letter-spacing: 0.04em;
   margin-top: 20px;
+  cursor: default;
 }
 .addPeople {
   font-style: normal;
@@ -27,6 +28,7 @@
   text-decoration-line: underline;
   margin-top: 30px;
   margin-bottom: 30px;
+  cursor: pointer;
   &::before {
     position: absolute;
     display: inline-block;
@@ -105,6 +107,7 @@
     font-size: 18px;
     line-height: 22px;
     letter-spacing: 0.04em;
+    cursor: default;
   }
   .descr {
     width: 400px;
