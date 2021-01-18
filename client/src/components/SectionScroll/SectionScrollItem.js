@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 
 import s from './SectionScroll.module.scss';
 
-export default function SectionScrollItem({ id, title, descr }) {
-  const link = `projects/:${id}`;
+export default function SectionScrollItem({ _id, title, color }, route) {
+  console.log(_id, title, color);
+  const link = `${route}/:${_id}`;
+  const toTrimTitle = title =>
+    title.length >= 15 ? title.substr(0, 15) + '...' : title;
+  const redTitle = toTrimTitle(title);
   return (
-    <li className={s.scrollItem}>
+    <li className={s.scrollItemContainer}>
       <Link to={link}>
-        <h2 className={s.title}>{title}</h2>
-        <p className={s.text}>{descr}</p>
+        <div className={s.scrollItem}>
+          <div className={s.icon} style={{ backgroundColor: color }}></div>
+          <h2 className={s.title}>{redTitle}</h2>
+        </div>
       </Link>
     </li>
   );

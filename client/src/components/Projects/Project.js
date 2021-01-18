@@ -36,6 +36,7 @@ export default function Project(props) {
   const type = 'проект';
   const backTo = '/';
   const descr = project.descr;
+  const route = '/projects';
 
   return (
     <section className={s.container}>
@@ -43,6 +44,7 @@ export default function Project(props) {
         type={type}
         list={[...allProjects]}
         backTo={backTo}
+        route={route}
         children={ProjectEditor}
       />
       <div className={s.projectContainer}>

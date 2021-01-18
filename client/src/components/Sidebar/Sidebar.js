@@ -5,7 +5,7 @@ import Modal from '../../components/Modal/Modal';
 import SectionScroll from '../SectionScroll/SectionScroll';
 import styles from './Sidebar.module.scss';
 
-export default function Sidebar({ type, list, backTo, children }) {
+export default function Sidebar({ type, list, route, backTo, children }) {
   const [isModal, setisModal] = useState(false);
   const toggleModal = () => {
     const toggledIsOpen = isModal ? false : true;
@@ -23,7 +23,7 @@ export default function Sidebar({ type, list, backTo, children }) {
         </Link>
       </div>
 
-      <SectionScroll arr={list} />
+      <SectionScroll arr={list} route={route} />
 
       <div className={styles.addNew}>
         <ButtonAddNew setShowModal={toggleModal} />
