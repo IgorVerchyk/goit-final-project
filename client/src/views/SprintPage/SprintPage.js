@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import styles from './SprintPage.module.scss';
 import SprintHeader from '../../components/Sprint/SprintHeader/SprintHeader';
+import ChartModal from '../../components/ChartModal';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TaskCard from '../../components/Tasks/TaskCard/TaskCard';
 import ButtonAddNew from '../../components/Buttons/ButtonAddNew/ButtonAddNew';
@@ -92,10 +93,6 @@ function SprintPage() {
           <p className={styles.createTaskText}>Створити задачу</p>
         </div>
         {/* ////////////////////////////////////////////// */}
-
-        <div className={styles.showGraph}>
-          <ButtonShowGraph />
-        </div>
       </section>
       {/* /////////////ModalTasks/////////////////////// */}
 
@@ -108,6 +105,7 @@ function SprintPage() {
           />
         </Modal>
       )}
+      {sprint.tasks.length > 1 && <ChartModal sprint={sprint} />}
       {/* ////////////////////////////////////////////// */}
     </section>
   );
