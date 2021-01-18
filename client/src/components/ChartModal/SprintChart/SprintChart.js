@@ -74,8 +74,6 @@ const SprintChart = ({ sprint }) => {
     return arr;
   };
 
-  console.log(caclRedLineData());
-
   const data = {
     labels: labels,
     datasets: [
