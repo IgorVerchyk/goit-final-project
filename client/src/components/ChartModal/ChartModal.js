@@ -10,7 +10,7 @@ import s from './ChartModal.module.scss';
 
 Modal.setAppElement('body');
 
-const ChartModal = () => {
+const ChartModal = ({ sprint }) => {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -33,7 +33,7 @@ const ChartModal = () => {
       >
         <CloseModalBtn onButtonClick={closeModal} />
         <h1 className={s.chartHeader}>Burndown Chart(Calendar Team)</h1>
-        <SprintChart />
+        <SprintChart sprint={sprint} />
       </Modal>
       <ChartModalBtn onButtonClick={openModal} />
     </>
