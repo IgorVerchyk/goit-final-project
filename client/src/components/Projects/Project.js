@@ -31,8 +31,8 @@ export default function Project(props) {
   const project = useSelector(
     state =>
       state.user.currentUser.projects &&
-      state.user.currentUser.projects.find(project =>
-        project._id === projectId ? project : state,
+      state.user.currentUser.projects.find(
+        project => project._id === projectId,
       ),
   );
 
