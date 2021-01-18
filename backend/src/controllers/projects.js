@@ -194,30 +194,6 @@ const createTask = async (req, res, next) => {
   }
 };
 
-const updateTaskTitle = async (req, res, next) => {
-  console.log("updateTaskTitle");
-  try {
-    const {
-      params: { taskId },
-      body,
-      user: { id: userId },
-    } = req;
-
-    if (!body.descr) {
-      return next();
-    }
-
-    const result = await projectService.updateTaskTitle(userId, taskId, body);
-
-    return result
-      ? res.status(200).json(result)
-      : res.status(404).json({ message: `Task ${taskId} not found ` });
-  } catch (e) {
-    console.log(e);
-    next(e);
-  }
-};
-
 const updateTaskTime = async (req, res, next) => {
   try {
     const {

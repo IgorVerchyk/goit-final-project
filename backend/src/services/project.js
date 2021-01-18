@@ -129,19 +129,9 @@ class ProjectService {
     return this.checkResultAndGetUser(result, userId);
   }
 
-  async updateTaskTitle(userId, taskId, body) {
-    const { descr } = body;
-
-    const result = await this.repositories.project.updateTaskTitle(
-      taskId,
-      descr
-    );
-
-    return this.checkResultAndGetUser(result, userId);
-  }
-
   async updateTaskTime(userId, taskId, body) {
-    const { spendTime } = body;
+    const { spendTime, total } = body;
+    await this.repositories.project.updateTaskTotal(tastId, total);
 
     const result = await this.repositories.project.updateTaskTime(
       taskId,

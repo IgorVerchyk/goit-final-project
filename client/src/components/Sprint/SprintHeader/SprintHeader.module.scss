@@ -261,6 +261,7 @@
     height: 50px;
     font-weight: normal;
     font-style: normal;
+    margin-top: 40px;
 
     font-size: 14px;
     line-height: 17px;
@@ -269,6 +270,7 @@
   }
   .tasksHeaderText {
     width: 100px;
+    cursor: default;
     &:first-child {
       margin-right: 100px;
     }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 import styles from './SprintPage.module.scss';
 import SprintHeader from '../../components/Sprint/SprintHeader/SprintHeader';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -22,7 +23,7 @@ function SprintPage() {
   const project = useSelector(state =>
     state.user.currentUser.projects.find(project => project._id === projectId),
   );
-  const tasks = project.sprints.find(sprint => sprint._id === sprintId).tasks;
+  const sprint = project.sprints.find(sprint => sprint._id === sprintId);
 
   const handleInputFilter = ev => {
     setFilter(ev.target.value);
@@ -37,14 +38,26 @@ function SprintPage() {
 
   /////////////////////////////////
 
-  const sprintTitle = 'Sprint Burndown Chart 1';
+  function getDates(startDate, endDate) {
+    const dateArray = [];
+    let currentDate = moment(startDate);
+    const stopDate = moment(endDate);
+    while (currentDate <= stopDate) {
+      dateArray.push(moment(currentDate).format('MMM Do'));
+      currentDate = moment(currentDate).add(1, 'days');
+    }
+    return dateArray;
+  }
+  const dateArr = getDates(sprint.startDate, sprint.endDate);
+  console.log(dateArr);
 
   const filterTasks = (tasks, filter) => {
     return tasks.filter(task =>
       task.descr.toLowerCase().includes(filter.toLowerCase()),
     );
   };
-  let filtredTasks = filter.length > 0 ? filterTasks(tasks, filter) : tasks;
+  let filtredTasks =
+    filter.length > 0 ? filterTasks(sprint.tasks, filter) : sprint.tasks;
 
   return (
     <section className={styles.sprint}>
@@ -58,7 +71,12 @@ function SprintPage() {
       {/* ////////////////////////////////////////////// */}
 
       <section className={styles.tasks}>
-        <SprintHeader handleInput={handleInputFilter} title={sprintTitle} />
+        <SprintHeader
+          handleInput={handleInputFilter}
+          title={sprint.title}
+          id={sprint._id}
+          dateArr={dateArr}
+        />
 
         <ul className={styles.list}>
           {filtredTasks.map(task => (

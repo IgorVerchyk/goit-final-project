@@ -84,24 +84,24 @@ class ProjectRepository {
     );
   }
 
-  updateTaskTitle(taskId, descr) {
-    return this.model.findOneAndUpdate(
-      {
-        sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
-      },
-      { $set: { "sprints.$[].tasks.$[task].descr": descr } },
-      {
-        arrayFilters: [{ "task._id": taskId }],
-      }
-    );
-  }
-
   updateTaskTime(taskId, spendTime) {
     return this.model.findOneAndUpdate(
       {
         sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
       },
       { $set: { "sprints.$[].tasks.$[task].spendTime": spendTime } },
+      {
+        arrayFilters: [{ "task._id": taskId }],
+      }
+    );
+  }
+
+  updateTaskTotal(taskId, total) {
+    return this.model.findOneAndUpdate(
+      {
+        sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
+      },
+      { $push: { "sprints.$[].tasks.$[task].total": total } },
       {
         arrayFilters: [{ "task._id": taskId }],
       }
