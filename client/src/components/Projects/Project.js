@@ -27,22 +27,25 @@ export default function Project(props) {
   };
 
   const projectId = props.id.location.state.id;
-
-  const project = useSelector(state =>
-    state.user.currentUser.projects.find(project => project._id === projectId),
+  const allProjects = useSelector(state => state.user.currentUser.projects);
+  const project = useSelector(
+    state =>
+      state.user.currentUser.projects &&
+      state.user.currentUser.projects.find(project =>
+        project._id === projectId ? project : state,
+      ),
   );
 
-  const allProjects = useSelector(state => state.user.currentUser.projects);
   const type = 'проект';
   const backTo = '/';
-  const descr = project.descr;
+  const descr = project && project.descr;
   const route = '/projects';
 
   return (
     <section className={s.container}>
       <Sidebar
         type={type}
-        list={[...allProjects]}
+        list={allProjects && [...allProjects]}
         backTo={backTo}
         route={route}
         children={ProjectEditor}
@@ -52,7 +55,7 @@ export default function Project(props) {
           <TitleEditor
             id={projectId}
             route={backTo}
-            initialTitle={project.title}
+            initialTitle={project && project.title}
           />
 
           <p className={s.descr}>{descr}</p>
@@ -62,14 +65,15 @@ export default function Project(props) {
         </div>
 
         <ul className={s.list}>
-          {project.sprints.map(sprint => (
-            <SprintCard
-              routeTo={`/sprints/${sprint._id}`}
-              key={sprint.objectId}
-              projectId={projectId}
-              {...sprint}
-            />
-          ))}
+          {project &&
+            project.sprints.map(sprint => (
+              <SprintCard
+                routeTo={`/sprints/${sprint._id}`}
+                key={sprint.objectId}
+                projectId={projectId}
+                {...sprint}
+              />
+            ))}
         </ul>
       </div>
       <div className={s.addSprint}>

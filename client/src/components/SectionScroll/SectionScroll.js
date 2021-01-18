@@ -17,7 +17,7 @@ export default function SectionScroll({ arr }, route) {
 
   useEffect(
     () =>
-      arr.length > 6 && index < arr.length - 6
+      arr && arr.length > 6 && index < arr.length - 6
         ? setIncrButton(true)
         : setIncrButton(false),
     [arr, index],
@@ -25,10 +25,11 @@ export default function SectionScroll({ arr }, route) {
 
   useEffect(() => {
     setList(
-      arr.filter(
-        project =>
-          arr.indexOf(project) >= index && arr.indexOf(project) < index + 6,
-      ),
+      arr &&
+        arr.filter(
+          project =>
+            arr.indexOf(project) >= index && arr.indexOf(project) < index + 6,
+        ),
     );
   }, [index, arr]);
 
@@ -51,9 +52,10 @@ export default function SectionScroll({ arr }, route) {
       </div>
 
       <ul className={styles.scrollList}>
-        {list.map(listItem => (
-          <SectionScrollItem key={listItem._id} {...listItem} route={route} />
-        ))}
+        {list &&
+          list.map(listItem => (
+            <SectionScrollItem key={listItem._id} {...listItem} route={route} />
+          ))}
       </ul>
       <div className={styles.buttonContainer}>
         {incrButton && (
