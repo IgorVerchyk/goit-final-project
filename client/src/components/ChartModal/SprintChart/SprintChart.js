@@ -1,27 +1,81 @@
 import { Line, Chart } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import moment from 'moment';
 
 Chart.plugins.register({ ChartDataLabels });
 // Display labels on data for any type of charts
 
-const SprintChart = () => {
+const SprintChart = ({ sprint }) => {
+  const getDateArray = () => {
+    const endDate = new Date(sprint.endDate);
+    const startDate = new Date(sprint.startDate);
+    var arr = [];
+    var dt = new Date(startDate);
+
+    while (dt <= endDate) {
+      arr.push(
+        new Date(dt).toLocaleString(undefined, {
+          month: 'short',
+          day: 'numeric',
+        }),
+      );
+      dt.setDate(dt.getDate() + 1);
+    }
+    return arr;
+  };
+
+  const labels = getDateArray();
+
+  const planTimeSum = sprint.tasks.reduce(
+    (acc, task) => task.planTime + acc,
+    0,
+  );
+
+  const calcBlueLineData = () => {
+    const blueLineData = labels.reduce((acc, label) => {
+      const spendTimePerDate = sprint.tasks.reduce((acc, task) => {
+        const spendTimePerDatePerTask = task.spendTime.reduce((acc, time) => {
+          if (Date.parse(time.data.slice(0, -2)) !== Date.parse(label)) {
+            return acc;
+          }
+          return acc + time.time;
+        }, 0);
+        return acc + spendTimePerDatePerTask;
+      }, 0);
+      if (spendTimePerDate === 0) return acc;
+      if (acc.length === 0) {
+        acc.push(planTimeSum - spendTimePerDate);
+      }
+      acc.push(acc[acc.length - 1] - spendTimePerDate);
+      return acc;
+    }, []);
+    return blueLineData;
+  };
+
+  const caclRedLineData = () => {
+    const arr = labels.reduce((acc, label, labelIndex) => {
+      const planedTimeSum = sprint.tasks.reduce((acc, task, index) => {
+        if (labelIndex > index) {
+          return acc;
+        }
+        return acc + task.planTime;
+      }, 0);
+
+      if (planedTimeSum === 0) return acc;
+
+      if (acc.length === 0) {
+        acc.push(planedTimeSum / labels.length);
+        return acc;
+      }
+
+      acc.push(acc[acc.length - 1] - planedTimeSum / labels.length);
+      return acc;
+    }, []);
+    return arr;
+  };
+
   const data = {
-    labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'September',
-      'October',
-      'November',
-      'December',
-      'January',
-      'February',
-      'March',
-    ],
+    labels: labels,
     datasets: [
       {
         datalabels: {
@@ -42,21 +96,7 @@ const SprintChart = () => {
         pointHitRadius: 10,
         pointHoverRadius: 5,
         pointHoverBorderWidth: 2,
-        data: [
-          226.5,
-          207.625,
-          188.75,
-          169.875,
-          151,
-          132.125,
-          113.25,
-          94.375,
-          75.5,
-          55.625,
-          37.75,
-          18.875,
-          0,
-        ],
+        data: caclRedLineData(),
       },
       {
         datalabels: {
@@ -77,21 +117,7 @@ const SprintChart = () => {
         pointHitRadius: 10,
         pointHoverRadius: 5,
         pointHoverBorderWidth: 2,
-        data: [
-          226.5,
-          219.17,
-          194.17,
-          176.03,
-          145.05,
-          124.67,
-          113.25,
-          90.02,
-          81.44,
-          55.625,
-          30.17,
-          -2.03,
-          -3.03,
-        ],
+        data: calcBlueLineData(),
       },
     ],
   };
