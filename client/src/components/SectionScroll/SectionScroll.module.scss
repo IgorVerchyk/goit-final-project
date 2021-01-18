@@ -1,6 +1,49 @@
+@import '../../helpers/scss/vars.module.scss';
 @media screen and (max-width: 480px) {
   .scrollContainer {
     display: inline-block;
     display: none;
+    position: relative;
+  }
+}
+@media screen and (min-width: 768px) {
+  .scrollContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .scrollButton {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: $primary-color;
+    color: white;
+    justify-content: center;
+    align-items: center;
+  }
+  .scrollList {
+    display: flex;
+    flex-direction: column;
+  }
+  .scrollItem {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 5px;
+  }
+  .title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.04em;
+    padding-left: 15px;
+    max-width: 119px;
   }
 }

@@ -4,11 +4,14 @@ import SectionScrollItem from './SectionScrollItem';
 
 import styles from './SectionScroll.module.scss';
 
-export default function SectionScroll({ arr }) {
-  console.log(arr);
-
+export default function SectionScroll({ arr }, route) {
   const [index, setIndex] = useState(0);
   const [list, setList] = useState([]);
+  const [decrButton, setDecrButton] = useState(false);
+
+  useEffect(() => (index > 0 ? setDecrButton(true) : setDecrButton(false)), [
+    index,
+  ]);
 
   useEffect(() => {
     setList(
@@ -28,15 +31,17 @@ export default function SectionScroll({ arr }) {
 
   return (
     <div className={styles.scrollContainer}>
-      <button className={styles.scrollButtom} onClick={decrementIndex}>
-        ...
-      </button>
+      {decrButton && (
+        <button className={styles.scrollButton} onClick={decrementIndex}>
+          ...
+        </button>
+      )}
       <ul className={styles.scrollList}>
         {list.map(listItem => (
-          <SectionScrollItem key={listItem._id} {...listItem} />
+          <SectionScrollItem key={listItem._id} {...listItem} route={route} />
         ))}
       </ul>
-      <button className={styles.scrollButtom} onClick={incrementIndex}>
+      <button className={styles.scrollButton} onClick={incrementIndex}>
         ...
       </button>
     </div>

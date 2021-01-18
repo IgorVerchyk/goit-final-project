@@ -89,7 +89,7 @@ class ProjectRepository {
       {
         sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
       },
-      { $spush: { "sprints.$[].tasks.$[task].spendTime": spendTime } },
+      { $push: { "sprints.$[].tasks.$[task].spendTime": spendTime } },
       {
         arrayFilters: [{ "task._id": taskId }],
       }
