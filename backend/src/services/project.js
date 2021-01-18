@@ -130,9 +130,10 @@ class ProjectService {
   }
 
   async updateTaskTime(userId, taskId, body) {
-    const { spendTime, total } = body;
-    await this.repositories.project.updateTaskTotal(tastId, total);
+    const { data, time, total } = body;
 
+    await this.repositories.project.updateTaskTotal(taskId, total);
+    const spendTime = { data, time };
     const result = await this.repositories.project.updateTaskTime(
       taskId,
       spendTime

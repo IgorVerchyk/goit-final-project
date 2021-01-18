@@ -3,7 +3,7 @@ const { Schema, Types } = mongoose;
 const mongoosePaginate = require("mongoose-paginate-v2");
 
 const spendTimeSchema = new Schema({
-  data: { type: Date, required: true },
+  data: { type: String, required: true },
   time: { type: Number, default: 0 },
 });
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import projectsOperations from '../../../redux/projects/projectsOperations';
 import projectOperations from '../../../redux/projects/projectsOperations';
+import moment from 'moment';
 
 import styles from './TaskCard.module.scss';
 
@@ -18,6 +20,9 @@ export default function Task({
   useEffect(() => {
     setHours(spentTime);
   }, [spentTime]);
+
+  const route = '/tasks/';
+  const today = moment(new Date()).format('MMM Do');
 
   const handleKeyDown = ev => {
     const keyValue = ev.key;
@@ -51,12 +56,13 @@ export default function Task({
       if (Number(hours) !== Number(spentTime)) {
         setErrMessage(false);
         console.log('sent to server:', hours);
+        const total = Number(spentAllTime) + Number(hours);
+        const body = { data: today, time: Number(hours), total };
+        dispatch(projectsOperations.updateDocument({ id, route, body }));
         // changeSpentTime(hours);
       }
     }
   };
-
-  const route = '/tasks/';
   const dispatch = useDispatch();
 
   const handleClick = useCallback(

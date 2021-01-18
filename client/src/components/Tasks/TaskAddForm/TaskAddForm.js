@@ -10,6 +10,7 @@ export default function TaskAddForm({ onClose, sprintId }) {
   const initialValues = {
     descr: '',
     planTime: '',
+    spendTime: [],
   };
 
   const onSubmit = values => {
@@ -21,6 +22,7 @@ export default function TaskAddForm({ onClose, sprintId }) {
 
     const body = values;
     const id = sprintId;
+
     //here your code to Dispatch value to backend
     dispatch(projectOperations.addDocument({ route, id, body }));
     onClose();

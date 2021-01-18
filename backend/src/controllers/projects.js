@@ -242,6 +242,5 @@ module.exports = {
   createTask,
   removeTask,
   updateTaskTime,
-  updateTaskTitle,
   updateColaborators,
 };

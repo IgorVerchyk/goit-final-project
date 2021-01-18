@@ -33,11 +33,6 @@ function SprintPage() {
     setModalAdd(!onModalAdd);
   };
 
-  //////////валидация и отправка/////
-  const changeSpentTime = () => {};
-
-  /////////////////////////////////
-
   function getDates(startDate, endDate) {
     const dateArray = [];
     let currentDate = moment(startDate);
@@ -87,7 +82,6 @@ function SprintPage() {
               scheduledTime={task.planTime}
               spentTime={task.spendTime}
               spentAllTime={task.total}
-              changeSpentTime={changeSpentTime}
             />
           ))}
         </ul>

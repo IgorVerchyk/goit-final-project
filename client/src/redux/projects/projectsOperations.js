@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import projectsActions from './projectsActions';
 
-const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
-// const baseURL = 'http://localhost:3001/api/projects';
+//const baseURL = 'https://project-manager-goit20.herokuapp.com/api/projects';
+const baseURL = 'http://localhost:3001/api/projects';
 
 const addProject = ({ title, descr }, color) => async dispatch => {
   // console.log(color);
@@ -32,8 +32,6 @@ const removeDocument = (route, id) => async dispatch => {
 };
 
 const addDocument = ({ id, route, body }) => async dispatch => {
-  console.log(id);
-  console.log(body);
   dispatch(projectsActions.addDocumentRequest);
   try {
     const { data } = await axios.post(`${baseURL}${route}${id}`, body);

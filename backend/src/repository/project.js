@@ -89,7 +89,7 @@ class ProjectRepository {
       {
         sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
       },
-      { $set: { "sprints.$[].tasks.$[task].spendTime": spendTime } },
+      { $spush: { "sprints.$[].tasks.$[task].spendTime": spendTime } },
       {
         arrayFilters: [{ "task._id": taskId }],
       }
@@ -101,7 +101,7 @@ class ProjectRepository {
       {
         sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
       },
-      { $push: { "sprints.$[].tasks.$[task].total": total } },
+      { $set: { "sprints.$[].tasks.$[task].total": total } },
       {
         arrayFilters: [{ "task._id": taskId }],
       }
