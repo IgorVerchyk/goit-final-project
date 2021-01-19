@@ -1,9 +1,9 @@
-const { UsersRepository } = require("../repository");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
+const { UsersRepository } = require('../repository');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const SECRET_KEY = process.env.JWT_SECRET_KEY;
 const REFRESH_TOKEN_KEY = process.env.REFRESH_TOKEN_SECRET;
-const config = require("../config/config.json");
+const config = require('../config/config.json');
 
 class AuthService {
   constructor() {
@@ -17,7 +17,7 @@ class AuthService {
 
     const isPasswordValid = await this.repositories.users.validatePassword(
       password,
-      user.password,
+      user.password
     );
 
     if (!user || !isPasswordValid) {

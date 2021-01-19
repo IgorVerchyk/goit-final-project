@@ -8,7 +8,6 @@ const tokenList = {};
 
 const reg = async (req, res, next) => {
   try {
-    console.log('control user start');
     const { email, password } = req.body;
     const user = await userServise.findByEmail(email);
     if (user) {
@@ -37,7 +36,7 @@ const reg = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-
+  console.log('start login');
   try {
     const result = await authService.login({ email, password });
 
@@ -65,7 +64,7 @@ const login = async (req, res, next) => {
 
 const token = async (req, res, next) => {
   const { email, refreshToken } = req.body;
-  console.log(req.body);
+
   try {
     const result = await authService.token({ email, refreshToken });
 
@@ -101,7 +100,7 @@ const logout = async (req, res, next) => {
 const current = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    console.log(userId);
+
     const user = await userServise.findById(userId);
     if (user) {
       return res.status(HttpCode.OK).json({
@@ -126,7 +125,7 @@ const verify = async (req, res, next) => {
   try {
     const token = req.params.token;
     const result = await userServise.verify(token);
-    console.log('verify control', token);
+
     if (result) {
       return res.status(HttpCode.OK).json({
         status: 'success',

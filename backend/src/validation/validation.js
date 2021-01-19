@@ -7,8 +7,16 @@ const schemaAuth = Joi.object({
 });
 
 const schemaCreateProject = Joi.object({
-  title: Joi.string().alphanum().min(2).max(32).required(),
-  descr: Joi.string().alphanum().min(5).max(50).required(),
+  title: Joi.string()
+    .regex(/^[a-zA-Z0-9, ]*$/, 'Alphanumerics, space and comma characters')
+    .min(3)
+    .max(20)
+    .required(),
+  descr: Joi.string()
+    .regex(/^[a-zA-Z0-9, ]*$/, 'Alphanumerics, space and comma characters')
+    .min(3)
+    .max(35)
+    .required(),
   color: Joi.string().required(),
   colaborators: Joi.array().optional(),
   sprints: Joi.array().optional(),
@@ -16,23 +24,34 @@ const schemaCreateProject = Joi.object({
 });
 
 const schemaCreateSprint = Joi.object({
-  title: Joi.string().alphanum().min(2).max(32).required(),
+  title: Joi.string()
+    .regex(/^[a-zA-Z0-9, ]*$/, 'Alphanumerics, space and comma characters')
+    .min(3)
+    .max(35)
+    .required(),
   startDate: Joi.date().required(),
-  // Joi.date().default(() => moment().format(), 'date created'),
   endDate: Joi.date().required(),
   duration: Joi.number().optional(),
   tasks: Joi.array().optional(),
 });
 
 const schemaCreateTask = Joi.object({
-  descr: Joi.string().alphanum().min(5).max(50).required(),
+  descr: Joi.string()
+    .regex(/^[a-zA-Z0-9, ]*$/, 'Alphanumerics, space and comma characters')
+    .min(3)
+    .max(30)
+    .required(),
   planTime: Joi.number().required(),
-  spendTime: Joi.array().required(),
+  spendTime: Joi.array().optional(),
   total: Joi.number().optional(),
 });
 
 const schemaUpdateTitle = Joi.object({
-  title: Joi.string().alphanum().min(2).max(32).required(),
+  title: Joi.string()
+    .regex(/^[a-zA-Z0-9, ]*$/, 'Alphanumerics, space and comma characters')
+    .min(3)
+    .max(35)
+    .required(),
 });
 
 const schemaUpdateColaborators = Joi.object({
@@ -57,7 +76,6 @@ const validate = (schema, body, next) => {
 };
 
 module.exports.validateAuth = (req, res, next) => {
-  console.log('validateAuth start');
   return validate(schemaAuth, req.body, next);
 };
 

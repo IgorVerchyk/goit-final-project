@@ -16,7 +16,6 @@ class UserService {
     const verifyToken = nanoid();
     const { email } = body;
     try {
-      console.log('create serv start');
       await this.emailService.sendEmail(verifyToken, email);
       const data = await this.repositories.users.create({
         ...body,
@@ -29,7 +28,6 @@ class UserService {
   }
 
   async findByEmail(email) {
-    console.log('find by emeil start');
     const data = await this.repositories.users.findByField({ email });
     return data;
   }
@@ -43,11 +41,10 @@ class UserService {
   }
 
   async verify(token) {
-    console.log('service token', token);
     const user = await this.repositories.users.findByField({
       verifyToken: token,
     });
-    console.log('user', user);
+
     if (user) {
       await user.updateOne({ verify: true, verifyToken: null });
       return true;

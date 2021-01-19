@@ -15,6 +15,7 @@ class UsersRepository {
 
   async findByField(input) {
     const result = await this.model.findOne({ ...input });
+    // console.log('findByField', result);
     return result;
   }
   async findByFieldVer(field) {
@@ -23,16 +24,17 @@ class UsersRepository {
   }
 
   async create(body) {
-    console.log('create', body);
     const user = new this.model(body);
     return user.save();
   }
 
   async updateToken(id, token) {
+    console.log('updateToken', id, token);
     await this.model.updateOne({ _id: id }, { token });
   }
 
   validatePassword(password, userPassword) {
+    console.log('valid pass', password, userPassword);
     return User.schema.methods.validPassword(password, userPassword);
   }
 

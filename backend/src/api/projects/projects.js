@@ -7,10 +7,10 @@ const {
   validateCreateProject,
   validateCreateSprint,
   validateCreateTask,
-  validateSprintTitle,
-  validateProjectTiltle,
-  validateUpdateColaborators,
-  validateUpdateTaskTime,
+  // validateSprintTitle,
+  // validateProjectTiltle,
+  // validateUpdateColaborators,
+  // validateUpdateTaskTime,
 } = require('../../validation/validation');
 
 const projectsRouter = express.Router();
@@ -29,16 +29,16 @@ projectsRouter.get('/:projectId', ProjectController.getProject);
 projectsRouter.patch(
   '/:projectId',
   auth,
-  validateProjectTiltle,
+  // validateProjectTiltle,
   ProjectController.updateProjectTitle
 );
 
 projectsRouter.patch(
   '/:projectId',
   auth,
-  validateUpdateColaborators,
+  // validateUpdateColaborators,
   ProjectController.updateColaborators
-); ///
+);
 
 projectsRouter.post(
   '/sprints/:projectId',
@@ -50,7 +50,7 @@ projectsRouter.post(
 projectsRouter.patch(
   '/sprints/:sprintId',
   auth,
-  validateSprintTitle,
+  // validateSprintTitle,
   ProjectController.updateSprintTitle
 );
 
@@ -70,9 +70,9 @@ projectsRouter.post(
 projectsRouter.patch(
   '/tasks/:taskId',
   auth,
-  validateUpdateTaskTime,
+  // validateUpdateTaskTime,
   ProjectController.updateTaskTime
-); //
+);
 
 projectsRouter.delete('/tasks/:taskId', auth, ProjectController.removeTask);
 
