@@ -10,7 +10,6 @@ export default function SprintHeader({ handleInput, title, id, dateArr }) {
   const sprintEndDay = dateArr.length;
   const today = moment(new Date()).format('MMM Do');
   const todayIs = moment(new Date()).format('MM/DD/YYYY');
-  console.log(today);
   function currentDay(today, dateArr) {
     const dayOf = dateArr.indexOf(today);
     if (dayOf === -1) {

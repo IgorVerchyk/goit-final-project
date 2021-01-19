@@ -5,31 +5,24 @@ import moment from 'moment';
 Chart.plugins.register({ ChartDataLabels });
 // Display labels on data for any type of charts
 
-const SprintChart = ({ sprint }) => {
-  const getDateArray = () => {
-    const endDate = new Date(sprint.endDate);
-    const startDate = new Date(sprint.startDate);
-    var arr = [];
-    var dt = new Date(startDate);
-
-    while (dt <= endDate) {
-      arr.push(
-        new Date(dt).toLocaleString(undefined, {
-          month: 'short',
-          day: 'numeric',
-        }),
-      );
-      dt.setDate(dt.getDate() + 1);
-    }
-    return arr;
-  };
-
-  const labels = getDateArray();
+const SprintChart = ({ sprint, arr }) => {
+  const labels = arr;
 
   const planTimeSum = sprint.tasks.reduce(
     (acc, task) => task.planTime + acc,
     0,
   );
+
+  const caclRedLineData = duration => {
+    const day = 9;
+    let initial = duration;
+    const planedArr = [initial];
+    while (initial) {
+      initial = initial - day;
+      planedArr.push(initial);
+    }
+    return planedArr;
+  };
 
   const calcBlueLineData = () => {
     const blueLineData = labels.reduce((acc, label) => {
@@ -52,28 +45,6 @@ const SprintChart = ({ sprint }) => {
     return blueLineData;
   };
 
-  const caclRedLineData = () => {
-    const arr = labels.reduce((acc, label, labelIndex) => {
-      const planedTimeSum = sprint.tasks.reduce((acc, task, index) => {
-        if (labelIndex > index) {
-          return acc;
-        }
-        return acc + task.planTime;
-      }, 0);
-
-      if (planedTimeSum === 0) return acc;
-
-      if (acc.length === 0) {
-        acc.push(planedTimeSum / labels.length);
-        return acc;
-      }
-
-      acc.push(acc[acc.length - 1] - planedTimeSum / labels.length);
-      return acc;
-    }, []);
-    return arr;
-  };
-
   const data = {
     labels: labels,
     datasets: [
@@ -81,7 +52,7 @@ const SprintChart = ({ sprint }) => {
         datalabels: {
           color: '#e74d48',
         },
-        label: 'Актуальные оставшиеся трудозатраты в часах',
+        label: 'Запланированые оставшиеся трудозатраты в часах',
         fill: false,
         lineTension: 0.1,
         backgroundColor: 'rgb(231, 77, 72 )',
@@ -96,13 +67,13 @@ const SprintChart = ({ sprint }) => {
         pointHitRadius: 10,
         pointHoverRadius: 5,
         pointHoverBorderWidth: 2,
-        data: caclRedLineData(),
+        data: caclRedLineData(sprint.duration),
       },
       {
         datalabels: {
           color: '#3d88e7',
         },
-        label: 'Запланированые оставшиеся трудозатраты в часах',
+        label: 'Актуальные оставшиеся трудозатраты в часах',
         fill: false,
         lineTension: 0.1,
         backgroundColor: 'rgb(61, 136, 231)',

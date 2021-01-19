@@ -14,10 +14,6 @@ export default function TaskAddForm({ onClose, sprintId }) {
   };
 
   const onSubmit = values => {
-    console.log(values);
-
-    // form body
-
     const route = '/tasks/';
 
     const body = values;

@@ -45,7 +45,6 @@ function SprintPage() {
     return dateArray;
   }
   const dateArr = getDates(sprint.startDate, sprint.endDate);
-  console.log(dateArr);
 
   const filterTasks = (tasks, filter) => {
     return tasks.filter(task =>
@@ -100,12 +99,12 @@ function SprintPage() {
         <Modal closeModal={setShowModal}>
           <TaskAddForm
             onClick={setShowModal}
-            onCloseModal={setShowModal}
+            onClose={setShowModal}
             sprintId={sprintId}
           />
         </Modal>
       )}
-      {sprint.tasks.length > 1 && <ChartModal sprint={sprint} />}
+      {sprint.tasks.length > 1 && <ChartModal sprint={sprint} arr={dateArr} />}
       {/* ////////////////////////////////////////////// */}
     </section>
   );
