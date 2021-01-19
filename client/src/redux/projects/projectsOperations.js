@@ -58,7 +58,7 @@ const addColaborators = ({ projectId, email }) => async dispatch => {
   console.log({ email });
   dispatch(projectsActions.addColaboratorsRequest());
   try {
-    const { data } = await axios.patch(`${baseURL}/${projectId}`, {
+    const { data } = await axios.put(`${baseURL}/${projectId}`, {
       email,
     });
 

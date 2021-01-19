@@ -1,4 +1,4 @@
-const Project = require("../schemas/project");
+const Project = require('../schemas/project');
 
 class ProjectRepository {
   constructor() {
@@ -12,7 +12,7 @@ class ProjectRepository {
   }
 
   getBySprintId(sprintId) {
-    return this.model.findOne({ "sprints._id": sprintId });
+    return this.model.findOne({ 'sprints._id': sprintId });
   }
 
   findByField(input) {
@@ -51,6 +51,7 @@ class ProjectRepository {
   }
 
   updateColaborators(id, data) {
+    console.log('repos update colab', data);
     return this.model.findByIdAndUpdate(
       { _id: id },
       { $push: { colaborators: data } },
@@ -60,17 +61,17 @@ class ProjectRepository {
 
   updateSprintTitle(sprintId, title) {
     return this.model.findOneAndUpdate(
-      { "sprints._id": sprintId },
-      { $set: { "sprints.$[sprint].title": title } },
+      { 'sprints._id': sprintId },
+      { $set: { 'sprints.$[sprint].title': title } },
       {
-        arrayFilters: [{ "sprint._id": sprintId }],
+        arrayFilters: [{ 'sprint._id': sprintId }],
       }
     );
   }
 
   removeSprint(sprintId) {
     return this.model.findOneAndUpdate(
-      { "sprints._id": sprintId },
+      { 'sprints._id': sprintId },
       { $pull: { sprints: { _id: sprintId } } },
       { safe: true, multi: false }
     );
@@ -78,8 +79,8 @@ class ProjectRepository {
 
   createNewTask(sprintId, { descr, planTime, spendTime }) {
     return this.model.findOneAndUpdate(
-      { "sprints._id": sprintId },
-      { $push: { "sprints.$.tasks": { descr, planTime, spendTime } } },
+      { 'sprints._id': sprintId },
+      { $push: { 'sprints.$.tasks': { descr, planTime, spendTime } } },
       { safe: true, multi: false }
     );
   }
@@ -89,9 +90,9 @@ class ProjectRepository {
       {
         sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
       },
-      { $spush: { "sprints.$[].tasks.$[task].spendTime": spendTime } },
+      { $set: { 'sprints.$[].tasks.$[task].spendTime': spendTime } },
       {
-        arrayFilters: [{ "task._id": taskId }],
+        arrayFilters: [{ 'task._id': taskId }],
       }
     );
   }
@@ -101,9 +102,9 @@ class ProjectRepository {
       {
         sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
       },
-      { $set: { "sprints.$[].tasks.$[task].total": total } },
+      { $set: { 'sprints.$[].tasks.$[task].total': total } },
       {
-        arrayFilters: [{ "task._id": taskId }],
+        arrayFilters: [{ 'task._id': taskId }],
       }
     );
   }
@@ -113,7 +114,7 @@ class ProjectRepository {
       {
         sprints: { $elemMatch: { tasks: { $elemMatch: { _id: taskId } } } },
       },
-      { $pull: { "sprints.$[].tasks": { _id: taskId } } }
+      { $pull: { 'sprints.$[].tasks': { _id: taskId } } }
     );
   }
 }

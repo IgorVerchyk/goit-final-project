@@ -54,10 +54,6 @@ const schemaUpdateTitle = Joi.object({
     .required(),
 });
 
-const schemaUpdateColaborators = Joi.object({
-  colaborators: Joi.array().optional(),
-});
-
 const schemaUpdateTaskTime = Joi.object({
   data: Joi.date().required(),
   time: Joi.number().required(),
@@ -95,9 +91,7 @@ module.exports.validateProjectTiltle = (req, res, next) => {
 module.exports.validateSprintTitle = (req, res, next) => {
   return validate(schemaUpdateTitle, req.body, next);
 };
-module.exports.validateUpdateColaborators = (req, res, next) => {
-  return validate(schemaUpdateColaborators, req.body, next);
-};
+
 module.exports.validateUpdateTaskTime = (req, res, next) => {
   return validate(schemaUpdateTaskTime, req.body, next);
 };
