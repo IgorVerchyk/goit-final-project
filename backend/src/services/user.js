@@ -30,7 +30,7 @@ class UserService {
 
   async findByEmail(email) {
     console.log('find by emeil start');
-    const data = await this.repositories.users.findByField(email);
+    const data = await this.repositories.users.findByField({ email });
     return data;
   }
 
@@ -42,9 +42,12 @@ class UserService {
     return data;
   }
 
-  async verify({ token }) {
-    console.log(token);
-    const user = await this.repositories.users.findByField(token);
+  async verify(token) {
+    console.log('service token', token);
+    const user = await this.repositories.users.findByField({
+      verifyToken: token,
+    });
+    console.log('user', user);
     if (user) {
       await user.updateOne({ verify: true, verifyToken: null });
       return true;

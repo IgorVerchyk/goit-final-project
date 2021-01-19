@@ -2,7 +2,7 @@ const Joi = require('joi');
 const { HttpCode } = require('../helpers/constants');
 
 const schemaAuth = Joi.object({
-  email: Joi.string().required(),
+  email: Joi.string().email({ minDomainSegments: 2 }).required(),
   password: Joi.string().required(),
 });
 

@@ -126,7 +126,7 @@ const verify = async (req, res, next) => {
   try {
     const token = req.params.token;
     const result = await userServise.verify(token);
-    console.log(token);
+    console.log('verify control', token);
     if (result) {
       return res.status(HttpCode.OK).json({
         status: 'success',
