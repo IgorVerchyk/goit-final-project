@@ -1,6 +1,6 @@
-const AuthService = require("../services/auth");
-const UsersService = require("../services/user");
-const { HttpCode } = require("../helpers/constants");
+const AuthService = require('../services/auth');
+const UsersService = require('../services/user');
+const { HttpCode } = require('../helpers/constants');
 
 const userServise = new UsersService();
 const authService = new AuthService();
@@ -13,8 +13,8 @@ const reg = async (req, res, next) => {
     if (user) {
       return next({
         status: HttpCode.CONFLICT,
-        data: "Conflict",
-        message: "This email is already use",
+        data: 'Conflict',
+        message: 'This email is already use',
       });
     }
     const newUser = await userServise.create({
@@ -22,7 +22,7 @@ const reg = async (req, res, next) => {
       password,
     });
     return res.status(HttpCode.CREATED).json({
-      status: "success",
+      status: 'success',
       code: HttpCode.CREATED,
       data: {
         id: newUser.id,
@@ -36,14 +36,14 @@ const reg = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-
+  console.log('start login');
   try {
     const result = await authService.login({ email, password });
 
     if (!result) {
       return next({
         status: HttpCode.UNAUTHORIZED,
-        message: "Invalid creadentials",
+        message: 'Invalid creadentials',
       });
     }
 
@@ -64,7 +64,7 @@ const login = async (req, res, next) => {
 
 const token = async (req, res, next) => {
   const { email, refreshToken } = req.body;
-  console.log(req.body);
+
   try {
     const result = await authService.token({ email, refreshToken });
 
@@ -77,7 +77,7 @@ const token = async (req, res, next) => {
     }
     next({
       status: HttpCode.UNAUTHORIZED,
-      message: "Invalid creadentials",
+      message: 'Invalid creadentials',
     });
   } catch (e) {
     next(e);
@@ -89,22 +89,22 @@ const logout = async (req, res, next) => {
     const id = req.user.id;
     await authService.logout(id);
     return res.status(HttpCode.NO_CONTENT).json({
-      status: "success",
+      status: 'success',
       code: HttpCode.NO_CONTENT,
     });
   } catch (e) {
-    res.status(500).send({ message: "Something went wrong, please try again" });
+    res.status(500).send({ message: 'Something went wrong, please try again' });
   }
 };
 
 const current = async (req, res, next) => {
   try {
     const userId = req.user.id;
-    console.log(userId);
+
     const user = await userServise.findById(userId);
     if (user) {
       return res.status(HttpCode.OK).json({
-        status: "success",
+        status: 'success',
         code: HttpCode.OK,
         data: {
           user,
@@ -113,7 +113,7 @@ const current = async (req, res, next) => {
     } else {
       return next({
         status: HttpCode.UNAUTHORIZED,
-        message: "Invalid credentials",
+        message: 'Invalid credentials',
       });
     }
   } catch (e) {
@@ -125,20 +125,20 @@ const verify = async (req, res, next) => {
   try {
     const token = req.params.token;
     const result = await userServise.verify(token);
-    console.log(token);
+
     if (result) {
       return res.status(HttpCode.OK).json({
-        status: "success",
+        status: 'success',
         code: HttpCode.OK,
         data: {
-          message: "Verification successful",
+          message: 'Verification successful',
         },
       });
     } else {
       return next({
         status: HttpCode.BAD_REQUEST,
 
-        message: "Verification token is not valid",
+        message: 'Verification token is not valid',
       });
     }
   } catch (e) {

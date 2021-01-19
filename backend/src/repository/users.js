@@ -1,4 +1,4 @@
-const User = require("../schemas/user");
+const User = require('../schemas/user');
 
 class UsersRepository {
   constructor() {
@@ -10,11 +10,16 @@ class UsersRepository {
   //   return result;
   // }
   findById(id) {
-    return this.model.findOne({ _id: id }).populate("projects");
+    return this.model.findOne({ _id: id }).populate('projects');
   }
 
   async findByField(input) {
     const result = await this.model.findOne({ ...input });
+    // console.log('findByField', result);
+    return result;
+  }
+  async findByFieldVer(field) {
+    const result = await this.model.findOne(field);
     return result;
   }
 
@@ -24,10 +29,12 @@ class UsersRepository {
   }
 
   async updateToken(id, token) {
+    console.log('updateToken', id, token);
     await this.model.updateOne({ _id: id }, { token });
   }
 
   validatePassword(password, userPassword) {
+    console.log('valid pass', password, userPassword);
     return User.schema.methods.validPassword(password, userPassword);
   }
 

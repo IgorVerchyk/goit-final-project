@@ -1,8 +1,8 @@
-const { UsersRepository } = require("../repository");
-const EmailService = require("./email");
-const { ErrorHandler } = require("../helpers/errorHandler");
-const { nanoid } = require("nanoid");
-require("dotenv").config();
+const { UsersRepository } = require('../repository');
+const EmailService = require('./email');
+const { ErrorHandler } = require('../helpers/errorHandler');
+const { nanoid } = require('nanoid');
+require('dotenv').config();
 
 class UserService {
   constructor() {
@@ -23,12 +23,12 @@ class UserService {
       });
       return data;
     } catch (e) {
-      throw new ErrorHandler(503, e.message, "Service unavailable");
+      throw new ErrorHandler(503, e.message, 'Service unavailable');
     }
   }
 
   async findByEmail(email) {
-    const data = await this.repositories.users.findByField(email);
+    const data = await this.repositories.users.findByField({ email });
     return data;
   }
 
@@ -40,9 +40,11 @@ class UserService {
     return data;
   }
 
-  async verify({ token }) {
-    console.log(token);
-    const user = await this.repositories.users.findByField(token);
+  async verify(token) {
+    const user = await this.repositories.users.findByField({
+      verifyToken: token,
+    });
+
     if (user) {
       await user.updateOne({ verify: true, verifyToken: null });
       return true;
